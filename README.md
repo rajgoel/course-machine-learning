@@ -1,41 +1,47 @@
-# reveal.js-template
+# Machine Learning and Deep Learning
 
-A template easing the use of reveal.js with my favorite configuration.
+## Lecture slides
 
-## Demo
+https://rajgoel.github.io/course-machine-learning
 
-https://rajgoel.github.io/reveal.js-template/
+## Session overview
 
-## Usage
+| Session | Lecture                                                                                            | Lab             |
+|---------|----------------------------------------------------------------------------------------------------|-----------------|
+| 01      | [Introduction](https://rajgoel.github.io/course-machine-learning/?topic=01-lecture)          | [Requirements and prerequisites](https://rajgoel.github.io/course-machine-learning/?topic=01-lab)    |
+| 02      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=02-lecture)    | Project work    |
+| 03      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=03-lecture)    | Project work    |
+| 04      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=04-lecture)    | Project work    |
+| 05      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=05-lecture)    | Project work    |
+| 06      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=06-lecture)    | Project work    |
+| 07      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)    | Project work    |
+| 08      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=08-lecture)    | Project work    |
+| 09      | [N/A](https://rajgoel.github.io/course-machine-learning/?topic=09-lecture)    | Project work    |
+| 10      | Miscellaneous            | Project work    |
+| 11      | Ask me anything                                                                                    | Ask me anything |
 
-- Clone or copy the repository, or use https://github.com/new/import
-- Add the course meta-data to `course.json`
-- Create markdown files as specified in the course meta-data 
-- Change `RevealConfig` in `index.html` if needed.
-- Update license if necessary
-- Update README.md
+## Grading
 
-## Admonitions
+Grading will be based to 100% on project work.
 
-Github style admonitions are supported in Markdown:
+## Bonus
 
-> [!NOTE]
-> A note highlights important information.
+A bonus of up to 10% of the final score can be obtained by meaningful contribution to the course materials. 
 
-> [!TIP]
-> A tip provides helpful information.
+## Module description
 
-> [!IMPORTANT]
-> Important information for success.
+N/A
 
-> [!WARNING]
-> A warning alerts users about potential risks.
+### Learning outcomes
 
-> [!CAUTION]
-> Caution should be taken to avoid negative consequences.
+N/A
+
+### Literature
+
+N/A
 
 ## License
 
-The Unlicense
+MIT licensed
 
-The file `logo.svg` is subject to the conditions of Github: https://github.com/logos
+Copyright (C) 2025 Asvin Goel
