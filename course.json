@@ -1,12 +1,12 @@
 {
-  "title": "My course",
-  "subtitle": "on an awesome topic",
-  "author": "Me Myself",
-  "email": "me.myself@example.com",
+  "title": "Machine Learning and Deep Learning",
+  "subtitle": "",
+  "author": "Asvin Goel",
+  "email": "asvin.goel@klu.org",
   "logo": "logo.svg",
   "topics": [
-    { "topic": "First session", "src": "slides.md", "folder": "session1" },
-    { "topic": "Second session", "src": "slides.md", "folder": "session2" }
+    { "topic": "Introduction", "src": "slides.md", "folder": "01-lecture" },
+    { "topic": "N/A", "src": "slides.md", "folder": "02-lecture" }
   ]
 }
 
