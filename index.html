@@ -42,6 +42,9 @@
   <!-- Anything plugin -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/anything/plugin.js"></script>
   <script src="https://unpkg.com/cytoscape@3.19.1/dist/cytoscape.min.js"></script>
+  <script src="cytoscape-neuralnetworks.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0"></script>
+  <script src="digitrecognition/digitrecognition.js"></script>
 
   <!-- Chalkboard plugin -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@4.6.0/chalkboard/plugin.js"></script>
@@ -151,40 +154,13 @@ code:not(:empty):not(:has(*)):not(pre code) {
   
 <script src="reveal-config.js"></script>
 <script>
-/******************************************
- * Change reveal.js config as needed, e.g.,
- * register AMPL syntax highlighting
- ******************************************/
-function registerAMPL(hljs) {
-  hljs.registerLanguage("ampl", function(hljs) {
-    return {
-      contains: [
-        hljs.HASH_COMMENT_MODE,
-        hljs.C_BLOCK_COMMENT_MODE,
-        {
-          className: "number",
-          begin: /\b(\d*\.?\d+)\b/,
-          relevance: 0
-        },
-        {
-          className: "strong",
-          begin: /^ampl[\?:]/,
-          relevance: 0
-        }
-      ],
-      keywords: {
-        keyword: 'maximize minimize subject to set within union inter diff symdiff cross sum in by mod var param default setof dimen symbolic if then else',
-        type: 'binary integer',
-        string: 'reset model solve data option solver solver_msg solution_precision display include print printf cd quit',
-        built_in: 'abs max min sqrt round trunc ceil floor',
-        number: 'Infinity',
-        symbol: '_nvars _varname _var'
-      }
-    };
-  });
-}
-
-RevealConfig.highlight = { beforeHighlight: registerAMPL };
+RevealConfig.anything: [ 
+  { className: "neuralnetwork", initialize: showNeuralNetwork }, 
+  { className: "drawDigit", initialize: initialiseCanvas }, 
+  { className: "togglePrediction", initialize: initialisePredictionButton }, 
+  { className: "preview5x5", initialize: initialise5x5PreviewButton }, 
+  { className: "toggle5x5Prediction", initialize: initialise5x5PredictionButton }, 
+];
 </script>
 <script src="setup.js"></script>
 

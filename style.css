@@ -135,6 +135,10 @@ blockquote.admonition.caution::before {
   color: #c62828;
 }
 
+blockquote.admonition ul {
+  display: block !important;
+}
+
 /*********************************************
  * Fragments
  *********************************************/
