@@ -266,33 +266,6 @@ and
 
 ---
 
-`$$\left(
-\begin{array}{c}
-a^\textrm{out}_{1} \\
-a^\textrm{out}_{2} 
-\end{array}
-\right) = \left(
-\begin{array}{cccc}
-w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
-w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4} 
-\end{array}
-\right)
-\left(
-\begin{array}{c}
-a^\textrm{in}_{1} \\
-a^\textrm{in}_{2} \\
-a^\textrm{in}_{3} \\
-a^\textrm{in}_{4}
-\end{array}
-\right) + \left(
-\begin{array}{c}
-b_{1} \\
-b_{2} 
-\end{array}
-\right)$$`
-
----
-
 ### Matrix notation
 
 `$$\left(
@@ -388,8 +361,7 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 If we find weights and biases such that
 
-`$$
-\left(
+`$$\left(
 \begin{array}{cccc}
 w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
 w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4} 
@@ -402,27 +374,21 @@ w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4}
 1 \\
 0
 \end{array}
-\right)
-+
-\left(
+\right) + \left(
 \begin{array}{c}
 b_{1} \\
 b_{2} 
 \end{array}
-\right)
-=
-\left(
+\right) = \left(
 \begin{array}{c}
 1 \\
 0 
 \end{array}
-\right)
-$$`
+\right)$$`
 
 and
 
-`$$
-\left(
+`$$\left(
 \begin{array}{cccc}
 w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
 w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4}  
@@ -435,22 +401,17 @@ w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4}
 0 \\
 1
 \end{array}
-\right)
-+
-\left(
+\right) + \left(
 \begin{array}{c}
 b_{1} \\
 b_{2} 
 \end{array}
-\right)
-=
-\left(
+\right) = \left(
 \begin{array}{c}
 0 \\
 1 
 \end{array}
-\right)
-$$`
+\right) $$`
 
 our neural network can perfectly recognise both symbols. 
 
@@ -460,8 +421,7 @@ our neural network can perfectly recognise both symbols.
 
 Below weights and biases are optimal.
 
-`$$
-\left(
+`$$\left(
 \begin{array}{cccc}
 0.5 & 0.5 & 0.5 & -0.5 \\
 0.5 & 0.5 & -0.5 & 0.5  
@@ -488,13 +448,11 @@ Below weights and biases are optimal.
 1 \\
 0 
 \end{array}
-\right)
-$$`
+\right)$$`
 
 and
 
-`$$
-\left(
+`$$\left(
 \begin{array}{cccc}
 0.5 & 0.5 & 0.5 & -0.5 \\
 0.5 & 0.5 & -0.5 & 0.5  
@@ -521,8 +479,7 @@ and
 0 \\
 1 
 \end{array}
-\right)
-$$`
+\right)$$`
 
 We can also find other weights and biases that are optimal for this example.
 <!-- .element: class="fragment" -->
