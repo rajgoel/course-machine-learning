@@ -258,25 +258,20 @@ Given a
 
 we can determine the output activation values as a linear combination of the input activation values by
 
-<br>
-
-`$ a^\textrm{out}_1 = w_{1,1} a^\textrm{in}_{1} + w_{1,2} a^\textrm{in}_{2} + w_{1,3} a^\textrm{in}_{3} + w_{1,4} a^\textrm{in}_{4} + b_1$`
+`$$a^\textrm{out}_1 = w_{1,1} a^\textrm{in}_{1} + w_{1,2} a^\textrm{in}_{2} + w_{1,3} a^\textrm{in}_{3} + w_{1,4} a^\textrm{in}_{4} + b_1$$`
 
 and 
 
-`$ a^\textrm{out}_2 = w_{2,1} a^\textrm{in}_{1} + w_{2,2} a^\textrm{in}_{2} + w_{2,3} a^\textrm{in}_{3} + w_{2,4} a^\textrm{in}_{4} + b_2.$`
+`$$ a^\textrm{out}_2 = w_{2,1} a^\textrm{in}_{1} + w_{2,2} a^\textrm{in}_{2} + w_{2,3} a^\textrm{in}_{3} + w_{2,4} a^\textrm{in}_{4} + b_2.$$`
 
 ---
 
-`$$ 
-\left(
+`$$\left(
 \begin{array}{c}
 a^\textrm{out}_{1} \\
 a^\textrm{out}_{2} 
 \end{array}
-\right)
-=
-\left(
+\right) = \left(
 \begin{array}{cccc}
 w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
 w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4} 
@@ -289,15 +284,12 @@ a^\textrm{in}_{2} \\
 a^\textrm{in}_{3} \\
 a^\textrm{in}_{4}
 \end{array}
-\right)
-+
-\left(
+\right) + \left(
 \begin{array}{c}
 b_{1} \\
 b_{2} 
 \end{array}
-\right)
-$$`
+\right)$$`
 
 ---
 
