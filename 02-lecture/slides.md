@@ -39,6 +39,7 @@ $$a^\textrm{out} = f( a^\textrm{in}_{1}, a^\textrm{in}_{2}, a^\textrm{in}_{3})$$
 </tr>
 </table>
 
+
 ---
 
 ## Classification with neural networks
@@ -124,13 +125,14 @@ How can we recognise digits using neural networks?
 
 Vectorisation or flattening converts a multi-dimensional data structure, such as a matrix or tensor, into a one-dimensional vector by sequentially arranging all elements in a specified order.
 
+
 ![Image](02-lecture/flatten.svg)
 
 ---
 
 ### Input encoding
 
-The input is represented by an encoding $(a^\textrm{in}_{1}, a^\textrm{in}_{2}, a^\textrm{in}_{3}, a^\textrm{in}_{4})$.
+The input is represented by an encoding `$(a^\textrm{in}_{1}, a^\textrm{in}_{2}, a^\textrm{in}_{3}, a^\textrm{in}_{4})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -256,15 +258,17 @@ Given a
 
 we can determine the output activation values as a linear combination of the input activation values by
 
-$$ a^\textrm{out}_1 = w_{1,1} a^\textrm{in}_{1} + w_{1,2} a^\textrm{in}_{2} + w_{1,3} a^\textrm{in}_{3} + w_{1,4} a^\textrm{in}_{4} + b_1$$
+<br>
+
+`$ a^\textrm{out}_1 = w_{1,1} a^\textrm{in}_{1} + w_{1,2} a^\textrm{in}_{2} + w_{1,3} a^\textrm{in}_{3} + w_{1,4} a^\textrm{in}_{4} + b_1$`
 
 and 
 
-$$ a^\textrm{out}_2 = w_{2,1} a^\textrm{in}_{1} + w_{2,2} a^\textrm{in}_{2} + w_{2,3} a^\textrm{in}_{3} + w_{2,4} a^\textrm{in}_{4} + b_2.$$
+`$ a^\textrm{out}_2 = w_{2,1} a^\textrm{in}_{1} + w_{2,2} a^\textrm{in}_{2} + w_{2,3} a^\textrm{in}_{3} + w_{2,4} a^\textrm{in}_{4} + b_2.$`
 
 ---
 
-$$ 
+`$$ 
 \left(
 \begin{array}{c}
 a^\textrm{out}_{1} \\
@@ -293,13 +297,13 @@ b_{1} \\
 b_{2} 
 \end{array}
 \right)
-$$
+$$`
 
 ---
 
 ### Matrix notation
 
-$$
+`$$
 \left(
 \begin{array}{c}
 a^\textrm{out}_{1} \\
@@ -328,11 +332,13 @@ b_{1} \\
 b_{2} 
 \end{array}
 \right)
-$$
+$$`
 
 or
 
-$$a^\textrm{out} = Wa^\textrm{in} + b$$
+`$$
+a^\textrm{out} = Wa^\textrm{in} + b
+$$`
 
 ---
 
@@ -398,7 +404,7 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 If we find weights and biases such that
 
-$$
+`$$
 \left(
 \begin{array}{cccc}
 w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
@@ -427,11 +433,11 @@ b_{2}
 0 
 \end{array}
 \right)
-$$
+$$`
 
 and
 
-$$
+`$$
 \left(
 \begin{array}{cccc}
 w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
@@ -460,7 +466,7 @@ b_{2}
 1 
 \end{array}
 \right)
-$$
+$$`
 
 our neural network can perfectly recognise both symbols. 
 
@@ -470,7 +476,7 @@ our neural network can perfectly recognise both symbols.
 
 Below weights and biases are optimal.
 
-$$
+`$$
 \left(
 \begin{array}{cccc}
 0.5 & 0.5 & 0.5 & -0.5 \\
@@ -499,11 +505,11 @@ $$
 0 
 \end{array}
 \right)
-$$
+$$`
 
 and
 
-$$
+`$$
 \left(
 \begin{array}{cccc}
 0.5 & 0.5 & 0.5 & -0.5 \\
@@ -532,7 +538,7 @@ $$
 1 
 \end{array}
 \right)
-$$
+$$`
 
 We can also find other weights and biases that are optimal for this example.
 <!-- .element: class="fragment" -->
