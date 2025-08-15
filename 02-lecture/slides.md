@@ -434,16 +434,12 @@ Below weights and biases are optimal.
 1 \\
 0
 \end{array}
-\right)
-+
-\left(
+\right) + \left(
 \begin{array}{c}
 0 \\
 0 
 \end{array}
-\right)
-=
-\left(
+\right) = \left(
 \begin{array}{c}
 1 \\
 0 
@@ -465,16 +461,12 @@ and
 0 \\
 1
 \end{array}
-\right)
-+
-\left(
+\right) + \left(
 \begin{array}{c}
 0 \\
 0 
 \end{array}
-\right)
-=
-\left(
+\right) = \left(
 \begin{array}{c}
 0 \\
 1 
