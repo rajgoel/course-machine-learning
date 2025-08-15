@@ -21,6 +21,18 @@ window.RevealConfig = {
     markers: true,
     hideMissingTitles: true
   },
+  mathjax2: {
+    mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js',
+    config: 'TeX-AMS_HTML-full',
+    // pass other options into `MathJax.Hub.Config()`
+    tex2jax: {
+      inlineMath: [
+        ['$', '$'],
+        ['\\(', '\\)'],
+      ],
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    },
+  },
   animate: { autoplay: true },
   chalkboard: { theme: "whiteboard" },
   chart: {
