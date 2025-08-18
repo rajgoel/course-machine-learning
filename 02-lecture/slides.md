@@ -1,4 +1,8 @@
-# Not so simple world: Digits with 5x5 black and white pixel input
+# Neural networks and gradient descent
+
+===
+
+## Not so simple world: Digits with 5x5 black and white pixel input
 
 <object data="digitrecognition/5x5digits/svg/digit_0a.svg" type="image/svg+xml" style="filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));margin:6px;"></object>
 <object data="digitrecognition/5x5digits/svg/digit_1a.svg" type="image/svg+xml" style="filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));margin:6px;"></object>
@@ -141,8 +145,6 @@ Given a
 
 we can determine the output activation values as a linear combination of the input activation values by
 
-<br>
-
 `$$ a^\textrm{out}_i = \displaystyle\sum_{j=1}^{25} w_{i,j} a^\textrm{in}_{j} + b_i$$`
 
 for all `$i \in \{ 0,1, \ldots, 9\}$`.
@@ -155,12 +157,7 @@ Assume we are given a pairs of input activation values $a^\textrm{in}$ with thei
 
 If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
 
-`$$
-\underbrace{
-W a^\textrm{in} + b
-}_{a^\textrm{out}}
-= a^*
-$$`
+`$$ \underbrace{ W a^\textrm{in} + b }_{a^\textrm{out}} = a^* $$`
 
 or 
 
@@ -181,9 +178,7 @@ a^\textrm{in}_{2} \\
 \vdots \\
 a^\textrm{in}_{25}
 \end{array}
-\right)
-+
-\left(
+\right) + \left(
 \begin{array}{c}
 b_{0} \\
 b_{1} \\
@@ -191,9 +186,7 @@ b_{1} \\
 b_{9} \\
 \end{array}
 \right)
-}_{a^\textrm{out}}
-=
-\left(
+}_{a^\textrm{out}} = \left(
 \begin{array}{c}
 a^*_0 \\
 a^*_1 \\
