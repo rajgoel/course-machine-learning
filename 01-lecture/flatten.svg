@@ -1,71 +1,67 @@
-<svg width="1000" height="400" xmlns="http://www.w3.org/2000/svg" style="transform:scale(2);">
+<svg width="1000" height="400" xmlns="http://www.w3.org/2000/svg">
     <!-- 3x3 Matrix -->
-    <g transform="translate(50,50)">
-        <rect x="0" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="15" y="20" font-size="16" text-anchor="middle" fill="black">1</text>
+    <g transform="translate(100,100)">
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-size="32" text-anchor="middle" fill="black">1</text>
 
-        <rect x="30" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="45" y="20" font-size="16" text-anchor="middle" fill="black">2</text>
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-size="32" text-anchor="middle" fill="black">2</text>
 
-        <rect x="60" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="75" y="20" font-size="16" text-anchor="middle" fill="black">3</text>
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-size="32" text-anchor="middle" fill="black">3</text>
       
-        <rect x="0" y="30" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="15" y="50" font-size="16" text-anchor="middle" fill="black">4</text>
+        <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="100" font-size="32" text-anchor="middle" fill="black">4</text>
 
-        <rect x="30" y="30" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="45" y="50" font-size="16" text-anchor="middle" fill="black">5</text>
+        <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="100" font-size="32" text-anchor="middle" fill="black">5</text>
 
-        <rect x="60" y="30" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="75" y="50" font-size="16" text-anchor="middle" fill="black">6</text>
+        <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="100" font-size="32" text-anchor="middle" fill="black">6</text>
         
-        <rect x="0" y="60" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="15" y="80" font-size="16" text-anchor="middle" fill="black">7</text>
+        <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="160" font-size="32" text-anchor="middle" fill="black">7</text>
 
-        <rect x="30" y="60" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="45" y="80" font-size="16" text-anchor="middle" fill="black">8</text>
+        <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="160" font-size="32" text-anchor="middle" fill="black">8</text>
 
-        <rect x="60" y="60" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="75" y="80" font-size="16" text-anchor="middle" fill="black">9</text>
+        <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="160" font-size="32" text-anchor="middle" fill="black">9</text>
     </g>
 
-    <!-- Arrows showing flattening -->
-    <line x1="150" y1="95" x2="190" y2="95" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
-    
     <!-- Flattened row -->
-    <g transform="translate(200,80)">
-        <rect x="0" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="15" y="20" font-size="16" text-anchor="middle" fill="black">1</text>
+    <g transform="translate(400,160)">
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-size="32" text-anchor="middle" fill="black">1</text>
 
-        <rect x="30" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="45" y="20" font-size="16" text-anchor="middle" fill="black">2</text>
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-size="32" text-anchor="middle" fill="black">2</text>
 
-        <rect x="60" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="75" y="20" font-size="16" text-anchor="middle" fill="black">3</text>
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-size="32" text-anchor="middle" fill="black">3</text>
 
-        <rect x="90" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="105" y="20" font-size="16" text-anchor="middle" fill="black">4</text>
+        <rect x="180" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="40" font-size="32" text-anchor="middle" fill="black">4</text>
 
-        <rect x="120" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="135" y="20" font-size="16" text-anchor="middle" fill="black">5</text>
+        <rect x="240" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="40" font-size="32" text-anchor="middle" fill="black">5</text>
 
-        <rect x="150" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="165" y="20" font-size="16" text-anchor="middle" fill="black">6</text>
+        <rect x="300" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="40" font-size="32" text-anchor="middle" fill="black">6</text>
 
-        <rect x="180" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="195" y="20" font-size="16" text-anchor="middle" fill="black">7</text>
+        <rect x="360" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="390" y="40" font-size="32" text-anchor="middle" fill="black">7</text>
 
-        <rect x="210" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="225" y="20" font-size="16" text-anchor="middle" fill="black">8</text>
+        <rect x="420" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="450" y="40" font-size="32" text-anchor="middle" fill="black">8</text>
 
-        <rect x="240" y="0" width="30" height="30" fill="lightgray" stroke="black"/>
-        <text x="255" y="20" font-size="16" text-anchor="middle" fill="black">9</text>
+        <rect x="480" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="510" y="40" font-size="32" text-anchor="middle" fill="black">9</text>
     </g>
 
-    <!-- Marker definition for arrowhead -->
-    <defs>
-        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
-        </marker>
-    </defs>
+    <!-- Font Awesome arrow -->
+    <g transform="translate(320, 160) scale(0.08)">
+        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" fill="black"/>
+    </g>
 </svg>
+
