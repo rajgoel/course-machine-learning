@@ -1,8 +1,5 @@
 # Introduction
 
-> [!CAUTION]
-> Not yet complete!
-
 ===
 
 ## Machine learning
@@ -18,27 +15,30 @@ Machine learning (ML) is a branch of artificial intelligence (AI) concerned with
 
 Machine learning is broadly classified into:
 
-- **Supervised Learning**
-- **Unsupervised Learning**
-- **Reinforcement Learning**
+- **Supervised learning**
+- **Unsupervised learning**
+- **Reinforcement learning**
 
 ---
 
 ### Supervised learning
 
-Supervised Learning trains a model to predict an output from a given input. 
+Supervised learning trains a model to predict an output from a given input. 
 
-It uses **labelled data**, where each input is paired with the correct output, to adjust the model’s parameters and improve its predictions.
+It uses **labelled data**, i.e.,
+
+- the input data and
+- labels providing the expected output for each input
+
+to adjust the model’s parameters and improve its predictions.
 
 > [!NOTE]
-> - The term *supervised* is used to indicate that guidance is given in form of correct outputs for each input.
-> - In ML, the term *predict* does not mean forecasting future events. It refers to assuming an output based on prior learning.
+> - The term *supervised* is used to indicate that guidance is given in form of labels.
+> - In ML, the term *predict* does not mean forecasting future events. It refers to assuming a specific output based on prior learning.
 
 ---
 
-#### Examples
-
-Common examples for supervised learning are:
+Common use cases for supervised learning are:
 
 - **Regression:** Predict a continuous value, e.g., predict the arrival time of a shipment.
 
@@ -56,9 +56,7 @@ Unsupervised learning trains a model to find patterns, relationships, or structu
 
 ---
 
-#### Examples
-
-Common examples for unsupervised learning are:
+Common use cases for unsupervised learning are:
 
 - **Clustering:** Group similar data points together based on their features.
 - **Dimensionality reduction:** Simplify or compress data while keeping important information.
@@ -67,20 +65,18 @@ Common examples for unsupervised learning are:
 
 ### Reinforcement learning
 
-Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment in order to maximize cumulative reward.
+Reinforcement learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment in order to maximize cumulative reward:
 
-- The agent takes actions in the environment.
-- The environment provides feedback in the form of rewards or penalties.
-- The agent learns to choose actions that lead to higher long-term rewards.
+- the agent takes actions in the environment,
+- the environment provides feedback in the form of rewards or penalties, and
+- the agent learns to choose actions that lead to higher long-term rewards.
 
 > [!NOTE]
-> RL differs from supervised learning because the agent learns from trial and error with feedback, rather than given labeled input-output pairs.
+> RL differs from supervised learning because the agent learns from trial and error with feedback, rather than given input-output pairs.
 
 ---
 
-#### Examples
-
-Common examples of reinforcement learning include **sequential decision-making problems**, in particular, with imperfect information or uncertain.
+A common use case for reinforcement learning are **sequential decision-making problems**, in particular, with imperfect information or uncertainty.
 
 > [!NOTE]
 > Decisions often have to be made before relevant information is known with certainty. The outcomes of actions may depend on previous actions and unpredictable events.
@@ -89,25 +85,23 @@ Common examples of reinforcement learning include **sequential decision-making p
 
 ## Deep learning
 
-Deep Learning (DL) is a subfield of machine learning that uses **artificial neural networks** with **multiple layers** to automatically learn from data.
+Deep learning (DL) is a subfield of machine learning that uses **artificial neural networks** with **multiple layers** to automatically learn from data.
 
 ---
 
 ### Artificial neural networks
 
-An artificial neural network (ANNs) is a computational model inspired by the structure and functions of biological neural networks.
-
-An ANN consists of:
+An artificial neural network (ANN) is a computational model inspired by the structure and functions of biological neural networks. It consists of:
 
 - **Artificial neurons:** Each neuron receives input signals, processes them, and produces an output signal.
-- **Edges:** Connections between neurons carry signals of varying intensity.
+- **Edges:** Connections between neurons carrying signals of varying intensity.
 
 
 ---
 
 ## Artificial neurons
 
-Artificial neurons have an activation value that is calculated with an *activation function* that uses the input of connected neurons.
+Artificial neurons have an activation value that is calculated with an **activation function** that uses the input of connected neurons.
 
 <table class="stretch">
 <tr>
@@ -149,13 +143,9 @@ A deep neural network (DNN) is an artificial neural network in which artificial 
 </div>
 
 
-===
-
-## Classification with neural networks
-
 ---
 
-### Example: Digit recognition
+#### Example: Hand-written digit recognition
 
 <table style="table-layout: fixed!important;width:900px;">
 <tr>
@@ -174,10 +164,6 @@ A deep neural network (DNN) is an artificial neural network in which artificial 
 </td>
 </tr>
 </table>
-
----
-
-How can we recognise digits using neural networks?
 
 ===
 
@@ -230,14 +216,6 @@ How can we recognise digits using neural networks?
 
 ---
 
-### Vectorisation / Flattening
-
-Vectorisation or flattening converts a multi-dimensional data structure, such as a matrix or tensor, into a one-dimensional vector by sequentially arranging all elements in a specified order.
-
-
-![Image](01-lecture/flatten.svg)
-
----
 
 ### Input encoding
 
@@ -282,15 +260,9 @@ The input is represented by an encoding `$(a^\textrm{in}_{1}, a^\textrm{in}_{2},
 
 ---
 
-### One-hot encoding
-
-Given a value $v$ from list of alternative values $V$,  *one-hot encoding* creates a vector of size $|V|$ where only the value at the position corresponding to value $v$ is set to 1, and all other values are set to 0.
-
----
-
 ### Output encoding
 
-The output for our list of symbols $V$ = ( /, \ ) is represented by a one-hot encoding  `$(a^\textrm{out}_{1}, a^\textrm{out}_{2})$`.
+The output for our list of symbols `/` and `\` is represented by a 2-dimensional vector `$(a^\textrm{out}_{1}, a^\textrm{out}_{2})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -582,12 +554,7 @@ and
 \end{array}
 \right)$$`
 
-We can also find other weights and biases that are optimal for this example.
-<!-- .element: class="fragment" -->
-
 ---
-
-### Conclusion
 
 A simple neural network with
 
