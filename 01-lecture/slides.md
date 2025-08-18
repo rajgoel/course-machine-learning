@@ -140,11 +140,7 @@ $$a^\textrm{out} = f( a^\textrm{in}_{1}, a^\textrm{in}_{2}, a^\textrm{in}_{3})$$
 
 ### Deep neural networks
 
-A deep neural network (DNN) is an artificial neural network in which artificial neurons are grouped into layers such that it consist of:
-
-- an **input layer**: containing neurons receiving signals from the outside world
-- multiple **hidden layesr**: containing neurons receiving signals from the previous layer and passing signals to the next layer
-- an **output layer**: containing neurons receiving signals from the previous layer and producing the final result
+A deep neural network (DNN) is an artificial neural network in which artificial neurons are grouped into layers, typically consisting of an **input layer**, multiple **hidden layers**, and an **output layer**.
 
 <div class="neuralnetwork predictions" style="height: 700px; width: 1300px!important;">
 <!--
