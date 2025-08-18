@@ -206,8 +206,8 @@ our neural network would be able to perfectly recognise the given digits.
 - For each  pair $(a^\textrm{in},a^*)$ we have 10 equations for a perfect neural network.
 - With 30 pairs, we would have 30 $\cdot$ 10 = 300 equations.
 
-A system of equations with 300 equations and 260 variables (ie. parameters of the neural network) cannot be solved (unless some of the equations are redundant). <!-- .element: class="fragment" -->
-
+> [!NOTE]
+> A system of equations with 300 equations and 260 variables (ie. parameters of the neural network) cannot be solved (unless some of the equations are redundant). 
 
 ---
 
