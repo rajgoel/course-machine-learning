@@ -223,55 +223,7 @@ For each given pair $(a^\textrm{in},a^*)$ we can define an error function as the
 \Big)^2
 $$`
 
----
 
-## Losses
- 
-The purpose of loss functions is to compute the quantity that a model should seek to minimize during training.
-
-### Probabilistic Losses (classification problems)
-
-#### Binary Crossentropy: 
-
-When the target has binary values (0,1).
-
-$BCE = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]$
-
-where 
-- N is the number of observations.
-
-- $y_i$​ is the true label for the i_th sample (either 0 or 1).
-
-- $\hat{y}_i$ is the predicted probability for the the i_th sample.
-
-- log⁡(⋅) is the natural logarithm.
-
----
-
-#### Categorical Crossentropy: 
-
-When the target has more than two classes and it is hot encoded.
-
-$CCE= -\frac{1}{C} \sum_{i=1}^{N} \log(\hat{y}_{i})$
-
-where 
-- C is the number of classes.
-
-- $y_i$​ is the true label for the i_th sample (either 0 or 1) from the one-hot encoded.
-
-- $\hat{y}_i$ is the predicted probability for the the i_th sample.
-
-- log⁡(⋅) is the natural logarithm.
-
----
-
-### Regression Losses 
-
-- Mean Squared Error
-
-
-
-- Mean Absolute Error
 
 ---
 
@@ -301,22 +253,10 @@ We want to find weights and biases minimizing the mean error.
 
 The gradient $\nabla f$ of a function $f$ gives the direction of the steepest ascend. 
 
-<object data="digitrecognition/gradient.svg" type="image/svg+xml" ></object>
+<object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
-By changing weights and biases in opposite direction of the gradient, we can quickly minimise the error function.
-
----
-
-## Forward Pass (Forward Propagation)
-
-- The input data is passed through the network, and the output is the computed output probabilities.
-
-
-## Backpropagation
-
-- The error (loss) is computed.
-- Gradients of the loss w.r.t. network parameters using the chain rule are computed.
-- Update the weights and biases using gradient descent (or other optimizers like Adam).
+> [!NOTE]
+> By changing weights and biases in opposite direction of the gradient, we can minimise the error function.
 
 ---
 
