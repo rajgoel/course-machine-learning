@@ -5,9 +5,19 @@
 
 ===
 
-## What is machine learning ?
-Is a field of Artificial Intelligence (AI) that enables computers to learn from data. 
-It is broadly classified into:
+## Machine learning
+
+Machine learning (ML) is a branch of artificial intelligence (AI) concerned with the development of algorithms that can learn from data and generalise to unseen data.
+
+> [!NOTE]
+> The goal of artificial intelligence is to develop algorithms that can perform tasks without being explicitly programmed.
+
+---
+
+### Types of machine learning
+
+Machine learning is broadly classified into:
+
 - **Supervised Learning**
 - **Unsupervised Learning**
 - **Reinforcement Learning**
@@ -15,62 +25,83 @@ It is broadly classified into:
 ---
 
 ### Supervised learning
-Supervised learning involves training a model using labeled data, where each input has a corresponding correct output.
 
-### Examples:
-- **Regression**: Predict continuous values (e.g., sales forecasting, churn prediction, revenue prediction...).
-- **Classification**: Predict discrete labels (e.g., spam detection, sentiment analysis, medical diagnostics...).
+Supervised Learning trains a model to predict an output from a given input. 
+
+It uses **labelled data**, where each input is paired with the correct output, to adjust the model’s parameters and improve its predictions.
+
+> [!NOTE]
+> - The term *supervised* is used to indicate that guidance is given in form of correct outputs for each input.
+> - In ML, the term **predict** does not necessarily mean forecasting future events. It refers to assuming the output corresponding to a given input based on the patterns learned from the training data.
+
+---
+
+#### Examples
+
+Common examples for supervised learning are:
+
+- **Regression:** Predict a continuous value, e.g., predict the arrival time of a shipment.
+
+- **Classification:** Predict a category or class, e.g., predict whether a shipment will be delayed or not.
 
 
 ---
 
 ### Unsupervised learning
-Unsupervised learning deals with unlabeled data, discovering patterns without predefined outputs.
 
-### Examples:
-- **Clustering** k-means, hierarchical clustering (e.g., market segmentation, social networks analysis...)
-- **Recommender systems** 
-- **Dimensionality reduction**, e.g., autoencoder
+Unsupervised learning trains a model to find patterns, relationships, or structures in the data.
+
+> [!NOTE]
+> Unlike supervised learning, unsupervised learning does **not** rely on given labels or outputs.
+
+---
+
+#### Examples
+
+Common examples for unsupervised learning are:
+
+- **Clustering:** Group similar data points together based on their features.
+- **Dimensionality reduction:** Simplify or compress data while keeping important information.
 
 ---
 
 ### Reinforcement learning
 
-...
+Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment in order to maximize cumulative reward.
 
-===
+- The agent takes actions in the environment.
+- The environment provides feedback in the form of rewards or penalties.
+- The agent learns to choose actions that lead to higher long-term rewards.
 
-## What is deep learning ?
-
-
-
----
-
-## Artificial neural networks
-
-
-
-<!--
-
-While neural networks have been around since the 1950s, deep learning became practical due to advancements in:
-- **Increased computational power (GPUs)**
-- **Large-scale datasets (Big Data)**
-- **Improved training algorithms (e.g., backpropagation, optimization techniques)**
-
-
-Deep Learning excels in tasks such as image recognition and natural language processing.
-
--->
-
-===
-
-
-# Neural networks
+> [!NOTE]
+> RL differs from supervised learning because the agent learns from trial and error with feedback, rather than given labeled input-output pairs.
 
 ---
 
-> [!CAUTION]
-> Not yet complete
+#### Examples
+
+Common examples of reinforcement learning include sequential decision-making problems:
+
+- **Exogenous uncertainty:** Decisions affected by external factors outside the agent’s control, e.g., unknown customer demand.
+- **Endogenous uncertainty:** Decisions affected by internal factors within the agent’s control, e.g., the current positions of vehicles in a fleet.
+
+===
+
+## Deep learning
+
+Deep Learning (DL) is a subfield of machine learning that uses **artificial neural networks** with **multiple layers** to automatically learn from data.
+
+---
+
+### Artificial neural networks
+
+An artificial neural network (ANNs) is a computational model inspired by the structure and functions of biological neural networks.
+
+Like biological neural networks, which contain neurons connected by synapses that carry signals, an ANN is made up of:
+
+- **Artificial neurons:** Each neuron receives input signals, processes them, and produces an output signal.
+- **Edges:** Connections between neurons that carry signals of varying intensity.
+
 
 ---
 
@@ -106,7 +137,7 @@ $$a^\textrm{out} = f( a^\textrm{in}_{1}, a^\textrm{in}_{2}, a^\textrm{in}_{3})$$
 </table>
 
 
----
+===
 
 ## Classification with neural networks
 
