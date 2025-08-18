@@ -401,36 +401,10 @@ Can we use the weights and biases we obtained for the 5x5 pixel input to recogni
 
 ---
 
-### Pooling
-
-Pooling is a technique to reduce the dimensions of an input while preserving important features or patterns.
-
-A *filter* is used to determine groups of input values which are replaced by an output of lower dimension.
-<!-- .element: class="fragment" -->
-
-For image inputs, the filter typically determines areas of $n$ x $m$ pixels that are replaced by a single value.
-<!-- .element: class="fragment" -->
-
----
-
-#### Max pooling ####
-
-A filter  moves across the input data, and for each group of values that the filter covers, the maximum value is selected to represent the group in the output.
-
----
-
-#### Average pooling ####
-
-A filter moves across the input data, and for each group of values that the filter covers, the average value is selected to represent the group in the output.
-
----
-
 
 ### Input preprocessing
 
 First we have to create a 5x5 pixel input of our hand-written digit.
-
-<br>
 
 <table style="table-layout: fixed!important;width:900px;">
 <tr>
@@ -473,7 +447,8 @@ First we have to create a 5x5 pixel input of our hand-written digit.
 </tr>
 </table>
 
-Here, we apply average pooling with a threshold value of 0.3 to determine a binary input.
+> [!NOTE]
+> Here, we calculate the average color of each area in our input and assume a white pixel if the average is above 0.3.
 
 ---
 
