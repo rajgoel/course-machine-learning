@@ -32,7 +32,7 @@ It uses **labelled data**, where each input is paired with the correct output, t
 
 > [!NOTE]
 > - The term *supervised* is used to indicate that guidance is given in form of correct outputs for each input.
-> - In ML, the term **predict** does not necessarily mean forecasting future events. It refers to assuming the output corresponding to a given input based on the patterns learned from the training data.
+> - In ML, the term *predict* does not mean forecasting future events. It refers to assuming an output based on prior learning.
 
 ---
 
@@ -80,10 +80,10 @@ Reinforcement Learning (RL) is a type of machine learning where an agent learns 
 
 #### Examples
 
-Common examples of reinforcement learning include sequential decision-making problems:
+Common examples of reinforcement learning include **sequential decision-making problems**, in particular, with imperfect information or uncertain.
 
-- **Exogenous uncertainty:** Decisions affected by external factors outside the agent’s control, e.g., unknown customer demand.
-- **Endogenous uncertainty:** Decisions affected by internal factors within the agent’s control, e.g., the current positions of vehicles in a fleet.
+> [!NOTE]
+> Decisions often have to be made before relevant information is known with certainty. The outcomes of actions may depend on previous actions and unpredictable events.
 
 ===
 
@@ -97,10 +97,10 @@ Deep Learning (DL) is a subfield of machine learning that uses **artificial neur
 
 An artificial neural network (ANNs) is a computational model inspired by the structure and functions of biological neural networks.
 
-Like biological neural networks, which contain neurons connected by synapses that carry signals, an ANN is made up of:
+An ANN consists of:
 
 - **Artificial neurons:** Each neuron receives input signals, processes them, and produces an output signal.
-- **Edges:** Connections between neurons that carry signals of varying intensity.
+- **Edges:** Connections between neurons carry signals of varying intensity.
 
 
 ---
@@ -135,6 +135,22 @@ $$a^\textrm{out} = f( a^\textrm{in}_{1}, a^\textrm{in}_{2}, a^\textrm{in}_{3})$$
 </td>
 </tr>
 </table>
+
+---
+
+### Deep neural networks
+
+A deep neural network (DNN) is an artificial neural network in which artificial neurons are grouped into layers such that it consist of:
+
+- an **input layer**: containing neurons receiving signals from the outside world
+- multiple **hidden layesr**: containing neurons receiving signals from the previous layer and passing signals to the next layer
+- an **output layer**: containing neurons receiving signals from the previous layer and producing the final result
+
+<div class="neuralnetwork predictions" style="height: 700px; width: 1300px!important;">
+<!--
+{"type": "feedforward" }
+-->
+</div>
 
 
 ===
