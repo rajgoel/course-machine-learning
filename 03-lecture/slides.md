@@ -52,7 +52,16 @@ where $I^L$ denotes the set of neurons in the output layer.
 
 ---
 
-### Partial derivatives of the error function
+### How does gradient descent work for feed forward networks?
+
+Gradient descent works by iteratively changing weights and biases in opposite direction of the gradient.
+
+> [!NOTE]
+> The gradient of $f^\textrm{error}_{(a^\textrm{in},a^*)}$ is the collection of all its partial derivatives.
+
+---
+
+### Partial derivatives for weights
 
 For any particular weight $\bar w$, we have
 
@@ -60,7 +69,14 @@ For any particular weight $\bar w$, we have
 \frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
 $$`
 
-and for any particular bias $\bar b$, we have
+> [!NOTE]
+> Remember, that `$f^\textrm{error}_{(a^\textrm{in},a^*)} = \displaystyle\sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2$`.
+
+---
+
+### Partial derivatives for biases
+
+For any particular bias $\bar b$, we have
 
 `$$
 \frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}
