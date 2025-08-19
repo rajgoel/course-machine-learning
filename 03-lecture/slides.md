@@ -50,9 +50,18 @@ For a given input/output pair  $(a^\textrm{in},a^*)$, the sum of squared errors 
 
 where $I^L$ denotes the set of neurons in the output layer.
 
+===
+
+### Gradient descent work for feed forward networks
+
+> [!TIP]
+> The following deep dive is helpful for an understanding of the mechanics of deep learning. 
+> As the mechanics are already implemented in deep learning frameworks, you do not need to understand them when simply using the frameworks.
+ 
 ---
 
-### How does gradient descent work for feed forward networks?
+
+### How does gradient descent work?
 
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
@@ -69,7 +78,7 @@ For any particular weight $\bar w$, we have
 
 `$$
 \frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L} \underbrace{\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} 
-\class{fragment}{{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}}}
+\class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}}
 $$`
 
 > [!NOTE]
@@ -83,7 +92,7 @@ For any particular bias $\bar b$, we have
 
 `$$
 \frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\underbrace{\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} 
-\class{fragment}{{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}}}
+\class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}}
 $$`
 
 > [!NOTE]
