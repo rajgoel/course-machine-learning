@@ -243,8 +243,8 @@ Let $S$ denote the set of samples given. Then, the **mean error** is
 \displaystyle\sum_{(a^\textrm{in},a^*) \in S} \underbrace{f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b)}_{\textrm{Error of sample}}.
 $$`
 
-We want to find weights and biases minimizing the mean error.
-<!-- .element: class="fragment" -->
+> [!NOTE]
+> We want to find weights and biases minimizing the mean error.
 
 ===
 
@@ -527,4 +527,3 @@ The simple neural network can achieve **high training accuracy**, but **poor tes
 - Larger neural network?
 - Non-linear activation functions?
 
----
