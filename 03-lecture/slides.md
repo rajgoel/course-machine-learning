@@ -57,7 +57,8 @@ where $I^L$ denotes the set of neurons in the output layer.
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
-> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of $f^\textrm{error}_{(a^\textrm{in},a^*)}$.
+> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of the mean error $\displaystyle\frac{1}{|S|} \cdot
+\displaystyle\sum_{(a^\textrm{in},a^*) \in S}f^\textrm{error}_{(a^\textrm{in},a^*)}$.
 > The gradient is the collection of all its partial derivatives.
 
 ---
@@ -67,7 +68,7 @@ where $I^L$ denotes the set of neurons in the output layer.
 For any particular weight $\bar w$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} 
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L} \underbrace{\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} 
 \class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}}
 $$`
 
@@ -81,7 +82,7 @@ $$`
 For any particular bias $\bar b$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} 
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\underbrace{\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} 
 \class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}}
 $$`
 
