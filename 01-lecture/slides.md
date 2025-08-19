@@ -442,7 +442,7 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 If we find weights and biases such that
 
-<span class="fragment  fade-out">
+<span class="fragment appear-disappear">
 
 `$$\left(
 \begin{array}{cccc}
@@ -498,7 +498,7 @@ b_{2}
 
 </span>
 
-<span class="fragment  fade-in-then-out">
+<span class="fragment appear-disappear">
 
 `$$\left(
 \begin{array}{cccc}
@@ -531,7 +531,7 @@ b_{2}
 
 </span>
 
-<span class="fragment  fade-in">
+<span class="fragment appear-disappear">
 
 `$$\left(
 \begin{array}{cccc}
