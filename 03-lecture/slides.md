@@ -63,6 +63,8 @@ where $I^L$ denotes the set of neurons in the output layer.
 
 ---
 
+<span class="fragment" data-fragment-index="0"></span>
+
 ### Partial derivatives for weights
 
 For any particular weight $\bar w$, we have
@@ -71,6 +73,7 @@ For any particular weight $\bar w$, we have
 \frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L} \underbrace{\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} 
 \class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}}
 $$`
+
 <span class="fragment" data-fragment-index="1"></span>
 
 > [!NOTE]
