@@ -440,7 +440,7 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 ---
 
-<-- .slide: data-auto-animate="true" -->
+<!-- .slide: data-auto-animate="true" -->
 
 If we find weights and biases such that
 
@@ -500,7 +500,7 @@ our neural network can perfectly recognise both symbols.
 
 ---
 
-<-- .slide: data-auto-animate="true" -->
+<!-- .slide: data-auto-animate="true" -->
 
 If we find weights and biases such that
 
