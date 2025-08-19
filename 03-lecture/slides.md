@@ -86,6 +86,34 @@ $$`
 
 ---
 
+The partial derivative $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar w}$ indicates how much a change in $\bar w$ or $\bar b$ affects an output activation $a^\textrm{out}_i$ and can be determined using the **chain rule**.
+
+---
+
+Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute the activation in layer $\bar l + 1$.
+
+According to the chain rule, we have
+`$$
+\begin{array}{ccl}
+\frac{\partial a^\textrm{out}}{\partial \bar w} & = & \frac{\partial a^L}{\partial \bar w} \\
+& = & 
+\frac{\partial a^L}{\partial a^{L-1}}
+\quad\cdot\quad 
+\frac{\partial a^{L-1}}{\partial a^{L-2}}
+\quad\cdot\quad \ldots \quad\cdot\quad 
+\frac{\partial a^{\bar l+2}}{\partial a^{l+1}} 
+\quad\cdot\quad
+\frac{\partial a^{\bar l+1}}{\partial \bar w}
+\end{array}
+$$`
+
+> [!NOTE]
+> For any $\bar l < l \leq L$, $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicates how much a change in the activation of a neuron in layer $l$ affects the activation of the a neuron in layer $l+1$ and $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
+
+
+---
+
+
 ### Partial derivatives for biases
 
 For any particular bias $\bar b$, we have
@@ -100,11 +128,11 @@ $$`
 
 ---
 
-The partial derivatives $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar w}$ and $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar b}$
-indicate how much a change in $\bar w$ or $\bar b$ affects an output activation $a^\textrm{out}_i$.
+The partial derivative $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar b}$ indicate how much a change in $\bar b$ affects an output activation $a^\textrm{out}_i$ and can also be determined using the **chain rule**.
 
-They can be determined using the **chain rule**.
-
+> [!NOTE]
+> All the steps are analogously to those to determine the partial derivatives for weights.
+ 
 ---
 
 Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute the activation in layer $\bar l + 1$.
