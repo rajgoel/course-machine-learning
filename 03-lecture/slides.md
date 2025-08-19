@@ -91,6 +91,13 @@ $$`
 
 ---
 
+To determine $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar w}$ and $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar b}$, we can determine
+
+- how much a change in $\bar w$ or $\bar b$ affects the activation of the correspondig neuron, and
+- how much a change in the activation of a neuron affects the activation of the next neuron.
+
+---
+
 ### Chain rule
 
 According to the chain rule, we have
