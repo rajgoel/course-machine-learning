@@ -102,15 +102,34 @@ According to the chain rule, we have
 \ \cdot\  
 \frac{\partial a^{L-1}}{\partial a^{L-2}}
 \ \cdot\  \ldots \ \cdot\  
-\frac{\partial a^{\bar l+2}}{\partial a^{l+1}}}_{\textrm{indicate how much a change in the activation of a neuron} \atop \textrm{in one layer affects the activation of the a neuron in the next layer}}
+\frac{\partial a^{\bar l+2}}{\partial a^{l+1}}}_{\textrm{each term indicates how much a change in the activation of a neuron} \atop \textrm{in one layer affects the activation of the a neuron in the next layer}}
 \ \cdot\ 
 \frac{\partial a^{\bar l+1}}{\partial \bar w}
 \end{array}
 $$`
 
-> [!NOTE]
-> - $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
+---
 
+### Jacobian matrix of partial derivatives
+
+We have
+`$$
+\frac{\partial a^{l+1}}{\partial a^{l}} = \frac{\partial F^{l}_{W^{l},b^{l}}}{\partial a^{l}}
+=\left(
+\begin{array}{ccc}
+\tfrac{\partial f_1}{\partial a^{l}_1} & \ldots & \tfrac{\partial f_1}{\partial a^{l}_{h}} \\
+\vdots & \ddots & \vdots \\
+\tfrac{\partial f_{k}}{\partial a^{l}_1} & \ldots & \tfrac{\partial f_{k}}{\partial a^{l}_{h}} \\
+\end{array}
+\right)
+$$`
+where 
+- $h$ is the number of neurons in layer $l$,
+- $k$ is the number of neurons in layer $l+1$, and 
+- $f_i$ is the activation function of the $i$-th neuron in layer $l+1$. 
+
+> [!NOTE]
+> Remember, that $F^l_{W^l,b^l}$ is a **vector** of activation functions.
 
 ---
 
@@ -133,27 +152,6 @@ The partial derivative $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \
 
 > [!NOTE]
 > All the steps are analogously to those to determine the partial derivatives for weights.
-
----
-
-### Jacobian matrix of partial derivatives
-
-We have
-`$$
-\frac{\partial a^{l+1}}{\partial a^{l}} = \frac{\partial F^{l}_{W^{l},b^{l}}}{\partial a^{l}}
-=\left(
-\begin{array}{ccc}
-\tfrac{\partial f_1}{\partial a^{l}_1} & \ldots & \tfrac{\partial f_1}{\partial a^{l}_{h}} \\
-\vdots & \ddots & \vdots \\
-\tfrac{\partial f_{k}}{\partial a^{l}_1} & \ldots & \tfrac{\partial f_{k}}{\partial a^{l}_{h}} \\
-\end{array}
-\right)
-$$`
-where $h=|I^l|$, $k=|I^{l+1}|$, and $f_i$ is the activation function of the $i$-th neuron in layer $l+1$. 
-
-> [!NOTE]
-> Remember, `$a^{l+1} = F^l_{W^l,b^l} (a^l)$` and $F^l_{W^l,b^l}$ denotes a vector of activation functions.
-
 
 
 ---
