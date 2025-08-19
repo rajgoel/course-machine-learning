@@ -504,38 +504,15 @@ our neural network can perfectly recognise both symbols.
 
 If we find weights and biases such that
 
-`$$\left(
-\begin{array}{cccc}
-w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
-w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4} \\
-w_{1,1} & w_{1,2} & w_{1,3} & w_{1,4} \\
-w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4}  
-\end{array}
-\right)
-\left(
-\begin{array}{c}
-0 \\
-1 \\
-1 \\
-0
-\end{array}
-\right) + \left(
-\begin{array}{c}
-b_{1} \\
-b_{2} \\ 
-b_{1} \\
-b_{2} 
-\end{array}
-\right) = \left(
-\begin{array}{c}
-1 \\
-0 
-\end{array}
-\right)$$`
+`$$w_{1,2} + w_{1,3} + b_1 = 1$$`
+`$$w_{2,2} + w_{2,3} + b_2 = 0$$`
+
+and 
+
+`$$w_{1,1} + w_{1,4} + b_1 = 0$$`
+`$$w_{2,1} + w_{2,4} + b_2 = 1$$`
 
 our neural network can perfectly recognise both symbols. 
-
-
 
 ---
 
