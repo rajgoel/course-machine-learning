@@ -57,7 +57,7 @@ where $I^L$ denotes the set of neurons in the output layer.
 For any particular weight $\bar w$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}  \frac{\partial a^\textrm{out}_i}{\partial \bar w = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}  \frac{\partial a^\textrm{out}_i}{\partial \bar w} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
 $$`
 
 and for any particular bias $\bar b$, we have
