@@ -227,7 +227,7 @@ $$`
 
 ---
 
-Our goal is to find weights and biases that minimize the sum of squared errors for all given pairs $(a^\textrm{in},a^*)$.
+Our goal is to find weights and biases that minimize the sum of squared errors **for all** given pairs $(a^\textrm{in},a^*)$.
 
 ===
 
@@ -237,11 +237,10 @@ Our goal is to find weights and biases that minimize the sum of squared errors f
 
 ## Mean error
 
-Let $S$ denote the set of samples given. For each $(a^\textrm{in},a^*) \in S$ let  $f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b)$ denote the error function for the sample.
+Let $S$ denote the set of samples given. Then, the **mean error** is
 
-The mean error is
 `$$f^\textrm{error}(W,b) = \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b).
+\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \underbrace{f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b)}_{\textrm{Error of sample}}.
 $$`
 
 We want to find weights and biases minimizing the mean error.
