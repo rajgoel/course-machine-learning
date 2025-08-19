@@ -48,15 +48,11 @@ where $a^\textrm{out}$ is the computed output activation
 For any particular weight $\bar w$ and bias $\bar b$ used to determine the activations in layer $\bar l$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w}
-=
-\sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
 $$`
 and
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b}
-=
-\sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}
 $$`
 
 ---
@@ -147,11 +143,10 @@ with respect to each weight $\bar w$ and bias $\bar b$ for the respective activa
 
 So far we only considered linear activation functions of the form $f_{W,b}(a) = Wa + b$.
 
-A feedforward neural network with multiple layers and linear activation functions has **no advantage** over a simple neural network.
-<!-- .element: class="fragment" -->
-
-The linear activation functions of all layers can be combined into one linear activation function directly determining the output activation from the inputs.
-<!-- .element: class="fragment" -->
+> [!IMPORTANT]
+> A feedforward neural network with multiple layers and linear activation functions has **no advantage** over a simple neural network.
+> 
+> The linear activation functions of all layers can be combined into **one** linear activation function directly determining the output activation from the inputs.
 
 ---
 
@@ -162,9 +157,8 @@ We can use a composed activation function $f = g \circ h$ where
 - $h$ is a linear input function used to aggregate input activation values, and
 - $g$ is a non-linear output function  that modifies the aggregated input to determine the output activation value.
 
-
-Note, many references use the term *activation function* to describe $g$ and implicitly assume $h$ to be a linear combination of the input activation values.
-<!-- .element: class="fragment" -->
+> [!NOTE]
+> Some references use the term *activation function* to describe $g$ and implicitly assume $h$ to be a linear combination of the input activation values.
 
 ---
 
@@ -186,7 +180,7 @@ $$\frac{ \partial f}{ \partial \bar b} = \frac{ \partial g}{ \partial h } \cdot 
 
 `$$g(x) = \frac{1}{1+e^{-x}}$$`
 
-![Figure](feedforwardnetworks/sigmoid.svg)
+![Figure](03-lecture/sigmoid.svg)
 
 <!-- 
 Derivative: 
@@ -201,7 +195,7 @@ Usage: as an output layer activation function in binary classification
 
 `$$g(x) = \max\{0,x\}$$`
 
-![Figure](feedforwardnetworks/ReLU.svg)
+![Figure](03-lecture/ReLU.svg)
 
 Note, that $\frac{ \partial g}{ \partial x }$ is not defined for $x=0$, but we can anyhow use a value of 0 or 1 in back propagation.
 <!-- .element: class="fragment" -->
@@ -331,7 +325,7 @@ It includes
 - a training set of 60,000 examples, and
 - a test set of 10,000 examples. 
 
-![Digits](feedforwardnetworks/digits.jpg)
+![Digits](03-lecture/digits.jpg)
 
 ---
 
