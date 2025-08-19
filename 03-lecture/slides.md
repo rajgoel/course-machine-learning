@@ -86,7 +86,7 @@ $$`
 
 ---
 
-The partial derivative $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar w}$ indicates how much a change in $\bar w$ or $\bar b$ affects an output activation $a^\textrm{out}_i$ and can be determined using the **chain rule**.
+The partial derivative $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar w}$ indicates how much a change in $\bar w$ affects an output activation $a^\textrm{out}_i$ and can be determined using the **chain rule**.
 
 ---
 
@@ -108,7 +108,8 @@ According to the chain rule, we have
 $$`
 
 > [!NOTE]
-> For any $\bar l < l \leq L$, $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicates how much a change in the activation of a neuron in layer $l$ affects the activation of the a neuron in layer $l+1$ and $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
+> - For any $\bar l < l \leq L$, $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicates how much a change in the activation of a neuron in layer $l$ affects the activation of the a neuron in layer $l+1$.
+> - $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
 
 
 ---
@@ -128,7 +129,7 @@ $$`
 
 ---
 
-The partial derivative $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar b}$ indicate how much a change in $\bar b$ affects an output activation $a^\textrm{out}_i$ and can also be determined using the **chain rule**.
+The partial derivative $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar b}$ indicates how much a change in $\bar b$ affects an output activation $a^\textrm{out}_i$ and can also be determined using the **chain rule**.
 
 > [!NOTE]
 > All the steps are analogously to those to determine the partial derivatives for weights.
@@ -158,43 +159,6 @@ $$`
 
 ---
 
-
----
-
-### Chain rule
-
-According to the chain rule, we have
-`$$
-\begin{array}{ccccccccccc}
-\frac{\partial a^\textrm{out}}{\partial \bar w} & = & \frac{\partial a^L}{\partial \bar w} \\
-& = &
-\frac{\partial a^L}{\class{highlight}{\partial a^{L-1}}} 
-&\cdot& 
-\class{highlight}{\frac{\partial a^{L-1}}{\partial a^{L-2}}} 
-&\cdot& \ldots &\cdot& 
-\class{highlight}{\frac{\partial a^{\bar l+2}}{\partial a^{\bar l+1}}} &\cdot&
-\frac{\class{highlight}{\partial a^{\bar l+1}}}{\partial \bar w}
-\end{array}
-$$`
-and
-`$$
-\begin{array}{ccccccccccc}
-\frac{\partial a^\textrm{out}}{\partial \bar b} & = & \frac{\partial a^L}{\partial \bar b}\\
-& = &
-\frac{\partial a^L}{\class{highlight}{\partial a^{L-1}}} 
-&\cdot& 
-\class{highlight}{\frac{\partial a^{L-1}}{\partial a^{L-2}}} 
-&\cdot& \ldots &\cdot& 
-\class{highlight}{\frac{\partial a^{\bar l+2}}{\partial a^{\bar l+1}}} &\cdot&
-\frac{\class{highlight}{\partial a^{\bar l+1}}}{\partial \bar b}
-\end{array}
-$$`
-
-> [!NOTE]
-> The terms $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicate how much the activation values of neurons in layer $l+1$ change if we change the activation values of neurons in layer $l$.
-
----
-
 ### Jacobian matrix of partial derivatives
 
 We have
@@ -209,7 +173,10 @@ We have
 \right)
 $$`
 where $h=|I^l|$, $k=|I^{l+1}|$, and $f_i$ is the activation function of the $i$-th neuron in layer $l+1$. 
-</div>
+
+> [!NOTE]
+> Remember, `$a^{l+1} = F^l_{W^l,b^l} (a^l)$` and $F^l_{W^l,b^l}$ denotes a vector of activation functions.
+
 
 
 ---
