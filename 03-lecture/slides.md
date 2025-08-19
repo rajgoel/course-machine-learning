@@ -125,9 +125,8 @@ According to the chain rule, we have
 $$`
 
 > [!NOTE]
-> $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
-> 
-> For any $\bar l < l \leq L$, $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicates how much a change in the activation of a neuron in layer $l$ affects the activation of the a neuron in layer $l+1$.
+> For any $\bar l < l \leq L$, $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicates how much a change in the activation of a neuron in layer $l$ affects the activation of the a neuron in layer $l+1$ and $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
+
 
 ---
 
