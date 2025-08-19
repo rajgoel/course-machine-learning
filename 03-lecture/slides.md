@@ -54,10 +54,11 @@ where $I^L$ denotes the set of neurons in the output layer.
 
 ### How does gradient descent work for feed forward networks?
 
-Gradient descent works by iteratively changing weights and biases in opposite direction of the gradient.
+<object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
-> The gradient of $f^\textrm{error}_{(a^\textrm{in},a^*)}$ is the collection of all its partial derivatives.
+> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of $f^\textrm{error}_{(a^\textrm{in},a^*)}$.
+> The gradient is the collection of all its partial derivatives.
 
 ---
 
@@ -66,7 +67,8 @@ Gradient descent works by iteratively changing weights and biases in opposite di
 For any particular weight $\bar w$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} 
+\class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}}
 $$`
 
 > [!NOTE]
@@ -79,7 +81,8 @@ $$`
 For any particular bias $\bar b$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} 
+\class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}}
 $$`
 
 > [!NOTE]
