@@ -33,13 +33,22 @@ Then, the activation values of layer $l+1$ can be computed by
 
 ---
 
+### Computed output activations
+
+For a given input activiation  $a^\textrm{in}$, the output activation $a^\textrm{out}$ in a feedforward neural network with $L$ layers can be computed by
+
+`$$ a^\textrm{out} = \underbrace{F^{L-1}_{W^{L-1},b^{L-1}} ( \underbrace{\ldots \underbrace{F^2_{W^2,b^2} ( \underbrace{F^1_{W^1,b^1}( \underbrace{a^\textrm{in}}_{a^1} )}_{a^2} )}_{a^3}  \ldots}_{\unicode{x22F0}\quad})}_{a^L}.$$`
+
+
+---
+
 ### Error function
 
-For a given input/expected output pair  $(a^\textrm{in},a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers and a set $I^l$ of neurons in the $l$-th layer is
+For a given input/expected output pair  $(a^\textrm{in},a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
+
 `$$f^\textrm{error}_{(a^\textrm{in},a^*)}(W^1,b^1,\ldots,W^{L-1},b^{L-1}) = \sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2.$$`
 
-where $a^\textrm{out}$ is the computed output activation
-`$$ a^\textrm{out} = \underbrace{F^{L-1}_{W^{L-1},b^{L-1}} ( \underbrace{\ldots \underbrace{F^2_{W^2,b^2} ( \underbrace{F^1_{W^1,b^1}( \underbrace{a^\textrm{in}}_{a^1} )}_{a^2} )}_{a^3}  \ldots}_{\unicode{x22F0}\quad})}_{a^L}.$$`
+where $I$ denotes the set of neurons in the output layer.
 
 ---
 
@@ -64,7 +73,7 @@ According to the chain rule, we have
 \begin{array}{ccccccccccc}
 \frac{\partial a^\textrm{out}}{\partial \bar w} & = & \frac{\partial a^L}{\partial \bar w} \\
 & = &
-\frac{\partial a^L}{\partial a^{L-1}} 
+\frac{\partial a^L}{\class{highlight}{\partial a^{L-1}}} 
 &\cdot& 
 \frac{\partial a^{L-1}}{\partial a^{L-2}} 
 &\cdot& \ldots &\cdot& 
@@ -86,8 +95,8 @@ and
 \end{array}
 $$`
 
-The terms $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicate how much the activation values of neurons in layer $l+1$ change if we change the activation values of neurons in layer $l$.
-<!-- .element: class="fragment" -->
+> [!NOTE]
+> The terms $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicate how much the activation values of neurons in layer $l+1$ change if we change the activation values of neurons in layer $l$.
 
 ---
 
@@ -144,9 +153,7 @@ with respect to each weight $\bar w$ and bias $\bar b$ for the respective activa
 So far we only considered linear activation functions of the form $f_{W,b}(a) = Wa + b$.
 
 > [!IMPORTANT]
-> A feedforward neural network with multiple layers and linear activation functions has **no advantage** over a simple neural network.
-> 
-> The linear activation functions of all layers can be combined into **one** linear activation function directly determining the output activation from the inputs.
+> A feedforward neural network with **multiple layers** and **linear activation functions** has **no advantage** over a single layer neural network.
 
 ---
 
