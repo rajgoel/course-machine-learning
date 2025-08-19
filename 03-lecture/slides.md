@@ -52,7 +52,7 @@ where $I^L$ denotes the set of neurons in the output layer.
 
 ===
 
-### Gradient descent work for feed forward networks
+### Gradient descent for feed forward networks
 
 > [!TIP]
 > The following deep dive is helpful for an understanding of the mechanics of deep learning. 
@@ -103,28 +103,28 @@ $$`
 The partial derivatives $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar w}$ and $\displaystyle\frac{\partial a^\textrm{out}_i}{\partial \bar b}$
 indicate how much a change in $\bar w$ or $\bar b$ affects an output activation $a^\textrm{out}_i$.
 
-They can be determined using the chain rule
+They can be determined using the **chain rule**.
 
 ---
 
-Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute an activation value of the $\bar l + 1$st layer.
+Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute `$a^{\bar l+1} = F^l_{W^{\bar l},b^{\bar l}} (a^{\bar l})$`.
 
 According to the chain rule, we have
 `$$
 \begin{array}{ccccccccccc}
 \frac{\partial a^\textrm{out}}{\partial \bar w} & = & \frac{\partial a^L}{\partial \bar w} \\
 & = &
-\frac{\partial a^L}{\class{highlight}{\partial a^{L-1}}} 
+\frac{\partial a^L}{\partial a^{L-1}}
 &\cdot& 
-\class{highlight}{\frac{\partial a^{L-1}}{\partial a^{L-2}}} 
+\frac{\partial a^{L-1}}{\partial a^{L-2}}
 &\cdot& \ldots &\cdot& 
-\class{highlight}{\frac{\partial a^{\bar l+2}}{\partial a^{l+1}}} &\cdot&
-\frac{\class{highlight}{\partial a^{\bar l+1}}}{\partial \bar w}
+\frac{\partial a^{\bar l+2}}{\partial a^{l+1}} &\cdot&
+\frac{\partial a^{\bar l+1}}{\partial \bar w}
 \end{array}
 $$`
 
 > [!NOTE]
-> $\partial a^{\bar l+1}}}{\partial \bar w}$ much a change in $\bar w$ affects the activation of the correspondig neuron in layer $\bar l + 1$.
+> $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
 > 
 > For any $\bar l < l \leq L$, $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicates how much a change in the activation of a neuron in layer $l$ affects the activation of the a neuron in layer $l+1$.
 
