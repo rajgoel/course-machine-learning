@@ -44,24 +44,26 @@ For a given input activiation  $a^\textrm{in}$, the output activation $a^\textrm
 
 ### Error function
 
-For a given input/expected output pair  $(a^\textrm{in},a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
+For a given input/output pair  $(a^\textrm{in},a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
 
 `$$f^\textrm{error}_{(a^\textrm{in},a^*)}(W^1,b^1,\ldots,W^{L-1},b^{L-1}) = \sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2.$$`
 
-where $I$ denotes the set of neurons in the output layer.
+where $I^L$ denotes the set of neurons in the output layer.
 
 ---
 
 ### Partial derivatives of the error function
 
-For any particular weight $\bar w$ and bias $\bar b$ used to determine the activations in layer $\bar l$, we have
+For any particular weight $\bar w$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}  \frac{\partial a^\textrm{out}_i}{\partial \bar w = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}
 $$`
-and
+
+and for any particular bias $\bar b$, we have
+
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}
+\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i} \frac{\partial a^\textrm{out}_i}{\partial \bar b} = \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}
 $$`
 
 ---
