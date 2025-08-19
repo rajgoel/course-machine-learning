@@ -187,7 +187,9 @@ Derivative:
 dg(x)/d = (1+e^{-x})^{-1} = -(1+e^{-x})^{-2}(-e^{-x})
 -->
 
+<!--
 Usage: as an output layer activation function in binary classification
+-->
 
 ---
 
@@ -197,10 +199,12 @@ Usage: as an output layer activation function in binary classification
 
 ![Figure](03-lecture/ReLU.svg)
 
-Note, that $\frac{ \partial g}{ \partial x }$ is not defined for $x=0$, but we can anyhow use a value of 0 or 1 in back propagation.
-<!-- .element: class="fragment" -->
+> [!NOTE]
+> $\frac{ \partial g}{ \partial x }$ is not defined for $x=0$, but we can anyhow use a value of 0 or 1 in back propagation.
 
+<!--
 Usage: most commonly used activation function for hidden layers.
+-->
 
 ---
 
