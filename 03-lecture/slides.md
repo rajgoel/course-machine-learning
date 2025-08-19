@@ -107,18 +107,19 @@ They can be determined using the **chain rule**.
 
 ---
 
-Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute `$a^{\bar l+1} = F^l_{W^{\bar l},b^{\bar l}} (a^{\bar l})$`.
+Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute the activation in layer $\bar l + 1$.
 
 According to the chain rule, we have
 `$$
-\begin{array}{ccccccccccc}
+\begin{array}{ccl}
 \frac{\partial a^\textrm{out}}{\partial \bar w} & = & \frac{\partial a^L}{\partial \bar w} \\
-& = &
+& = & 
 \frac{\partial a^L}{\partial a^{L-1}}
-&\cdot& 
+\quad\cdot\quad 
 \frac{\partial a^{L-1}}{\partial a^{L-2}}
-&\cdot& \ldots &\cdot& 
-\frac{\partial a^{\bar l+2}}{\partial a^{l+1}} &\cdot&
+\quad\cdot\quad \ldots \quad\cdot\quad 
+\frac{\partial a^{\bar l+2}}{\partial a^{l+1}} 
+\quad\cdot\quad
 \frac{\partial a^{\bar l+1}}{\partial \bar w}
 \end{array}
 $$`
@@ -127,6 +128,9 @@ $$`
 > $\frac{\partial a^{\bar l+1}}{\partial \bar w}$ indicates how much a change in $\bar w$ affects the activation in layer $\bar l + 1$.
 > 
 > For any $\bar l < l \leq L$, $\frac{\partial a^{l+1}}{\partial a^{l}}$ indicates how much a change in the activation of a neuron in layer $l$ affects the activation of the a neuron in layer $l+1$.
+
+---
+
 
 ---
 
