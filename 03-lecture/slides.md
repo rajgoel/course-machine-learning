@@ -75,10 +75,10 @@ According to the chain rule, we have
 & = &
 \frac{\partial a^L}{\class{highlight}{\partial a^{L-1}}} 
 &\cdot& 
-\frac{\partial a^{L-1}}{\partial a^{L-2}} 
+\class{highlight}{\frac{\partial a^{L-1}}{\partial a^{L-2}}} 
 &\cdot& \ldots &\cdot& 
-\frac{\partial a^{\bar l+2}}{\partial a^{\bar l+1}} &\cdot&
-\frac{\partial a^{\bar l+1}}{\partial \bar w}
+\class{highlight}{\frac{\partial a^{\bar l+2}}{\partial a^{\bar l+1}}} &\cdot&
+\frac{\class{highlight}{\partial a^{\bar l+1}}}{\partial \bar w}
 \end{array}
 $$`
 and
@@ -86,12 +86,12 @@ and
 \begin{array}{ccccccccccc}
 \frac{\partial a^\textrm{out}}{\partial \bar b} & = & \frac{\partial a^L}{\partial \bar b}\\
 & = &
-\frac{\partial a^L}{\partial a^{L-1}} 
+\frac{\partial a^L}{\class{highlight}{\partial a^{L-1}}} 
 &\cdot& 
-\frac{\partial a^{L-1}}{\partial a^{L-2}} 
+\class{highlight}{\frac{\partial a^{L-1}}{\partial a^{L-2}}} 
 &\cdot& \ldots &\cdot& 
-\frac{\partial a^{\bar l+2}}{\partial a^{\bar l+1}} &\cdot&
-\frac{\partial a^{\bar l+1}}{\partial \bar b}
+\class{highlight}{\frac{\partial a^{\bar l+2}}{\partial a^{\bar l+1}}} &\cdot&
+\frac{\class{highlight}{\partial a^{\bar l+1}}}{\partial \bar b}
 \end{array}
 $$`
 
