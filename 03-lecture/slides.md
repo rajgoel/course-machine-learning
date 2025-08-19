@@ -67,7 +67,7 @@ and for any particular bias $\bar b$, we have
 $$`
 
 > [!NOTE]
-> Remember, that $f^\textrm{error}_{(a^\textrm{in},a^*)} = \sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2.$
+> Remember, that `$f^\textrm{error}_{(a^\textrm{in},a^*)} = \displaystyle\sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2$`.
 
 ---
 
