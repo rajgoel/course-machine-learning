@@ -28,8 +28,9 @@ For each layer $l$ in the feedforward neural network let
 - $\sigma^l$ denote the vector of activation functions.
 
 Then, the activation values of layer $l+1$ can be computed by
- 
-`$$a^{l+1} = \sigma^l( W^l a^{l-1} + b^l).$$`
+
+`$$z^l = W^l a^{l-1} + b^l,$$`
+`$$a^{l+1} = \sigma^l(z^l).$$`
 
 ---
 
