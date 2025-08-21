@@ -215,7 +215,12 @@ our neural network would be able to perfectly recognise the given digits.
 
 For each given pair $(a^\textrm{in},a^*)$ we can define the loss (i.e., error function) as the sum of the squared differences of the computed output and the expected output.
 
-`$$\mathscr{L}_{(a^\textrm{in},a^*)}(W,b) =
+`$$
+\begin{align}
+\mathscr{L}_{(a^\textrm{in},a^*)}(W,b) & = \Big( a^\textrm{out} - a^* \Big)^2 \\
+& =
+\displaystyle\sum_{i=0}^{9} \Big( a^\textrm{out}_i - a^*_i \Big)^2 \\
+& =
 \displaystyle\sum_{i=0}^{9} 
 \Big(
 \underbrace{\displaystyle\sum_{j=1}^{25} w_{i,j} a^\textrm{in}_{j} + b_i
