@@ -69,7 +69,7 @@ $$
 
 ### Output encoding
 
-The output is represented by an encoding  `$(a^\textrm{out}_{0}, a^\textrm{out}_{1}, \ldots, a^\textrm{out}_{9})$`.
+The output is represented by a **one-hot encoding**  `$(a^\textrm{out}_{0}, a^\textrm{out}_{1}, \ldots, a^\textrm{out}_{9})$`.
 
 <table style="table-layout: fixed!important;width:900px;">
 <tr style="border: 0;border-style:hidden;">
@@ -110,7 +110,7 @@ and so on.
 <table  style="width:400px;">
 <tr>
 <td style="vertical-align: middle;width:50px;position:relative;left:150px;">
-$$
+$$a^\textrm{in} = 
 \left(
 \begin{align}
 a^\textrm{in}_{1} \\
@@ -129,29 +129,20 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;width:50px;position:relative;left:-150px;">
-$$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a^\textrm{out}_{9}  \end{align} \right) $$
+$$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a^\textrm{out}_{9}  \end{align} \right) = a^\textrm{out}$$
 </td>
 </tr>
 </table>
 
----
-
-### Linear activation function
-
-Given a 
-
-- *weight* $w_{i,j}$  for each output $i$ and input $j$, and 
-- a bias $b_i$ for each output $i$, 
-
-we can determine the output activation values as a linear combination of the input activation values by
-
-`$$ a^\textrm{out}_i = \displaystyle\sum_{j=1}^{25} w_{i,j} a^\textrm{in}_{j} + b_i$$`
-
-for all `$i \in \{ 0,1, \ldots, 9\}$`.
+> [!IMPORTANT]
+> Again we assume a linear activation $a^\textrm{out} = \sigma(Wa^\textrm{in} + b) = Wa^\textrm{in} + b$.
 
 ---
 
-Assume we are given a pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
+
+---
+
+Assume we are given a input/output pairs $(a^\textrm{in},a^*)$. 
 
 ---
 
