@@ -125,7 +125,7 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$\begin{array}{l}z = w^T a^\textrm{in} + b,\\ \atop a^\textrm{out} = \sigma(z)\end{array}$$
+$$\begin{array}{l}z = w^T a^\textrm{in} + b,\\ a^\textrm{out} = \sigma(z)\end{array}$$
 </td>
 </tr>
 </table>
