@@ -59,7 +59,7 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 > [!NOTE]
 > Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of the mean error $\displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S}f^\textrm{error}_{(a^\textrm{in},a^*)}$.
+\displaystyle\sum_{(a^\textrm{in},a^*) \in S}\mathscr{L}_{(a^\textrm{in},a^*)}$.
 > The gradient is the collection of all its partial derivatives.
 
 ---
@@ -69,12 +69,12 @@ where $n^L$ denotes the number of neurons in the output layer.
 For any particular weight $\bar w$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L} \underbrace{\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} 
+\frac{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial \bar w} = \sum_{i\in I^L} \underbrace{\frac{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar w} 
 \class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar w}}
 $$`
 
 > [!NOTE]
-> Remember, that `$f^\textrm{error}_{(a^\textrm{in},a^*)} = \displaystyle\sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2$`.
+> Remember, that `$\mathscr{L}_{(a^\textrm{in},a^*)} = \displaystyle\sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2$`.
 
 ---
 
@@ -131,12 +131,12 @@ where
 For any particular bias $\bar b$, we have
 
 `$$
-\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\underbrace{\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} 
+\frac{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial \bar b} = \sum_{i\in I^L}\underbrace{\frac{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial a^\textrm{out}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial a^\textrm{out}_i}{\partial \bar b} 
 \class{fragment}{= \sum_{i\in I^L}2(a^\textrm{out}_i - a^*_i) \frac{\partial a^\textrm{out}_i}{\partial \bar b}}
 $$`
 
 > [!NOTE]
-> Remember, that `$f^\textrm{error}_{(a^\textrm{in},a^*)} = \displaystyle\sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2$`.
+> Remember, that `$\mathscr{L}_{(a^\textrm{in},a^*)} = \displaystyle\sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2$`.
 
 ---
 
@@ -168,7 +168,7 @@ $\ldots$
 <div class="fragment">
 and use these to compute the partial derivatives
 
-`$\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar w}$` and `$\frac{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial \bar b}$` 
+`$\frac{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial \bar w}$` and `$\frac{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial \bar b}$` 
 
 with respect to each weight $\bar w$ and bias $\bar b$ for the respective activation function of the layer.
 </div>
