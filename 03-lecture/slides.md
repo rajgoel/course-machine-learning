@@ -25,11 +25,11 @@ In a feedforward neural network, the activations of one layer determine the acti
 For each layer $l$ in the feedforward neural network let
 - $a^l$ denote the vector of activation values,
 - $W^l$ and $b^l$ denote the weights and biases, and
-- $F^l_{W^l,b^l}$ denote the vector of activation functions.
+- $\sigma^l$ denote the vector of activation functions.
 
 Then, the activation values of layer $l+1$ can be computed by
  
-`$$a^{l+1} = F^l_{W^l,b^l} (a^l).$$`
+`$$a^{l+1} = \sigma^l( W^l a^{l-1} + b^l).$$`
 
 ---
 
