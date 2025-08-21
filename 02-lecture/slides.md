@@ -237,7 +237,7 @@ $$`
 Let $S$ denote the set of samples given. Then, the **average loss** is
 
 `$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \underbrace{\mathscr{L}_{(a^\textrm{in},a^*)}(W,b)}_{\textrm{Error of sample}}.
+\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \underbrace{\mathscr{L}_{(a^\textrm{in},a^*)}(W,b)}_{\textrm{Loss of sample}}.
 $$`
 
 > [!NOTE]
