@@ -129,13 +129,13 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;width:50px;position:relative;left:-150px;">
-$$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a^\textrm{out}_{9}  \end{align} \right) = = \sigma(Wa^\textrm{in} + b)$$
+$$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a^\textrm{out}_{9}  \end{align} \right) = \sigma(Wa^\textrm{in} + b)$$
 </td>
 </tr>
 </table>
 
 > [!IMPORTANT]
-> Again we assume a linear activation with $\sigma(z) = z$ and $a^\textrm{out} = Wa^\textrm{in} + b$.
+> Again we assume a linear activation with $\sigma(z) = z$, and thus, $a^\textrm{out} = Wa^\textrm{in} + b$.
 
 ---
 
