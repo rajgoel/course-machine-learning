@@ -232,12 +232,12 @@ $$`
 
 ---
 
-## Mean error
+## Average loss
 
-Let $S$ denote the set of samples given. Then, the **mean error** is
+Let $S$ denote the set of samples given. Then, the **average loss** is
 
-`$$f^\textrm{error}(W,b) = \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \underbrace{f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b)}_{\textrm{Error of sample}}.
+`$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
+\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \underbrace{\mathscr{L}_{(a^\textrm{in},a^*)}(W,b)}_{\textrm{Error of sample}}.
 $$`
 
 > [!NOTE]
@@ -252,35 +252,35 @@ The gradient $\nabla f$ of a function $f$ gives the direction of the steepest as
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
-> By changing weights and biases in opposite direction of the gradient, we can minimise the error function.
+> By changing weights and biases in opposite direction of the gradient, we can minimise the loss.
 
 ---
 
-### Gradient of the mean error
+### Gradient of the average loss
 
-The gradient of the mean error
+The gradient of the average loss
 `$$f^\textrm{error}(W,b) = \displaystyle\frac{1}{|S|} \cdot
 \displaystyle\sum_{(a^\textrm{in},a^*) \in S} f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b).
 $$`
 is the mean of the gradients over all samples 
 `$$
-\nabla f^\textrm{error}(W,b) =
+\nabla \mathscr{L}(W,b) =
 \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \nabla f^\textrm{error}_{(a^i,a^*)}(W,b)
+\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \nabla \mathscr{L}_{(a^i,a^*)}(W,b)
 $$`
 
 ---
 
 ### Partial derivatives
 
-The gradient of $f^\textrm{error}_{(a^\textrm{in},a^*)}$ is the collection of all its partial derivatives
+The gradient of $\mathscr{L}_{(a^\textrm{in},a^*)}$ is the collection of all its partial derivatives
 
 `$
-\genfrac{}{}{1pt}{1}{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} }
 \quad$`
 and
 `$
-\quad\genfrac{}{}{1pt}{1}{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial b_i }
+\quad\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial b_i }
 $`
 
 for each output neuron $i \in I$ and each input neuron $j \in J$.
@@ -291,7 +291,7 @@ for each output neuron $i \in I$ and each input neuron $j \in J$.
 
 For each output neuron $i \in I$ and each input neuron $j \in J$ the partial derivative of
 `$$
-f^\textrm{error}_{(a^\textrm{in},a^*)} =
+\mathscr{L}_{(a^\textrm{in},a^*)} =
 \displaystyle\sum_{i \in I} 
 \Big(
 \underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
@@ -301,7 +301,7 @@ $$`
 with respect to $w_{i,j}$ is
 
 `$$
-\genfrac{}{}{1pt}{1}{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} }
 = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
 }_{a^\textrm{out}_i} - a^*_i\Big) \cdot a^\textrm{in}_j
 = 2(a^\textrm{out}_i - a^*_i)a^\textrm{in}_j
@@ -313,7 +313,7 @@ $$`
 
 For each output neuron $i \in I$ the partial derivative of
 `$$
-f^\textrm{error}_{(a^\textrm{in},a^*)} =
+\mathscr{L}_{(a^\textrm{in},a^*)} =
 \displaystyle\sum_{i \in I} 
 \Big(
 \underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
@@ -323,7 +323,7 @@ $$`
 with respect to $b_i$ is
 
 `$$
-\genfrac{}{}{1pt}{1}{\partial f^\textrm{error}_{(a^\textrm{in},a^*)}}{\partial b_i }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial b_i }
 = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
 }_{a^\textrm{out}_i} - a^*_i\Big) \cdot 1
 = 2(a^\textrm{out}_i - a^*_i)
