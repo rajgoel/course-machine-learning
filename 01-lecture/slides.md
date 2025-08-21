@@ -130,6 +130,7 @@ $$a^\textrm{out} = \sigma(z), z = w^T a^\textrm{in} + b$$
 </tr>
 </table>
 Here, $w$ is a vector of **weights**, and $b$ is a scalar **bias** value.
+
 ---
 
 ### Deep neural networks
@@ -303,7 +304,7 @@ The output for our list of symbols `/` and `\` is represented by a 2-dimensional
 <table class="stretch">
 <tr>
 <td style="vertical-align: middle;">
-$$
+$$ a^\textrm{in} = 
 \left(
 \begin{align}
 a^\textrm{in}_{1} \\
@@ -322,11 +323,11 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$ \left( \begin{align} a^\textrm{out}_{1} \\  a^\textrm{out}_{2} \end{align} \right) $$
+$$ \left( \begin{align} a^\textrm{out}_{1} \\  a^\textrm{out}_{2} \end{align} \right) = a^\textrm{out}$$
 </td>
 </tr>
 </table>
-
+$$a^\textrm{out} = \sigma(z), Z = W a^\textrm{in} + b$$ 
 
 ---
 
