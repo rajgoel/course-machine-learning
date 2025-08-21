@@ -101,7 +101,7 @@ An artificial neural network (ANN) is a computational model inspired by the stru
 
 ## Artificial neurons
 
-Artificial neurons have an activation value $a^\textrm{out}$ that is calculated with an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input  $a^\textrm{in}$ .
+Artificial neurons compute activation value $a^\textrm{out}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a^\textrm{in}$ .
 
 <table class="stretch">
 <tr>
@@ -327,7 +327,8 @@ $$ \left( \begin{align} a^\textrm{out}_{1} \\  a^\textrm{out}_{2} \end{align} \r
 </td>
 </tr>
 </table>
-$$a^\textrm{out} = \sigma(z), Z = W a^\textrm{in} + b$$ 
+
+Here, $$a^\textrm{out} = \sigma(z), Z = W a^\textrm{in} + b$$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
 
 ---
 
