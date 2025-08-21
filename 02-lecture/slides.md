@@ -223,11 +223,8 @@ For each given pair $(a^\textrm{in},a^*)$ we can define the loss (i.e., error fu
 \end{align}
 $$`
 
-
-
----
-
-Our goal is to find weights and biases that minimize the sum of squared errors **for all** given pairs $(a^\textrm{in},a^*)$.
+> [!NOTE]
+> Our goal is to find weights and biases that minimize the loss $\mathscr{L}_{(a^\textrm{in},a^*)}$ **for all** given pairs $(a^\textrm{in},a^*)$.
 
 ===
 
