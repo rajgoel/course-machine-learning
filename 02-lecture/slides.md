@@ -139,18 +139,27 @@ $$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
+Assume we are given a pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
+
+If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
+
+- the computed output $a^\textrm{out} = W a^\textrm{in} + b$ equals the expected output $a^*$
+
+our neural network would be able to perfectly recognise the given digits. 
 
 ---
+
+<!-- .slide: data-auto-animate="true" -->
 
 Assume we are given a pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
-
-`$$ \underbrace{ W a^\textrm{in} + b }_{a^\textrm{out}} = a^* $$`
-
-or 
 
 `$$
 \underbrace{
