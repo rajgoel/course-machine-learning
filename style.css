@@ -143,6 +143,15 @@ blockquote.admonition ul {
  * Fragments
  *********************************************/
 
+.reveal .slides section .fragment.disappear {
+  display: inline;   /* visible at start */
+  opacity: 1;
+}
+.reveal .slides section .fragment.disappear.current-fragment {
+  display: none;     /* hide when stepped over */
+  opacity: 0;
+}
+
 .reveal .slides section .fragment.appear-disappear {
 	opacity: 0;
 	display: none; }
@@ -150,6 +159,14 @@ blockquote.admonition ul {
 	opacity: 1;
 	display: inline; }
 
+.reveal .slides section .fragment.appear {
+  opacity: 0;
+  display: none;
+}
+.reveal .slides section .fragment.appear.visible {
+  opacity: 1;
+  display: inline;
+}
 
 /*********************************************
  * Display fractions properly

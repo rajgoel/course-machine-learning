@@ -304,8 +304,8 @@ $$`
 with respect to $w_{i,j}$ is
 
 `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} } $`
-`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot a^\textrm{in}_j $`<!-- .element: class="fragment" -->
-`$ = 2(a^\textrm{out}_i - a^*_i)a^\textrm{in}_j $`<!-- .element: class="fragment" -->
+`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot a^\textrm{in}_j $`<!-- .element: class="fragment appear" -->
+`$ = 2(a^\textrm{out}_i - a^*_i)a^\textrm{in}_j $`<!-- .element: class="fragment appear" -->
 
 ---
 
@@ -323,8 +323,8 @@ $$`
 with respect to $b_i$ is
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial b_i }$`
-`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment" -->
-`$= 2(a^\textrm{out}_i - a^*_i)$`<!-- .element: class="fragment" -->
+`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment appear" -->
+`$= 2(a^\textrm{out}_i - a^*_i)$`<!-- .element: class="fragment appear" -->
 
 ---
 
