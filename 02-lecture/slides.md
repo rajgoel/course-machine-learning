@@ -141,13 +141,13 @@ $$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a
 
 <!-- .slide: data-auto-animate="true" -->
 
-Assume we are given a pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
+Assume we are given a collection of pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-Assume we are given a pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
+Assume we are given a collection of pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
 
 If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
 
@@ -207,7 +207,7 @@ our neural network would be able to perfectly recognise the given digits.
 - With 30 pairs of training data, we would have 30 $\cdot$ 10 = 300 equations.
 
 > [!NOTE]
-> A system of equations with 300 equations and 260 variables (ie. parameters of the neural network) cannot be solved (unless some of the equations are redundant). 
+> A system of equations with 300 equations and 260 variables cannot be solved in general, therefore, we need to approximate. 
 
 ---
 
@@ -247,7 +247,7 @@ $$`
 
 ## Gradient descent
 
-The gradient $\nabla f$ of a function $f$ gives the direction of the steepest ascend. 
+The gradient $\nabla f$ of a function $f$ is the vector of all its partial derivatives with respect to each input variable and gives the direction of the steepest ascend. 
 
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
@@ -273,7 +273,7 @@ $$`
 
 ### Partial derivatives
 
-The gradient of $\mathscr{L}_{(a^\textrm{in},a^*)}$ is the collection of all its partial derivatives
+The gradient of $\mathscr{L}_{(a^\textrm{in},a^*)}$ is the vector of all its partial derivatives
 
 `$
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} }
@@ -284,6 +284,7 @@ and
 $`
 
 for each output neuron $i \in I$ and each input neuron $j \in J$.
+
 
 ---
 
