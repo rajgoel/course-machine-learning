@@ -333,24 +333,13 @@ Here, $z = W a^\textrm{in} + b$ and $a^\textrm{out} = \sigma(z)$  where $W$ is a
 
 ---
 
-### Linear activation function
+### Simplification: Linear activation
 
-Given a 
+For simplification, we assume $\sigma(z) = z$. Then we have
 
-- *weight* $w_{i,j}$  for each output $i$ and input $j$, and 
-- a bias $b_i$ for each output $i$, 
+$$a^\textrm{out} = Wa^\textrm{in} + b$$
 
-we can determine the output activation values as a linear combination of the input activation values by
-
-`$$a^\textrm{out}_1 = w_{1,1} a^\textrm{in}_{1} + w_{1,2} a^\textrm{in}_{2} + w_{1,3} a^\textrm{in}_{3} + w_{1,4} a^\textrm{in}_{4} + b_1$$`
-
-and 
-
-`$$ a^\textrm{out}_2 = w_{2,1} a^\textrm{in}_{1} + w_{2,2} a^\textrm{in}_{2} + w_{2,3} a^\textrm{in}_{3} + w_{2,4} a^\textrm{in}_{4} + b_2.$$`
-
----
-
-### Matrix notation
+or
 
 `$$\left(
 \begin{array}{c}
@@ -376,10 +365,6 @@ b_{1} \\
 b_{2} 
 \end{array}
 \right)$$`
-
-or
-
-`$$a^\textrm{out} = Wa^\textrm{in} + b$$`
 
 ---
 
