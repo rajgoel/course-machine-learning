@@ -151,7 +151,7 @@ Assume we are given a pairs of input activation values $a^\textrm{in}$ with thei
 
 If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
 
-- the computed output $a^\textrm{out} = W a^\textrm{in} + b$ equals the expected output $a^*$
+> The computed output $a^\textrm{out} = W a^\textrm{in} + b$ equals the expected output $a^*$.
 
 our neural network would be able to perfectly recognise the given digits. 
 
