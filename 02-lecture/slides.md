@@ -157,7 +157,6 @@ our neural network would be able to perfectly recognise the given digits.
 
 ---
 
-
 <!-- .slide: data-auto-animate="true" -->
 
 If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
@@ -205,7 +204,7 @@ our neural network would be able to perfectly recognise the given digits.
 
 - Our neural network has 25 $\cdot$ 10 weights and 10 bias values, thus, a total of 260 parameters.
 - For each  pair $(a^\textrm{in},a^*)$ we have 10 equations for a perfect neural network.
-- With 30 pairs, we would have 30 $\cdot$ 10 = 300 equations.
+- With training data of 30 pairs, we would have 30 $\cdot$ 10 = 300 equations.
 
 > [!NOTE]
 > A system of equations with 300 equations and 260 variables (ie. parameters of the neural network) cannot be solved (unless some of the equations are redundant). 
@@ -216,7 +215,7 @@ our neural network would be able to perfectly recognise the given digits.
 
 For each given pair $(a^\textrm{in},a^*)$ we can define an error function as the sum of the squared differences of the computed output and the expected output.
 
-`$$f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b) =
+`$$\mathscr{L} = f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b) =
 \displaystyle\sum_{i=0}^{9} 
 \Big(
 \underbrace{\displaystyle\sum_{j=1}^{25} w_{i,j} a^\textrm{in}_{j} + b_i
