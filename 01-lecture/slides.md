@@ -436,11 +436,11 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 If we find weights and biases such that
 
-- an input of `/` results in an output $(1,0)$ 
+> An input of `/` results in an output $(1,0)$.
 
 and
 
-- an input of `\` results in an output $(0,1)$ 
+> An input of `\` results in an output $(0,1)$.
 
 our neural network can perfectly recognise both symbols. 
 
