@@ -125,7 +125,7 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$z = w^T a^\textrm{in} + b, \atop a^\textrm{out} = \sigma(z)$$
+$$\begin{array}{l}z = w^T a^\textrm{in} + b,\\ \atop a^\textrm{out} = \sigma(z)\end{array}$$
 </td>
 </tr>
 </table>
@@ -264,7 +264,7 @@ The input is represented by an encoding `$(a^\textrm{in}_{1}, a^\textrm{in}_{2},
 
 ### Output encoding
 
-The output for our list of symbols `/` and `\` is represented by a 2-dimensional vector `$(a^\textrm{out}_{1}, a^\textrm{out}_{2})$`.
+The output for our list of symbols `/` and `\` is represented by a **one-hot encoding** with a 2-dimensional vector `$(a^\textrm{out}_{1}, a^\textrm{out}_{2})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -324,12 +324,12 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$ \left( \begin{align} a^\textrm{out}_{1} \\  a^\textrm{out}_{2} \end{align} \right) = a^\textrm{out}$$
+$$\left( \begin{align} a^\textrm{out}_{1} \\  a^\textrm{out}_{2} \end{align} \right) = a^\textrm{out}$$
 </td>
 </tr>
 </table>
 
-Here, $$a^\textrm{out} = \sigma(z), Z = W a^\textrm{in} + b$$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
+Here, $z = W a^\textrm{in} + b$ and $a^\textrm{out} = \sigma(z)$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
 
 ---
 
