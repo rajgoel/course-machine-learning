@@ -241,7 +241,7 @@ Let $S$ denote the set of samples given. Then, the **average loss** is
 $$`
 
 > [!NOTE]
-> We want to find weights and biases minimizing the mean error.
+> We want to find weights and biases minimizing the average loss.
 
 ===
 
@@ -259,10 +259,10 @@ The gradient $\nabla f$ of a function $f$ gives the direction of the steepest as
 ### Gradient of the average loss
 
 The gradient of the average loss
-`$$f^\textrm{error}(W,b) = \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b).
+`$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
+\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \mathscr{L}_{(a^\textrm{in},a^*)}(W,b).
 $$`
-is the mean of the gradients over all samples 
+is the average of the gradients over all samples 
 `$$
 \nabla \mathscr{L}(W,b) =
 \displaystyle\frac{1}{|S|} \cdot
