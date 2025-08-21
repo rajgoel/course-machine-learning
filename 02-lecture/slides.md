@@ -129,20 +129,20 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;width:50px;position:relative;left:-150px;">
-$$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a^\textrm{out}_{9}  \end{align} \right) = a^\textrm{out}$$
+$$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a^\textrm{out}_{9}  \end{align} \right) = = \sigma(Wa^\textrm{in} + b)$$
 </td>
 </tr>
 </table>
 
 > [!IMPORTANT]
-> Again we assume a linear activation $a^\textrm{out} = \sigma(Wa^\textrm{in} + b) = Wa^\textrm{in} + b$.
+> Again we assume a linear activation with $\sigma(z) = z$ and $a^\textrm{out} = Wa^\textrm{in} + b$.
 
 ---
 
 
 ---
 
-Assume we are given a input/output pairs $(a^\textrm{in},a^*)$. 
+Assume we are given a pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
 
 ---
 
