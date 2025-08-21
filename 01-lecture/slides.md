@@ -125,10 +125,11 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$a^\textrm{out} = \sigma(z), z = w^T a^\textrm{in} + b$$
+$$z = w^T a^\textrm{in} + b, \atop a^\textrm{out} = \sigma(z)$$
 </td>
 </tr>
 </table>
+
 Here, $w$ is a vector of **weights**, and $b$ is a scalar **bias** value.
 
 ---
@@ -316,7 +317,7 @@ a^\textrm{in}_{4}
 $$
 </td>
 <td>
-<div class="neuralnetwork" style="height: 500px; width: 900px;">
+<div class="neuralnetwork" style="height: 400px; width: 700px;">
 <!--
 {"type": "simple" }
 -->
