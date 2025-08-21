@@ -303,54 +303,13 @@ For each output neuron $i \in I$ and each input neuron $j \in J$ the partial der
 $$`
 with respect to $w_{i,j}$ is
 
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} }$`
-
----
-
-<!-- .slide: data-auto-animate="true" -->
-
-### Partial derivative for weights
-
-For each output neuron $i \in I$ and each input neuron $j \in J$ the partial derivative of
-`$$
-\mathscr{L}_{(a^\textrm{in},a^*)} =
-\displaystyle\sum_{i \in I} 
-\Big(
-\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
-}_{a^\textrm{out}_i} - a^*_i
-\Big)^2
-$$`
-with respect to $w_{i,j}$ is
-
 `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} } $`
-`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot a^\textrm{in}_j $`
-
----
-
-<!-- .slide: data-auto-animate="true" -->
-
-### Partial derivative for weights
-
-For each output neuron $i \in I$ and each input neuron $j \in J$ the partial derivative of
-`$$
-\mathscr{L}_{(a^\textrm{in},a^*)} =
-\displaystyle\sum_{i \in I} 
-\Big(
-\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
-}_{a^\textrm{out}_i} - a^*_i
-\Big)^2
-$$`
-with respect to $w_{i,j}$ is
-
-`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} } $`
-`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot a^\textrm{in}_j $`
-`$ = 2(a^\textrm{out}_i - a^*_i)a^\textrm{in}_j $`
+`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot a^\textrm{in}_j $`<!-- .element: class="fragment" -->
+`$ = 2(a^\textrm{out}_i - a^*_i)a^\textrm{in}_j $`<!-- .element: class="fragment" -->
 
 ---
 
 ### Partial derivative for biases
-
-<!-- .slide: data-auto-animate="true" -->
 
 For each output neuron $i \in I$ the partial derivative of
 `$$
@@ -363,12 +322,9 @@ For each output neuron $i \in I$ the partial derivative of
 $$`
 with respect to $b_i$ is
 
-`$$
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial b_i }
-= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
-}_{a^\textrm{out}_i} - a^*_i\Big) \cdot 1
-= 2(a^\textrm{out}_i - a^*_i)
-$$`
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial b_i }$`
+`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment" -->
+`$= 2(a^\textrm{out}_i - a^*_i)$`<!-- .element: class="fragment" -->
 
 ---
 
