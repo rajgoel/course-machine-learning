@@ -317,7 +317,7 @@ a^\textrm{in}_{4}
 $$
 </td>
 <td>
-<div class="neuralnetwork" style="height: 400px; width: 700px;">
+<div class="neuralnetwork" style="height: 360px; width: 600px;">
 <!--
 {"type": "simple" }
 -->
@@ -330,6 +330,10 @@ $$\left( \begin{align} a^\textrm{out}_{1} \\  a^\textrm{out}_{2} \end{align} \ri
 </table>
 
 Here, $z = W a^\textrm{in} + b$ and $a^\textrm{out} = \sigma(z)$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
+
+> [!TIP]
+> - For each edge going from input neuron $j$ to output neuron $i$, we have a weight $w_{i,j}$. 
+> - For each output neuron $i$, we have a bias $b_i$. 
 
 ---
 
