@@ -522,6 +522,10 @@ and
 
 our neural network can perfectly recognise both symbols. 
 
+> [!TIP]
+> To solve a system of 4 equations with 10 variables, we can arbitrarily chose 6 variable values and calculate the remaining.
+
+ 
 ---
 
 ### Optimal weights and biases
