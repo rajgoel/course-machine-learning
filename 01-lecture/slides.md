@@ -339,9 +339,9 @@ Here, $z = W a^\textrm{in} + b$ and $a^\textrm{out} = \sigma(z)$  where $W$ is a
 
 ### Simplification: Linear activation
 
-For simplification, we assume $\sigma(z) = z$. Then we have
+If we assume $\sigma(z) = z$, we have
 
-$$a^\textrm{out} = Wa^\textrm{in} + b$$
+$$a^\textrm{out} = \sigma(Wa^\textrm{in} + b) = Wa^\textrm{in} + b$$
 
 or
 
@@ -429,6 +429,22 @@ We want to find weights and biases, so that our neural network can reliably reco
 </div>
 </div>
 </div>
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+If we find weights and biases such that
+
+- an input of `/` results in an output $(1,0)$ 
+
+and
+
+- an input of `\` results in an output $(0,1)$ 
+
+our neural network can perfectly recognise both symbols. 
+
+
 
 ---
 
@@ -569,7 +585,7 @@ and
 A simple neural network with
 
 - 4 input neurons
-- 2 output neurons with linear activation function
+- 2 output neurons with linear activation
 
 can be used to reliable recognize both symbols given a 2x2 black and white pixel image.
 
