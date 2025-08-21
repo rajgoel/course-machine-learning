@@ -34,22 +34,13 @@ Then, the activation values of layer $l+1$ can be computed by
 
 ---
 
-### Computed output activations
-
-For a given input activiation  $a^\textrm{in}$, the output activation $a^\textrm{out}$ in a feedforward neural network with $L$ layers can be computed by
-
-`$$ a^\textrm{out} = \underbrace{F^{L-1}_{W^{L-1},b^{L-1}} ( \underbrace{\ldots \underbrace{F^2_{W^2,b^2} ( \underbrace{F^1_{W^1,b^1}( \underbrace{a^\textrm{in}}_{a^1} )}_{a^2} )}_{a^3}  \ldots}_{\unicode{x22F0}\quad})}_{a^L}.$$`
-
-
----
-
-### Error function
+### Loss
 
 For a given input/output pair  $(a^\textrm{in},a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
 
-`$$f^\textrm{error}_{(a^\textrm{in},a^*)}(W^1,b^1,\ldots,W^{L-1},b^{L-1}) = \sum_{i\in I^L}(a^\textrm{out}_i - a^*_i)^2.$$`
+`$$\mathscr{L}_{(a^\textrm{in},a^*)}(W^1,b^1,\ldots,W^{L-1},b^{L-1}) = \sum_{i=1}^{n^L}(a^\textrm{out}_i - a^*_i)^2.$$`
 
-where $I^L$ denotes the set of neurons in the output layer.
+where $n^L$ denotes the number of neurons in the output layer.
 
 ===
 
