@@ -151,7 +151,7 @@ Assume we are given a pairs of input activation values $a^\textrm{in}$ with thei
 
 If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
 
-> The computed output $a^\textrm{out} = W a^\textrm{in} + b$ equals the expected output $a^*$.
+> The computed output $a^\textrm{out} = W a^\textrm{in} + b$  matches the given output $a^*$.
 
 our neural network would be able to perfectly recognise the given digits. 
 
@@ -204,18 +204,18 @@ our neural network would be able to perfectly recognise the given digits.
 
 - Our neural network has 25 $\cdot$ 10 weights and 10 bias values, thus, a total of 260 parameters.
 - For each  pair $(a^\textrm{in},a^*)$ we have 10 equations for a perfect neural network.
-- With training data of 30 pairs, we would have 30 $\cdot$ 10 = 300 equations.
+- With 30 pairs of training data, we would have 30 $\cdot$ 10 = 300 equations.
 
 > [!NOTE]
 > A system of equations with 300 equations and 260 variables (ie. parameters of the neural network) cannot be solved (unless some of the equations are redundant). 
 
 ---
 
-### Error function
+### Loss
 
-For each given pair $(a^\textrm{in},a^*)$ we can define an error function as the sum of the squared differences of the computed output and the expected output.
+For each given pair $(a^\textrm{in},a^*)$ we can define the loss (i.e., error function) as the sum of the squared differences of the computed output and the expected output.
 
-`$$\mathscr{L} = f^\textrm{error}_{(a^\textrm{in},a^*)}(W,b) =
+`$$\mathscr{L}_{(a^\textrm{in},a^*)}(W,b) =
 \displaystyle\sum_{i=0}^{9} 
 \Big(
 \underbrace{\displaystyle\sum_{j=1}^{25} w_{i,j} a^\textrm{in}_{j} + b_i
