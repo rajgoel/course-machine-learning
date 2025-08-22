@@ -9,11 +9,27 @@ using Random
 Random.seed!(42)
 
 """
-Deep Neural Network structure
-- layers: vector specifying number of neurons per layer [input, hidden..., output]
-- W: array of weight matrices W^[l]
-- b: array of bias vectors b^[l]
-- L: total number of layers (input, hidden..., output)
+    DNN(layers)
+
+Deep Neural Network structure with fully connected layers.
+
+# Arguments
+- `layers::Vector{Int}`: Number of neurons per layer [input, hidden..., output]
+
+# Fields
+- `layers::Vector{Int}`: Layer architecture specification
+- `W::Vector{Matrix{Float64}}`: Weight matrices W^[l] for each layer
+- `b::Vector{Vector{Float64}}`: Bias vectors b^[l] for each layer  
+- `L::Int`: Total number of layers
+
+Uses He initialization for weights and zero initialization for biases.
+ReLU activation for hidden layers, linear activation for output layer.
+
+# Example
+```julia
+# Create network: 784 inputs → 128 hidden → 64 hidden → 10 outputs
+network = DNN([784, 128, 64, 10])
+```
 """
 mutable struct DNN
     layers::Vector{Int}           # [n^[0], n^[1], ..., n^[L-1]]
@@ -45,8 +61,15 @@ mutable struct DNN
 end
 
 """
-Activation function σ
-ReLU: σ(z) = max(0,z)
+    σ(z)
+
+ReLU activation function: σ(z) = max(0, z).
+
+# Arguments
+- `z::Real`: Input value
+
+# Returns
+- `Float64`: Activated value (0.0 if z ≤ 0, z if z > 0)
 """
 function σ(z::Real)
     # ReLU activation function
@@ -54,24 +77,37 @@ function σ(z::Real)
 end
 
 """
-∂σ/∂z derivative
-ReLU: ∂σ/∂z = 1 if z > 0, 0 if z ≤ 0
+    ∂σ_∂z(z)
+
+Derivative of ReLU activation function: ∂σ/∂z = 1 if z > 0, 0 if z ≤ 0.
+
+# Arguments
+- `z::Real`: Input value
+
+# Returns
+- `Float64`: Derivative value (1.0 if z > 0, 0.0 if z ≤ 0)
 """
 function ∂σ_∂z(z::Real)
     return z > 0 ? 1.0 : 0.0
 end
 
 """
-Forward propagation
-Computes activations a^[l] for all layers
+    forwardpropagation(network, x)
+
+Compute forward propagation through the neural network.
 
 Mathematical formulation:
-z^[l] = W^[l] * a^[l-1] + b^[l]
-a^[l] = σ(z^[l]) = σ(z^[l])
+- z^[l] = W^[l] * a^[l-1] + b^[l]
+- a^[l] = σ(z^[l]) for hidden layers, a^[l] = z^[l] for output layer
 
-Returns:
-- activations: a^[0], a^[1], ..., a^[L-1]
-- z_values: z^[1], z^[2], ..., z^[L-1]
+# Arguments
+- `network::DNN`: Neural network structure
+- `x::Vector{Float64}`: Input vector
+
+# Returns
+- `Tuple{Vector{Vector{Float64}}, Vector{Vector{Float64}}}`: (activations, z_values)
+  - `activations`: [a^[0], a^[1], ..., a^[L-1]] - activations for each layer
+  - `z_values`: [z^[1], z^[2], ..., z^[L-1]] - linear combinations for each layer
 """
 function forwardpropagation(network::DNN, x::Vector{Float64})
     # Initialize storage for activations and z-values
@@ -101,8 +137,16 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
 end
 
 """
-Mean Squared Error loss function
-ℒ = ||y - ŷ||²
+    ℒ(y_true, y_pred)
+
+Mean Squared Error loss function: ℒ = ||ŷ - y||².
+
+# Arguments
+- `y_true::Vector{Float64}`: True target values
+- `y_pred::Vector{Float64}`: Predicted values
+
+# Returns
+- `Float64`: MSE loss value
 """
 function ℒ(y_true::Vector{Float64}, y_pred::Vector{Float64})
     diff = y_pred - y_true
@@ -110,18 +154,40 @@ function ℒ(y_true::Vector{Float64}, y_pred::Vector{Float64})
 end
 
 """
-∂ℒ/∂ŷ = 2(ŷ - y)
+    ∂ℒ_∂ŷ(y_true, y_pred)
+
+Gradient of MSE loss with respect to predictions: ∂ℒ/∂ŷ = 2(ŷ - y).
+
+# Arguments
+- `y_true::Vector{Float64}`: True target values
+- `y_pred::Vector{Float64}`: Predicted values
+
+# Returns
+- `Vector{Float64}`: Gradient vector
 """
 function ∂ℒ_∂ŷ(y_true::Vector{Float64}, y_pred::Vector{Float64})
     return  2.0*(y_pred - y_true)
 end
 
 """
-Backpropagation algorithm
-Computes gradients ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers
+    backpropagation(network, activations, z_values, y_true)
 
-Gradients: ∂ℒ/∂W^[l] = δ^[l] * (a^[l-1])^T
-           ∂ℒ/∂b^[l] = δ^[l]
+Compute gradients using backpropagation algorithm.
+
+Calculates ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers using:
+- ∂ℒ/∂W^[l] = δ^[l] * (a^[l-1])^T  
+- ∂ℒ/∂b^[l] = δ^[l]
+
+# Arguments
+- `network::DNN`: Neural network structure
+- `activations::Vector{Vector{Float64}}`: Layer activations from forward pass
+- `z_values::Vector{Vector{Float64}}`: Linear combinations from forward pass
+- `y_true::Vector{Float64}`: True target values
+
+# Returns
+- `Tuple{Vector{Matrix{Float64}}, Vector{Vector{Float64}}}`: (∇W, ∇b)
+  - `∇W`: Weight gradients for each layer
+  - `∇b`: Bias gradients for each layer
 """
 function backpropagation(network::DNN, activations::Vector{Vector{Float64}}, 
                         z_values::Vector{Vector{Float64}}, y_true::Vector{Float64})
@@ -149,9 +215,19 @@ function backpropagation(network::DNN, activations::Vector{Vector{Float64}},
 end
 
 """
-Gradient descent parameter update
-W^[l] ← W^[l] - α * ∂ℒ/∂W^[l]
-b^[l] ← b^[l] - α * ∂ℒ/∂b^[l]
+    update_parameters!(network, ∇W, ∇b, α)
+
+Update network parameters using gradient descent.
+
+Parameter updates:
+- W^[l] ← W^[l] - α * ∂ℒ/∂W^[l]
+- b^[l] ← b^[l] - α * ∂ℒ/∂b^[l]
+
+# Arguments
+- `network::DNN`: Neural network (modified in-place)
+- `∇W::Vector{Matrix{Float64}}`: Weight gradients
+- `∇b::Vector{Vector{Float64}}`: Bias gradients  
+- `α::Float64`: Learning rate
 """
 function update_parameters!(network::DNN, ∇W::Vector{Matrix{Float64}}, 
                            ∇b::Vector{Vector{Float64}}, α::Float64)
@@ -166,12 +242,26 @@ function update_parameters!(network::DNN, ∇W::Vector{Matrix{Float64}},
 end
 
 """
-Training function
+    train!(network, X, Y, α=0.01, epochs=1000, verbose=true)
+
+Train the neural network using gradient descent.
+
 Implements the complete training algorithm:
 1. Forward propagation
 2. Loss computation  
 3. Backpropagation
 4. Parameter update
+
+# Arguments
+- `network::DNN`: Neural network (modified in-place)
+- `X::Vector{Vector{Float64}}`: Training input data
+- `Y::Vector{Vector{Float64}}`: Training target data
+- `α::Float64`: Learning rate (default: 0.01)
+- `epochs::Int`: Number of training epochs (default: 1000)
+- `verbose::Bool`: Print training progress (default: true)
+
+# Returns
+- `Vector{Float64}`: Training losses for each epoch
 """
 function train!(network::DNN, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}}, 
                α::Float64=0.01, epochs::Int=1000, verbose::Bool=true)
@@ -210,8 +300,18 @@ function train!(network::DNN, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float
 end
 
 """
-Prediction function
-Performs forward propagation to get network output ŷ
+    predict(network, x)
+
+Make predictions using the trained neural network.
+
+Performs forward propagation to compute network output ŷ.
+
+# Arguments
+- `network::DNN`: Trained neural network
+- `x::Vector{Float64}`: Input vector
+
+# Returns
+- `Vector{Float64}`: Network predictions (output layer activations)
 """
 function predict(network::DNN, x::Vector{Float64})
     activations, _ = forwardpropagation(network, x)

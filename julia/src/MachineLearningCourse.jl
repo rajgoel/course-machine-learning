@@ -31,7 +31,7 @@ MachineLearningCourse.Lecture03.demo()
 
 ## Available implementations
 
-- `Lecture03`: Feed forward networks
+- [`Lecture03`](@ref MachineLearningCourse.Lecture03): Feed forward networks
 """
 module MachineLearningCourse
 

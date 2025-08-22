@@ -6,19 +6,27 @@ This example shows how to:
 1. Load MNIST data using MLDatasets.jl
 2. Preprocess data for neural networks
 3. Train and evaluate on MNIST digits
-
-Author: Asvin Goel
 """
 
 using MLDatasets
 using Random
 
-# DNN implementation is included by the parent Lecture03 module
-
 """
-One-hot encoding for classification
-Converts class labels to one-hot vectors
-Example: 3 → `[0, 0, 0, 1, 0, 0, 0, 0, 0, 0]` (for 10 classes)
+    one_hot_encode(label, num_classes)
+
+Convert class labels to one-hot vectors for classification.
+
+# Arguments
+- `label::Int`: Class label (0-indexed)
+- `num_classes::Int`: Total number of classes
+
+# Returns
+- `Vector{Float64}`: One-hot encoded vector
+
+# Example
+```julia
+one_hot_encode(3, 10)  # Returns [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+```
 """
 function one_hot_encode(label::Int, num_classes::Int)
     encoded = zeros(Float64, num_classes)
@@ -26,12 +34,36 @@ function one_hot_encode(label::Int, num_classes::Int)
     return encoded
 end
 
+"""
+    one_hot_encode_batch(labels, num_classes)
+
+Convert a batch of class labels to one-hot vectors.
+
+# Arguments
+- `labels::Vector{Int}`: Vector of class labels (0-indexed)
+- `num_classes::Int`: Total number of classes
+
+# Returns
+- `Vector{Vector{Float64}}`: Vector of one-hot encoded vectors
+"""
 function one_hot_encode_batch(labels::Vector{Int}, num_classes::Int)
     return [one_hot_encode(label, num_classes) for label in labels]
 end
 
 """
-Evaluate model performance on test data
+    evaluate_model(network, X_test, Y_test)
+
+Evaluate neural network performance on test data and display detailed results.
+
+# Arguments
+- `network::DNN`: Trained neural network
+- `X_test::Vector{Vector{Float64}}`: Test input data
+- `Y_test::Vector{Vector{Float64}}`: Test target labels (one-hot encoded)
+
+# Returns
+- `Float64`: Test accuracy (0.0 to 1.0)
+
+Prints comprehensive evaluation including per-digit accuracy, confusion matrix summary, and sample predictions.
 """
 function evaluate_model(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::Vector{Vector{Float64}})
     correct = 0
@@ -87,7 +119,23 @@ function evaluate_model(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::V
 end
 
 """
-Load and preprocess MNIST data
+    load_mnist_data(train_size=5000, test_size=1000)
+
+Load and preprocess MNIST handwritten digit dataset.
+
+# Arguments
+- `train_size::Int`: Number of training samples to use (default: 5000)
+- `test_size::Int`: Number of test samples to use (default: 1000)
+
+# Returns
+- `Tuple`: (X_train, Y_train, X_test, Y_test)
+  - `X_train::Vector{Vector{Float64}}`: Training images (flattened and normalized)
+  - `Y_train::Vector{Vector{Float64}}`: Training labels (one-hot encoded)
+  - `X_test::Vector{Vector{Float64}}`: Test images (flattened and normalized)
+  - `Y_test::Vector{Vector{Float64}}`: Test labels (one-hot encoded)
+
+Images are flattened from 28×28 to 784-dimensional vectors and normalized to [0,1].
+Labels are one-hot encoded for 10-class classification (digits 0-9).
 """
 function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
     println("Loading MNIST dataset...")
@@ -140,7 +188,15 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
     return X_train, Y_train, X_test, Y_test
 end
 
-# Demo execution
+"""
+    demo(learning_rate=0.001, epochs=50)
+
+MNIST handwritten digit recognition demonstration.
+
+# Parameters
+- `learning_rate`: Learning rate for training (default: 0.001)
+- `epochs`: Number of training epochs (default: 50)
+"""
 function demo(learning_rate = 0.001, epochs = 50)
     println("="^80)
     println("MNIST DIGIT RECOGNITION WITH DEEP NEURAL NETWORK")
