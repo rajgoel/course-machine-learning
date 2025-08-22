@@ -11,8 +11,8 @@ https://rajgoel.github.io/course-machine-learning
 | 01      | [Introduction](https://rajgoel.github.io/course-machine-learning/?topic=01-lecture)                   | [Requirements and prerequisites](https://rajgoel.github.io/course-machine-learning/?topic=01-lab)    |
 | 02      | [Neural networks and gradient descent](https://rajgoel.github.io/course-machine-learning/?topic=02-lecture)                | Project work    |
 | 03      | [Feed forward networks](https://rajgoel.github.io/course-machine-learning/?topic=03-lecture)          | Project work    |
-| 04      | [Pooling, filtering and convolution](https://rajgoel.github.io/course-machine-learning/?topic=04-lecture) | Project work    |
-| 05      | [Traffic sign detection](https://rajgoel.github.io/course-machine-learning/?topic=05-lecture)  | Project work    |
+| 04      | [Architecture and pipeline](https://rajgoel.github.io/course-machine-learning/?topic=04-lecture) | Project work    |
+| 05      | [Filtering and convolution](https://rajgoel.github.io/course-machine-learning/?topic=05-lecture)  | Project work    |
 | 06      | [Object detection](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
 | 07      | [Autoencoders](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
 | 08      | [Reinforcement learning](https://rajgoel.github.io/course-machine-learning/?topic=08-lecture)         | Project work    |
