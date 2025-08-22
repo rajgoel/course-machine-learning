@@ -44,4 +44,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          julia --project=julia/docs julia/docs/make.jl
+          cd julia/docs
+          julia --project=. make.jl
