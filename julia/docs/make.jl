@@ -1,11 +1,12 @@
 using Documenter
 using Pkg
 
-# Add the parent project to the load path for docstring extraction
-push!(LOAD_PATH, joinpath(@__DIR__, ".."))
+# Include the module source directly (no package loading)
+include("../src/MachineLearningCourse.jl")
+include("../03-lecture/src/Lecture03.jl")
 
-# Import the module without precompiling heavy dependencies
-import MachineLearningCourse
+# Use the modules directly
+using .MachineLearningCourse
 
 makedocs(
     sitename = "MachineLearningCourse.jl",
