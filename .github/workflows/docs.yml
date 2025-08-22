@@ -15,7 +15,7 @@ on:
 
 jobs:
   docs:
-    name: Documentation
+    name: Code Documentation
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -36,6 +36,7 @@ jobs:
       
       - name: Install dependencies
         run: |
+          julia -e 'using Pkg; Pkg.Registry.add("General")'
           julia --project=julia -e 'using Pkg; Pkg.resolve(); Pkg.instantiate()'
           julia --project=julia/docs -e 'using Pkg; Pkg.instantiate()'
       
