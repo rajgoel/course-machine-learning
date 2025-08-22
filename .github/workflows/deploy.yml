@@ -38,8 +38,8 @@ jobs:
         run: |
           # Only install docs dependencies (Documenter.jl)
           julia --project=julia/docs -e 'using Pkg; Pkg.instantiate()'
-#          # Add the local package for docstring extraction only
-#          julia --project=julia/docs -e 'using Pkg; Pkg.develop(PackageSpec(path="julia"))'
+          # Add the local package for docstring extraction only
+          julia --project=julia/docs -e 'using Pkg; Pkg.develop(PackageSpec(path="julia"))'
       
       - name: Build docs
         run: |
