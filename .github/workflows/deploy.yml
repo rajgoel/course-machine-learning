@@ -86,7 +86,24 @@ jobs:
           # Configure git and commit
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
+          
+          # Debug: Check what's actually there before git add
+          echo "=== Files in julia/docs/build before git add ==="
+          ls -la julia/docs/build/ || echo "Directory missing"
+          
+          # Check if .gitignore is blocking build directories
+          echo "=== Checking .gitignore ==="
+          cat .gitignore | grep -i build || echo "No build rules in .gitignore"
+          
           git add .
+          
+          # Debug: What did git actually stage?
+          echo "=== Git status after git add ==="
+          git status --porcelain
+          
+          # Force add build directory (ignore .gitignore)
+          git add julia/docs/build/ --force
+          
           git commit -m "Deploy slides and Julia docs"
           
           # Force push to gh-pages
