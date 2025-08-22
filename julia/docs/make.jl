@@ -1,9 +1,11 @@
 using Documenter
 using Pkg
 
-# Activate the parent project to access MachineLearningCourse
-Pkg.activate("..")
-using MachineLearningCourse
+# Add the parent project to the load path for docstring extraction
+push!(LOAD_PATH, joinpath(@__DIR__, ".."))
+
+# Import the module without precompiling heavy dependencies
+import MachineLearningCourse
 
 makedocs(
     sitename = "MachineLearningCourse.jl",
