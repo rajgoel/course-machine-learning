@@ -58,9 +58,8 @@ where $n^L$ denotes the number of neurons in the output layer.
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
-> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of the mean error $\displaystyle\frac{1}{|S|} \cdot
+> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of the average loss $\displaystyle\frac{1}{|S|} \cdot
 \displaystyle\sum_{(a^\textrm{in},a^*) \in S}\mathscr{L}_{(a^\textrm{in},a^*)}$.
-> The gradient is the collection of all its partial derivatives.
 
 ---
 
