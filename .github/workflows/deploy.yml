@@ -37,8 +37,10 @@ jobs:
       - name: Install dependencies
         run: |
           julia -e 'using Pkg; Pkg.Registry.add("General")'
-          julia --project=julia -e 'using Pkg; Pkg.resolve(); Pkg.instantiate()'
-          julia --project=julia/docs -e 'using Pkg; Pkg.develop(PackageSpec(path="julia")); Pkg.instantiate()'
+          # Only install docs dependencies (Documenter.jl)
+          julia --project=julia/docs -e 'using Pkg; Pkg.instantiate()'
+          # Add the local package for docstring extraction only
+          julia --project=julia/docs -e 'using Pkg; Pkg.develop(PackageSpec(path="julia"))'
       
       - name: Build docs
         run: |
@@ -73,7 +75,14 @@ jobs:
           
           # Copy built docs from the previous step
           mkdir -p julia/docs/build
-          cp -r /tmp/docs-build/* julia/docs/build/ || echo "No build files to copy"
+          if cp -r /tmp/docs-build/* julia/docs/build/; then
+            echo "✅ Successfully copied docs to julia/docs/build"
+            echo "Contents of julia/docs/build:"
+            ls -la julia/docs/build/
+          else
+            echo "❌ Failed to copy docs to julia/docs/build"
+            exit 1
+          fi
           
           # Configure git and commit
           git config user.email "action@github.com"
