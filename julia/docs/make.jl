@@ -22,14 +22,5 @@ makedocs(
     doctest = false,  # Skip doctests for now
 )
 
-# Deploy docs only if running on CI
-if get(ENV, "CI", "false") == "true"
-    deploydocs(
-        repo = "github.com/rajgoel/course-machine-learning.git",
-        target = "build",
-        branch = "gh-pages",
-        devbranch = "main",
-        dirname = "julia",  # This puts docs in julia/ subdirectory
-        forcepush = false,  # Don't overwrite existing content
-    )
-end
+# Docs are built to julia/docs/build/ and will be published by GitHub's automatic workflow
+# No manual deployment needed - GitHub Pages will serve the entire repository
