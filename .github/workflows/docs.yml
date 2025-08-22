@@ -36,7 +36,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          julia --project=julia -e 'using Pkg; Pkg.instantiate()'
+          julia --project=julia -e 'using Pkg; Pkg.resolve(); Pkg.instantiate()'
           julia --project=julia/docs -e 'using Pkg; Pkg.instantiate()'
       
       - name: Build and deploy docs
