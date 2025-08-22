@@ -18,7 +18,7 @@ using Random
 """
 One-hot encoding for classification
 Converts class labels to one-hot vectors
-Example: 3 → [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] (for 10 classes)
+Example: 3 → `[0, 0, 0, 1, 0, 0, 0, 0, 0, 0]` (for 10 classes)
 """
 function one_hot_encode(label::Int, num_classes::Int)
     encoded = zeros(Float64, num_classes)
