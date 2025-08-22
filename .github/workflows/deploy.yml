@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'julia/**'
-      - '.github/workflows/docs.yml'
+      - '.github/workflows/deploy.yml'
   pull_request:
     branches:
       - main
