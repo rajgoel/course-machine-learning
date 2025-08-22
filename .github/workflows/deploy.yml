@@ -1,0 +1,73 @@
+name: Deploy slides and Julia docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'julia/**'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'julia/**'
+
+jobs:
+  docs:
+    name: Deploy slides and Julia docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      statuses: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: '1.11'
+      
+      - uses: julia-actions/cache@v1
+      
+      - name: Configure git
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+      
+      - name: Install dependencies
+        run: |
+          julia -e 'using Pkg; Pkg.Registry.add("General")'
+          julia --project=julia -e 'using Pkg; Pkg.resolve(); Pkg.instantiate()'
+          julia --project=julia/docs -e 'using Pkg; Pkg.develop(PackageSpec(path="julia")); Pkg.instantiate()'
+      
+      - name: Build docs
+        run: |
+          cd julia/docs
+          julia --project=. make.jl
+          # Save built docs for later use
+          cp -r build /tmp/docs-build
+      
+      - name: Deploy to gh-pages
+        run: |
+          # Copy main branch content to gh-pages (for RevealJS)
+          git checkout --orphan gh-pages-temp
+          git rm -rf .
+          
+          # Copy all main branch files except .git
+          git checkout main -- .
+          
+          # Remove julia/docs/build if it exists (we'll add fresh one)
+          rm -rf julia/docs/build
+          
+          # Copy built docs from the previous step
+          mkdir -p julia/docs/build
+          cp -r /tmp/docs-build/* julia/docs/build/ || echo "No build files to copy"
+          
+          # Configure git and commit
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add .
+          git commit -m "Deploy slides and Julia docs"
+          
+          # Force push to gh-pages
+          git push -f origin gh-pages-temp:gh-pages
