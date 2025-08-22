@@ -44,8 +44,20 @@ jobs:
         run: |
           cd julia/docs
           julia --project=. make.jl
-          # Save built docs for later use
-          cp -r build /tmp/docs-build
+          
+      - name: Save built docs
+        run: |
+          # Copy built docs using absolute path
+          if cp -r julia/docs/build /tmp/docs-build; then
+            echo "✅ Successfully copied built docs to /tmp/docs-build"
+            echo "Contents of /tmp/docs-build:"
+            ls -la /tmp/docs-build/
+          else
+            echo "❌ Failed to copy built docs"
+            echo "Checking if julia/docs/build exists:"
+            ls -la julia/docs/build/ || echo "julia/docs/build directory does not exist"
+            exit 1
+          fi
       
       - name: Deploy to gh-pages
         run: |
