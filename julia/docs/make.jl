@@ -30,5 +30,6 @@ if get(ENV, "CI", "false") == "true"
         branch = "gh-pages",
         devbranch = "main",
         dirname = "julia",  # This puts docs in julia/ subdirectory
+        forcepush = false,  # Don't overwrite existing content
     )
 end
