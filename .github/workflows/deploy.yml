@@ -36,7 +36,6 @@ jobs:
       
       - name: Install dependencies
         run: |
-          julia -e 'using Pkg; Pkg.Registry.add("General")'
           # Only install docs dependencies (Documenter.jl)
           julia --project=julia/docs -e 'using Pkg; Pkg.instantiate()'
           # Add the local package for docstring extraction only
