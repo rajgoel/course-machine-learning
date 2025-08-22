@@ -8,8 +8,8 @@ using MachineLearningCourse
 makedocs(
     sitename = "MachineLearningCourse.jl",
     format = Documenter.HTML(
-        prettyurls = false,  # For local viewing
-        canonical = "",
+        prettyurls = get(ENV, "CI", "false") == "true",
+        canonical = "https://rajgoel.github.io/course-machine-learning/julia/",
         assets = String[],
     ),
     modules = [MachineLearningCourse],
@@ -21,3 +21,14 @@ makedocs(
     checkdocs = :exports,
     doctest = false,  # Skip doctests for now
 )
+
+# Deploy docs only if running on CI
+if get(ENV, "CI", "false") == "true"
+    deploydocs(
+        repo = "github.com/rajgoel/course-machine-learning.git",
+        target = "build",
+        branch = "gh-pages",
+        devbranch = "main",
+        dirname = "julia",  # This puts docs in julia/ subdirectory
+    )
+end
