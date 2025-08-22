@@ -4,24 +4,45 @@ A Julia package for machine learning course materials and implementations.
 
 ## Installation
 
-To use this package from any directory:
+The recommended way to use this package is to clone the repository
+
+```bash
+git clone https://github.com/rajgoel/course-machine-learning
+```
+
+and load the module as follows (replace `path/to/` by the path to the repository):
+
+```julia
+using Pkg
+Pkg.develop(path="path/to/course-machine-learning/julia")
+```
+
+Alternatively, you can directly load the module as follows:
 
 ```julia
 using Pkg
 Pkg.develop(url="https://github.com/rajgoel/course-machine-learning", subdir="julia")
-using MachineLearningCourse
 ```
 
-Or clone and develop locally:
+## Usage
 
+To use the module type:
 ```julia
-# In terminal: git clone https://github.com/rajgoel/course-machine-learning
-using Pkg
-Pkg.develop(path="path/to/course-machine-learning/julia")
 using MachineLearningCourse
 ```
 
-## API Reference
+To access specific lecture modules (replace `XX` with the two-digit lecture number):
+```julia
+using MachineLearningCourse.LectureXX
+```
+
+For example, to run the Lecture 03 demo:
+```julia
+using MachineLearningCourse
+MachineLearningCourse.Lecture03.demo()
+```
+
+## Course material
 
 ```@autodocs
 Modules = [MachineLearningCourse, MachineLearningCourse.Lecture03]

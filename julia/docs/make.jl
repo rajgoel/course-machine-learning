@@ -17,8 +17,7 @@ makedocs(
     modules = [MachineLearningCourse],
     authors = "Asvin Goel",
     pages = [
-        "Home" => "index.md",
-        "Lecture 03: Deep Neural Networks" => "lecture03.md"
+        "Home" => "index.md"
     ],
     checkdocs = :exports,
     doctest = false,  # Skip doctests for now

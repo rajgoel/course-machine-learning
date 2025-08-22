@@ -29,9 +29,9 @@ MachineLearningCourse.Lecture03.demo()
 ```
 
 
-## Available submodules
+## Available implementations
 
-- `Lecture03`: Vanilla deep neural network implementation
+- `Lecture03`: Feed forward networks
 """
 module MachineLearningCourse
 
