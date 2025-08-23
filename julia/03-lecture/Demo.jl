@@ -17,7 +17,7 @@ using Random
 Convert class labels to one-hot vectors for classification.
 
 # Arguments
-- `label::Int`: Class label (0-indexed)
+- `label::Int`: Class label (1-indexed)
 - `num_classes::Int`: Total number of classes
 
 # Returns
@@ -25,12 +25,12 @@ Convert class labels to one-hot vectors for classification.
 
 # Example
 ```julia
-one_hot_encode(3, 10)  # Returns [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+one_hot_encode(3, 10)  # Returns [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
 ```
 """
 function one_hot_encode(label::Int, num_classes::Int)
     encoded = zeros(Float64, num_classes)
-    encoded[label + 1] = 1.0  # +1 because Julia is 1-indexed, MNIST labels are 0-9
+    encoded[label] = 1.0
     return encoded
 end
 
@@ -148,7 +148,7 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
         push!(X_train, image)
         
         # One-hot encode label
-        label = one_hot_encode(Int(train_y[i]), 10)
+        label = one_hot_encode(Int(train_y[i])+1, 10)   # +1 because Julia is 1-indexed, MNIST labels are 0-9
         push!(Y_train, label)
     end
     
@@ -161,7 +161,7 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
         image = Float64.(image) ./ 255.0
         push!(X_test, image)
         
-        label = one_hot_encode(Int(test_y[i]), 10)
+        label = one_hot_encode(Int(test_y[i])+1, 10)  # +1 because Julia is 1-indexed, MNIST labels are 0-9
         push!(Y_test, label)
     end
     
