@@ -7,7 +7,7 @@ Mean Squared Error loss function: ℒ = ‖â - y‖².
 
 # Arguments
 - `y::Vector{Float64}`: True target values
-- `â::Vector{Float64}`: Predicted values
+- `â::Vector{Float64}`: Computed values
 
 # Returns
 - `Float64`: MSE loss value
@@ -20,11 +20,11 @@ end
 """
     ∂ℒ_∂â(y, â)
 
-Gradient of MSE loss with respect to predicted activations: ∂ℒ/∂â = 2(â - y).
+Gradient of MSE loss with respect to computed activations: ∂ℒ/∂â = 2(â - y).
 
 # Arguments
 - `y::Vector{Float64}`: True target values
-- `â::Vector{Float64}`: Predicted values
+- `â::Vector{Float64}`: Computed values
 
 # Returns
 - `Vector{Float64}`: Gradient vector ∂ℒ/∂â
@@ -99,7 +99,7 @@ function compute_average_gradients(W::Matrix{Float64}, b::Vector{Float64}, X::Ve
     sum_∇b = zeros(Float64, size(b))
 
     for j in 1:length(X)
-        ∇W, ∇b = compute_gradients(W, b, X[j], Y[j])
+                ∇W, ∇b = compute_gradients(W, b, X[j], Y[j])
         sum_∇W .+= ∇W
         sum_∇b .+= ∇b
     end
@@ -175,7 +175,7 @@ function gradient_descent(W_0::Matrix{Float64}, b_0::Vector{Float64}, X::Vector{
                 ∇W, ∇b = compute_average_gradients(W, b, X, Y)
         grad_norm = gradient_norm(∇W, ∇b)
         
-        println("Iteration $iter, ‖∇‖ = $grad_norm")
+        println("Iteration $iter, ‖(∇W,∇b)‖ = $grad_norm")
         
         # Break if the gradient norm is smaller than the tolerance
         if grad_norm < tolerance

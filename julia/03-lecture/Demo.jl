@@ -39,8 +39,8 @@ function evaluate_model(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::V
     println("Evaluating on $total test samples...")
     
     for i in 1:total
-        output = predict(network, X_test[i])
-        predicted_class = argmax(output) - 1  # Convert to 0-indexed (0-9 for MNIST)
+        â = predict(network, X_test[i])
+        predicted_class = argmax(â) - 1  # Convert to 0-indexed (0-9 for MNIST)
         true_class = argmax(Y_test[i]) - 1
         
         push!(predictions, predicted_class)
@@ -71,12 +71,12 @@ function evaluate_model(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::V
     println("\nSample predictions:")
     sample_indices = rand(1:total, min(10, total))
     for i in sample_indices
-        output = predict(network, X_test[i])
-        predicted_class = argmax(output) - 1  # Convert to 0-indexed (0-9 for MNIST)
+        â = predict(network, X_test[i])
+        predicted_class = argmax(â) - 1  # Convert to 0-indexed (0-9 for MNIST)
         true_class = argmax(Y_test[i]) - 1
-        activations = join(["$d: $(round(output[d+1], digits=4))" for d in 0:9], ", ")
+        activation_string = join(["$d: $(round(â[d+1], digits=4))" for d in 0:9], ", ")
         status = predicted_class == true_class ? "✓" : "✗"
-        println("  $status Predicted: $predicted_class, True: $true_class, Output: [ $(activations) ]")
+        println("  $status Predicted: $predicted_class, True: $true_class, Output: [ $(activation_string) ]")
     end
     
     return accuracy
