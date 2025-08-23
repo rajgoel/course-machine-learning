@@ -125,8 +125,8 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
     println("Loading MNIST dataset...")
     
     # Load MNIST data
-    train_x, train_y = MNIST.traindata()  # 60,000 training samples
-    test_x, test_y = MNIST.testdata()     # 10,000 test samples
+    train_x, train_y = MNIST(split=:train)[:]  # 60,000 training samples
+    test_x, test_y = MNIST(split=:test)[:]     # 10,000 test samples
     
     println("Original data shapes:")
     println("  Training: $(size(train_x)) images, $(length(train_y)) labels")
