@@ -36,15 +36,20 @@ To access specific lecture modules (replace `XX` with the two-digit lecture numb
 using MachineLearningCourse.LectureXX
 ```
 
-For example, to run the Lecture 03 demo:
+For example, to run the demos:
 ```julia
 using MachineLearningCourse
+
+# Run Lecture 02 gradient descent demo
+MachineLearningCourse.Lecture02.demo()
+
+# Run Lecture 03 deep network demo
 MachineLearningCourse.Lecture03.demo()
 ```
 
 ## Course material
 
 ```@autodocs
-Modules = [MachineLearningCourse, MachineLearningCourse.Lecture03]
+Modules = [MachineLearningCourse, MachineLearningCourse.Lecture02, MachineLearningCourse.Lecture03]
 ```
 
