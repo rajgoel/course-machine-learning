@@ -5,9 +5,6 @@ Deep Neural Network Implementation in Julia
 using LinearAlgebra
 using Random
 
-# Set random seed for reproducibility
-Random.seed!(42)
-
 """
     DNN(layers)
 

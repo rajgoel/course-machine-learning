@@ -35,22 +35,6 @@ function one_hot_encode(label::Int, num_classes::Int)
 end
 
 """
-    one_hot_encode_batch(labels, num_classes)
-
-Convert a batch of class labels to one-hot vectors.
-
-# Arguments
-- `labels::Vector{Int}`: Vector of class labels (0-indexed)
-- `num_classes::Int`: Total number of classes
-
-# Returns
-- `Vector{Vector{Float64}}`: Vector of one-hot encoded vectors
-"""
-function one_hot_encode_batch(labels::Vector{Int}, num_classes::Int)
-    return [one_hot_encode(label, num_classes) for label in labels]
-end
-
-"""
     evaluate_model(network, X_test, Y_test)
 
 Evaluate neural network performance on test data and display detailed results.
@@ -189,21 +173,22 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
 end
 
 """
-    demo(learning_rate=0.001, epochs=50)
+    demo(learning_rate=0.001, epochs=50, seed=42)
 
 MNIST handwritten digit recognition demonstration.
 
 # Parameters
 - `learning_rate`: Learning rate for training (default: 0.001)
 - `epochs`: Number of training epochs (default: 50)
+- `seed`: Random seed (default: 42)
 """
-function demo(learning_rate = 0.001, epochs = 50)
+function demo(learning_rate = 0.001, epochs = 50, seed = 42)
     println("="^80)
     println("MNIST DIGIT RECOGNITION WITH DEEP NEURAL NETWORK")
     println("="^80)
     
     # Set random seed for reproducibility
-    Random.seed!(42)
+    Random.seed!(seed)
     
     # Load and preprocess data
     println("\n1. Loading MNIST data...")
