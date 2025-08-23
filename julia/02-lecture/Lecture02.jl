@@ -37,7 +37,7 @@ include("GradientDescent.jl")
 include("Demo.jl")
 
 # Essential public API:
-export gradient_descent
+export gradient_descent, one_hot_encode
 # Essential public API:
 export demo
 

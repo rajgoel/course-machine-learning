@@ -1,10 +1,9 @@
-using OffsetArrays
 using LinearAlgebra
 
 function get_sum_squared_errors(weights, biases, samples, inputs, outputs)
     sum_squared_errors = 0.0
     for j in 1:samples
-        for i in 0:length(biases)-1
+        for i in 1:length(biases)
             sum_squared_errors += ( dot(weights[i,:], inputs[j]) + biases[i] - outputs[j][i] )^2
         end
     end
@@ -13,10 +12,10 @@ end
 
 function get_gradients(weights, biases, input, output)
     # Initialize gradients
-    gradient_weights = OffsetArray(zeros(Float64, 10, 25), 0:9, 1:25)
-    gradient_biases = OffsetArray(zeros(Float64, 10), 0:9)
+    gradient_weights = zeros(Float64, 10, 25)
+    gradient_biases = zeros(Float64, 10)
 
-    for i in 0:length(biases)-1
+    for i in 1:length(biases)
         error = dot(weights[i,:], input) + biases[i] - output[i]
         # Gradient w.r.t weights and biases
         gradient_weights[i, :] = 2 * error * input
@@ -28,8 +27,8 @@ end
 
 function get_average_gradient(weights, biases, samples, inputs, outputs)
     # Initialize average gradients
-    sum_gradient_weights = OffsetArray(zeros(Float64, 10, 25), 0:9, 1:25)
-    sum_gradient_biases = OffsetArray(zeros(Float64, 10), 0:9)
+    sum_gradient_weights = zeros(Float64, 10, 25)
+    sum_gradient_biases = zeros(Float64, 10)
 
     for j in 1:samples
         gradient_weights, gradient_biases = get_gradients(weights, biases, inputs[j], outputs[j])
@@ -42,8 +41,8 @@ end
 
 function get_norm(gradient_weights, gradient_biases)
     # Flatten and concatenate the gradients
-    flat_weights = vec(parent(gradient_weights))  # Convert weights to a 1D array
-    flat_biases = vec(parent(gradient_biases))    # Convert biases to a 1D array
+    flat_weights = vec(gradient_weights)  # Convert weights to a 1D array
+    flat_biases = vec(gradient_biases)    # Convert biases to a 1D array
     combined_gradient = vcat(flat_weights, flat_biases)  # Concatenate them
     
     # Return the norm of the combined gradient

@@ -10,10 +10,10 @@ A Julia package for machine learning course materials and implementations.
 module MachineLearningCourse
 
 # Load submodules here:
-#include("../02-lecture/Lecture02.jl")
+include("../02-lecture/Lecture02.jl")
 include("../03-lecture/Lecture03.jl")
 
-#using .Lecture02
+using .Lecture02
 using .Lecture03
 
 end

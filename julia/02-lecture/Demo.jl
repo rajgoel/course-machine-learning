@@ -1,6 +1,29 @@
+"""
+    one_hot_encode(label, num_classes)
+
+Convert class labels to one-hot vectors for classification.
+
+# Arguments
+- `label::Int`: Class label (1-indexed)
+- `num_classes::Int`: Total number of classes
+
+# Returns
+- `Vector{Float64}`: One-hot encoded vector
+
+# Example
+```julia
+one_hot_encode(3, 10)  # Returns [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+```
+"""
+function one_hot_encode(label::Int, num_classes::Int)
+    encoded = zeros(Float64, num_classes)
+    encoded[label] = 1.0
+    return encoded
+end
+
 function read_data(file_path)
     inputs = Vector{Vector{Float64}}()
-    outputs = Vector{OffsetArray{Float64, 1}}()
+    outputs = Vector{Vector{Float64}}()  # Changed from OffsetArray to regular Vector
     size = 0
     open(file_path, "r") do f
         while !eof(f)
@@ -12,10 +35,9 @@ function read_data(file_path)
                 append!(input, parse.(Float64, split(line)))
             end
 
-            # Create a 0-indexed array from 0 to 9, filled with zeros
-            output = OffsetArray(zeros(Float64, 10), 0:9)
-            digit = parse(Int, readline(f))  # Read the digit label
-            output[digit] = 1.0  # Set desired output
+            # Create one-hot encoded output
+            digit = parse(Int, readline(f))  # Read the digit label (0-9)
+            output = one_hot_encode(digit + 1, 10)  # +1 to convert 0-9 to 1-10 indexing
 
             push!(inputs, input)
             push!(outputs, output)
@@ -25,12 +47,12 @@ function read_data(file_path)
     return size, inputs, outputs
 end
 
-function demo(sample_file)
+function demo(sample_file=joinpath(@__DIR__, "5x5digits.txt"))
   samples, inputs, outputs = read_data(sample_file)
 
   # Define initial weights and biases
-  initial_weights = OffsetArray(rand(Float64, 10, 25), 0:9, 1:25)
-  initial_biases = OffsetArray(rand(Float64, 10), 0:9)
+  initial_weights = rand(Float64, 10, 25)  # Regular arrays, 1-indexed
+  initial_biases = rand(Float64, 10)
 
   # Perform gradient descent
   optimized_weights, optimized_biases = gradient_descent(initial_weights, initial_biases, samples, inputs, outputs)
@@ -44,8 +66,3 @@ function demo(sample_file)
 #  println("Optimized biases: ", optimized_biases)
 
 end
-
-# Example usage:
-sample_file = "5x5digits.txt"  
-demo(sample_file)
-
