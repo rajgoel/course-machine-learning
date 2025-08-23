@@ -5,6 +5,9 @@ Deep Neural Network Implementation in Julia
 using LinearAlgebra
 using Random
 
+# Import MSE loss functions from Lecture02
+using ..Lecture02: ℒ, ∂ℒ_∂â
+
 """
     DNN(layers)
 
@@ -43,7 +46,7 @@ mutable struct DNN
         W = Matrix{Float64}[]
         b = Vector{Float64}[]
         
-        for l in 2:L  # l = 1, 2, ..., L-1 in our notation (Julia is 1-indexed)
+        for l in 2:L
             # W^[l] ∈ ℝ^{n^[l] × n^[l-1]}
             W_l = randn(layers[l], layers[l-1]) * sqrt(2.0 / layers[l-1])  # He initialization
             push!(W, W_l)
@@ -133,41 +136,10 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
     return activations, z_values
 end
 
-"""
-    ℒ(y_true, y_pred)
-
-Mean Squared Error loss function: ℒ = ||ŷ - y||².
-
-# Arguments
-- `y_true::Vector{Float64}`: True target values
-- `y_pred::Vector{Float64}`: Predicted values
-
-# Returns
-- `Float64`: MSE loss value
-"""
-function ℒ(y_true::Vector{Float64}, y_pred::Vector{Float64})
-    diff = y_pred - y_true
-    return dot(diff, diff)
-end
+# Loss functions ℒ and ∂ℒ_∂â are imported from Lecture02
 
 """
-    ∂ℒ_∂ŷ(y_true, y_pred)
-
-Gradient of MSE loss with respect to predictions: ∂ℒ/∂ŷ = 2(ŷ - y).
-
-# Arguments
-- `y_true::Vector{Float64}`: True target values
-- `y_pred::Vector{Float64}`: Predicted values
-
-# Returns
-- `Vector{Float64}`: Gradient vector
-"""
-function ∂ℒ_∂ŷ(y_true::Vector{Float64}, y_pred::Vector{Float64})
-    return  2.0*(y_pred - y_true)
-end
-
-"""
-    backpropagation(network, activations, z_values, y_true)
+    backpropagation(network, activations, z_values, y)
 
 Compute gradients using backpropagation algorithm.
 
@@ -179,7 +151,7 @@ Calculates ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers using:
 - `network::DNN`: Neural network structure
 - `activations::Vector{Vector{Float64}}`: Layer activations from forward pass
 - `z_values::Vector{Vector{Float64}}`: Linear combinations from forward pass
-- `y_true::Vector{Float64}`: True target values
+- `y::Vector{Float64}`: True target values
 
 # Returns
 - `Tuple{Vector{Matrix{Float64}}, Vector{Vector{Float64}}}`: (∇W, ∇b)
@@ -187,14 +159,14 @@ Calculates ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers using:
   - `∇b`: Bias gradients for each layer
 """
 function backpropagation(network::DNN, activations::Vector{Vector{Float64}}, 
-                        z_values::Vector{Vector{Float64}}, y_true::Vector{Float64})
+                        z_values::Vector{Vector{Float64}}, y::Vector{Float64})
 
-    ∇W = Matrix{Float64}[]
-    ∇b = Vector{Float64}[]
+        ∇W = Matrix{Float64}[]
+        ∇b = Vector{Float64}[]
 
     # Output error
-    y_pred = activations[end]
-    δ = ∂ℒ_∂ŷ(y_true, y_pred)  # (ŷ - y)
+    â = activations[end]
+    δ = ∂ℒ_∂â(y, â)  # (â - y)
 
     # Gradient for last layer
     pushfirst!(∇W, δ * activations[end-1]')
@@ -312,6 +284,6 @@ Performs forward propagation to compute network output ŷ.
 """
 function predict(network::DNN, x::Vector{Float64})
     activations, _ = forwardpropagation(network, x)
-    return activations[end]  # Return a^[L-1] = ŷ
+    return activations[end]
 end
 

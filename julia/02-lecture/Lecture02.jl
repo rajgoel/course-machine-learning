@@ -1,11 +1,11 @@
 """
 # Lecture02: Gradient Descent
 
-A vanilla implementation of a gradient descent.
+A vanilla implementation of gradient descent.
 
 ## Exported Functions
 
-- [`demo`](@ref): 5x5 digit gardient descent demonstration
+- [`demo`](@ref): 5x5 digit gradient descent demonstration
 
 ## Usage Examples
 
@@ -37,7 +37,7 @@ include("GradientDescent.jl")
 include("Demo.jl")
 
 # Essential public API:
-export gradient_descent, one_hot_encode
+export gradient_descent, one_hot_encode, ℒ, ∂ℒ_∂â
 # Essential public API:
 export demo
 
