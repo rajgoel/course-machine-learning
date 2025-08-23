@@ -1,17 +1,17 @@
 """
-Lecture03: Feed forward networks
+# Lecture03: Feed forward networks
 
 A vanilla implementation of a deep neural network with fully connected
 layers, ReLU activation for all hidden layers, and MSE loss.
 
-# Exported Functions
+## Exported Functions
 
 - [`DNN`](@ref): Constructor for deep neural network structure
 - [`train!`](@ref): Training function using backpropagation
 - [`predict`](@ref): Prediction function for inference
 - [`demo`](@ref): MNIST handwritten digit recognition demonstration
 
-# Usage Examples
+## Usage Examples
 
 Create and train a neural network:
 
