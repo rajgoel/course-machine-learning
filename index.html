@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Slides</title>
+
+  <meta name="description" content="Slides">
+  <meta name="author" content="Asvin Goel">
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.0/dist/reveal.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.0/dist/theme/simple.css" id="theme">
+
+  <!-- Native plugins of reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.0/plugin/markdown/markdown.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.0/plugin/math/math.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.0/plugin/highlight/highlight.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.0/plugin/highlight/zenburn.css">
+
+  <!-- Menu plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+  <link href=" https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css " rel="stylesheet">
+
+  <!-- Font awesome is used by several plugins -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Animate plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/animate/plugin.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js"></script>
+
+  <!-- Anything plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/anything/plugin.js"></script>
+  <script src="https://unpkg.com/cytoscape@3.19.1/dist/cytoscape.min.js"></script>
+  <script src="cytoscape-neuralnetworks.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0"></script>
+  <script src="digitrecognition/digitrecognition.js"></script>
+
+  <!-- Chalkboard plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@4.6.0/chalkboard/plugin.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@4.6.0/chalkboard/style.css">
+
+  <!-- Chart plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
+
+  <!-- Custom controls plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@4.6.0/customcontrols/plugin.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@4.6.0/customcontrols/style.css">
+
+  <!-- Load content plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/loadcontent/plugin.js"></script>
+
+  <!-- Fullscreen plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/fullscreen/plugin.js"></script>
+
+  <!-- QR-Codes -->
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <script type="text/javascript" src="fix_svg_defs.js"></script>
+
+  <!-- Style file -->
+<!--
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/style.css">
+-->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Customized style -->
+<style>
+:root {
+  --r-heading-text-shadow: none;
+  --r-heading1-text-shadow: none;
+  --r-main-font: Helvetica, sans-serif;
+  --r-heading-font: Helvetica, sans-serif;
+  --r-heading-color: darkred;
+  --r-heading-text-transform: none;
+  --r-heading-font-weight: 600;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.3em;
+  --r-heading4-size: 1em;
+  --r-link-color: firebrick;
+  --r-link-color-dark: darkred;
+  --r-link-color-hover: red;
+}
+
+[data-fullscreen]::after {
+    content: "";
+    display: block;
+    height: 50px; /* Adjust the value as needed */
+}
+
+.reveal blockquote {
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  width: 100%;
+  box-shadow: 10px 10px 5px #888888;
+  background: #EEEEEE;
+  background-color: platinum;
+}
+
+code:not(:empty):not(:has(*)):not(pre code) {
+  background-color: lightgray;
+}
+
+</style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section class="titlepage">
+        <h1 id="course-title">Title</h1>
+        <h2 id="course-subtitle">Subtitle</h2>
+        <p><span id="course-author">Author</span><br>
+           <a id="course-email" href="mailto:email@example.com">email@example.com</a>
+        </p>
+        <div id="qrcode" style="margin-top:50px;"></div>
+<!--
+        <p><a id="url"></a></p>
+-->
+</section>
+
+
+<section data-markdown data-separator="^\n===\n$" data-separator-vertical="^\n---\n$">
+</section>
+
+<section>
+  <h2>The end</h2>
+  <div id="navigation-to-next-topic" class="presentation-only">
+    You have reached the last slide of this slide deck. Please click
+    <ul>
+      <li><a id="pdf-link"><i class="fas fa-file-pdf"></i></a> to open a version printable to PDF, or </li>
+      <li><a id="next-topic"><i class="fas fa-external-link-alt"></i></a> to continue with the next slide deck.</li>
+      </ul>
+  </div>
+</section>
+
+</div>
+</div>
+
+
+  <!-- Reveal.js configuration and setup of slide deck-->
+  
+<script src="reveal-config.js"></script>
+<script>
+RevealConfig.anything = [ 
+  { className: "neuralnetwork", initialize: showNeuralNetwork }, 
+  { className: "drawDigit", initialize: initialiseCanvas }, 
+  { className: "togglePrediction", initialize: initialisePredictionButton }, 
+  { className: "preview5x5", initialize: initialise5x5PreviewButton }, 
+  { className: "toggle5x5Prediction", initialize: initialise5x5PredictionButton }, 
+];
+</script>
+<script src="setup.js"></script>
+
+</body>
+</html>
