@@ -5,6 +5,7 @@ A Julia package for machine learning course materials and implementations.
 
 ## Content
 
+- [`Lecture02`](@ref MachineLearningCourse.Lecture03): Gradient descent
 - [`Lecture03`](@ref MachineLearningCourse.Lecture03): Feed forward networks
 """
 module MachineLearningCourse
