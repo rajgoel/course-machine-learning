@@ -99,6 +99,30 @@ According to the chain rule, we have
 \end{array}
 $$`
 
+
+---
+
+### Weight and bias sensitivities
+
+We have
+`$$
+\frac{\partial a^{l+1}}{\partial a^{l}} = 
+\frac{\partial a^{l+1}}{\partial z^{l}} \cdot \frac{\partial \z^{l}}{\partial a^{l}}$$`
+
+Since $\sigma^l$ is applied element-wise, we have
+`$$
+\frac{\partial a^{l+1}}{\partial z^{l}} = \operatorname{diag}\left(
+\frac{\partial \sigma^{l}(z_1^{l})}{\partial z_1^{l}}, \ldots, 
+\frac{\partial \sigma^{l}(z_{n^{l+1}}^{l})}{\partial z_{n^{l+1}}^{l}}
+\right)
+$$`
+
+Moreover, we have
+`$$
+\frac{\partial \z^{l}}{\partial a^{l}} = W^l
+$$`
+
+
 ---
 
 ### Jacobian matrix of partial derivatives
