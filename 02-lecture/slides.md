@@ -41,7 +41,7 @@
 
 ### Input encoding
 
-The input is represented by an encoding `$(a_{1}, a_{2}, \ldots, a_{25})$`.
+Each input $X$ is represented by an encoding `$(a_{1}, a_{2}, \ldots, a_{25})$`.
 
 <table style="table-layout: fixed!important;width:600px;">
 <tr style="border: 0;border-style:hidden;">
@@ -69,7 +69,7 @@ $$
 
 ### Output encoding
 
-The output is represented by a **one-hot encoding**  `$(\hat{a}_{0}, \hat{a}_{1}, \ldots, \hat{a}_{9})$`.
+Each output $Y$ is represented by a **one-hot encoding**  `$(\hat{a}_{0}, \hat{a}_{1}, \ldots, \hat{a}_{9})$`.
 
 <table style="table-layout: fixed!important;width:900px;">
 <tr style="border: 0;border-style:hidden;">
@@ -141,15 +141,15 @@ $$ \left( \begin{align} \hat{a}_{0} \\  \hat{a}_{1} \\ \vdots \\ \hat{a}_{9}  \e
 
 <!-- .slide: data-auto-animate="true" -->
 
-Assume we are given a collection of pairs of input activation values $a$ with their expected output activation values $a^*$. 
+Assume we are given a collection of $(X,Y)$ pairs each encoded as $(a,a^*)$. 
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-Assume we are given a collection of pairs of input activation values $a$ with their expected output activation values $a^*$. 
+Assume we are given a collection of $(X,Y)$ pairs each encoded as activations by $(a,a^*)$. 
 
-If we could find weights and biases such that for each pair $(a,a^*)$ we have
+If we could find weights and biases such that for each pair $(a,a^*)$, we have
 
 > The computed output $\hat{a} = W a + b$  matches the given output $a^*$.
 
@@ -304,8 +304,8 @@ $$`
 with respect to $w_{i,j}$ is
 
 `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } $`
-`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{\hat{a}_i} - a^*_i\Big) \cdot a_j $`<!-- .element: class="fragment appear" -->
-`$ = 2(\hat{a}_i - a^*_i)a_j $`<!-- .element: class="fragment appear" -->
+`$ = \underbrace{2\Big(\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i - a^*_i\Big)}_{\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i}} \cdot \underbrace{a_j}_{  \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial w_{i,j} } } $`<!-- .element: class="fragment appear" -->
+`$ = 2(\hat{a}_i - a^*_i) \cdot a_j $`<!-- .element: class="fragment appear" -->
 
 ---
 

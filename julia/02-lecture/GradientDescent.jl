@@ -45,8 +45,8 @@ Calculates gradients using the chain rule:
 # Arguments
 - `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs)
 - `b::Vector{Float64}`: Bias vector (n_outputs,)
-- `x::Vector{Float64}`: Input vector for single sample
-- `y::Vector{Float64}`: Target output vector for single sample
+- `x::Vector{Float64}`: Input vector for sample
+- `y::Vector{Float64}`: Target output vector for sample
 
 # Returns
 - `Tuple{Matrix{Float64}, Vector{Float64}}`: (∇W, ∇b)
@@ -54,19 +54,22 @@ Calculates gradients using the chain rule:
   - `∇b`: Bias gradients (same size as b)
 """
 function compute_gradients(W::Matrix{Float64}, b::Vector{Float64}, x::Vector{Float64}, y::Vector{Float64})
-    # Initialize gradients
+    # Initialize
         ∇W = zeros(Float64, size(W))
         ∇b = zeros(Float64, size(b))
-
+  
+    # Input activation 
+    a = x
+  
     # Compute predictions
-    â = W * x + b
+    â = W * a + b
 
     # Compute ∂ℒ/∂â
     δ = ∂ℒ_∂â(y, â)
 
     # Compute gradients using chain rule
-    # ∂ℒ/∂W = δ * x^T (outer product)
-        ∇W = δ * x'
+    # ∂ℒ/∂W = δ * a^T (outer product)
+        ∇W = δ * a'
     # ∂ℒ/∂b = δ
         ∇b = δ
 
