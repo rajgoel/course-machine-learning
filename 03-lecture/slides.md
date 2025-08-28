@@ -38,7 +38,7 @@ Then, the activation values of layer $l$ can be computed by
 
 For a given input/output pair  $(a,a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
 
-`$$\mathscr{L}_{(a,a^*)}(W^1,b^1,\ldots,W^{L-1},b^{L-1}) = \sum_{i=1}^{n^L}(\hat{a}_i - a^*_i)^2.$$`
+`$$\mathscr{L}_{(a,a^*)}(W^1,b^1,\ldots,W^{L},b^{L}) = \sum_{i=1}^{n^L}(\hat{a}_i - a^*_i)^2.$$`
 
 where $n^L$ denotes the number of neurons in the output layer.
 
@@ -111,7 +111,7 @@ We have
 
 Since $\sigma^l$ is applied element-wise, we have
 `$$
-\frac{\partial a^{l+1}}{\partial z^{l}} = \operatorname{diag}\left(
+\frac{\partial a^{l}}{\partial z^{l}} = \operatorname{diag}\left(
 \frac{\partial \sigma^{l}(z_1^{l})}{\partial z_1^{l}}, \ldots, 
 \frac{\partial \sigma^{l}(z_{n^{l}}^{l})}{\partial z_{n^{l}}^{l}}
 \right)
