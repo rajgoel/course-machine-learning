@@ -101,7 +101,7 @@ An artificial neural network (ANN) is a computational model inspired by the stru
 
 ## Artificial neurons
 
-Artificial neurons compute an activation value ${\hat a}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a$.
+Artificial neurons compute an activation value $\hat{a}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a$.
 
 <table class="stretch">
 <tr>
@@ -125,7 +125,7 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$\begin{array}{l}z = w^T a + b,\\ {\hat a} = \sigma(z)\end{array}$$
+$$\begin{array}{l}z = w^T a + b,\\ \hat{a} = \sigma(z)\end{array}$$
 </td>
 </tr>
 </table>
@@ -277,7 +277,7 @@ Each input $X$ is represented by an encoding `$(a_{1}, a_{2}, a_{3}, a_{4})$`.
 
 ### Output encoding
 
-Each output $Y$ is represented by a **one-hot encoding** with a 2-dimensional vector `$({\hat a}_{1}, {\hat a}_{2})$`.
+Each output $Y$ is represented by a **one-hot encoding** with a 2-dimensional vector `$(\hat{a}_{1}, \hat{a}_{2})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -337,12 +337,12 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$\left( \begin{align} {\hat a}_{1} \\  {\hat a}_{2} \end{align} \right) = {\hat a}$$
+$$\left( \begin{align} \hat{a}_{1} \\  \hat{a}_{2} \end{align} \right) = \hat{a}$$
 </td>
 </tr>
 </table>
 
-Here, $z = W a + b$ and ${\hat a} = \sigma(z)$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
+Here, $z = W a + b$ and $\hat{a} = \sigma(z)$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
 
 > [!TIP]
 > - For each edge going from input neuron $j$ to output neuron $i$, we have a weight $w_{i,j}$. 
@@ -354,15 +354,15 @@ Here, $z = W a + b$ and ${\hat a} = \sigma(z)$  where $W$ is a matrix of **weigh
 
 If we assume $\sigma(z) = z$, we have
 
-$${\hat a} = \sigma(Wa + b) = Wa + b$$
+$$\hat{a} = \sigma(Wa + b) = Wa + b$$
 
 <span class="fragment">
 or
 
 `$$\left(
 \begin{array}{c}
-{\hat a}_{1} \\
-{\hat a}_{2} 
+\hat{a}_{1} \\
+\hat{a}_{2} 
 \end{array}
 \right) = \left(
 \begin{array}{cccc}
