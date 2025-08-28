@@ -69,7 +69,7 @@ $$
 
 ### Output encoding
 
-The output is represented by a **one-hot encoding**  `$({\hat a}_{0}, {\hat a}_{1}, \ldots, {\hat a}_{9})$`.
+The output is represented by a **one-hot encoding**  `$(\hat{a}_{0}, \hat{a}_{1}, \ldots, \hat{a}_{9})$`.
 
 <table style="table-layout: fixed!important;width:900px;">
 <tr style="border: 0;border-style:hidden;">
@@ -129,13 +129,13 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;width:50px;position:relative;left:-150px;">
-$$ \left( \begin{align} {\hat a}_{0} \\  {\hat a}_{1} \\ \vdots \\ {\hat a}_{9}  \end{align} \right) = \sigma(Wa + b)$$
+$$ \left( \begin{align} \hat{a}_{0} \\  \hat{a}_{1} \\ \vdots \\ \hat{a}_{9}  \end{align} \right) = \sigma(Wa + b)$$
 </td>
 </tr>
 </table>
 
 > [!IMPORTANT]
-> Again we assume a linear activation with $\sigma(z) = z$, and thus, ${\hat a} = Wa + b$.
+> Again we assume a linear activation with $\sigma(z) = z$, and thus, $\hat{a} = Wa + b$.
 
 ---
 
@@ -151,7 +151,7 @@ Assume we are given a collection of pairs of input activation values $a$ with th
 
 If we could find weights and biases such that for each pair $(a,a^*)$ we have
 
-> The computed output ${\hat a} = W a + b$  matches the given output $a^*$.
+> The computed output $\hat{a} = W a + b$  matches the given output $a^*$.
 
 our neural network would be able to perfectly recognise the given digits. 
 
@@ -186,7 +186,7 @@ b_{1} \\
 b_{9} \\
 \end{array}
 \right)
-}_{{\hat a}} = \left(
+}_{\hat{a}} = \left(
 \begin{array}{c}
 a^*_0 \\
 a^*_1 \\
@@ -217,8 +217,8 @@ For each given pair $(a,a^*)$ we can define the loss (i.e., error function) as t
 
 `$$
 \begin{align}
-\mathscr{L}_{(a,a^*)}(W,b) & = \| {\hat a} - a^* \|^2 \\
-& = \displaystyle\sum_{i=0}^{9} \Big( {\hat a}_i - a^*_i \Big)^2 \\
+\mathscr{L}_{(a,a^*)}(W,b) & = \| \hat{a} - a^* \|^2 \\
+& = \displaystyle\sum_{i=0}^{9} \Big( \hat{a}_i - a^*_i \Big)^2 \\
 & = \displaystyle\sum_{i=0}^{9} \Big( \displaystyle\sum_{j=1}^{25} w_{i,j} a_{j} + b_i - a^*_i \Big)^2
 \end{align}
 $$`
@@ -298,14 +298,14 @@ For each output neuron $i \in I$ and each input neuron $j \in J$ the partial der
 \displaystyle\sum_{i \in I} 
 \Big(
 \underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i
-}_{{\hat a}_i} - a^*_i
+}_{\hat{a}_i} - a^*_i
 \Big)^2
 $$`
 with respect to $w_{i,j}$ is
 
 `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } $`
-`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{{\hat a}_i} - a^*_i\Big) \cdot a_j $`<!-- .element: class="fragment appear" -->
-`$ = 2({\hat a}_i - a^*_i)a_j $`<!-- .element: class="fragment appear" -->
+`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{\hat{a}_i} - a^*_i\Big) \cdot a_j $`<!-- .element: class="fragment appear" -->
+`$ = 2(\hat{a}_i - a^*_i)a_j $`<!-- .element: class="fragment appear" -->
 
 ---
 
@@ -317,14 +317,14 @@ For each output neuron $i \in I$ the partial derivative of
 \displaystyle\sum_{i \in I} 
 \Big(
 \underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i
-}_{{\hat a}_i} - a^*_i
+}_{\hat{a}_i} - a^*_i
 \Big)^2
 $$`
 with respect to $b_i$ is
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i }$`
-`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{{\hat a}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment appear" -->
-`$= 2({\hat a}_i - a^*_i)$`<!-- .element: class="fragment appear" -->
+`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{\hat{a}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment appear" -->
+`$= 2(\hat{a}_i - a^*_i)$`<!-- .element: class="fragment appear" -->
 
 ---
 

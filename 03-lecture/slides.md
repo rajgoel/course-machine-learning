@@ -38,7 +38,7 @@ Then, the activation values of layer $l+1$ can be computed by
 
 For a given input/output pair  $(a,a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
 
-`$$\mathscr{L}_{(a,a^*)}(W^1,b^1,\ldots,W^{L-1},b^{L-1}) = \sum_{i=1}^{n^L}({\hat a}_i - a^*_i)^2.$$`
+`$$\mathscr{L}_{(a,a^*)}(W^1,b^1,\ldots,W^{L-1},b^{L-1}) = \sum_{i=1}^{n^L}(\hat{a}_i - a^*_i)^2.$$`
 
 where $n^L$ denotes the number of neurons in the output layer.
 
@@ -68,16 +68,16 @@ where $n^L$ denotes the number of neurons in the output layer.
 For any particular weight $\bar w$, we have
 
 `$$
-\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial \bar w} = \sum_{i\in I^L} \underbrace{\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial {\hat a}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial {\hat a}_i}{\partial \bar w} 
-\class{fragment}{= \sum_{i\in I^L}2({\hat a}_i - a^*_i) \frac{\partial {\hat a}_i}{\partial \bar w}}
+\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial \bar w} = \sum_{i\in I^L} \underbrace{\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial \hat{a}_i}{\partial \bar w} 
+\class{fragment}{= \sum_{i\in I^L}2(\hat{a}_i - a^*_i) \frac{\partial \hat{a}_i}{\partial \bar w}}
 $$`
 
 > [!NOTE]
-> Remember, that `$\mathscr{L}_{(a,a^*)} = \displaystyle\sum_{i\in I^L}({\hat a}_i - a^*_i)^2$`.
+> Remember, that `$\mathscr{L}_{(a,a^*)} = \displaystyle\sum_{i\in I^L}(\hat{a}_i - a^*_i)^2$`.
 
 ---
 
-The partial derivative $\displaystyle\frac{\partial {\hat a}_i}{\partial \bar w}$ indicates how much a change in $\bar w$ affects an output activation ${\hat a}_i$ and can be determined using the **chain rule**.
+The partial derivative $\displaystyle\frac{\partial \hat{a}_i}{\partial \bar w}$ indicates how much a change in $\bar w$ affects an output activation $\hat{a}_i$ and can be determined using the **chain rule**.
 
 ---
 
@@ -86,7 +86,7 @@ Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute the a
 According to the chain rule, we have
 `$$
 \begin{array}{ccl}
-\frac{\partial {\hat a}}{\partial \bar w} & = & \frac{\partial a^L}{\partial \bar w} \\
+\frac{\partial \hat{a}}{\partial \bar w} & = & \frac{\partial a^L}{\partial \bar w} \\
 & = & 
 \underbrace{
 \frac{\partial a^L}{\partial a^{L-1}}
@@ -130,16 +130,16 @@ where
 For any particular bias $\bar b$, we have
 
 `$$
-\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial \bar b} = \sum_{i\in I^L}\underbrace{\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial {\hat a}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial {\hat a}_i}{\partial \bar b} 
-\class{fragment}{= \sum_{i\in I^L}2({\hat a}_i - a^*_i) \frac{\partial {\hat a}_i}{\partial \bar b}}
+\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial \bar b} = \sum_{i\in I^L}\underbrace{\frac{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i}}_{\textrm{independent of} \atop \textrm{weights and biases}} \cdot \frac{\partial \hat{a}_i}{\partial \bar b} 
+\class{fragment}{= \sum_{i\in I^L}2(\hat{a}_i - a^*_i) \frac{\partial \hat{a}_i}{\partial \bar b}}
 $$`
 
 > [!NOTE]
-> Remember, that `$\mathscr{L}_{(a,a^*)} = \displaystyle\sum_{i\in I^L}({\hat a}_i - a^*_i)^2$`.
+> Remember, that `$\mathscr{L}_{(a,a^*)} = \displaystyle\sum_{i\in I^L}(\hat{a}_i - a^*_i)^2$`.
 
 ---
 
-The partial derivative $\displaystyle\frac{\partial {\hat a}_i}{\partial \bar b}$ indicates how much a change in $\bar b$ affects an output activation ${\hat a}_i$ and can also be determined using the **chain rule**.
+The partial derivative $\displaystyle\frac{\partial \hat{a}_i}{\partial \bar b}$ indicates how much a change in $\bar b$ affects an output activation $\hat{a}_i$ and can also be determined using the **chain rule**.
 
 > [!NOTE]
 > All the steps are analogously to those to determine the partial derivatives for weights.
