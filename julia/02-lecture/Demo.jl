@@ -77,7 +77,7 @@ end
 Compute total Mean Squared Error loss across all training samples.
 
 For each sample, performs forward pass and computes loss:
-- Forward pass: â = W * x + b
+- Forward pass: â = W * a + b
 - Sample loss: ℒ(y, â) = ‖â - y‖²
 - Total loss: Σ ℒ(y_i, â_i) over all samples
 
@@ -107,14 +107,7 @@ end
 
 Demonstration of gradient descent on 5x5 digit recognition.
 
-Loads training data, initializes a linear classifier, and optimizes
-parameters using gradient descent. Prints initial and final loss values.
-
-# Implementation Details
-- Network: Linear classifier (25 inputs → 10 outputs)
-- Loss: Mean Squared Error
-- Optimization: Batch gradient descent
-- Random initialization for weights and biases
+Loads training data, randomly initializes weights and biases, and uses gradient descent to minimize total loss. Prints initial and final loss values.
 
 # Example
 ```julia
@@ -125,12 +118,14 @@ function demo(sample_file=joinpath(@__DIR__, "5x5digits.txt"))
   X, Y = read_data(sample_file)
 
   # Define initial W and b
-  W_0 = rand(Float64, 10, 25)  # Regular arrays, 1-indexed
-  b_0 = rand(Float64, 10)
+  W = rand(Float64, 10, 25)  # Regular arrays, 1-indexed
+  b = rand(Float64, 10)
+
+  initial_loss = total_loss(W, b, X, Y)
 
   # Perform gradient descent
-  W, b = gradient_descent(W_0, b_0, X, Y)
+  gradient_descent!(W, b, X, Y)
 
-  println("Initial total loss: ", total_loss(W_0, b_0, X, Y))
+  println("Initial total loss: ", initial_loss)
   println("Optimized total loss: ", total_loss(W, b, X, Y))
 end

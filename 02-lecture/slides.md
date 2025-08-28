@@ -331,13 +331,10 @@ with respect to $b_i$ is
 
 ### Gradient descent in Julia
 
-```julia[1-28|2-7|9-25|10-14|16-20|22-24|27|1-28]
-function gradient_descent(W_0::Matrix{Float64}, b_0::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
-    W = copy(W_0)
-    b = copy(b_0)
-    
+```julia[1-23|2-4|6-22|7-11|13-17|19-21|1-23]
+function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
     tolerance::Float64 = 1.0e-3
-    max_iterations::Int = 1e4
+    max_iterations::Int = 10000
     α::Float64 = 0.1  # learning rate
     
     for iter in 1:max_iterations
@@ -357,8 +354,6 @@ function gradient_descent(W_0::Matrix{Float64}, b_0::Vector{Float64}, X::Vector{
         W .-= α .* ∇W
         b .-= α .* ∇b
     end
-    
-    return W, b
 end
 ```
 <!-- .element: class="fullscreen stretch" -->

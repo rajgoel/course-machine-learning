@@ -136,41 +136,30 @@ function gradient_norm(∇W, ∇b)
 end
 
 """
-    gradient_descent(W_0, b_0, X, Y)
+    gradient_descent!(W, b, X, Y)
 
 Optimize neural network parameters using batch gradient descent.
 
-Implements the complete gradient descent algorithm:
-1. Initialize parameters from W_0, b_0
-2. For each iteration:
-   - Compute average gradients across all samples
-   - Update parameters: W ← W - α * ∇W, b ← b - α * ∇b
-   - Check convergence using gradient norm
-3. Stop when ‖∇‖ < tolerance or max iterations reached
+Implements gradient descent with
+- Maximum of 10,000 iterations 
+- Compute average gradients (∇W,∇b) across all samples
+- Stops when ‖(∇W,∇b)‖ < tolerance 1.0e-3
+- Update parameters: W ← W - α * ∇W, b ← b - α * ∇b with learning rate: α = 0.1
+
+
+For each iteration:
+ - 
 
 # Arguments
-- `W_0::Matrix{Float64}`: Initial weight matrix (n_outputs × n_inputs)
-- `b_0::Vector{Float64}`: Initial bias vector (n_outputs,)
+- `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs)
+- `b::Vector{Float64}`: Bias vector (n_outputs,)
 - `X::Vector{Vector{Float64}}`: Training input data
 - `Y::Vector{Vector{Float64}}`: Training target data (one-hot encoded)
 
-# Returns
-- `Tuple{Matrix{Float64}, Vector{Float64}}`: (W, b)
-  - `W`: Optimized weight matrix
-  - `b`: Optimized bias vector
-
-# Implementation Details
-- Learning rate: α = 0.1
-- Convergence tolerance: 1e-3
-- Maximum iterations: 10,000
-- Uses MSE loss function: ℒ = ‖â - y‖²
 """
-function gradient_descent(W_0::Matrix{Float64}, b_0::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
-    W = copy(W_0)
-    b = copy(b_0)
-    
+function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
     tolerance::Float64 = 1.0e-3
-    max_iterations::Int = 1e4
+    max_iterations::Int = 10000
     α::Float64 = 0.1  # learning rate
     
     for iter in 1:max_iterations
@@ -190,6 +179,4 @@ function gradient_descent(W_0::Matrix{Float64}, b_0::Vector{Float64}, X::Vector{
         W .-= α .* ∇W
         b .-= α .* ∇b
     end
-    
-    return W, b
 end
