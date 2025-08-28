@@ -304,7 +304,7 @@ $$`
 with respect to $w_{i,j}$ is
 
 `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } $`
-`$ = \underbrace{2\Big(\hat{a}_i - a^*_i\Big)}_{\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i}} \cdot \underbrace{\vphantom{\displaystyle\sum_{j \in J} w_{i,j}} a_j}_{\genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial w_{i,j} } } $`
+`$ = \underbrace{2(\hat{a}_i - a^*_i)}_{\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i}} \cdot \underbrace{a_j}_{\genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial w_{i,j} } } $`
 
 ---
 
