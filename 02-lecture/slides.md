@@ -304,7 +304,7 @@ $$`
 with respect to $w_{i,j}$ is
 
 `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial w_{i,j} } $`
-`$ = 2(\hat{a}_i - a^*_i)} \cdot a_j$`<!-- .element: class="fragment appear" -->
+`$ = 2(\hat{a}_i - a^*_i) \cdot a_j$`<!-- .element: class="fragment appear" -->
 
 ---
 
@@ -321,9 +321,9 @@ For each output neuron $i \in I$ the partial derivative of
 $$`
 with respect to $b_i$ is
 
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i } $`
-`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{\hat{a}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment appear" -->
-`$= 2(\hat{a}_i - a^*_i)$`<!-- .element: class="fragment appear" -->
+
+`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial b_i } $`
+`$= 2(\hat{a}_i - a^*_i) \cdot 1$`<!-- .element: class="fragment appear" -->
 
 ---
 
