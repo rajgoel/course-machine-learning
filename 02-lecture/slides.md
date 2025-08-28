@@ -331,7 +331,7 @@ with respect to $b_i$ is
 
 ### Gradient descent in Julia
 
-```julia[1-28|2-7|9,25|10-14|16-20|22-24|27|1-28]
+```julia[1-28|2-7|9-25|10-14|16-20|22-24|27|1-28]
 function gradient_descent(W_0::Matrix{Float64}, b_0::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
     W = copy(W_0)
     b = copy(b_0)
