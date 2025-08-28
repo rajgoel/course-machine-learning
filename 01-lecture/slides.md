@@ -101,7 +101,7 @@ An artificial neural network (ANN) is a computational model inspired by the stru
 
 ## Artificial neurons
 
-Artificial neurons compute an activation value $\hat{a}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a$.
+Artificial neurons compute an activation value $\hat{a}$ using an **activation function** $\sigma(\cdot)$ applied on a **linear transformation** of the input $a$.
 
 <table class="stretch">
 <tr>
@@ -130,7 +130,8 @@ $$\begin{array}{l}z = w^T a + b,\\ \hat{a} = \sigma(z)\end{array}$$
 </tr>
 </table>
 
-Here, $w$ is a vector of **weights**, and $b$ is a scalar **bias** value.
+> [!NOTE]
+> Here, $w$ is a vector of **weights**, and $b$ is a scalar **bias** value.
 
 ---
 
@@ -220,13 +221,13 @@ A deep neural network (DNN) is an artificial neural network in which artificial 
 
 ### Supervised learning with neural networks
 
-In supervised learning we have pairs of input/output relationships $(X, Y)$ and we want to train a neural network with the goal that
+In supervised learning with neural networks, we have pairs of input/output relationships $(X, Y)$ and we want to train the neural network such that
 
 - given an input $X$, 
-- the neural networks ideally predicts the output $Y$.
+- the neural networks predicts the output $Y$.
 
 > [!IMPORTANT]
-> $(X, Y)$ are usually not in a format suitable for neural networks. Therefore, we need to a suitable encoding.
+> $(X, Y)$ are usually not in a format suitable for neural networks. Therefore, we need a suitable encoding for the input and the output.
 
 
 ---
@@ -342,11 +343,10 @@ $$\left( \begin{align} \hat{a}_{1} \\  \hat{a}_{2} \end{align} \right) = \hat{a}
 </tr>
 </table>
 
-Here, $z = W a + b$ and $\hat{a} = \sigma(z)$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
-
 > [!TIP]
-> - For each edge going from input neuron $j$ to output neuron $i$, we have a weight $w_{i,j}$. 
-> - For each output neuron $i$, we have a bias $b_i$. 
+> Here, $\hat{a} = \sigma(z)$ and $z = W a + b$ where
+> - $W$ is a matrix containing a **weight** $w_{i,j}$ for each edge going from input neuron $j$ to output neuron $i$, and 
+> - $b$ is a vector containing a **bias** $b_i$ for each output neuron $i$. 
 
 ---
 
@@ -451,11 +451,11 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 If we find weights and biases such that
 
-> The input of `/` is properly recognised.
+> The input of `/` is recognised.
 
 and
 
-> The input of `\` is properly recognised$.
+> The input of `\` is recognised.
 
 our neural network can perfectly recognise both symbols. 
 
