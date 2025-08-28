@@ -41,7 +41,7 @@
 
 ### Input encoding
 
-The input is represented by an encoding `$(a^\textrm{in}_{1}, a^\textrm{in}_{2}, \ldots, a^\textrm{in}_{25})$`.
+The input is represented by an encoding `$(a_{1}, a_{2}, \ldots, a_{25})$`.
 
 <table style="table-layout: fixed!important;width:600px;">
 <tr style="border: 0;border-style:hidden;">
@@ -69,7 +69,7 @@ $$
 
 ### Output encoding
 
-The output is represented by a **one-hot encoding**  `$(a^\textrm{out}_{0}, a^\textrm{out}_{1}, \ldots, a^\textrm{out}_{9})$`.
+The output is represented by a **one-hot encoding**  `$({\hat a}_{0}, {\hat a}_{1}, \ldots, {\hat a}_{9})$`.
 
 <table style="table-layout: fixed!important;width:900px;">
 <tr style="border: 0;border-style:hidden;">
@@ -110,13 +110,13 @@ and so on.
 <table  style="width:400px;">
 <tr>
 <td style="vertical-align: middle;width:50px;position:relative;left:150px;">
-$$a^\textrm{in} = 
+$$a = 
 \left(
 \begin{align}
-a^\textrm{in}_{1} \\
-a^\textrm{in}_{2} \\
+a_{1} \\
+a_{2} \\
 \vdots \\
-a^\textrm{in}_{25}
+a_{25}
 \end{align}
 \right)
 $$
@@ -129,29 +129,29 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;width:50px;position:relative;left:-150px;">
-$$ \left( \begin{align} a^\textrm{out}_{0} \\  a^\textrm{out}_{1} \\ \vdots \\ a^\textrm{out}_{9}  \end{align} \right) = \sigma(Wa^\textrm{in} + b)$$
+$$ \left( \begin{align} {\hat a}_{0} \\  {\hat a}_{1} \\ \vdots \\ {\hat a}_{9}  \end{align} \right) = \sigma(Wa + b)$$
 </td>
 </tr>
 </table>
 
 > [!IMPORTANT]
-> Again we assume a linear activation with $\sigma(z) = z$, and thus, $a^\textrm{out} = Wa^\textrm{in} + b$.
+> Again we assume a linear activation with $\sigma(z) = z$, and thus, ${\hat a} = Wa + b$.
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-Assume we are given a collection of pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
+Assume we are given a collection of pairs of input activation values $a$ with their expected output activation values $a^*$. 
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-Assume we are given a collection of pairs of input activation values $a^\textrm{in}$ with their expected output activation values $a^*$. 
+Assume we are given a collection of pairs of input activation values $a$ with their expected output activation values $a^*$. 
 
-If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
+If we could find weights and biases such that for each pair $(a,a^*)$ we have
 
-> The computed output $a^\textrm{out} = W a^\textrm{in} + b$  matches the given output $a^*$.
+> The computed output ${\hat a} = W a + b$  matches the given output $a^*$.
 
 our neural network would be able to perfectly recognise the given digits. 
 
@@ -159,7 +159,7 @@ our neural network would be able to perfectly recognise the given digits.
 
 <!-- .slide: data-auto-animate="true" -->
 
-If we could find weights and biases such that for each pair $(a^\textrm{in},a^*)$ we have
+If we could find weights and biases such that for each pair $(a,a^*)$ we have
 
 `$$
 \underbrace{
@@ -173,10 +173,10 @@ w_{9,1} &  w_{9,2} & \ldots & w_{9,25} \\
 \right)
 \left(
 \begin{array}{c}
-a^\textrm{in}_{1} \\
-a^\textrm{in}_{2} \\
+a_{1} \\
+a_{2} \\
 \vdots \\
-a^\textrm{in}_{25}
+a_{25}
 \end{array}
 \right) + \left(
 \begin{array}{c}
@@ -186,7 +186,7 @@ b_{1} \\
 b_{9} \\
 \end{array}
 \right)
-}_{a^\textrm{out}} = \left(
+}_{{\hat a}} = \left(
 \begin{array}{c}
 a^*_0 \\
 a^*_1 \\
@@ -203,7 +203,7 @@ our neural network would be able to perfectly recognise the given digits.
 ### Determining weights and biases
 
 - Our neural network has 25 $\cdot$ 10 weights and 10 bias values, thus, a total of 260 parameters.
-- For each  pair $(a^\textrm{in},a^*)$ we have 10 equations for a perfect neural network.
+- For each  pair $(a,a^*)$ we have 10 equations for a perfect neural network.
 - With 30 pairs of training data, we would have 30 $\cdot$ 10 = 300 equations.
 
 > [!NOTE]
@@ -213,18 +213,18 @@ our neural network would be able to perfectly recognise the given digits.
 
 ### Loss
 
-For each given pair $(a^\textrm{in},a^*)$ we can define the loss (i.e., error function) as the sum of the squared differences of the computed output and the expected output.
+For each given pair $(a,a^*)$ we can define the loss (i.e., error function) as the sum of the squared differences of the computed output and the expected output.
 
 `$$
 \begin{align}
-\mathscr{L}_{(a^\textrm{in},a^*)}(W,b) & = \| a^\textrm{out} - a^* \|^2 \\
-& = \displaystyle\sum_{i=0}^{9} \Big( a^\textrm{out}_i - a^*_i \Big)^2 \\
-& = \displaystyle\sum_{i=0}^{9} \Big( \displaystyle\sum_{j=1}^{25} w_{i,j} a^\textrm{in}_{j} + b_i - a^*_i \Big)^2
+\mathscr{L}_{(a,a^*)}(W,b) & = \| {\hat a} - a^* \|^2 \\
+& = \displaystyle\sum_{i=0}^{9} \Big( {\hat a}_i - a^*_i \Big)^2 \\
+& = \displaystyle\sum_{i=0}^{9} \Big( \displaystyle\sum_{j=1}^{25} w_{i,j} a_{j} + b_i - a^*_i \Big)^2
 \end{align}
 $$`
 
 > [!NOTE]
-> Our goal is to find weights and biases that minimize the loss **for all** given pairs $(a^\textrm{in},a^*)$.
+> Our goal is to find weights and biases that minimize the loss **for all** given pairs $(a,a^*)$.
 
 ===
 
@@ -237,7 +237,7 @@ $$`
 Let $S$ denote the set of samples given. Then, the **average loss** is
 
 `$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \underbrace{\mathscr{L}_{(a^\textrm{in},a^*)}(W,b)}_{\textrm{Loss of sample}}.
+\displaystyle\sum_{(a,a^*) \in S} \underbrace{\mathscr{L}_{(a,a^*)}(W,b)}_{\textrm{Loss of sample}}.
 $$`
 
 > [!NOTE]
@@ -260,27 +260,27 @@ The gradient $\nabla f$ of a function $f$ is the vector of all its partial deriv
 
 The gradient of the average loss
 `$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \mathscr{L}_{(a^\textrm{in},a^*)}(W,b).
+\displaystyle\sum_{(a,a^*) \in S} \mathscr{L}_{(a,a^*)}(W,b).
 $$`
 is the average of the gradients over all samples 
 `$$
 \nabla \mathscr{L}(W,b) =
 \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a^\textrm{in},a^*) \in S} \nabla \mathscr{L}_{(a^i,a^*)}(W,b)
+\displaystyle\sum_{(a,a^*) \in S} \nabla \mathscr{L}_{(a,a^*)}(W,b)
 $$`
 
 ---
 
 ### Partial derivatives
 
-The gradient of $\mathscr{L}_{(a^\textrm{in},a^*)}$ is the vector of all its partial derivatives
+The gradient of $\mathscr{L}_{(a,a^*)}$ is the vector of all its partial derivatives
 
 `$
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} }
 \quad$`
 and
 `$
-\quad\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial b_i }
+\quad\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i }
 $`
 
 for each output neuron $i \in I$ and each input neuron $j \in J$.
@@ -294,18 +294,18 @@ for each output neuron $i \in I$ and each input neuron $j \in J$.
 
 For each output neuron $i \in I$ and each input neuron $j \in J$ the partial derivative of
 `$$
-\mathscr{L}_{(a^\textrm{in},a^*)} =
+\mathscr{L}_{(a,a^*)} =
 \displaystyle\sum_{i \in I} 
 \Big(
-\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
-}_{a^\textrm{out}_i} - a^*_i
+\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i
+}_{{\hat a}_i} - a^*_i
 \Big)^2
 $$`
 with respect to $w_{i,j}$ is
 
-`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial w_{i,j} } $`
-`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot a^\textrm{in}_j $`<!-- .element: class="fragment appear" -->
-`$ = 2(a^\textrm{out}_i - a^*_i)a^\textrm{in}_j $`<!-- .element: class="fragment appear" -->
+`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } $`
+`$ = 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{{\hat a}_i} - a^*_i\Big) \cdot a_j $`<!-- .element: class="fragment appear" -->
+`$ = 2({\hat a}_i - a^*_i)a_j $`<!-- .element: class="fragment appear" -->
 
 ---
 
@@ -313,18 +313,18 @@ with respect to $w_{i,j}$ is
 
 For each output neuron $i \in I$ the partial derivative of
 `$$
-\mathscr{L}_{(a^\textrm{in},a^*)} =
+\mathscr{L}_{(a,a^*)} =
 \displaystyle\sum_{i \in I} 
 \Big(
-\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i
-}_{a^\textrm{out}_i} - a^*_i
+\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i
+}_{{\hat a}_i} - a^*_i
 \Big)^2
 $$`
 with respect to $b_i$ is
 
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a^\textrm{in},a^*)}}{\partial b_i }$`
-`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a^\textrm{in}_{j} + b_i}_{a^\textrm{out}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment appear" -->
-`$= 2(a^\textrm{out}_i - a^*_i)$`<!-- .element: class="fragment appear" -->
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i }$`
+`$= 2\Big(\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i}_{{\hat a}_i} - a^*_i\Big) \cdot 1$`<!-- .element: class="fragment appear" -->
+`$= 2({\hat a}_i - a^*_i)$`<!-- .element: class="fragment appear" -->
 
 ---
 

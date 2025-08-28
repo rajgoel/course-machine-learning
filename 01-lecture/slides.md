@@ -101,17 +101,17 @@ An artificial neural network (ANN) is a computational model inspired by the stru
 
 ## Artificial neurons
 
-Artificial neurons compute activation value $a^\textrm{out}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a^\textrm{in}$ .
+Artificial neurons compute activation value ${\hat a}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a$ .
 
 <table class="stretch">
 <tr>
 <td style="vertical-align: middle;">
-$$ a^\textrm{in} = 
+$$ a = 
 \left(
 \begin{align}
-a^\textrm{in}_{1} \\
-a^\textrm{in}_{2} \\
-a^\textrm{in}_{3} 
+a_{1} \\
+a_{2} \\
+a_{3} 
 \end{align}
 \right)
 $$
@@ -125,7 +125,7 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$\begin{array}{l}z = w^T a^\textrm{in} + b,\\ a^\textrm{out} = \sigma(z)\end{array}$$
+$$\begin{array}{l}z = w^T a + b,\\ {\hat a} = \sigma(z)\end{array}$$
 </td>
 </tr>
 </table>
@@ -221,7 +221,7 @@ A deep neural network (DNN) is an artificial neural network in which artificial 
 
 ### Input encoding
 
-The input is represented by an encoding `$(a^\textrm{in}_{1}, a^\textrm{in}_{2}, a^\textrm{in}_{3}, a^\textrm{in}_{4})$`.
+The input is represented by an encoding `$(a_{1}, a_{2}, a_{3}, a_{4})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -264,7 +264,7 @@ The input is represented by an encoding `$(a^\textrm{in}_{1}, a^\textrm{in}_{2},
 
 ### Output encoding
 
-The output for our list of symbols `/` and `\` is represented by a **one-hot encoding** with a 2-dimensional vector `$(a^\textrm{out}_{1}, a^\textrm{out}_{2})$`.
+The output for our list of symbols `/` and `\` is represented by a **one-hot encoding** with a 2-dimensional vector `$({\hat a}_{1}, {\hat a}_{2})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -305,13 +305,13 @@ The output for our list of symbols `/` and `\` is represented by a **one-hot enc
 <table class="stretch">
 <tr>
 <td style="vertical-align: middle;">
-$$ a^\textrm{in} = 
+$$ a = 
 \left(
 \begin{align}
-a^\textrm{in}_{1} \\
-a^\textrm{in}_{2} \\
-a^\textrm{in}_{3} \\
-a^\textrm{in}_{4}
+a_{1} \\
+a_{2} \\
+a_{3} \\
+a_{4}
 \end{align}
 \right)
 $$
@@ -324,12 +324,12 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$\left( \begin{align} a^\textrm{out}_{1} \\  a^\textrm{out}_{2} \end{align} \right) = a^\textrm{out}$$
+$$\left( \begin{align} {\hat a}_{1} \\  {\hat a}_{2} \end{align} \right) = {\hat a}$$
 </td>
 </tr>
 </table>
 
-Here, $z = W a^\textrm{in} + b$ and $a^\textrm{out} = \sigma(z)$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
+Here, $z = W a + b$ and ${\hat a} = \sigma(z)$  where $W$ is a matrix of **weights**, and $b$ is a vector of **bias** values.
 
 > [!TIP]
 > - For each edge going from input neuron $j$ to output neuron $i$, we have a weight $w_{i,j}$. 
@@ -341,14 +341,14 @@ Here, $z = W a^\textrm{in} + b$ and $a^\textrm{out} = \sigma(z)$  where $W$ is a
 
 If we assume $\sigma(z) = z$, we have
 
-$$a^\textrm{out} = \sigma(Wa^\textrm{in} + b) = Wa^\textrm{in} + b$$
+$${\hat a} = \sigma(Wa + b) = Wa + b$$
 
 or
 
 `$$\left(
 \begin{array}{c}
-a^\textrm{out}_{1} \\
-a^\textrm{out}_{2} 
+{\hat a}_{1} \\
+{\hat a}_{2} 
 \end{array}
 \right) = \left(
 \begin{array}{cccc}
@@ -358,10 +358,10 @@ w_{2,1} & w_{2,2} & w_{2,3} & w_{2,4}
 \right)
 \left(
 \begin{array}{c}
-a^\textrm{in}_{1} \\
-a^\textrm{in}_{2} \\
-a^\textrm{in}_{3} \\
-a^\textrm{in}_{4}
+a_{1} \\
+a_{2} \\
+a_{3} \\
+a_{4}
 \end{array}
 \right) + \left(
 \begin{array}{c}
