@@ -331,34 +331,34 @@ with respect to $b_i$ is
 
 ### Gradient descent in Julia
 
-```julia
-function gradient_descent(initial_weights, initial_biases, samples, inputs, outputs)
-    weights = copy(initial_weights)
-    biases = copy(initial_biases)
+```julia[1-27|2-6|8,24|9-13|15-19|21-23|26|1-27]
+function gradient_descent(W_0::Matrix{Float64}, b_0::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
+    W = copy(W_0)
+    b = copy(b_0)
     
-    tolerance = 1.0e-3
-    max_iterations = 1e4
-    learning_rate = .1
+    tolerance::Float64 = 1.0e-3
+    max_iterations::Int = 1e4
+    α::Float64 = 0.1  # learning rate
     
     for iter in 1:max_iterations
-        # Compute the average gradient
-        avg_gradient_weights, avg_gradient_biases = get_average_gradient(weights, biases, samples, inputs, outputs)
-        norm_gradient = get_norm(avg_gradient_weights, avg_gradient_biases)
+        # Compute the average gradients ∇W and ∇b
+                ∇W, ∇b = compute_average_gradients(W, b, X, Y)
+        grad_norm = gradient_norm(∇W, ∇b)
         
-        println("Iteration $iter, Norm of gradient: $norm_gradient")
+        println("Iteration $iter, ‖(∇W,∇b)‖ = $grad_norm")
         
         # Break if the gradient norm is smaller than the tolerance
-        if norm_gradient < tolerance
+        if grad_norm < tolerance
             println("Gradient norm below tolerance. Stopping.")
             break
         end
         
-        # Update weights and biases using gradient descent
-        weights .-= learning_rate .* avg_gradient_weights
-        biases .-= learning_rate .* avg_gradient_biases
+        # Parameter updates: W ← W - α * ∇W, b ← b - α * ∇b
+        W .-= α .* ∇W
+        b .-= α .* ∇b
     end
     
-    return weights, biases
+    return W, b
 end
 ```
 <!-- .element: class="fullscreen stretch" -->
