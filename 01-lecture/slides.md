@@ -101,7 +101,7 @@ An artificial neural network (ANN) is a computational model inspired by the stru
 
 ## Artificial neurons
 
-Artificial neurons compute activation value ${\hat a}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a$ .
+Artificial neurons compute an activation value ${\hat a}$ using an **activation function** $\sigma(\cdot)$ applied on a linear transformation of the input $a$.
 
 <table class="stretch">
 <tr>
@@ -218,10 +218,23 @@ A deep neural network (DNN) is an artificial neural network in which artificial 
 
 ---
 
+### Supervised learning with neural networks
+
+In supervised learning we have pairs of input/output relationships $(X, Y)$ and we want to train a neural network with the goal that
+
+- given an input $X$, 
+- the neural networks ideally predicts the output $Y$.
+
+> [!IMPORTANT]
+> $(X, Y)$ are usually not in a format suitable for neural networks. Therefore, we need to a suitable encoding.
+
+
+---
+
 
 ### Input encoding
 
-The input is represented by an encoding `$(a_{1}, a_{2}, a_{3}, a_{4})$`.
+Each input $X$ is represented by an encoding `$(a_{1}, a_{2}, a_{3}, a_{4})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -264,7 +277,7 @@ The input is represented by an encoding `$(a_{1}, a_{2}, a_{3}, a_{4})$`.
 
 ### Output encoding
 
-The output for our list of symbols `/` and `\` is represented by a **one-hot encoding** with a 2-dimensional vector `$({\hat a}_{1}, {\hat a}_{2})$`.
+Each output $Y$ is represented by a **one-hot encoding** with a 2-dimensional vector `$({\hat a}_{1}, {\hat a}_{2})$`.
 
 <table style="table-layout: fixed!important;width:700px;">
 <tr style="border: 0;border-style:hidden;">
@@ -343,6 +356,7 @@ If we assume $\sigma(z) = z$, we have
 
 $${\hat a} = \sigma(Wa + b) = Wa + b$$
 
+<span class="fragment">
 or
 
 `$$\left(
@@ -369,6 +383,7 @@ b_{1} \\
 b_{2} 
 \end{array}
 \right)$$`
+</span>
 
 ---
 
@@ -436,11 +451,11 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 If we find weights and biases such that
 
-> An input of `/` results in an output $(1,0)$.
+> The input of `/` is properly recognised.
 
 and
 
-> An input of `\` results in an output $(0,1)$.
+> The input of `\` is properly recognised$.
 
 our neural network can perfectly recognise both symbols. 
 
@@ -587,6 +602,6 @@ A simple neural network with
 - 4 input neurons
 - 2 output neurons with linear activation
 
-can be used to reliable recognize both symbols given a 2x2 black and white pixel image.
+can be used to perfectly recognize both symbols given a 2x2 black and white pixel image.
 
 
