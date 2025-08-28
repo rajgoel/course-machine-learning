@@ -27,10 +27,10 @@ For each layer $l$ in the feedforward neural network let
 - $W^l$ and $b^l$ denote the weights and biases, and
 - $\sigma^l$ denote the vector of activation functions.
 
-Then, the activation values of layer $l+1$ can be computed by
+Then, the activation values of layer $l$ can be computed by
 
 `$$z^l = W^l a^{l-1} + b^l,$$`
-`$$a^{l+1} = \sigma^l(z^l).$$`
+`$$a^{l} = \sigma^l(z^l).$$`
 
 ---
 
@@ -81,7 +81,7 @@ The partial derivative $\displaystyle\frac{\partial \hat{a}_i}{\partial \bar w}$
 
 ---
 
-Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute the activation in layer $\bar l + 1$.
+Assume that $\bar w$ is a weight belonging to $W^{\bar l}$ used to compute the activation in layer $\bar l$.
 
 According to the chain rule, we have
 `$$
@@ -93,9 +93,9 @@ According to the chain rule, we have
 \ \cdot\  
 \frac{\partial a^{L-1}}{\partial a^{L-2}}
 \ \cdot\  \ldots \ \cdot\  
-\frac{\partial a^{\bar l+2}}{\partial a^{l+1}}}_{\textrm{each term indicates how much a change in the activation of a neuron} \atop \textrm{in one layer affects the activation of the a neuron in the next layer}}
+\frac{\partial a^{\bar l+1}}{\partial a^{\bar l}}}_{\textrm{each term indicates how much a change in the activation of a neuron} \atop \textrm{in one layer affects the activation of the a neuron in the next layer}}
 \ \cdot\ 
-\frac{\partial a^{\bar l+1}}{\partial \bar w}
+\frac{\partial a^{\bar l}}{\partial \bar w}
 \end{array}
 $$`
 
@@ -106,20 +106,20 @@ $$`
 
 We have
 `$$
-\frac{\partial a^{l+1}}{\partial a^{l}} = 
-\frac{\partial a^{l+1}}{\partial z^{l}} \cdot \frac{\partial \z^{l}}{\partial a^{l}}$$`
+\frac{\partial a^{l}}{\partial a^{l-1}} = 
+\frac{\partial a^{l}}{\partial z^{l}} \cdot \frac{\partial z^{l}}{\partial a^{l-1}}$$`
 
 Since $\sigma^l$ is applied element-wise, we have
 `$$
 \frac{\partial a^{l+1}}{\partial z^{l}} = \operatorname{diag}\left(
 \frac{\partial \sigma^{l}(z_1^{l})}{\partial z_1^{l}}, \ldots, 
-\frac{\partial \sigma^{l}(z_{n^{l+1}}^{l})}{\partial z_{n^{l+1}}^{l}}
+\frac{\partial \sigma^{l}(z_{n^{l}}^{l})}{\partial z_{n^{l}}^{l}}
 \right)
 $$`
 
 Moreover, we have
 `$$
-\frac{\partial \z^{l}}{\partial a^{l}} = W^l
+\frac{\partial z^{l}}{\partial a^{l-1}} = W^l
 $$`
 
 
