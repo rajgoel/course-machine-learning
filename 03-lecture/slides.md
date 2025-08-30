@@ -106,7 +106,11 @@ where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^
 
 According to the multivariable chain rule, we have
 
-- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } = \sum_{j=1}^{n^{l+1}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l+1}_j} \cdot \genfrac{}{}{1pt}{1}{d a^{l+1}_j}{d a^l_i }$`
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_j } = \sum_{i=1}^{n^{l+1}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l+1}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l+1}_i}{d a^l_j }$`
+
+`$
+= \sum_{i=1}^{n^{l+1}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l+1}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l+1}_i}{d z^l_j } \cdot \genfrac{}{}{1pt}{1}{d z^{l+1}_i}{d a^l_j }
+$`
 
 > [!NOTE]
 > **Multivariable chain rule:** Given a function $f( g_1(x), \ldots, g_n(x) )$, ee have $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_i } \cdot \genfrac{}{}{1pt}{1}{d g_i}{d x }$. 
