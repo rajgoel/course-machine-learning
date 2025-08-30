@@ -335,7 +335,7 @@ function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vec
     
     for iter in 1:max_iterations
         # Compute the average gradients ∇W and ∇b
-                ∇W, ∇b = compute_average_gradients(W, b, X, Y)
+        ∇W, ∇b = compute_average_gradients(W, b, X, Y)
         grad_norm = gradient_norm(∇W, ∇b)
         
         println("Iteration $iter, ‖(∇W,∇b)‖ = $grad_norm")
