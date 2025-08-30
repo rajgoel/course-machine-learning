@@ -115,7 +115,7 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 where 
 - `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and 
--`$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
+- `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
 
 ---
 
