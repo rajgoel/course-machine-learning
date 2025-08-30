@@ -98,7 +98,7 @@ According to the chain rule, we have
 \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$` for each neuron $i$ of layer $l$  
 
 
-where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$`, `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`, and `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_j} = 1$`.
+where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$`, `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`, and `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
 
 ---
 
@@ -106,14 +106,14 @@ where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^
 
 According to the multivariable chain rule, we have
 
-`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d a^l_j }$`
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d a^{l-1}_j }$`
 
 `$
-= \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d z^l_j } \cdot \genfrac{}{}{1pt}{1}{d z^{l}_i}{d a^{l-1}_j }
+= \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d z^l_i } \cdot \genfrac{}{}{1pt}{1}{d z^{l}_i}{d a^{l-1}_j }
 $`
 
 `$
-= \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_j)}{d z^l_j } \cdot w^{l}_{i,j}
+= \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
 $`
 
 > [!NOTE]
