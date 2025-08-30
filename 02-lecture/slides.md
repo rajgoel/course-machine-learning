@@ -245,14 +245,28 @@ $$`
 
 ===
 
-## Gradient descent
+<!-- .slide: data-auto-animate="true" -->
 
-The gradient $\nabla f$ of a function $f$ is the vector of all its partial derivatives with respect to each input variable and gives the direction of the steepest ascend. 
+## Gradient and partial derivatives
+
+The [gradient](https://en.wikipedia.org/wiki/Gradient) $\nabla f$ of a function $f(x,y, \ldots)$ is the vector of all its partial derivatives with respect to each input variable. 
 
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
-> By changing weights and biases in opposite direction of the gradient, we can minimise the loss.
+> **Partial derivative:** The [partial derivative](https://en.wikipedia.org/wiki/Partial_derivative) measures the rate of change of a function with respect to one variable while keeping other variables constant.
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Gradient and partial derivatives
+
+The [gradient](https://en.wikipedia.org/wiki/Gradient) $\nabla f$ of a function $f$ is the vector of all its partial derivatives with respect to each input variable. 
+
+<object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
+
+The gradient gives the direction of the steepest ascend. By changing weights and biases in opposite direction of the gradient, we can minimise the loss.
 
 ---
 
@@ -264,9 +278,9 @@ The gradient of the average loss
 $$`
 is the average of the gradients over all samples 
 `$$
-\nabla \mathscr{L}(W,b) =
+\nabla_{(W,b)} \mathscr{L} =
 \displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a,a^*) \in S} \nabla \mathscr{L}_{(a,a^*)}(W,b)
+\displaystyle\sum_{(a,a^*) \in S} \nabla_{(W,b)} \mathscr{L}_{(a,a^*)}
 $$`
 
 ---
