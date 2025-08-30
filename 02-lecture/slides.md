@@ -286,19 +286,17 @@ $$`
 
 ---
 
-### Partial derivatives
+### Partial derivatives for weights and biases
 
-The gradient of $\mathscr{L}_{(a,a^*)}$ is the vector of all its partial derivatives
-
-`$
+To compute the gradient of $\nabla_{(W,b)} \mathscr{L}_{(a,a^*)}$ we need to determine the partial derivatives for each output neuron $i \in I$ and each input neuron $j \in J$
+and each weight $w_{i,j}$
+`$$
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} }
-\quad$`
-and
-`$
+\quad$$`
+and the partial derivatives for each output neuron $i \in I$ and each bias $b_i$
+`$$
 \quad\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i }
-$`
-
-for each output neuron $i \in I$ and each input neuron $j \in J$.
+$$`
 
 
 ---
