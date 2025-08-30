@@ -88,6 +88,18 @@ According to the chain rule, we have
 
 ---
 
+According to the chain rule, we have
+- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_j } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d a^l_j}{d z^l_j } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d z^l_j}{d w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
+- `$\displaystyle\genfrac{}{}{1pt}{1}{\operatorname{d} \mathscr{L}_{(a,a^*)}}{d b^l_j } = 
+\displaystyle\genfrac{}{}{1pt}{1}{\operatorname{d} \mathscr{L}_{(a,a^*)}}{d a^l_j } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d a^l_j}{d z^l_j } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d z^l_j}{d b^l_j }$` for each neuron $j$ of layer $l-1$.
+
+---
+
 Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers.
 
 > [!NOTE]
