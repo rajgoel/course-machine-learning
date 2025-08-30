@@ -59,9 +59,35 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 > [!NOTE]
 > Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of the average loss $\displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a,a^*) \in S}\mathscr{L}_{(a,a^*)}$.
+\displaystyle\sum_{(a,a^*) \in S}\mathscr{L}_{(a,a^*)}$. Therefore, we need the partial derivatives for all weights and biases.
 
 ---
+
+### Partial derivatives for the last layer
+
+For the last layer $L$ and any output neuron $i$, we have
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = 2(a^L_i - a^*_i) \cdot a_j$$`
+and
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } = 2(a^L_i - a^*_i)$$`
+
+> [!NOTE]
+> Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
+
+---
+
+### Partial derivatives for hidden layers
+
+
+> [!NOTE]
+> **Total derivative:** The total derivative of a function $f( g_1(x), \ldots, g_n(x) )$ is $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{m=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_m } \cdot \genfrac{}{}{1pt}{1}{\partial g_m}{\partial x }$. 
+
+
+---
+
+
+---
+
+
 
 ### Partial derivatives for weights
 
