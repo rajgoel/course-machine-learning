@@ -76,18 +76,15 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Partial derivatives for weights and biases in hidden layers
 
-- For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, we have
-`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} } = 
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_j } \cdot 
-\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
-\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial w^l_{i,j} } =
-$$`
-- For each neuron $j$ of layer $l-1$, we have
-`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_j } = 
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_j } \cdot 
-\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
-\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial b^l_j } =
-$$`
+According to the chain rule, we have
+- `$\dispaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} } = 
+\dispaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_j } \cdot 
+\dispaystyle\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
+\dispaystyle\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
+- `$\dispaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_j } = 
+\dispaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_j } \cdot 
+\dispaystyle\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
+\dispaystyle\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial b^l_j }$` for each neuron $j$ of layer $l-1$.
 
 ---
 
