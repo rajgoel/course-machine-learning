@@ -53,21 +53,20 @@ where $n^L$ denotes the number of neurons in the output layer.
 ---
 
 
-### How does gradient descent work?
+### Gradient descent
 
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
-> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the gradient of the average loss $\displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a,a^*) \in S}\mathscr{L}_{(a,a^*)}$. Therefore, we need the partial derivatives for all weights and biases.
+> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the average gradient of the loss. To compute the gradient, we need the partial derivatives for **all** weights and biases.
 
 ---
 
-### Partial derivatives for the last layer
+### Partial derivatives for weights and biases in the last layer
 
-For the last layer $L$ and any output neuron $i$, we have
-`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = 2(a^L_i - a^*_i) \cdot a^{L-1}_j$$`
-and
+- For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = 2(a^L_i - a^*_i) \cdot a^{L-1}_j.$$`
+- For each output neuron $i$, we have
 `$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } = 2(a^L_i - a^*_i)$$`
 
 > [!NOTE]
@@ -75,14 +74,33 @@ and
 
 ---
 
-### Partial derivatives for hidden layers
+### Partial derivatives for weights and biases in hidden layers
 
+- For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, we have
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} } = 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_j } \cdot 
+\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
+\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial w^l_{i,j} } =
+$$`
+- For each neuron $j$ of layer $l-1$, we have
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_j } = 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_j } \cdot 
+\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
+\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial b^l_j } =
+$$`
+
+---
+
+Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers.
 
 > [!NOTE]
-> **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f( g_1(x), \ldots, g_n(x) )$ Measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. We have $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_i } \cdot \genfrac{}{}{1pt}{1}{\partial g_i}{\partial x }$. 
+> **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f( g_1(x), \ldots, g_n(x) )$ measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. 
+> We have $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_i } \cdot \genfrac{}{}{1pt}{1}{\partial g_i}{\partial x }$. 
 
 
 ---
+
+
 
 
 ---
