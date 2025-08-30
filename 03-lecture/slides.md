@@ -66,7 +66,7 @@ where $n^L$ denotes the number of neurons in the output layer.
 ### Partial derivatives for the last layer
 
 For the last layer $L$ and any output neuron $i$, we have
-`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = 2(a^L_i - a^*_i) \cdot a_j$$`
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = 2(a^L_i - a^*_i) \cdot a^{L-1}_j$$`
 and
 `$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } = 2(a^L_i - a^*_i)$$`
 
@@ -79,7 +79,7 @@ and
 
 
 > [!NOTE]
-> **Total derivative:** The total derivative of a function $f( g_1(x), \ldots, g_n(x) )$ is $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{m=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_m } \cdot \genfrac{}{}{1pt}{1}{\partial g_m}{\partial x }$. 
+> **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f( g_1(x), \ldots, g_n(x) )$ Measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. We have $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_i } \cdot \genfrac{}{}{1pt}{1}{\partial g_i}{\partial x }$. 
 
 
 ---
