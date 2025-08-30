@@ -243,7 +243,7 @@ $$`
 > [!NOTE]
 > We want to find weights and biases minimizing the average loss.
 
-===
+---
 
 <!-- .slide: data-auto-animate="true" -->
 
@@ -266,7 +266,8 @@ The [gradient](https://en.wikipedia.org/wiki/Gradient) $\nabla f$ of a function 
 
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
-The gradient gives the direction of the steepest ascend. By changing weights and biases in opposite direction of the gradient, we can minimise the loss.
+> [!TIP]
+> The gradient gives the direction of the steepest ascend. By changing weights and biases in opposite direction of the gradient, we can minimise the loss.
 
 ---
 
