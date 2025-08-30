@@ -90,12 +90,12 @@ Changing a weight or bias in layer $l < L$, does not only change the activations
 According to the chain rule, we have
 - `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }
-\cdot  \underbrace {\displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i }}_{a^l_i = \sigma^l_i(z^l_i) }
- \cdot \underbrace{\displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial w^l_{i,j} }}_{a^{l-1}_j} $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
+\cdot  \underbrace{\displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }}_{a^l_i = \sigma^l_i(z^l_i) }
+ \cdot \underbrace{\displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} }}_{a^{l-1}_j} $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
 - `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i }$` for each neuron $i$ of layer $l$.
+\displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{d z^l_i } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{d b^l_i }$` for each neuron $i$ of layer $l$.
 
 ---
 
