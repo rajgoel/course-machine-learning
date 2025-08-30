@@ -76,7 +76,9 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Total derivatives
 
-Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers. Instead of using the partial derivative for weights and biases of hidden layers, we use the total derivative for gradient descent.
+Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers. 
+
+Instead of using the partial derivative for weights and biases of hidden layers, we use the **total derivative** for gradient descent.
 
 > [!NOTE]
 > **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f$ measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. We write $\frac{df}{dx}$ for the total derivative of $f$ with respect to $x$.
@@ -94,7 +96,10 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
  \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` 
 
 
-where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`
+where 
+
+- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and 
+- `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`.
 
 ---
 
@@ -105,10 +110,12 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } 
 \cdot \displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }
-\cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$` for each neuron $i$ of layer $l$  
+\cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$`  
 
 
-where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
+where 
+- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and 
+-`$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
 
 ---
 
@@ -121,7 +128,6 @@ According to the multivariable chain rule, we have
 `$
 = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d z^l_i } \cdot \genfrac{}{}{1pt}{1}{d z^{l}_i}{d a^{l-1}_j }
 $`
-
 `$
 = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
 $`
