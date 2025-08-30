@@ -76,7 +76,7 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Total derivatives
 
-Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers.
+Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers. Instead of using the partial derivative, we use the total derivative for gradient descent.
 
 > [!NOTE]
 > **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f( g_1(x), \ldots, g_n(x) )$ measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. 
@@ -89,24 +89,16 @@ Changing a weight or bias in layer $l < L$, does not only change the activations
 
 According to the chain rule, we have
 - `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
-\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }
+\cdot  \underbrace {\displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i }}_{\genfrac{}{}{1pt}{1}{d \sigma^l_i}{d z^l_i }}
+ \cdot \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
 - `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$` for each neuron $i$ of layer $l$.
+\displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i }$` for each neuron $i$ of layer $l$.
 
 ---
 
-Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers.
-
-> [!NOTE]
-> **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f( g_1(x), \ldots, g_n(x) )$ measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. 
-> We have $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_i } \cdot \genfrac{}{}{1pt}{1}{\partial g_i}{\partial x }$. 
-
-
----
 
 
 
