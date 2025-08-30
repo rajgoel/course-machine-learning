@@ -139,6 +139,28 @@ $`
 
 ---
 
+## Overview
+
+We have
+
+- `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = 2(a^L_i - a^*_i) \cdot a^{L-1}_j$`
+- `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } = 2(a^L_i - a^*_i)$`
+- `$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^L_{i} } = 2(a^L_i - a^*_i)$`
+- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
+$`
+- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } 
+\cdot \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }
+\cdot a^{l-1}_j$`
+- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } 
+\cdot \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$`  
+- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }
+\cdot  \displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }
+ \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` 
+
+
 ===
 
 ### Sigmoid
