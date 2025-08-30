@@ -76,7 +76,7 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Total derivatives
 
-Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers. 
+Changing a weight or bias of a hidden layer ($l < L$), does not only change the activations of the layer, but also the activations of subsequent layers. 
 
 Instead of using the partial derivative for weights and biases of hidden layers, we use the **total derivative** for gradient descent.
 
@@ -98,7 +98,7 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
 
 where 
 
-- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and 
+- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }$` is the derivative of $\sigma^l_i$ at $z^l_i$
 - `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`.
 
 ---
@@ -114,7 +114,7 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 
 where 
-- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and 
+- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }$` is the derivative of $\sigma^l_i$ at $z^l_i$
 - `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
 
 ---
