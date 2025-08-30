@@ -81,8 +81,8 @@ According to the chain rule, we have
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_j } \cdot 
 \displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
 \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
-- `$\displaystyle\genfrac{}{}{1pt}{1}{\operatorname{d} \mathscr{L}_{(a,a^*)}}{d b^l_j } = 
-\displaystyle\genfrac{}{}{1pt}{1}{\operatorname{d} \mathscr{L}_{(a,a^*)}}{d a^l_j } \cdot 
+- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_j } = 
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_j } \cdot 
 \displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_j}{\partial z^l_j } \cdot 
 \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_j}{\partial b^l_j }$` for each neuron $j$ of layer $l-1$.
 
@@ -90,13 +90,13 @@ According to the chain rule, we have
 
 According to the chain rule, we have
 - `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
-\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_j } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d a^l_j}{d z^l_j } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d z^l_j}{d w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
-- `$\displaystyle\genfrac{}{}{1pt}{1}{\operatorname{d} \mathscr{L}_{(a,a^*)}}{d b^l_j } = 
-\displaystyle\genfrac{}{}{1pt}{1}{\operatorname{d} \mathscr{L}_{(a,a^*)}}{d a^l_j } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d a^l_j}{d z^l_j } \cdot 
-\displaystyle\genfrac{}{}{1pt}{1}{d z^l_j}{d b^l_j }$` for each neuron $j$ of layer $l-1$.
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and
+- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
+\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } \cdot 
+\displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$` for each neuron $i$ of layer $l$.
 
 ---
 
