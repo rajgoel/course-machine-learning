@@ -76,7 +76,7 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Total derivatives
 
-Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers. Instead of using the partial derivative, we use the total derivative for gradient descent.
+Changing a weight or bias in layer $l < L$, does not only change the activations of layer $l$, but also the activations of subsequent layers. Instead of using the partial derivative for weights and biases of hidden layers, we use the total derivative for gradient descent.
 
 > [!NOTE]
 > **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f$ measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. We write $\frac{df}{dx}$ for the total derivative of $f$ with respect to $x$.
@@ -84,21 +84,31 @@ Changing a weight or bias in layer $l < L$, does not only change the activations
 
 ---
 
-### Total derivatives for weights and biases in hidden layers
+### Total derivatives for weights in hidden layers
 
-According to the chain rule, we have
-- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
+For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
+
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }
 \cdot  \displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }
- \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` for each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, and  
+ \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` 
 
-- `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
+
+where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`
+
+---
+
+### Total derivatives for biases in hidden layers
+
+For each neuron $i$ of layer $l$, the chain rule implies that
+
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } 
 \cdot \displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }
 \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$` for each neuron $i$ of layer $l$  
 
 
-where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$`, `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`, and `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
+where `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
 
 ---
 
