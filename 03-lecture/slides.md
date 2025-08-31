@@ -90,13 +90,13 @@ Instead of using the partial derivative for weights and biases of hidden layers,
 
 For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
 
-`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
+`$$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }
 \cdot  \displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }
- \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` 
+ \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $$` 
 
 
-`$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} }} = \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }} \cdot  \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot a^{l-1}_j $` 
+`$$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d w^l_{i,j} }} = \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }} \cdot  \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot a^{l-1}_j $$` 
 
 > [!NOTE]
 > 
@@ -109,13 +109,13 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
 
 For each neuron $i$ of layer $l$, the chain rule implies that
 
-`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
+`$$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_i } = 
 \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } 
 \cdot \displaystyle\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i }
-\cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$`  
+\cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$$`  
 
 
-`$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_j }}=  \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }} \cdot \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot 1$`  
+`$$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d b^l_j }} = \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i }} \cdot \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot 1$$`  
 
 > [!NOTE]
 > 
