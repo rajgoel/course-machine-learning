@@ -128,7 +128,7 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 ### Derivatives for activation values of hidden layers
 
-<div class="neuralnetwork predictions" style="height: 700px; width: 1100px!important;">
+<div class="neuralnetwork predictions" style="height: 600px; width: 900px!important;">
 <!--
 {"type": "feedforward" }
 -->
