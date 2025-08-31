@@ -10,7 +10,7 @@
 
 ## Feedforward neural network with 4 layers
 
-<div class="neuralnetwork predictions" style="height: 700px; width: 1300px!important;">
+<div class="neuralnetwork predictions" style="height: 700px; width: 1280px!important;">
 <!--
 {"type": "feedforward" }
 -->
@@ -128,7 +128,7 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 ### Derivatives for activation values of hidden layers
 
-<div class="neuralnetwork predictions" style="height: 600px; width: 900px!important;">
+<div class="neuralnetwork predictions" style="height: 600px; width: 1280px!important;">
 <!--
 {"type": "feedforward" }
 -->
