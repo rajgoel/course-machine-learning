@@ -96,10 +96,7 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
  \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j} } $` 
 
 
-where 
-
-- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and 
-- `$\genfrac{}{}{1pt}{1}{d z^l_i}{d w^l_{i,j}} = a^{l-1}_j$`.
+`$ = \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot  \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot a^{l-1}_j $` 
 
 ---
 
@@ -113,9 +110,7 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 \cdot \displaystyle\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i }$`  
 
 
-where 
-- `$\genfrac{}{}{1pt}{1}{d a^l_i}{d z^l_i } = \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i }$` and 
-- `$\genfrac{}{}{1pt}{1}{d z^l_i}{d b^l_i} = 1$`.
+`$=  \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot 1$`  
 
 ---
 
