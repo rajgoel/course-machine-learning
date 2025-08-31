@@ -124,7 +124,24 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ### Derivatives for activation values of hidden layers
+
+<div class="neuralnetwork predictions" style="height: 500px; width: 1000px!important;">
+<!--
+{"type": "feedforward" }
+-->
+</div>
+
+> [!NOTE]
+> When determining the sensitivity of the loss to an activation of a neuron of a hidden layer, we need to be aware that a change in the activation value can change **all** activations in the final layer. 
+
+---
+
+### Derivatives for activation values of hidden layers
+
+<!-- .slide: data-auto-animate="true" -->
 
 According to the multivariable chain rule, we have
 
@@ -133,6 +150,7 @@ According to the multivariable chain rule, we have
 `$
 = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d z^l_i } \cdot \genfrac{}{}{1pt}{1}{d z^{l}_i}{d a^{l-1}_j }
 $`
+
 `$
 = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
 $`
