@@ -99,8 +99,8 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
 `$ = \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot  \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot a^{l-1}_j $` 
 
 > [!NOTE]
-> For ReLU activation we have `$\sigma^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and 
-> `$$\genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } = \left\lbrace \begin{align}1 \textrm{ if } z^l_i > 0 \\\\ 0 \textrm{ if } z^l_i \leq 0 \end{align}\right.$$`
+> For ReLU activation, we have `$\sigma^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and 
+> `$\genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } = \left\lbrace \begin{align}1 \textrm{ if } z^l_i > 0 \\\\ 0 \textrm{ if } z^l_i \leq 0 \end{align}\right.$`
 
 ---
 
@@ -117,8 +117,8 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 `$=  \displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^l_i } \cdot \genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } \cdot 1$`  
 
 > [!NOTE]
-> For ReLU activation we have `$\sigma^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and 
-> `$$\genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } = \left\lbrace \begin{align}1 \textrm{ if } z^l_i > 0 \\\\ 0 \textrm{ if } z^l_i \leq 0 \end{align}\right.$$`
+> For ReLU activation, we have `$\sigma^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and 
+> `$\genfrac{}{}{1pt}{1}{d \sigma^l_i(z^l_i)}{d z^l_i } = \left\lbrace \begin{align}1 \textrm{ if } z^l_i > 0 \\\\ 0 \textrm{ if } z^l_i \leq 0 \end{align}\right.$`
 
 ---
 
