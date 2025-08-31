@@ -58,16 +58,16 @@ where $n^L$ denotes the number of neurons in the output layer.
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
-> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the average gradient of the loss. To compute the gradient, we need the partial derivatives for **all** weights and biases.
+> Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the average gradient of the loss. To compute the gradient, we need the derivatives for **all** weights and biases.
 
 ---
 
-### Partial derivatives for weights and biases in the last layer
+### Derivatives for weights and biases in the last layer
 
 - For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
-`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = 2(a^L_i - a^*_i) \cdot a^{L-1}_j.$$`
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{w^L_{i,j}  } = 2(a^L_i - a^*_i) \cdot a^{L-1}_j.$$`
 - For each output neuron $i$, we have
-`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } = 2(a^L_i - a^*_i)$$`
+`$$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } =  \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{}{\partial b^{L}_j} = 2(a^L_i - a^*_i)$$`
 
 > [!NOTE]
 > Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
@@ -86,7 +86,7 @@ Instead of using the partial derivative for weights and biases of hidden layers,
 
 ---
 
-### Total derivatives for weights in hidden layers
+### Derivatives for weights in hidden layers
 
 For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
 
@@ -103,7 +103,7 @@ where
 
 ---
 
-### Total derivatives for biases in hidden layers
+### Derivatives for biases in hidden layers
 
 For each neuron $i$ of layer $l$, the chain rule implies that
 
@@ -119,7 +119,7 @@ where
 
 ---
 
-### Total derivatives for activation values of hidden layers
+### Derivatives for activation values of hidden layers
 
 According to the multivariable chain rule, we have
 
