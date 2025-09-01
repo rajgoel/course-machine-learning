@@ -171,9 +171,9 @@ as
 
 ### Derivatives for activation values of hidden layers
 
-We can rewrite 
-`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
-$`
+For
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_1 }$`, `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_2 }$`, $\ldots$, `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_{n^{l-1}} }$`, we have
+
 
 as
 
@@ -206,11 +206,8 @@ w_{1,n^{l-1}} & w_{2,n^{l-1}} & \ldots & w_{n^l,n^{l-1}} \\
 
 ### Derivatives for activation values of hidden layers
 
-We can rewrite 
-`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
-$`
-
-as
+For
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_1 }$`, `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_2 }$`, $\ldots$, `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_{n^{l-1}} }$`, we have
 
 `$
 \left( \begin{array}{c}
@@ -235,11 +232,8 @@ as
 
 ### Derivatives for activation values of hidden layers
 
-We can rewrite 
-`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
-$`
-
-as
+For
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_1 }$`, `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_2 }$`, $\ldots$, `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_{n^{l-1}} }$`, we have
 
 `$
 \left( \begin{array}{c}
