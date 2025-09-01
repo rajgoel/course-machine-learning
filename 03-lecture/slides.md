@@ -125,6 +125,8 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ### Derivatives for activation values of hidden layers
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d a^{l-1}_j }$`
@@ -143,7 +145,7 @@ $`
 
 ---
 
-<!-- slide: data-auto-animate="true" -->
+<!-- .slide: data-auto-animate="true" -->
 
 ### Derivatives for activation values of hidden layers
 
@@ -165,7 +167,7 @@ as
 
 ---
 
-<!-- slide: data-auto-animate="true" -->
+<!-- .slide: data-auto-animate="true" -->
 
 ### Derivatives for activation values of hidden layers
 
@@ -200,7 +202,7 @@ w_{1,n^{l-1}} & w_{2,n^{l-1}} & \ldots & w_{n^l,n^{l-1}} \\
 
 ---
 
-<!-- slide: data-auto-animate="true" -->
+<!-- .slide: data-auto-animate="true" -->
 
 ### Derivatives for activation values of hidden layers
 
