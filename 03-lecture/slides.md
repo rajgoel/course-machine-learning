@@ -141,6 +141,100 @@ $`
 > **Multivariable chain rule:** Given a function $f( g_1(x), \ldots, g_n(x) )$, we have $\genfrac{}{}{1pt}{1}{d f}{d x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{d f}{d g_i } \cdot \genfrac{}{}{1pt}{1}{d g_i}{d x }$. 
 
 
+---
+
+<!-- slide: data-auto-animate="true" -->
+
+### Derivatives for activation values of hidden layers
+
+We can rewrite 
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
+$`
+
+as
+
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } =
+( w_{1,j}, w_{2,j}, \ldots, w_{n^l,j} ) \cdot \left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_1)}{d z^l_1 } \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_2(z^l_2)}{d z^l_1 } \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_{n^l}(z^l_{n^l})}{d z^l_{n^l} }
+\end{array}
+\right)$`
+
+
+---
+
+<!-- slide: data-auto-animate="true" -->
+
+### Derivatives for activation values of hidden layers
+
+We can rewrite 
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
+$`
+
+as
+
+`$
+\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_1 } \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_2 } \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_{n^{l-1}} } \\
+\end{array}
+\right) =
+\left( \begin{array}{cccc}
+w_{1,1} & w_{2,1} & \ldots & w_{n^l,1} \\
+w_{1,2} & w_{2,2} & \ldots & w_{n^l,2} \\
+\vdots \\
+w_{1,n^{l-1}} & w_{2,n^{l-1}} & \ldots & w_{n^l,n^{l-1}} \\
+\end{array}
+\right) \cdot 
+\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_1)}{d z^l_1 } \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_2(z^l_2)}{d z^l_2 } \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_{n^l}(z^l_{n^l})}{d z^l_{n^l} }
+\end{array}
+\right)$`
+
+---
+
+<!-- slide: data-auto-animate="true" -->
+
+### Derivatives for activation values of hidden layers
+
+We can rewrite 
+`$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_i)}{d z^l_i } \cdot w^{l}_{i,j}
+$`
+
+as
+
+`$
+\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_1 } \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_2 } \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_{n^{l-1}} } \\
+\end{array}
+\right) =
+(W^l)^T \cdot 
+\left( \left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_1} \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_2} \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_{n^l}}
+\end{array}
+\right)
+\odot
+\left(
+\begin{array}{c}
+\genfrac{}{}{1pt}{1}{d \sigma^{l}_i(z^l_1)}{d z^l_1 } \\
+\genfrac{}{}{1pt}{1}{d \sigma^{l}_2(z^l_2)}{d z^l_2 } \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{d \sigma^{l}_{n^l}(z^l_{n^l})}{d z^l_{n^l} }
+\end{array}
+\right) \right)$`
 
 ---
 
