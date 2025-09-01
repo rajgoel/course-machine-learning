@@ -74,14 +74,15 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ---
 
-### Total derivatives
+### Derivatives for values of hidden layers
 
-Changing a weight or bias of a hidden layer ($l < L$), does not only change the activations of the layer, but also the activations of subsequent layers. 
+A value change in a hidden layer can change **all** activations in the final layer. 
 
-Instead of using the partial derivative for weights and biases of hidden layers, we use the **total derivative** for gradient descent.
-
-> [!NOTE]
-> **Total derivative:** The [total derivative](https://www.geeksforgeeks.org/engineering-mathematics/total-derivative/) of a function $f$ measures the rate of change of a function with respect to one variable while considering the effect of all other variables changing as well. We write $\frac{df}{dx}$ for the total derivative of $f$ with respect to $x$.
+<div class="neuralnetwork predictions" style="height: 600px; width: 1280px!important;">
+<!--
+{"type": "feedforward" }
+-->
+</div>
 
 
 ---
@@ -124,24 +125,7 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 ---
 
-<!-- .slide: data-auto-animate="true" -->
-
 ### Derivatives for activation values of hidden layers
-
-<div class="neuralnetwork predictions" style="height: 600px; width: 1280px!important;">
-<!--
-{"type": "feedforward" }
--->
-</div>
-
-> [!NOTE]
-> When determining the sensitivity of the loss to an activation of a neuron of a hidden layer, we need to be aware that a change in the activation value can change **all** activations in the final layer. 
-
----
-
-### Derivatives for activation values of hidden layers
-
-<!-- .slide: data-auto-animate="true" -->
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l-1}_j } = \sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{d \mathscr{L}_{(a,a^*)}}{d a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{d a^{l}_i}{d a^{l-1}_j }$`
 
