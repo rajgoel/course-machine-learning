@@ -140,8 +140,7 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
         end
         push!(activations, a)
     end
-#"/"println(length(activations), "/" , length(z_values))    
-#println(length(activations[network.L]), "/" , length(z_values[network.L]))    
+
     return activations, z_values
 end
 

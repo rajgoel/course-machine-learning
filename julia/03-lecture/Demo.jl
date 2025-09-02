@@ -153,19 +153,20 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
 end
 
 """
-    demo(learning_rate=0.001, epochs=50, seed=42, train_size=5000, test_size=1000, verbose=true)
+    demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
 
 MNIST handwritten digit recognition demonstration.
 
 # Parameters
-- `learning_rate`: Learning rate for training (default: 0.001)
-- `epochs`: Number of training epochs (default: 50)
 - `seed`: Random seed (default: 42)
+- `hidden_layers`: Dimensions of hidden layers (default: [128, 64])
 - `train_size`: Number of training samples to use (default: 5000)
 - `test_size`: Number of test samples to use (default: 1000)
+- `learning_rate`: Learning rate for training (default: 0.001)
+- `epochs`: Number of training epochs (default: 50)
 - `verbose`: Print training progress (default: true)
 """
-function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000, test_size = 1000, verbose = true)
+function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000, test_size = 1000, verbose = true, hidden_layers = [128, 64])
     println("="^80)
     println("MNIST DIGIT RECOGNITION WITH DEEP NEURAL NETWORK")
     println("="^80)
@@ -179,15 +180,17 @@ function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000
     
     # Create network architecture for MNIST
     println("\n2. Creating network architecture...")
-    # Architecture: 784 → 128 → 64 → 10
-    mnist_network = DNN([784, 128, 64, 10])
+    # Architecture: 784 → hidden_layers → 10
+    layers = [784, hidden_layers..., 10]
+    mnist_network = DNN(layers)
     
-    println("   Network architecture: [784, 128, 64, 10]")
+    println("   Network architecture: $(layers)")
     total_params = sum(size(W, 1) * size(W, 2) + length(b) for (W, b) in zip(mnist_network.W, mnist_network.b))
     println("   Total parameters: $(total_params)")
-    println("   - Layer 1: 784 → 128 ($(784*128 + 128) parameters)")  
-    println("   - Layer 2: 128 → 64 ($(128*64 + 64) parameters)")
-    println("   - Layer 3: 64 → 10 ($(64*10 + 10) parameters)")
+    for l in 1:length(layers)-1
+        layer_params = layers[l] * layers[l+1] + layers[l+1]
+        println("   - Layer $l: $(layers[l]) → $(layers[l+1]) ($layer_params parameters)")
+    end
     
     # Train the network
     println("\n3. Training network...")

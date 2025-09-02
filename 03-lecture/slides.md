@@ -156,7 +156,7 @@ $`
 as
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j } =
-( w_{1,j}, w_{2,j}, \ldots, w_{n^l,j} ) \cdot \left( \begin{array}{c}
+( w^l_{1,j}, w^l_{2,j}, \ldots, w^l_{n^l,j} ) \cdot \left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_1 } \\
 \vdots \\
@@ -186,10 +186,10 @@ as
 \end{array}
 \right) =
 \left( \begin{array}{cccc}
-w_{1,1} & w_{2,1} & \ldots & w_{n^l,1} \\
-w_{1,2} & w_{2,2} & \ldots & w_{n^l,2} \\
+w^l_{1,1} & w^l_{2,1} & \ldots & w^l_{n^l,1} \\
+w^l_{1,2} & w^l_{2,2} & \ldots & w^l_{n^l,2} \\
 \vdots \\
-w_{1,n^{l-1}} & w_{2,n^{l-1}} & \ldots & w_{n^l,n^{l-1}} \\
+w^l_{1,n^{l-1}} & w^l_{2,n^{l-1}} & \ldots & w^l_{n^l,n^{l-1}} \\
 \end{array}
 \right) \cdot 
 \left( \begin{array}{c}

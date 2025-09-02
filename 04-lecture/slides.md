@@ -3,7 +3,100 @@
 > [!CAUTION]
 > This session needs revision!
 
+===
+
+### Sigmoid
+
+`$$g(x) = \frac{1}{1+e^{-x}}$$`
+
+![Figure](04-lecture/sigmoid.svg)
+
+<!-- 
+Derivative: 
+dg(x)/d = (1+e^{-x})^{-1} = -(1+e^{-x})^{-2}(-e^{-x})
+-->
+
+<!--
+Usage: as an output layer activation function in binary classification
+-->
+
 ---
+
+### Rectified Linear Unit (ReLU)
+
+`$$g(x) = \max\{0,x\}$$`
+
+![Figure](04-lecture/ReLU.svg)
+
+> [!NOTE]
+> $\frac{ \partial g}{ \partial x }$ is not defined for $x=0$, but we can anyhow use a value of 0 or 1 in back propagation.
+
+<!--
+Usage: most commonly used activation function for hidden layers.
+-->
+
+---
+
+
+#### Architecture parameters in a Neural Net
+
+- **Number of hidden Layers:** More complex problems benefit from more layers (Deep Learning)
+- **Number of nodes per hidden layer:**  used to be common to have a pyramid like structure, nowadays is fairly common to use the same 
+number of neurons in all hidden layers.
+- Example: input layer, 2 hidden layers, output layer → 4 total layers
+
+---
+
+#### Hyperparameters in a Neural Net
+
+- **Learning rate:** Controls how much the weights are moving in the gradient descent update. On some problems using a LR that changes during training can increase the performance.
+- **Batch size:** Controls how many training examples processed before updating the weights. Smaller batch size leads to slower convergence. A typical batch size is 32.
+- **Optimizer:** there are more advanced optimizers besides Gradient Descent 
+- **Number of iterations:** Early stopping is a way to not deal with the epochs as a hyperparameter. 
+- **Activation functions:** Relu, sigmoid, Tanh...
+- **Number of Epochs:** Often set based on validation loss.
+
+---
+
+### Data split
+
+<img src="04-lecture/datasplit.svg" width="800"/>
+
+| Training Set Purpose | Dev Set Purpose | Test Set Purpose |
+|----------------------|-----------------|------------------|
+| Train the model parameters | Tune hyperparameters | Final evaluation |
+| Learn patterns from data | Identify overfitting | Unbiased assessment |
+
+---
+
+### Training Heuristics
+
+- Often in practice, there is no test set and the dev set is called dev set.
+- Training error informs about bias problems (underfitting).
+- Dev error informs about variance problems (overfitting).
+
+
+---
+
+### Training Heuristics
+
+<img src="feedforwardnetworks/training_guidelines.png" />
+
+---
+
+### Training Heuristics
+
+- **Training a NN is highly iterative:** Evaluate the predictions on the right metric, make changes and evaluate again.
+
+<div class=highlight-box> 
+📝 A common workflow is training a model that fits the data very well (low training error)
+and check whether the variance is acceptable looking at the dev set performance. Adding more data and regularization
+should reduce the variance.
+</div>
+
+
+===
+
 
 ## Course Context
 
