@@ -153,7 +153,7 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
 end
 
 """
-    demo(learning_rate=0.001, epochs=50, seed=42)
+    demo(learning_rate=0.001, epochs=50, seed=42, train_size=5000, test_size=1000, verbose=true)
 
 MNIST handwritten digit recognition demonstration.
 
@@ -161,8 +161,11 @@ MNIST handwritten digit recognition demonstration.
 - `learning_rate`: Learning rate for training (default: 0.001)
 - `epochs`: Number of training epochs (default: 50)
 - `seed`: Random seed (default: 42)
+- `train_size`: Number of training samples to use (default: 5000)
+- `test_size`: Number of test samples to use (default: 1000)
+- `verbose`: Print training progress (default: true)
 """
-function demo(learning_rate = 0.001, epochs = 50, seed = 42)
+function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000, test_size = 1000, verbose = true)
     println("="^80)
     println("MNIST DIGIT RECOGNITION WITH DEEP NEURAL NETWORK")
     println("="^80)
@@ -172,7 +175,7 @@ function demo(learning_rate = 0.001, epochs = 50, seed = 42)
     
     # Load and preprocess data
     println("\n1. Loading MNIST data...")
-    X_train, Y_train, X_test, Y_test = load_mnist_data(5000, 1000)  # Subset for speed
+    X_train, Y_train, X_test, Y_test = load_mnist_data(train_size, test_size)
     
     # Create network architecture for MNIST
     println("\n2. Creating network architecture...")
@@ -190,7 +193,7 @@ function demo(learning_rate = 0.001, epochs = 50, seed = 42)
     println("\n3. Training network...")
     println("   Learning rate: $(learning_rate), Epochs: $(epochs)")
     
-    losses = train!(mnist_network, X_train, Y_train, learning_rate, epochs, true)
+    losses = train!(mnist_network, X_train, Y_train, learning_rate, epochs, verbose)
     
     # Evaluate on test set
     println("\n4. Evaluating on test set...")
