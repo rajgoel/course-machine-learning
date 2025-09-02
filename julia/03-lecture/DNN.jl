@@ -3,6 +3,7 @@ Deep Neural Network Implementation in Julia
 """
 
 using LinearAlgebra
+using OffsetArrays
 using Random
 
 # Import MSE loss functions from Lecture02
@@ -17,10 +18,10 @@ Deep Neural Network structure with fully connected layers.
 - `layers::Vector{Int}`: Number of neurons per layer [input, hidden..., output]
 
 # Fields
-- `layers::Vector{Int}`: Layer architecture specification
+- `layers::OffsetVector{Int}`: Layer architecture specification
 - `W::Vector{Matrix{Float64}}`: Weight matrices W^[l] for each layer
 - `b::Vector{Vector{Float64}}`: Bias vectors b^[l] for each layer  
-- `L::Int`: Total number of layers
+- `L::Int`: Total number of layers (excluding input layer)
 
 Uses He initialization for weights and zero initialization for biases.
 ReLU activation for hidden layers, linear activation for output layer.
@@ -32,21 +33,27 @@ network = DNN([784, 128, 64, 10])
 ```
 """
 mutable struct DNN
-    layers::Vector{Int}           # [n^[0], n^[1], ..., n^[L-1]]
+    layers::OffsetVector{Int}     # [n^[0], n^[1], ..., n^[L]]
     W::Vector{Matrix{Float64}}    # Weight matrices W^[l]
     b::Vector{Vector{Float64}}    # Bias vectors b^[l]
-    L::Int                        # Number of layers
+    L::Int                        # Number of layers excluding input layer
     
-    # Constructor
+    # Convenience constructor for regular Vector
     function DNN(layers::Vector{Int})
-        L = length(layers)
+        offset_layers = OffsetArray(layers, 0:length(layers)-1)
+        DNN(offset_layers)
+    end
+
+    # Constructor for OffsetVector
+    function DNN(layers::OffsetVector{Int})
+        L = length(layers)-1
         
         # Initialize weight matrices W^[l] and bias vectors b^[l]
-        # Note: We have L-1 weight matrices (no weights for input layer)
+        # Note: We have L weight matrices (no weights for input layer)
         W = Matrix{Float64}[]
         b = Vector{Float64}[]
         
-        for l in 2:L
+        for l in 1:L
             # W^[l] ∈ ℝ^{n^[l] × n^[l-1]}
             W_l = randn(layers[l], layers[l-1]) * sqrt(2.0 / layers[l-1])  # He initialization
             push!(W, W_l)
@@ -58,6 +65,7 @@ mutable struct DNN
         
         new(layers, W, b, L)
     end
+    
 end
 
 """
@@ -106,12 +114,12 @@ Mathematical formulation:
 
 # Returns
 - `Tuple{Vector{Vector{Float64}}, Vector{Vector{Float64}}}`: (activations, z_values)
-  - `activations`: [a^[0], a^[1], ..., a^[L-1]] - activations for each layer
-  - `z_values`: [z^[1], z^[2], ..., z^[L-1]] - linear combinations for each layer
+  - `activations`: [a^[0], a^[1], ..., a^[L]] - activations for each layer
+  - `z_values`: [z^[1], z^[2], ..., z^[L]] - linear combinations for each layer
 """
 function forwardpropagation(network::DNN, x::Vector{Float64})
     # Initialize storage for activations and z-values
-    activations = Vector{Vector{Float64}}()
+    activations = OffsetVector(Vector{Float64}[], 0:-1)
     z_values = Vector{Vector{Float64}}()
     
     # Input layer: a^[0] = x
@@ -119,20 +127,21 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
     push!(activations, a)
     
     # Forward through hidden layers and output layer
-    for l in 1:(network.L-1)  # l = 1, 2, ..., L-1
+    for l in 1:network.L  # l = 1, 2, ..., L
         # Linear transformation: z^[l] = W^[l] * a^[l-1] + b^[l]
         z = network.W[l] * a + network.b[l]
         push!(z_values, z)
         
         # Activation: a^[l] = σ(z^[l])
-        if l == network.L - 1  # Output layer
+        if l == network.L  # Output layer
             a = z  # Linear output
         else  # Hidden layers
             a = σ.(z)
         end
         push!(activations, a)
     end
-    
+#"/"println(length(activations), "/" , length(z_values))    
+#println(length(activations[network.L]), "/" , length(z_values[network.L]))    
     return activations, z_values
 end
 
@@ -149,7 +158,7 @@ Calculates ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers using:
 
 # Arguments
 - `network::DNN`: Neural network structure
-- `activations::Vector{Vector{Float64}}`: Layer activations from forward pass
+- `activations::OffsetVector{Vector{Float64}}`: Layer activations from forward pass
 - `z_values::Vector{Vector{Float64}}`: Linear combinations from forward pass
 - `y::Vector{Float64}`: True target values
 
@@ -158,7 +167,7 @@ Calculates ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers using:
   - `∇W`: Weight gradients for each layer
   - `∇b`: Bias gradients for each layer
 """
-function backpropagation(network::DNN, activations::Vector{Vector{Float64}}, 
+function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}}, 
                         z_values::Vector{Vector{Float64}}, y::Vector{Float64})
 
         ∇W = Matrix{Float64}[]
@@ -166,18 +175,25 @@ function backpropagation(network::DNN, activations::Vector{Vector{Float64}},
 
     # Output error
     â = activations[end]
-    δ = ∂ℒ_∂â(y, â)  # (â - y)
+    δ = ∂ℒ_∂â(y, â)
 
-    # Gradient for last layer
-    pushfirst!(∇W, δ * activations[end-1]')
-    pushfirst!(∇b, copy(δ))
+    # Gradient for output layer
+    pushfirst!(∇W, δ * activations[network.L-1]')
+    pushfirst!(∇b, δ ) # ∂ℒ/∂b = δ
 
     # Backpropagation through hidden layers
-    for l in (network.L-2):-1:1
-        δ = (network.W[l+1]' * δ) .* ∂σ_∂z.(z_values[l])
+    for l in network.L-1:-1:1 
+        # Compute
+        # - ∂ℒ_∂a[l] = W[l+1]' ∂ℒ_∂a[l+1] for l = L-1 
+        # - ∂ℒ_∂a[l] = W[l+1]' (∂ℒ_∂a[l+1] ⨀ ∂σ[l]_∂z[l+1])  for l < L-1 
+        δ = network.W[l+1]' * δ
 
-        pushfirst!(∇W, δ * activations[l]')
-        pushfirst!(∇b, copy(δ))
+        # Compute δ = ∂ℒ_∂a[l] ⨀ ∂σ[l]_∂z[l]
+        δ .*= ∂σ_∂z.(z_values[l])
+
+        # Gradient for layer l
+        pushfirst!(∇W, δ * activations[l-1]')
+        pushfirst!(∇b, δ)
     end
 
     return ∇W, ∇b
@@ -201,7 +217,7 @@ Parameter updates:
 function update_parameters!(network::DNN, ∇W::Vector{Matrix{Float64}}, 
                            ∇b::Vector{Vector{Float64}}, α::Float64)
     
-    for l in 1:(network.L-1)  # l = 1, 2, ..., L-1
+    for l in 1:network.L  # l = 1, 2, ..., L
         # Update weights: W^[l] ← W^[l] - α * ∇W^[l]
         network.W[l] .-= α .* ∇W[l]
         
