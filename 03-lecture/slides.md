@@ -65,7 +65,7 @@ For each output neuron $i$, we have
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} =  2(a^L_i - a^*_i)$`
 
 > [!NOTE]
-> Remember, we use the loss function error `$\mathscr{L}_{(a,a^*)} = \| a^L - a^* \|^2 = \displaystyle\sum_{i=1}^{n^L} (a^L_i - a^*_i)^2$`.
+> Remember, the loss is `$\mathscr{L}_{(a,a^*)} = \displaystyle\sum_{i=1}^{n^L} (a^L_i - a^*_i)^2$`.
 
 ---
 
@@ -89,6 +89,30 @@ For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = $`<!-- .element: data-id="lhs-w" -->
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_j$`<!-- .element: data-id="rhs-w" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for weights in the last layer
+
+For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }$`, `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{2,j} }$`, $\ldots,$ `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{n^{L},j}$` and each neuron $j$ in the last hidden layer, we have
+
+`$\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{2,j} }\\
+\vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{n^{L},j} }
+\end{array}
+\right)$`<!-- .element: data-id="lhs-w" -->
+`$\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_1}\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_2}\\
+\vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_n^{L}} 
+\end{array}
+\right)
+\cdot a^{L-1}_j$`<!-- .element: data-id="rhs-w" -->
 
 ---
 
