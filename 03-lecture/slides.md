@@ -464,11 +464,7 @@ as
 
 ### Derivatives for activation values of hidden layers
 
-For
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_1 }$`, `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_2 }$`, $\ldots$, `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} }$`, we have
-
-
-as
+For layer $l < L$, we have
 
 <span style="white-space: nowrap;">
 
@@ -503,8 +499,7 @@ w^l_{1,n^{l-1}} & w^l_{2,n^{l-1}} & \ldots & w^l_{n^l,n^{l-1}} \\
 
 ### Derivatives for activation values of hidden layers
 
-For
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_1 }$`, `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_2 }$`, $\ldots$, `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} }$`, we have
+For layer $l < L$, we have
 
 `$
 \left( \begin{array}{c}
@@ -529,8 +524,7 @@ For
 
 ### Derivatives for activation values of hidden layers
 
-For
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_1 }$`, `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_2 }$`, $\ldots$, `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} }$`, we have
+For layer $l < L$, we have
 
 `$
 \left( \begin{array}{c}
