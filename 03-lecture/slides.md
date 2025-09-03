@@ -96,7 +96,7 @@ For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
 
 ### Derivatives for weights in the last layer
 
-For each neuron $j$ in the **last hidden** layer and `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} }$`, we have
+For layer $L$ and each neuron $j$ in the **last hidden** layer, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }\\
@@ -120,7 +120,7 @@ For each neuron $j$ in the **last hidden** layer and `$\genfrac{}{}{1pt}{1}{\par
 
 ### Derivatives for weights in the last layer
 
-For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} }$`, we have
+For layer $L$, we have
 
 `$\left( \begin{array}{cccc}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,n^{L-1}} }\\
@@ -166,7 +166,7 @@ For each output neuron $i$, we have
 
 ### Derivatives for biases in the last layer
 
-For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_i }$`, we have
+For layer $L$, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{1} }\\
@@ -277,6 +277,39 @@ For layer $l < L$, we have
 \right)
 \cdot (a^{l-1})^T$`<!-- .element: data-id="rhs-w" -->
 
+---
+
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for weights in hidden layers
+
+For layer $l < L$, we have
+
+`$\left( \begin{array}{cccc}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,n^{l-1}} }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,n^{l-1}} }\\
+\vdots & \vdots & \ddots& \vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{L},n^{l-1}} }
+\end{array}
+\right)$`<!-- .element: data-id="lhs-w" -->
+`$\left( \left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}}
+\end{array}
+\right)
+\odot
+\left(
+\begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\end{array}
+\right) \right)
+\cdot (a^{l-1})^T$`<!-- .element: data-id="rhs-w" -->
 
 
 ---
