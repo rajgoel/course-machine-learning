@@ -300,8 +300,8 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
 For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} }$`<!-- .element: data-id="lhs-w" -->
-`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-w" -->
-`$\cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-a" -->
+`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-w" data-fragment-index="1"-->
+`$\cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-a"  data-fragment-index="1" -->
 
 ---
 
