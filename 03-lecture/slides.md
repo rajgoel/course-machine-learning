@@ -175,6 +175,8 @@ For
 
 as
 
+<span style="white-space: nowrap;">
+
 `$
 \left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_1 } \\
@@ -197,6 +199,8 @@ w^l_{1,n^{l-1}} & w^l_{2,n^{l-1}} & \ldots & w^l_{n^l,n^{l-1}} \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
 \right)$`<!-- .element: data-id="factor" style="display:inline-block;"-->
+
+</span>
 
 ---
 
