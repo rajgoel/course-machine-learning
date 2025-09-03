@@ -1,14 +1,9 @@
-> [!CAUTION]
-> Not yet complete!
-
----
-
 
 # Feedforward neural networks
 
 ---
 
-## Feedforward neural network with 4 layers
+## A neural network with 4 layers
 
 <div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
 <!--
@@ -34,6 +29,39 @@ Then, the activation values of layer $l$ can be computed by
 
 ---
 
+### Forward propagation in Julia
+
+```julia[1-26|2-8|10-23|11-13|15-21|1-26]
+function forwardpropagation(network::DNN, x::Vector{Float64})
+    # Initialize storage for activations and z-values
+    activations = OffsetVector(Vector{Float64}[], 0:-1)
+    z_values = Vector{Vector{Float64}}()
+    
+    # Input layer: a^[0] = x
+    a = copy(x)
+    push!(activations, a)
+    
+    # Forward through hidden layers and output layer
+    for l in 1:network.L  # l = 1, 2, ..., L
+        # Linear transformation: z^[l] = W^[l] * a^[l-1] + b^[l]
+        z = network.W[l] * a + network.b[l]
+        push!(z_values, z)
+        
+        # Activation: a^[l] = σ(z^[l])
+        if l == network.L  # Output layer
+            a = z  # Linear output
+        else  # Hidden layers
+            a = σ.(z)
+        end
+        push!(activations, a)
+    end
+
+    return activations, z_values
+end
+```
+
+---
+
 ### Loss
 
 For a given input/output pair  $(a,a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
@@ -46,17 +74,12 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Gradient descent for feed forward networks
 
----
-
-
-### Gradient descent
-
 <object data="02-lecture/gradient.svg" type="image/svg+xml" ></object>
 
 > [!NOTE]
 > Remember, that gradient descent works by iteratively changing weights and biases in opposite direction of the average gradient of the loss. To compute the gradient, we need the derivatives for **all** weights and biases.
 
----
+===
 
 ### Derivatives for activations in the last layer
 
@@ -67,7 +90,7 @@ For each output neuron $i$, we have
 > [!NOTE]
 > Remember, the loss is `$\mathscr{L}_{(a,a^*)} = \displaystyle\sum_{i=1}^{n^L} (a^L_i - a^*_i)^2$`.
 
----
+===
 
 <!-- .slide: data-auto-animate="true" -->
 
@@ -139,7 +162,7 @@ For layer $L$, we have
 \cdot (a^{L-1})^T$`<!-- .element: data-id="rhs-w" -->
 
 
----
+===
 
 <!-- .slide: data-auto-animate="true" -->
 
@@ -183,7 +206,7 @@ For layer $L$, we have
 \end{array}
 \right)$`<!-- .element: data-id="rhs-b" -->
 
----
+===
 
 ### Derivatives for values of hidden layers
 
@@ -196,7 +219,7 @@ A value change in a hidden layer can change **all** activations in the final lay
 </div>
 
 
----
+===
 
 <!-- .slide: data-auto-animate="true" -->
 
@@ -319,7 +342,7 @@ For layer $l < L$, we have
 
 </span>
 
----
+===
 
 <!-- .slide: data-auto-animate="true" -->
 
@@ -402,11 +425,13 @@ For layer $l < L$, we have
 \end{array}
 \right) \right)$`<!-- .element: data-id="rhs-b" -->
 
----
+===
 
 <!-- .slide: data-auto-animate="true" -->
 
 ### Derivatives for activation values of hidden layers
+
+For neuron $j$ in layer $l-1$, we have
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs-j" -->
 `$= \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial a^{l-1}_j }$`<!-- .element: data-id="chainrule" -->
@@ -421,6 +446,8 @@ For layer $l < L$, we have
 
 ### Derivatives for activation values of hidden layers
 
+For neuron $j$ in layer $l-1$, we have
+
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs-j" -->
 `$= \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial a^{l-1}_j }$`<!-- .element: data-id="chainrule" -->
 
@@ -431,7 +458,7 @@ For layer $l < L$, we have
 `$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs-j" style="margin-left:150px;" -->
 
 > [!IMPORTANT]
-> To unify notation we use $\sigma^{L}_i(z^L_i) = z^L_i$.
+> To unify notation we use $\sigma^{L}_i(z^L_i) = z^L_i$ for the last layer.
 
 </span>
 
@@ -464,7 +491,7 @@ as
 
 ### Derivatives for activation values of hidden layers
 
-For layer $l < L$, we have
+For layer $l - 1$, we have
 
 <span style="white-space: nowrap;">
 
@@ -499,7 +526,7 @@ w^l_{1,n^{l-1}} & w^l_{2,n^{l-1}} & \ldots & w^l_{n^l,n^{l-1}} \\
 
 ### Derivatives for activation values of hidden layers
 
-For layer $l < L$, we have
+For layer $l - 1$, we have
 
 `$
 \left( \begin{array}{c}
@@ -524,7 +551,7 @@ For layer $l < L$, we have
 
 ### Derivatives for activation values of hidden layers
 
-For layer $l < L$, we have
+For layer $l - 1$, we have
 
 `$
 \left( \begin{array}{c}
@@ -552,6 +579,45 @@ For layer $l < L$, we have
 \end{array}
 \right) \right)$`<!-- .element: data-id="factor" -->
 
+===
+
+---
+
+### Backpropagation in Julia
+
+```julia[1-31|4-13|15-28|30|1-31]
+function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}}, 
+                        z_values::Vector{Vector{Float64}}, y::Vector{Float64})
+
+        ∇W = Matrix{Float64}[]
+        ∇b = Vector{Float64}[]
+
+    # Output error
+    â = activations[end]
+    δ = ∂ℒ_∂â(y, â)
+
+    # Gradient for output layer
+    pushfirst!(∇W, δ * activations[network.L-1]')
+    pushfirst!(∇b, δ ) # ∂ℒ/∂b = δ
+
+    # Backpropagation through hidden layers
+    for l in network.L-1:-1:1 
+        # Compute
+        # - ∂ℒ_∂a[l] = W[l+1]' ∂ℒ_∂a[l+1] for l = L-1 
+        # - ∂ℒ_∂a[l] = W[l+1]' (∂ℒ_∂a[l+1] ⨀ ∂σ[l]_∂z[l+1])  for l < L-1 
+        δ = network.W[l+1]' * δ
+
+        # Compute δ = ∂ℒ_∂a[l] ⨀ ∂σ[l]_∂z[l]
+        δ .*= ∂σ_∂z.(z_values[l])
+
+        # Gradient for layer l
+        pushfirst!(∇W, δ * activations[l-1]')
+        pushfirst!(∇b, δ)
+    end
+
+    return ∇W, ∇b
+end
+```
 
 ===
 
@@ -618,61 +684,8 @@ It includes
 
 ![Digits](03-lecture/digits.jpg)
 
----
-
-<!-- .slide: data-fullscreen="yes"  -->
-
-### Read MNIST data in Julia
-
-```julia [1|3,13|5|7-10|15-16]
-using MLDatasets # Provides the MNIST database
-
-function get_data(data_type::Symbol)
-  # Load MNIST data based on the specified split
-  x, y = MLDatasets.MNIST(split=data_type)[:]
-
-  # Create flattened training images -> 784×[number of images] Matrix{Float32}
-  x_encoded = Flux.flatten(x) 
-  # Create one-hot encoded labels -> 10×[number of images] OneHotMatrix(::Vector{UInt32})
-  y_encoded = Flux.onehotbatch(y, 0:9)
-    
-  return ( x_encoded, y_encoded )
-end
-
-training_data = get_data(:train)
-test_data = get_data(:test)
-```
-<!-- .element: class="fullscreen stretch" -->
-
----
-
-### Machine learning libraries
-
-There are many machine learning that do most of the work for us. In Julia, we can use Flux.jl.
-
-<iframe class="stretch" data-src="https://fluxml.ai/Flux.jl/stable/"></iframe>
-
----
-
-<!-- .slide: data-fullscreen="yes"  -->
-
-### Create neural network in Julia
-
-```julia [1|3-11]
-using Flux # Provides machine learning library
-
-function create_model()
-    # Define the model
-    model = Chain(
-        Dense(28 * 28, 256, relu),
-        Dense(256, 10, relu),
-        softmax
-    )
-    return model
-end
-```
-<!-- .element: class="fullscreen stretch" -->
-
+> [!TIP]
+> You find a full implementation in `MachineLearningCourse.Lecture03` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
 
 
 ===

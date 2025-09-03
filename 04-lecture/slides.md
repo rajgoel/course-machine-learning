@@ -607,3 +607,59 @@ By the end of this lecture, you will know how to make informed decisions about:
 - Reinforcement learning (Lectures 8-9)
 
 **Remember**: These design principles apply to every architecture we'll study!
+
+===
+
+<!-- .slide: data-fullscreen="yes"  -->
+
+### Read MNIST data in Julia
+
+```julia [1|3,13|5|7-10|15-16]
+using MLDatasets # Provides the MNIST database
+
+function get_data(data_type::Symbol)
+  # Load MNIST data based on the specified split
+  x, y = MLDatasets.MNIST(split=data_type)[:]
+
+  # Create flattened training images -> 784×[number of images] Matrix{Float32}
+  x_encoded = Flux.flatten(x) 
+  # Create one-hot encoded labels -> 10×[number of images] OneHotMatrix(::Vector{UInt32})
+  y_encoded = Flux.onehotbatch(y, 0:9)
+    
+  return ( x_encoded, y_encoded )
+end
+
+training_data = get_data(:train)
+test_data = get_data(:test)
+```
+<!-- .element: class="fullscreen stretch" -->
+
+---
+
+### Machine learning libraries
+
+There are many machine learning that do most of the work for us. In Julia, we can use Flux.jl.
+
+<iframe class="stretch" data-src="https://fluxml.ai/Flux.jl/stable/"></iframe>
+
+---
+
+<!-- .slide: data-fullscreen="yes"  -->
+
+### Create neural network in Julia
+
+```julia [1|3-11]
+using Flux # Provides machine learning library
+
+function create_model()
+    # Define the model
+    model = Chain(
+        Dense(28 * 28, 256, relu),
+        Dense(256, 10, relu),
+        softmax
+    )
+    return model
+end
+```
+<!-- .element: class="fullscreen stretch" -->
+

@@ -175,6 +175,16 @@ function showNeuralNetwork(container,options) {
 			var links = cy.$('node:selected').connectedEdges().select();
 		});
 	}
+	if ( options.type == "feedforward") {
+		cy.on('select', 'node', function(event){
+			var node = event.target;
+			node.outgoers('edge').select();
+		});
+		cy.on('unselect', 'node', function(event){
+			var node = event.target;
+			node.outgoers('edge').unselect();
+		});
+	}
 	container.cy = cy;
 	container.updatePredictions = function(results) {
 		for (var i = 0; i < results.length; i++) {
