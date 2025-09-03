@@ -297,7 +297,7 @@ For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the 
 
 ### Derivatives for weights
 
-For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
+For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} }$`<!-- .element: data-id="lhs-w" -->
 `$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-w" -->
@@ -398,7 +398,7 @@ For layer $l$, we have
 
 ### Derivatives for biases
 
-For each neuron $i$ of hidden layer $l$, we have
+For each neuron $i$ of layer $l$, we have
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{i} }$`<!-- .element: data-id="lhs-b" --> 
 `$=  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i}  \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial z^l_j} \cdot \genfrac{}{}{1pt}{1}{\partial z^{l}_i}{\partial b^l_j}$`
