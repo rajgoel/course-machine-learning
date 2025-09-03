@@ -64,12 +64,23 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 <!-- .slide: data-auto-animate="true" -->
 
+### Derivatives for activations in the last layer
+
+For each output neuron $i$, we have  
+
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} =  2(a^L_i - a^*_i)$`
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
 ### Derivatives for weights in the last layer
 
-For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have  
+For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
-  
+`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_j$`
+
 > [!NOTE]
 > Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
 
@@ -82,21 +93,7 @@ For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
 For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
-`$= 2(a^L_i - a^*_i) \cdot a^{L-1}_j$`
-
-> [!NOTE]
-> Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
-
----
-
-<!-- .slide: data-auto-animate="true" -->
-
-### Derivatives for weights in the last layer
-
-For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
-
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
-`$= 2(a^L_i - a^*_i) \cdot a^{L-1}_j$`
+`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_j$`
 
 
 
@@ -122,7 +119,7 @@ For each output neuron $i$, we have
 For each output neuron $i$, we have
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$`<!-- .element: data-id="del-b" -->
-`$= 2(a^L_i - a^*_i)$`
+`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot 1$`
 
 > [!NOTE]
 > Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
