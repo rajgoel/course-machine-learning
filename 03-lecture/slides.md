@@ -67,11 +67,11 @@ end
 
 ### Loss
 
-For a given input/output pair  $(a,a^*)$, the sum of squared errors of a feedforward neural network with $L$ layers is
+For a given input/output pair  $(a,a^*)$, the sum of squared errors of a feedforward neural network is
 
 `$$\mathscr{L}_{(a,a^*)}(W^1,b^1,\ldots,W^{L},b^{L}) = \sum_{i=1}^{n^L}(\hat{a}_i - a^*_i)^2.$$`
 
-where $n^L$ denotes the number of neurons in the output layer.
+where $n^L$ denotes the number of neurons in the output layer $L$.
 
 ===
 
