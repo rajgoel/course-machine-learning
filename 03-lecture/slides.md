@@ -147,10 +147,40 @@ For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }$
 
 For each output neuron $i$, we have  
 
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$`<!-- .element: data-id="del-b" -->
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} }$`<!-- .element: data-id="lhs-b" --> `$=  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$` `$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i}$`<!-- .element: data-id="rhs-b" -->
   
-> [!NOTE]
-> Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for biases in the last layer
+
+For each output neuron $i$, we have  
+
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} }$`<!-- .element: data-id="lhs-b" --> `$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i}$`<!-- .element: data-id="rhs-b" -->
+  
+
+---
+
+For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_1 }$`, `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_2 }$`, $\ldots,$ `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{n^{L}}$`, we have
+
+`$\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{1} }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{2} }\\
+\vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{n^{L}} }
+\end{array}
+\right)$`<!-- .element: data-id="lhs-b" -->
+`$=\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_1}\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_2}\\
+\vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_{n^{L}}} 
+\end{array}
+\right)$`<!-- .element: data-id="rhs-b" -->
+
+
+---
 
 ---
 
