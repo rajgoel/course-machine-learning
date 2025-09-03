@@ -33,9 +33,9 @@ network = DNN([784, 128, 64, 10])
 ```
 """
 mutable struct DNN
-    layers::OffsetVector{Int}     # [n^[0], n^[1], ..., n^[L]]
-    W::Vector{Matrix{Float64}}    # Weight matrices W^[l]
-    b::Vector{Vector{Float64}}    # Bias vectors b^[l]
+    layers::OffsetVector{Int}     # [n^0, n^1, ..., n^L]
+    W::Vector{Matrix{Float64}}    # Weight matrices W^l
+    b::Vector{Vector{Float64}}    # Bias vectors b^l
     L::Int                        # Number of layers excluding input layer
     
     # Convenience constructor for regular Vector
@@ -48,17 +48,17 @@ mutable struct DNN
     function DNN(layers::OffsetVector{Int})
         L = length(layers)-1
         
-        # Initialize weight matrices W^[l] and bias vectors b^[l]
+        # Initialize weight matrices W^l and bias vectors b^l
         # Note: We have L weight matrices (no weights for input layer)
         W = Matrix{Float64}[]
         b = Vector{Float64}[]
         
         for l in 1:L
-            # W^[l] ∈ ℝ^{n^[l] × n^[l-1]}
+            # W^[l] ∈ ℝ^{n^l × n^l-1}
             W_l = randn(layers[l], layers[l-1]) * sqrt(2.0 / layers[l-1])  # He initialization
             push!(W, W_l)
             
-            # b^[l] ∈ ℝ^{n^[l]}
+            # b^l ∈ ℝ^{n^l}
             b_l = zeros(layers[l])
             push!(b, b_l)
         end
@@ -105,8 +105,8 @@ end
 Compute forward propagation through the neural network.
 
 Mathematical formulation:
-- z^[l] = W^[l] * a^[l-1] + b^[l]
-- a^[l] = σ(z^[l]) for hidden layers, a^[l] = z^[l] for output layer
+- z^l = W^l * a^[l-1] + b^l
+- a^l = σ(z^l) for hidden layers, a^l = z^l for output layer
 
 # Arguments
 - `network::DNN`: Neural network structure
@@ -114,25 +114,25 @@ Mathematical formulation:
 
 # Returns
 - `Tuple{Vector{Vector{Float64}}, Vector{Vector{Float64}}}`: (activations, z_values)
-  - `activations`: [a^[0], a^[1], ..., a^[L]] - activations for each layer
-  - `z_values`: [z^[1], z^[2], ..., z^[L]] - linear combinations for each layer
+  - `activations`: [a^0, a^1, ..., a^L] - activations for each layer
+  - `z_values`: [z^1, z^2, ..., z^L] - linear combinations for each layer
 """
 function forwardpropagation(network::DNN, x::Vector{Float64})
     # Initialize storage for activations and z-values
     activations = OffsetVector(Vector{Float64}[], 0:-1)
     z_values = Vector{Vector{Float64}}()
     
-    # Input layer: a^[0] = x
+    # Input layer: a^0 = x
     a = copy(x)
     push!(activations, a)
     
     # Forward through hidden layers and output layer
     for l in 1:network.L  # l = 1, 2, ..., L
-        # Linear transformation: z^[l] = W^[l] * a^[l-1] + b^[l]
+        # Linear transformation: z^l = W^l * a^[l-1] + b^l
         z = network.W[l] * a + network.b[l]
         push!(z_values, z)
         
-        # Activation: a^[l] = σ(z^[l])
+        # Activation: a^l = σ(z^l)
         if l == network.L  # Output layer
             a = z  # Linear output
         else  # Hidden layers
@@ -152,8 +152,8 @@ end
 Compute gradients using backpropagation algorithm.
 
 Calculates ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers using:
-- ∂ℒ/∂W^[l] = δ^[l] * (a^[l-1])^T  
-- ∂ℒ/∂b^[l] = δ^[l]
+- ∂ℒ/∂W^l = δ^l * (a^[l-1])^T  
+- ∂ℒ/∂b^l = δ^l
 
 # Arguments
 - `network::DNN`: Neural network structure
@@ -183,11 +183,11 @@ function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}
     # Backpropagation through hidden layers
     for l in network.L-1:-1:1 
         # Compute
-        # - ∂ℒ_∂a[l] = W[l+1]' ∂ℒ_∂a[l+1] for l = L-1 
-        # - ∂ℒ_∂a[l] = W[l+1]' (∂ℒ_∂a[l+1] ⨀ ∂σ[l]_∂z[l+1])  for l < L-1 
+        # - ∂ℒ_∂a^l = W^[l+1]' ∂ℒ/∂a^[l+1] for l = L-1 
+        # - ∂ℒ_∂a^l = W^[l+1]' (∂ℒ/∂a^[l+1] ⨀ ∂σ^l/∂z^[l+1])  for l < L-1 
         δ = network.W[l+1]' * δ
 
-        # Compute δ = ∂ℒ_∂a[l] ⨀ ∂σ[l]_∂z[l]
+        # Compute δ = ∂ℒ/∂a^l ⨀ ∂σ^l/∂z^l
         δ .*= ∂σ_∂z.(z_values[l])
 
         # Gradient for layer l
@@ -204,8 +204,8 @@ end
 Update network parameters using gradient descent.
 
 Parameter updates:
-- W^[l] ← W^[l] - α * ∂ℒ/∂W^[l]
-- b^[l] ← b^[l] - α * ∂ℒ/∂b^[l]
+- W^l ← W^l - α * ∂ℒ/∂W^l
+- b^l ← b^l - α * ∂ℒ/∂b^l
 
 # Arguments
 - `network::DNN`: Neural network (modified in-place)
@@ -217,10 +217,10 @@ function update_parameters!(network::DNN, ∇W::Vector{Matrix{Float64}},
                            ∇b::Vector{Vector{Float64}}, α::Float64)
     
     for l in 1:network.L  # l = 1, 2, ..., L
-        # Update weights: W^[l] ← W^[l] - α * ∇W^[l]
+        # Update weights: W^l ← W^l - α * ∇W^l
         network.W[l] .-= α .* ∇W[l]
         
-        # Update biases: b^[l] ← b^[l] - α * ∇b^[l]
+        # Update biases: b^l ← b^l - α * ∇b^l
         network.b[l] .-= α .* ∇b[l]
     end
 end

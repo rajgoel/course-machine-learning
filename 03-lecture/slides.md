@@ -39,17 +39,17 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
     activations = OffsetVector(Vector{Float64}[], 0:-1)
     z_values = Vector{Vector{Float64}}()
     
-    # Input layer: a^[0] = x
+    # Input layer: a^0 = x
     a = copy(x)
     push!(activations, a)
     
     # Forward through hidden layers and output layer
     for l in 1:network.L  # l = 1, 2, ..., L
-        # Linear transformation: z^[l] = W^[l] * a^[l-1] + b^[l]
+        # Linear transformation: z^l = W^l * a^[l-1] + b^l
         z = network.W[l] * a + network.b[l]
         push!(z_values, z)
         
-        # Activation: a^[l] = σ(z^[l])
+        # Activation: a^l = σ(z^l)
         if l == network.L  # Output layer
             a = z  # Linear output
         else  # Hidden layers
@@ -606,11 +606,11 @@ function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}
     # Backpropagation through hidden layers
     for l in network.L-1:-1:1 
         # Compute
-        # - ∂ℒ_∂a[l] = W[l+1]' ∂ℒ_∂a[l+1] for l = L-1 
-        # - ∂ℒ_∂a[l] = W[l+1]' (∂ℒ_∂a[l+1] ⨀ ∂σ[l]_∂z[l+1])  for l < L-1 
+        # - ∂ℒ_∂a^l = W^[l+1]' ∂ℒ/∂a^[l+1] for l = L-1 
+        # - ∂ℒ_∂a^l = W^[l+1]' (∂ℒ/∂a^[l+1] ⨀ ∂σ^l/∂z^[l+1])  for l < L-1 
         δ = network.W[l+1]' * δ
 
-        # Compute δ = ∂ℒ_∂a[l] ⨀ ∂σ[l]_∂z[l]
+        # Compute δ = ∂ℒ/∂a^l ⨀ ∂σ^l/∂z^l
         δ .*= ∂σ_∂z.(z_values[l])
 
         # Gradient for layer l
