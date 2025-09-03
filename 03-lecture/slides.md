@@ -58,8 +58,6 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ---
 
-<!-- .slide: data-auto-animate="true" -->
-
 ### Derivatives for activations in the last layer
 
 For each output neuron $i$, we have  
@@ -77,11 +75,31 @@ For each output neuron $i$, we have
 
 For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
 
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
-`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_j$`
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = $`<!-- .element: data-id="lhs-w" -->
+`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  } =$`
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_j$`<!-- .element: data-id="rhs-w" -->
 
-> [!NOTE]
-> Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for weights in the last layer
+
+For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
+
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } = $`<!-- .element: data-id="lhs-w" -->
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_j$`<!-- .element: data-id="rhs-w" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for weights in the last layer
+
+For each output neuron $i$, we have
+
+`$\left( \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,1} }, \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,2} }, \ldots , \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,{n^{L-1}}} } \right) = $`<!-- .element: data-id="lhs-w" -->
+`$\left(\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_1, \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_2, \ldots, \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot a^{L-1}_{n^{L-1}} \right)$`<!-- .element: data-id="rhs-w" -->
 
 ---
 
