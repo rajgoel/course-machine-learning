@@ -308,7 +308,7 @@ For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the 
 
 ### Derivatives for weights
 
-For layer $l < L$ and each neuron $j$ of layer $l-1$, we have
+For layer $l$ and each neuron $j$ of layer $l-1$, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,j} }\\
@@ -332,7 +332,7 @@ For layer $l < L$ and each neuron $j$ of layer $l-1$, we have
 
 ### Derivatives for weights
 
-For layer $l < L$, we have
+For layer $l$, we have
 
 <span style="white-space: nowrap;">
 
@@ -361,7 +361,7 @@ For layer $l < L$, we have
 
 ### Derivatives for weights
 
-For layer $l < L$, we have
+For layer $l$, we have
 
 <span style="white-space: nowrap;">
 
@@ -426,7 +426,7 @@ For each neuron $i$ of hidden layer $l$, we have
 
 ### Derivatives for biases
 
-For layer $l < L$, we have
+For layer $l$, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{1} }\\
@@ -449,7 +449,7 @@ For layer $l < L$, we have
 
 ### Derivatives for biases
 
-For layer $l < L$, we have
+For layer $l$, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{1} }\\
