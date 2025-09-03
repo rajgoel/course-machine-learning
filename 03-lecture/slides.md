@@ -166,7 +166,7 @@ For each output neuron $i$, we have
 
 ### Derivatives for biases in the last layer
 
-For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^i }$`, we have
+For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_i }$`, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{1} }\\
