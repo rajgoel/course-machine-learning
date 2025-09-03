@@ -261,6 +261,8 @@ For layer $l < L$ and each neuron $j$ of layer $l-1$, we have
 
 For layer $l < L$, we have
 
+<span style="white-space: nowrap;">
+
 `$\left( \begin{array}{cccc}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,n^{l-1}} }\\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,n^{l-1}} }\\
@@ -272,10 +274,12 @@ For layer $l < L$, we have
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_1 }\\ 
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_2 }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{L}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{L}} } 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{L}} } 
 \end{array}
 \right)
 \cdot (a^{l-1})^T$`<!-- .element: data-id="rhs-w" -->
+
+</span>
 
 ---
 
@@ -286,11 +290,13 @@ For layer $l < L$, we have
 
 For layer $l < L$, we have
 
-`$\left( \begin{array}{cccc}
+<span style="white-space: nowrap;">
+
+`$= \left( \begin{array}{cccc}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,n^{l-1}} }\\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,n^{l-1}} }\\
 \vdots & \vdots & \ddots& \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{L},n^{l-1}} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},n^{l-1}} }
 \end{array}
 \right)$`<!-- .element: data-id="lhs-w" -->
 `$\left( \left( \begin{array}{c}
@@ -311,6 +317,7 @@ For layer $l < L$, we have
 \right) \right)
 \cdot (a^{l-1})^T$`<!-- .element: data-id="rhs-w" -->
 
+</span>
 
 ---
 
