@@ -202,7 +202,7 @@ A value change in a hidden layer can change **all** activations in the final lay
 
 ### Derivatives for weights in hidden layers
 
-For each neuron $i$ of hidden layer $l<L$ and each neuron $j$ of layer $l-1$, the chain rule implies that
+For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
 
 `$$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} } = 
 \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }
@@ -235,7 +235,7 @@ For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the 
 
 <span class="fragment">
 
-`$= \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-w" style="margin-left:150px;" -->
+`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-w" style="margin-left:150px;" -->
 
 > [!NOTE]
 > 
@@ -245,6 +245,8 @@ For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the 
 </span>
 
 ---
+
+<!-- .slide: data-auto-animate="true" -->
 
 ### Derivatives for biases in hidden layers
 
