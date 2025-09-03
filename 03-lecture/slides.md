@@ -129,13 +129,13 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 ### Derivatives for activation values of hidden layers
 
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs" style="display:inline-block;"-->
+`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs" -->
 `$= \sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial a^{l-1}_j }$`
 
 `$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }} = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial z^l_i } \cdot \genfrac{}{}{1pt}{1}{\partial z^{l}_i}{\partial a^{l-1}_j }$`
 
 `$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }}$`
-`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs" style="display:inline-block;"-->
+`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs" -->
 
 > [!NOTE]
 > **Multivariable chain rule:** Given a function $f( g_1(x), \ldots, g_n(x) )$, we have $\genfrac{}{}{1pt}{1}{\partial f}{\partial x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_i } \cdot \genfrac{}{}{1pt}{1}{\partial g_i}{\partial x }$. 
@@ -148,19 +148,19 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 ### Derivatives for activation values of hidden layers
 
 We can rewrite 
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs" style="display:inline-block;"-->
-`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs" style="display:inline-block;"-->
+`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs" -->
+`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs"-->
 
 as
 
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j } = ( w^l_{1,j}, w^l_{2,j}, \ldots, w^l_{n^l,j} ) \cdot $` 
+`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j } = ( w^l_{1,j}, w^l_{2,j}, \ldots, w^l_{n^l,j} )\ \cdot $`<!-- .element: data-id="weights" --> 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_1 } \\
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
-\right)$`<!-- .element: data-id="factor" style="display:inline-block;"-->
+\right)$`<!-- .element: data-id="factor" -->
 
 
 ---
@@ -184,21 +184,21 @@ as
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} } \\
 \end{array}
-\right) =$`<!-- .element: data-id="lhs" style="display:inline-block;"-->
+\right) =$`<!-- .element: data-id="lhs" -->
 `$\left( \begin{array}{cccc}
 w^l_{1,1} & w^l_{2,1} & \ldots & w^l_{n^l,1} \\
 w^l_{1,2} & w^l_{2,2} & \ldots & w^l_{n^l,2} \\
 \vdots \\
 w^l_{1,n^{l-1}} & w^l_{2,n^{l-1}} & \ldots & w^l_{n^l,n^{l-1}} \\
 \end{array}
-\right) \cdot $` 
+\right) \cdot $`<!-- .element: data-id="weights" --> 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
-\right)$`<!-- .element: data-id="factor" style="display:inline-block;"-->
+\right)$`<!-- .element: data-id="factor" -->
 
 </span>
 
@@ -218,15 +218,15 @@ For
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} } \\
 \end{array}
-\right) =$`<!-- .element: data-id="lhs" style="display:inline-block;"-->
-`$(W^l)^T \cdot 
-\left( \begin{array}{c}
+\right) =$`<!-- .element: data-id="lhs" -->
+`$(W^l)^T \cdot $`<!-- .element: data-id="weights" --> 
+`$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
-\right)$`
+\right)$`<!-- .element: data-id="factor" -->
 
 ---
 
@@ -244,9 +244,9 @@ For
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} } \\
 \end{array}
-\right) =
-(W^l)^T \cdot 
-\left( \left( \begin{array}{c}
+\right) =$`<!-- .element: data-id="lhs" -->
+`$(W^l)^T \cdot$`<!-- .element: data-id="weights" --> 
+`$\left( \left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \\
 \vdots \\
@@ -261,7 +261,7 @@ For
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
-\right) \right)$`
+\right) \right)$`<!-- .element: data-id="factor" -->
 
 
 ===
