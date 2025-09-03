@@ -61,6 +61,7 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
     return activations, z_values
 end
 ```
+<!-- .element: class="fullscreen stretch" -->
 
 ---
 
@@ -620,6 +621,7 @@ function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}
     return ∇W, ∇b
 end
 ```
+<!-- .element: class="fullscreen stretch" -->
 
 ===
 
