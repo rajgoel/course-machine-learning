@@ -65,7 +65,7 @@ For each output neuron $i$, we have
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} =  2(a^L_i - a^*_i)$`
 
 > [!NOTE]
-> Remember, we use the loss function error $\mathscr{L}_{(a,a^*)} = \| a^L - a^* \|^2 = \displaystyle\sum_{i=1}^{n^L} (a^L_i - a^*_i)^2.
+> Remember, we use the loss function error `$\mathscr{L}_{(a,a^*)} = \| a^L - a^* \|^2 = \displaystyle\sum_{i=1}^{n^L} (a^L_i - a^*_i)^2$`.
 
 ---
 
