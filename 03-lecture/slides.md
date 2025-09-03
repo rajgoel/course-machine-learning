@@ -66,11 +66,11 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Derivatives for weights and biases in the last layer
 
-- For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
+- For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have  
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
   
-- For each output neuron $i$, we have
+- For each output neuron $i$, we have  
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$`<!-- .element: data-id="del-b" -->
   
