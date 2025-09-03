@@ -129,13 +129,13 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 
 ### Derivatives for activation values of hidden layers
 
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .slide: data-id="lhs" -->
+`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs" -->
 `$= \sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial a^{l-1}_j }$`
 
 `$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }} = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial z^l_i } \cdot \genfrac{}{}{1pt}{1}{\partial z^{l}_i}{\partial a^{l-1}_j }$`
 
 `$\hphantom{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }}$`
-`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .slide: data-id="rhs" -->
+`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs" -->
 
 > [!NOTE]
 > **Multivariable chain rule:** Given a function $f( g_1(x), \ldots, g_n(x) )$, we have $\genfrac{}{}{1pt}{1}{\partial f}{\partial x }  = \displaystyle\sum_{i=1}^n \genfrac{}{}{1pt}{1}{\partial f}{\partial g_i } \cdot \genfrac{}{}{1pt}{1}{\partial g_i}{\partial x }$. 
@@ -148,8 +148,8 @@ For each neuron $i$ of layer $l$, the chain rule implies that
 ### Derivatives for activation values of hidden layers
 
 We can rewrite 
-`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .slide: data-id="lhs" -->
-`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .slide: data-id="rhs" -->
+`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs" -->
+`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs" -->
 
 as
 
