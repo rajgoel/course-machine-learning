@@ -78,7 +78,10 @@ code:not(:empty):not(:has(*)):not(pre code) {
   border-radius: 4px;
   text-shadow: none;
   font-family: courier;
-  display: inline-block;
+}
+
+code[data-id]:not(pre code) {
+  display: inline-block; /* enables auto-animate if data-id is set */
 }
 
 /*********************************************
