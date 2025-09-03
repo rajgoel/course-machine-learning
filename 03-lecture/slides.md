@@ -46,10 +46,6 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 ### Gradient descent for feed forward networks
 
-> [!TIP]
-> The following deep dive is helpful for an understanding of the mechanics of deep learning. 
-> As the mechanics are already implemented in deep learning frameworks, you do not need to understand them when simply using the frameworks.
-
 ---
 
 
@@ -69,6 +65,9 @@ where $n^L$ denotes the number of neurons in the output layer.
 For each output neuron $i$, we have  
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} =  2(a^L_i - a^*_i)$`
+
+> [!NOTE]
+> Remember, we use the loss function error $\mathscr{L}_{(a,a^*)} = \| a^L - a^* \|^2 = \displaystyle\sum_{i=1}^{n^L} (a^L_i - a^*_i)^2.
 
 ---
 
