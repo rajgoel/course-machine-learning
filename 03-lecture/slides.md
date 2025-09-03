@@ -64,13 +64,49 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 <!-- .slide: data-auto-animate="true" -->
 
-### Derivatives for weights and biases in the last layer
+### Derivatives for weights in the last layer
 
-- For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have  
+For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have  
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
   
-- For each output neuron $i$, we have  
+> [!NOTE]
+> Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for weights in the last layer
+
+For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
+
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
+`$= 2(a^L_i - a^*_i) \cdot a^{L-1}_j$`
+
+> [!NOTE]
+> Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for weights in the last layer
+
+For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
+
+`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
+`$= 2(a^L_i - a^*_i) \cdot a^{L-1}_j$`
+
+
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for biases in the last layer
+
+For each output neuron $i$, we have  
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$`<!-- .element: data-id="del-b" -->
   
@@ -81,14 +117,9 @@ where $n^L$ denotes the number of neurons in the output layer.
 
 <!-- .slide: data-auto-animate="true" -->
 
-### Derivatives for weights and biases in the last layer
+### Derivatives for biases in the last layer
 
-- For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
-
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{w^L_{i,j}  }$`<!-- .element: data-id="del-w" -->
-`$= 2(a^L_i - a^*_i) \cdot a^{L-1}_j$`
-
-- For each output neuron $i$, we have
+For each output neuron $i$, we have
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$`<!-- .element: data-id="del-b" -->
 `$= 2(a^L_i - a^*_i)$`
@@ -110,6 +141,33 @@ A value change in a hidden layer can change **all** activations in the final lay
 
 
 ---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for weights in hidden layers
+
+For each neuron $i$ of hidden layer $l<L$ and each neuron $j$ of layer $l-1$, the chain rule implies that
+
+`$$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} } = 
+\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }
+\cdot  \displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i }
+ \cdot \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial w^l_{i,j} } $$` 
+
+
+<span class="fragment">
+
+`$= \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  style="margin-left:150px;" -->
+
+> [!NOTE]
+> 
+> For ReLU activation, we have `$\sigma^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and use
+> `$$\genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
+
+</span>
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
 
 ### Derivatives for weights in hidden layers
 
