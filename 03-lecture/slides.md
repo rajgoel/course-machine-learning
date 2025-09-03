@@ -184,7 +184,7 @@ as
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} } \\
 \end{array}
-\right) =$``<!-- .element: data-id="lhs" style="display:inline-block;"-->
+\right) =$`<!-- .element: data-id="lhs" style="display:inline-block;"-->
 `$\left( \begin{array}{cccc}
 w^l_{1,1} & w^l_{2,1} & \ldots & w^l_{n^l,1} \\
 w^l_{1,2} & w^l_{2,2} & \ldots & w^l_{n^l,2} \\
@@ -218,7 +218,7 @@ For
 \vdots \\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_{n^{l-1}} } \\
 \end{array}
-\right) =$``<!-- .element: data-id="lhs" style="display:inline-block;"-->
+\right) =$`<!-- .element: data-id="lhs" style="display:inline-block;"-->
 `$(W^l)^T \cdot 
 \left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
