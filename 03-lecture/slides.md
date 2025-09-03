@@ -33,7 +33,7 @@ Then, the activation values of layer $l$ can be computed by
 
 ### Forward propagation in Julia
 
-```julia[1-26|2-8|10-23|11-13|15-21|1-26]
+```julia[1-26|2-8|10-23|12-14|16-22|1-26]
 function forwardpropagation(network::DNN, x::Vector{Float64})
     # Initialize storage for activations and z-values
     activations = OffsetVector(Vector{Float64}[], 0:-1)
@@ -591,8 +591,8 @@ For layer $l - 1$, we have
 function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}}, 
                         z_values::Vector{Vector{Float64}}, y::Vector{Float64})
 
-        ∇W = Matrix{Float64}[]
-        ∇b = Vector{Float64}[]
+    ∇W = Matrix{Float64}[]
+    ∇b = Vector{Float64}[]
 
     # Output error
     â = activations[end]
@@ -678,16 +678,12 @@ end
 
 ### MNIST database
 
-The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale values of a 28x28 pixel image representing a handwritten digit and a label representing the corresponding digit.
-It includes 
-
-- a training set of 60,000 examples, and
-- a test set of 10,000 examples. 
+The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale values of a 28x28 pixel image representing a handwritten digits. 
 
 ![Digits](03-lecture/digits.jpg)
 
 > [!TIP]
-> You find a full implementation in `MachineLearningCourse.Lecture03` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
+> You find a full implementation in `Lecture03` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
 
 
 ===
