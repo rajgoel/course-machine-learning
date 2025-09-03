@@ -29,6 +29,8 @@ Then, the activation values of layer $l$ can be computed by
 
 ---
 
+<!-- .slide: data-fullscreen="yes"  -->
+
 ### Forward propagation in Julia
 
 ```julia[1-26|2-8|10-23|11-13|15-21|1-26]
@@ -581,7 +583,7 @@ For layer $l - 1$, we have
 
 ===
 
----
+<!-- .slide: data-fullscreen="yes"  -->
 
 ### Backpropagation in Julia
 
