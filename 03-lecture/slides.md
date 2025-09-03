@@ -10,7 +10,7 @@
 
 ## Feedforward neural network with 4 layers
 
-<div class="neuralnetwork predictions" style="height: 700px; width: 1280px!important;">
+<div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
 <!--
 {"type": "feedforward" }
 -->
@@ -227,17 +227,15 @@ For each neuron $i$ of hidden layer $l<L$ and each neuron $j$ of layer $l-1$, th
 
 ### Derivatives for weights in hidden layers
 
-For each neuron $i$ of hidden layer $l<L$ and each neuron $j$ of layer $l-1$, the chain rule implies that
+For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
 
-`$$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} } = 
-\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }
-\cdot  \displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i }
- \cdot \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial w^l_{i,j} } $$` 
+`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} }$`<!-- .element: data-id="lhs-w" -->
+`$ = \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i } \cdot \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial w^l_{i,j} }$` 
 
 
 <span class="fragment">
 
-`$= \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  style="margin-left:150px;" -->
+`$= \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-w" style="margin-left:150px;" -->
 
 > [!NOTE]
 > 
@@ -250,23 +248,11 @@ For each neuron $i$ of hidden layer $l<L$ and each neuron $j$ of layer $l-1$, th
 
 ### Derivatives for biases in hidden layers
 
-For each neuron $i$ of hidden layer $l<L$, the chain rule implies that
+For each neuron $i$ of hidden layer $l$, we have
 
-`$$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_i } = 
-\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } 
-\cdot \displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i }
-\cdot \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i }$$`  
+`$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} }$`<!-- .element: data-id="lhs-w" -->
+`$= \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-w" -->
 
-<span class="fragment">
-
-`$ = \class{highlight}{\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i }} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot 1$`<!-- .element:  style="margin-left:150px;" -->  
-
-> [!NOTE]
-> 
-> For ReLU activation, we have `$\sigma^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and use
-> `$$\genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
-
-</span>
 
 ---
 
