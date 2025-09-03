@@ -235,20 +235,20 @@ For each neuron $i$ of hidden layer $l$ and each neuron $j$ of layer $l-1$, the 
 
 ### Derivatives for weights in hidden layers
 
-For $l < L$ and each neuron $j$ of layer $l-1$, we have
+For layer $l < L$ and each neuron $j$ of layer $l-1$, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,j} }\\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,j} }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{L},j} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},j} }
 \end{array}
 \right)$`<!-- .element: data-id="lhs-w" -->
 `$=\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_1 }\\ 
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_2 }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{L}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{l}} }} 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{L}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{l}} } 
 \end{array}
 \right)
 \cdot a^{l-1}_j$`<!-- .element: data-id="rhs-w" -->
@@ -259,23 +259,23 @@ For $l < L$ and each neuron $j$ of layer $l-1$, we have
 
 ### Derivatives for weights in hidden layers
 
-For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} }$`, we have
+For layer $l < L$, we have
 
 `$\left( \begin{array}{cccc}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,n^{L-1}} }\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{2,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{2,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{2,n^{L-1}} }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{1,n^{l-1}} }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{2,n^{l-1}} }\\
 \vdots & \vdots & \ddots& \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{n^{L},1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{n^{L},2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{n^{L},n^{L-1}} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{l},2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{n^{L},n^{l-1}} }
 \end{array}
 \right)$`<!-- .element: data-id="lhs-w" -->
 `$=\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_1}\\ 
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_2}\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_1 }\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_2 }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_{n^{L}}} 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{L}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{L}} } 
 \end{array}
 \right)
-\cdot (a^{L-1})^T$`<!-- .element: data-id="rhs-w" -->
+\cdot (a^{l-1})^T$`<!-- .element: data-id="rhs-w" -->
 
 
 
