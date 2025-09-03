@@ -432,7 +432,7 @@ For layer $l$, we have
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{1} }\\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{2} }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{n^{L}} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{n^{l}} }
 \end{array}
 \right)$`<!-- .element: data-id="lhs-b" -->
 `$=\left( \begin{array}{c}
@@ -455,7 +455,7 @@ For layer $l$, we have
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{1} }\\
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{2} }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{n^{L}} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{n^{l}} }
 \end{array}
 \right)$`<!-- .element: data-id="lhs-b" -->
 `$=\left( \left( \begin{array}{c}
