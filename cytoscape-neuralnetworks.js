@@ -170,11 +170,12 @@ function showNeuralNetwork(container,options) {
 	}
 
 
-	if ( options.type == "simple" || options.type == "5x5") {
+	if ( options.type == "simple" || options.type == "feedforward" || options.type == "5x5") {
 		cy.on('select', 'node', function(event){
 			var links = cy.$('node:selected').connectedEdges().select();
 		});
 	}
+/*
 	if ( options.type == "feedforward") {
 		cy.on('select', 'node', function(event){
 			var node = event.target;
@@ -185,6 +186,7 @@ function showNeuralNetwork(container,options) {
 			node.outgoers('edge').unselect();
 		});
 	}
+*/
 	container.cy = cy;
 	container.updatePredictions = function(results) {
 		for (var i = 0; i < results.length; i++) {
