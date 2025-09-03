@@ -332,7 +332,7 @@ For each neuron $i$ of hidden layer $l$, we have
 
 `$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot \genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i } $`<!-- .element: class="fragment" style="margin-left:180px;"-->
 
-`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i }$`<!-- .element: data-id="rhs-b" class="fragment"  style="margin-left:120px;"-->
+`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i }$`<!-- .element: data-id="rhs-b" class="fragment"  style="margin-left:100px;"-->
 
 
 ---
@@ -346,6 +346,61 @@ For each neuron $i$ of hidden layer $l$, we have
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_i }$`<!-- .element: data-id="lhs-b" -->
 `$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } $`<!-- .element:  data-id="rhs-b" -->
 
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for biases in hidden layers
+
+For layer $l < L$, we have
+
+`$\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{1} }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{2} }\\
+\vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{n^{L}} }
+\end{array}
+\right)$`<!-- .element: data-id="lhs-b" -->
+`$=\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_1(z^l_1)}{\partial z^l_1 }\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_2(z^l_2)}{\partial z^l_2 }\\
+\vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_{n^{l}}(z^l_{n^{l}})}{\partial z^l_{n^{l}} } 
+\end{array}
+\right)$`<!-- .element: data-id="rhs-b" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for biases in hidden layers
+
+For layer $l < L$, we have
+
+`$\left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{1} }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{2} }\\
+\vdots\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{n^{L}} }
+\end{array}
+\right)$`<!-- .element: data-id="lhs-b" -->
+`$=\left( \left( \begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}}
+\end{array}
+\right)
+\odot
+\left(
+\begin{array}{c}
+\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
+\vdots \\
+\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\end{array}
+\right) \right)$`<!-- .element: data-id="rhs-b" -->
 
 ---
 
