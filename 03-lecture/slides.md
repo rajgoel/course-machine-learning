@@ -96,7 +96,7 @@ For each output neuron $i$ and each neuron $j$ in the last hidden layer, we have
 
 ### Derivatives for weights in the last layer
 
-For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }$`, `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{2,j} }$`, $\ldots,$ `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{n^{L},j}}$` and each neuron $j$ in the last hidden layer, we have
+For each neuron $j$ in the last **hidden** layer and `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} }$`, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }\\
@@ -120,7 +120,7 @@ For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }$
 
 ### Derivatives for weights in the last layer
 
-For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }$`, `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{2,j} }$`, $\ldots,$ `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{n^{L},j}}$`, we have
+For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{i,j} }$`, we have
 
 `$\left( \begin{array}{cccc}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,1} } & \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,2} } & \ldots& \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,n^{L-1}} }\\
@@ -148,7 +148,7 @@ For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^L_{1,j} }$
 For each output neuron $i$, we have  
 
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} }$`<!-- .element: data-id="lhs-b" --> `$=  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$` `$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i}$`<!-- .element: data-id="rhs-b" -->
-  
+
 ---
 
 <!-- .slide: data-auto-animate="true" -->
@@ -162,7 +162,11 @@ For each output neuron $i$, we have
 
 ---
 
-For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_1 }$`, `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_2 }$`, $\ldots,$ `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{n^{L}}$`, we have
+<!-- .slide: data-auto-animate="true" -->
+
+### Derivatives for biases in the last layer
+
+For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^i }$`, we have
 
 `$\left( \begin{array}{c}
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{1} }\\
@@ -178,23 +182,6 @@ For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_1 }$`, `
 \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_{n^{L}}} 
 \end{array}
 \right)$`<!-- .element: data-id="rhs-b" -->
-
-
----
-
----
-
-<!-- .slide: data-auto-animate="true" -->
-
-### Derivatives for biases in the last layer
-
-For each output neuron $i$, we have
-
-`$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^L_{i} } =  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot \genfrac{}{}{1pt}{1}{\partial a^{L}_i}{\partial b^{L}_j}$`<!-- .element: data-id="del-b" -->
-`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{L}_i} \cdot 1$`
-
-> [!NOTE]
-> Apart from notational differences, this is the same as for the single layer neural network studied in the last session.
 
 ---
 
