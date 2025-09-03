@@ -330,9 +330,9 @@ For each neuron $i$ of hidden layer $l$, we have
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{i} }$`<!-- .element: data-id="lhs-b" --> 
 `$=  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i}  \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial z^l_j} \cdot \genfrac{}{}{1pt}{1}{\partial z^{l}_i}{\partial b^l_j}$`
 
-`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot \genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i } $`<!-- .element: style="margin-left:150px;"-->
+`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot \genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i } $`<!-- .element: class="fragment" style="margin-left:180px;"-->
 
-`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i }$`<!-- .element: data-id="rhs-b" style="margin-left:150px;"-->
+`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i }$`<!-- .element: data-id="rhs-b" class="fragment"  style="margin-left:120px;"-->
 
 
 ---
