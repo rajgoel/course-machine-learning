@@ -189,7 +189,7 @@ For `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^i }$`, we 
 
 A value change in a hidden layer can change **all** activations in the final layer. 
 
-<div class="neuralnetwork predictions" style="height: 600px; width: 1280px!important;">
+<div class="neuralnetwork" style="height: 600px; width: 1280px!important;">
 <!--
 {"type": "feedforward" }
 -->
