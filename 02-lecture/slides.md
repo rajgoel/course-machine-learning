@@ -325,6 +325,8 @@ with respect to $w_{i,j}$ is
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ### Partial derivative for biases
 
 For each output neuron $i \in I$ the partial derivative of
@@ -339,8 +341,28 @@ $$`
 with respect to $b_i$ is
 
 
-`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial b_i } $`
-`$= 2(\hat{a}_i - a^*_i) \cdot 1$`<!-- .element: class="fragment appear" -->
+`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial b_i } $`<!-- .element: data-id="del-b" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Partial derivative for biases
+
+For each output neuron $i \in I$ the partial derivative of
+`$$
+\mathscr{L}_{(a,a^*)} =
+\displaystyle\sum_{i \in I} 
+\Big(
+\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i
+}_{\hat{a}_i} - a^*_i
+\Big)^2
+$$`
+with respect to $b_i$ is
+
+
+`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b_i } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial b_i } $`<!-- .element: data-id="del-b" -->
+`$= 2(\hat{a}_i - a^*_i) \cdot 1$`
 
 ---
 
