@@ -64,8 +64,7 @@ mutable struct DNN
         end
         
         new(layers, W, b, L)
-    end
-    
+    end 
 end
 
 """
@@ -150,10 +149,6 @@ end
     backpropagation(network, activations, z_values, y)
 
 Compute gradients using backpropagation algorithm.
-
-Calculates ∂ℒ/∂W^[l] and ∂ℒ/∂b^[l] for all layers using:
-- ∂ℒ/∂W^l = δ^l * (a^[l-1])^T  
-- ∂ℒ/∂b^l = δ^l
 
 # Arguments
 - `network::DNN`: Neural network structure
