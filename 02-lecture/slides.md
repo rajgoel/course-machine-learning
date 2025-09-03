@@ -286,6 +286,8 @@ $$`
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ### Partial derivative for weights
 
 For each output neuron $i \in I$ and each input neuron $j \in J$ the partial derivative of
@@ -299,8 +301,27 @@ For each output neuron $i \in I$ and each input neuron $j \in J$ the partial der
 $$`
 with respect to $w_{i,j}$ is
 
-`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial w_{i,j} } $`
-`$ = 2(\hat{a}_i - a^*_i) \cdot a_j$`<!-- .element: class="fragment appear" -->
+`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial w_{i,j} } $`<!-- .element: data-id="del-w" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Partial derivative for weights
+
+For each output neuron $i \in I$ and each input neuron $j \in J$ the partial derivative of
+`$$
+\mathscr{L}_{(a,a^*)} =
+\displaystyle\sum_{i \in I} 
+\Big(
+\underbrace{\displaystyle\sum_{j \in J} w_{i,j} a_{j} + b_i
+}_{\hat{a}_i} - a^*_i
+\Big)^2
+$$`
+with respect to $w_{i,j}$ is
+
+`$ \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w_{i,j} } =\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial \hat{a}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \hat{a}_i}{\partial w_{i,j} } $`<!-- .element: data-id="del-w" -->
+`$ = 2(\hat{a}_i - a^*_i) \cdot a_j$`
 
 ---
 
