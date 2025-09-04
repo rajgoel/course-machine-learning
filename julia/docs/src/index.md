@@ -50,6 +50,6 @@ MachineLearningCourse.Lecture03.demo()
 ## Course material
 
 ```@autodocs
-Modules = [MachineLearningCourse, MachineLearningCourse.Lecture02, MachineLearningCourse.Lecture03]
+Modules = [MachineLearningCourse, MachineLearningCourse.Lecture02, MachineLearningCourse.Lecture03, MachineLearningCourse.Lecture04]
 ```
 
