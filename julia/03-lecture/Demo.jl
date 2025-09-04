@@ -182,10 +182,10 @@ function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000
     println("\n2. Creating network architecture...")
     # Architecture: 784 → hidden_layers → 10
     layers = [784, hidden_layers..., 10]
-    mnist_network = DNN(layers)
+    dnn = DNN(layers)
     
     println("   Network architecture: $(layers)")
-    total_params = sum(size(W, 1) * size(W, 2) + length(b) for (W, b) in zip(mnist_network.W, mnist_network.b))
+    total_params = sum(size(W, 1) * size(W, 2) + length(b) for (W, b) in zip(dnn.W, dnn.b))
     println("   Total parameters: $(total_params)")
     for l in 1:length(layers)-1
         layer_params = layers[l] * layers[l+1] + layers[l+1]
@@ -196,11 +196,11 @@ function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000
     println("\n3. Training network...")
     println("   Learning rate: $(learning_rate), Epochs: $(epochs)")
     
-    losses = train!(mnist_network, X_train, Y_train, learning_rate, epochs, verbose)
+    losses = train!(dnn, X_train, Y_train, learning_rate, epochs, verbose)
     
     # Evaluate on test set
     println("\n4. Evaluating on test set...")
-    test_accuracy = evaluate_model(mnist_network, X_test, Y_test)
+    test_accuracy = evaluate_model(dnn, X_test, Y_test)
     
     # Summary
     println("\n" * "="^80)
