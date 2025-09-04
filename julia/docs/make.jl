@@ -13,6 +13,7 @@ makedocs(
         prettyurls = get(ENV, "CI", "false") == "true",
         canonical = "https://rajgoel.github.io/course-machine-learning/julia/",
         assets = String[],
+        collapselevel = 3,
     ),
     modules = [MachineLearningCourse],
     authors = "Asvin Goel",
