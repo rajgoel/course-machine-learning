@@ -579,7 +579,7 @@ end
 <table style="table-layout: fixed!important;width:1300px;">
 <tr>
 <td style="vertical-align: middle;">
-<canvas class="drawDigit" width="150" height="150">
+<canvas class="drawDigit" width="150" height="150" data-prevent-swipe>
 </canvas>
 </canvas>
 </td>
@@ -617,7 +617,7 @@ The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale val
 <table style="table-layout: fixed!important;width:900px;">
 <tr>
 <td style="vertical-align: middle;padding:0;width:400px!important;">
-<canvas class="drawDigit" width="400" height="400">
+<canvas class="drawDigit" width="400" height="400" data-prevent-swipe>
 </canvas>
 </td>
 <td style="vertical-align: middle;padding:0;width:300px!important;">
