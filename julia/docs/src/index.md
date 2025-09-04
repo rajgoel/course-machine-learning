@@ -49,7 +49,21 @@ MachineLearningCourse.Lecture03.demo()
 
 ## Course material
 
+### Lecture 02 - Gradient Descent
+
 ```@autodocs
-Modules = [MachineLearningCourse, MachineLearningCourse.Lecture02, MachineLearningCourse.Lecture03, MachineLearningCourse.Lecture04]
+Modules = [MachineLearningCourse.Lecture02]
+```
+
+### Lecture 03 - Feed Forward Networks
+
+```@autodocs
+Modules = [MachineLearningCourse.Lecture03]
+```
+
+### Lecture 04 - Deep Learning with Flux.jl
+
+```@autodocs
+Modules = [MachineLearningCourse.Lecture04]
 ```
 
