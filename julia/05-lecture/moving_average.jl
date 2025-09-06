@@ -45,7 +45,7 @@ function plot_stock_with_moving_average(symbol, window_size, period)
     filter = ones(window_size) / window_size
     
     # Use the generic sliding filter function
-    moving_average = sliding_filter(prices, filter, sum)
+    moving_average = sliding_filter(prices, filter; operation=sum)
     
     stock_plot = plot(dates, prices, label="$(symbol) Daily Close", linewidth=1, alpha=0.7, color=:blue)
     plot!(stock_plot, dates[window_size:end], moving_average, label="$(window_size)-Day Moving Average", linewidth=2, color=:red)

@@ -61,13 +61,13 @@ function apply_filter(image, kernel)
     end
     
     # Apply edge detection filter
-    filtered = sliding_filter(image_matrix, kernel, sum)
+    filtered = sliding_filter(image_matrix, kernel; operation=sum)
     
     # Normalize to [0,1] range for display
     filtered = abs.(filtered)
     filtered = filtered ./ maximum(filtered)
     
-    return filtered
+    return Gray.(filtered)
 end
 
 """
@@ -79,28 +79,16 @@ function demo_image_filtering(image_path, kernel=kernels[:laplacian])
     if !isfile(image_path)
         error("Image file '$image_path' not found! Please check the file path.")
     end
-    image = load(image_path)
-    
-    # Apply the given kernel
-    filtered = apply_filter(image, kernel)
 
-    # Display and return the processed image
-    result = Gray.(filtered)
-    
-    # Try to display if GUI is available (skip in CI environments)
-    try
-        # Check if ImageView is available and use it
-        ImageView = Base.require(Main, :ImageView)
-        ImageView.imshow(result)
-    catch e
-        println("Display not available (headless environment). Image processing completed.")
-    end
-    
-    return result
+    return apply_filter(load(image_path), kernel)
 end
 
 # Usage examples:
 # demo_image_filtering("my_image.png")
 # demo_image_filtering("my_image.png", kernels[:emboss])
 # demo_image_filtering("my_image.png", [0 -1 0; -1 5 -1; 0 -1 0])
+#
+# using ImageView
+# imshow(demo_image_filtering("my_image.png"))
+
 
