@@ -21,23 +21,17 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ### Example: Moving averages
 
-![Image](05-lecture/apple_stock.png)
+![Image](05-lecture/apple_stock.png)<!-- .element: style="width=800px;" -->
 
 ---
 
 ### Example: Image filtering
 
-<div class="twocolumn" style="display: flex; align-items: center;">
 
-<div>
-<img src="05-lecture/containers_C00.svg" style="width=400px;" />
-</div>
+![Image](05-lecture/containers_C00.jpg)<!-- .element: style="width=600px;" -->
 
-<div>
-<img src="05-lecture/container_contours.svg" style="width=400px;" />
-</div>
+![Image](05-lecture/container_contours.png)<!-- .element: style="width=600px;" -->
 
-</div>
 
 ---
 
