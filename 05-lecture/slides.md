@@ -3,6 +3,103 @@
 > [!CAUTION]
 > Incomplete
 
+
+===
+
+## Filtering
+
+Filtering is the process of transforming an input to emphasize certain aspects while suppressing others.
+
+> [!NOTE]
+>  **Examples:**  
+>  - Remove noise from measurements
+>  - Smooth fluctuations in time series
+>  - Highlight edges in images
+>  - Extract trends from data
+
+---
+
+### Example: Moving averages
+
+![Image](05-lecture/apple_stock.png)
+
+---
+
+### Example: Image filtering
+
+<div class="twocolumn" style="display: flex; align-items: center;">
+
+<div>
+<img src="05-lecture/containers_C00.svg" style="width=400px;" />
+</div>
+
+<div>
+<img src="05-lecture/container_contours.svg" style="width=400px;" />
+</div>
+
+</div>
+
+---
+
+## Sliding filters
+
+
+===
+
+## Convolutional neural networks
+
+---
+
+Input: A signal (e.g., time series, image, sequence).
+
+Filter: A function that defines what to emphasize and what to ignore.
+
+Output: A new signal with modified characteristics (e.g., smoothed, sharpened, edge-detected).
+
+Formally, a filter often acts as a convolution (or cross-correlation) of the input with a kernel:
+
+y = filtered output.
+
+---
+
+### Examples of Filtering
+
+---
+
+1. Time Series Filtering
+
+Input: Daily temperature readings.
+
+Filter: Moving average kernel 
+[1/3,1/3,1/3]
+[1/3,1/3,1/3].
+
+Effect: Smooths out fluctuations, highlighting the trend.
+
+Example:
+
+Signal: 
+[30,32,29,31,28]
+[30,32,29,31,28]
+
+Filtered (window=3): 
+[30.3,30.7,29.3]
+[30.3,30.7,29.3]
+
+---
+
+2. Image Filtering
+
+Input: Grayscale image (matrix of pixel intensities).
+
+Filter: Edge detection kernel, e.g. Sobel 
+[[−1,0,1],[−2,0,2],[−1,0,1]]
+[[−1,0,1],[−2,0,2],[−1,0,1]].
+
+Effect: Highlights vertical edges.
+
+Example (conceptual): A picture of a square becomes an outline emphasizing its borders.
+
 ---
 
 ## Convolutional Neural Networks
