@@ -38,7 +38,7 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ## Sliding filters
 
-![Image](05-lecture/filtering_0.jpg)
+![Image](05-lecture/filtering_0.svg)
 
 
 ---
@@ -47,7 +47,7 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ## Sliding filters
 
-![Image](05-lecture/filtering_1.jpg)
+![Image](05-lecture/filtering_1.svg)
 
 ---
 
@@ -55,7 +55,7 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ## Sliding filters
 
-![Image](05-lecture/filtering_2.jpg)
+![Image](05-lecture/filtering_2.svg)
 
 ---
 
@@ -63,7 +63,15 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ## Sliding filters
 
-![Image](05-lecture/filtering_3.jpg)
+![Image](05-lecture/filtering_3.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_4.svg)
 
 ===
 
