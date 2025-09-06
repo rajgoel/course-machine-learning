@@ -37,6 +37,22 @@ Usage: most commonly used activation function for hidden layers.
 
 ---
 
+### Pooling
+
+Operation: Reduces the spatial resolution of a feature map by aggregating values in local regions (e.g., max pooling takes the maximum, average pooling takes the mean).
+
+Purpose: Provides translational invariance and reduces dimensionality, which lowers computation and risk of overfitting.
+
+Effect: Keeps the most important information while discarding spatial detail.
+
+Not learnable: Pooling is a fixed operation without trainable parameters.
+
+---
+
+## Stochastic Gradient Descent
+
+---
+
 
 #### Architecture parameters in a Neural Net
 

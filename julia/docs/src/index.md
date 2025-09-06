@@ -45,6 +45,15 @@ MachineLearningCourse.Lecture02.demo()
 
 # Run Lecture 03 deep network demo
 MachineLearningCourse.Lecture03.demo()
+
+# Run Lecture 05 LeNet-5 CNN demo
+MachineLearningCourse.Lecture05.demo_lenet5()
+
+# Run Lecture 05 image filtering demo
+MachineLearningCourse.Lecture05.demo_image_filtering("path/to/image.jpg")
+
+# Run Lecture 05 stock moving average demo
+MachineLearningCourse.Lecture05.demo_moving_average()
 ```
 
 ## Course material
@@ -65,5 +74,22 @@ Modules = [MachineLearningCourse.Lecture03]
 
 ```@autodocs
 Modules = [MachineLearningCourse.Lecture04]
+```
+
+### Lecture 05 - Convolutional Neural Networks and Filters
+
+This lecture covers:
+- **LeNet-5 CNN Architecture**: Implementation of the classic LeNet-5 convolutional neural network for MNIST digit classification
+- **Image Filtering**: Sliding filter operations for edge detection, blurring, sharpening, and other image processing effects
+- **Moving Averages**: Stock market data analysis with moving average filters using real-time financial data
+
+Key features:
+- Complete LeNet-5 implementation with Flux.jl
+- Generic sliding filter function for N-dimensional data
+- Interactive stock market analysis with Dow 30 companies
+- Image processing with multiple filter kernels (Sobel, Laplacian, Gaussian blur, etc.)
+
+```@autodocs
+Modules = [MachineLearningCourse.Lecture05]
 ```
 

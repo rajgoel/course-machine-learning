@@ -13,6 +13,8 @@ using Random
 using Flux
 using Statistics
 
+include("mnist_data.jl")
+
 """
     evaluate_model(model, X_test, Y_test)
 
@@ -72,72 +74,6 @@ function evaluate_model(model, X_test::Matrix{Float32}, Y_test)
     return accuracy
 end
 
-"""
-    load_mnist_data(train_size=5000, test_size=1000)
-
-Load and preprocess MNIST handwritten digit dataset for Flux.jl.
-
-# Arguments
-- `train_size::Int`: Number of training samples to use (default: 5000)
-- `test_size::Int`: Number of test samples to use (default: 1000)
-
-# Returns
-- `Tuple`: (X_train, Y_train, X_test, Y_test)
-  - `X_train::Matrix{Float32}`: Training images (784 × samples)
-  - `Y_train`: Training labels (10 × samples, one-hot encoded)
-  - `X_test::Matrix{Float32}`: Test images (784 × samples)
-  - `Y_test`: Test labels (10 × samples, one-hot encoded)
-
-Images are flattened from 28×28 to 784-dimensional vectors and normalized to [0,1].
-Labels are one-hot encoded for 10-class classification (digits 0-9).
-Data is formatted for Flux.jl convention (features × samples).
-"""
-function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
-    println("Loading MNIST dataset...")
-    
-    # Load MNIST data
-    train_x, train_y = MNIST(split=:train)[:]  # 60,000 training samples
-    test_x, test_y = MNIST(split=:test)[:]     # 10,000 test samples
-    
-    println("Original data shapes:")
-    println("  Training: $(size(train_x)) images, $(length(train_y)) labels")
-    println("  Test: $(size(test_x)) images, $(length(test_y)) labels")
-    
-    # Take subset for faster training
-    train_indices = randperm(size(train_x, 3))[1:train_size]
-    test_indices = randperm(size(test_x, 3))[1:test_size]
-    
-    # Preprocess training data for Flux (features × samples format)
-    X_train = zeros(Float32, 784, train_size)
-    Y_train_labels = zeros(Int, train_size)
-    
-    for (idx, i) in enumerate(train_indices)
-        # Flatten and normalize
-        image = vec(train_x[:, :, i])
-        X_train[:, idx] = Float32.(image) ./ 255.0f0
-        Y_train_labels[idx] = Int(train_y[i])
-    end
-    
-    # Preprocess test data
-    X_test = zeros(Float32, 784, test_size)
-    Y_test_labels = zeros(Int, test_size)
-    
-    for (idx, i) in enumerate(test_indices)
-        image = vec(test_x[:, :, i])
-        X_test[:, idx] = Float32.(image) ./ 255.0f0
-        Y_test_labels[idx] = Int(test_y[i])
-    end
-    
-    # One-hot encode labels (Flux format: classes × samples)
-    Y_train = Flux.onehotbatch(Y_train_labels, 0:9)
-    Y_test = Flux.onehotbatch(Y_test_labels, 0:9)
-    
-    println("Preprocessed data:")
-    println("  Training: $(size(X_train, 2)) samples, $(size(X_train, 1))-dimensional inputs")
-    println("  Test: $(size(X_test, 2)) samples, $(size(Y_test, 1))-dimensional outputs")
-    
-    return X_train, Y_train, X_test, Y_test
-end
 
 """
     demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
@@ -165,7 +101,15 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     
     # Load and preprocess data
     println("\n1. Loading MNIST data...")
-    X_train, Y_train, X_test, Y_test = load_mnist_data(train_size, test_size)
+    X_train_raw, Y_train, X_test_raw, Y_test = load_mnist_data(train_size, test_size)
+    
+    # Flatten images for fully connected network (28×28×samples → 784×samples)
+    X_train = reshape(X_train_raw, 784, train_size)
+    X_test = reshape(X_test_raw, 784, test_size)
+    
+    println("Flattened for fully connected network:")
+    println("  Training: $(size(X_train)) (features × samples)")
+    println("  Test: $(size(X_test)) (features × samples)")
     
     # Create network architecture for MNIST using Flux
     println("\n2. Creating Flux network architecture...")

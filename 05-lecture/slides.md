@@ -172,12 +172,6 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 ![Image](05-lecture/filtering_16.svg)
 
 
----
-
-## Convolution
-
-![Image](05-lecture/convolution.svg)
-
 ===
 
 ## Convolutional neural networks
@@ -190,35 +184,12 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ---
 
-### Gradient computation: Filter weights
-
-For each filter weight $w^l_{m,n}$, the chain rule gives us:
-
-`$$\frac{\partial \mathcal{L}}{\partial w^l_{m,n}} = \sum_{i,j}  \frac{\partial \mathcal{L}}{\partial y^l_{i,j}} \cdot \frac{\partial y^l_{i,j}}{\partial w^l_{m,n}}$$`
-
-`$$= \sum_{i,j} \frac{\partial \mathcal{L}}{\partial y^l_{i,j}} \cdot   x^{l-1}_{i+m,j+n}$$`
-
-> [!NOTE]
-> The filter gradient is the **convolution** of the input with the error signal from the next layer.
-
----
-
-### Gradient computation: Input activations
-
-For input activation $x^{l-1}_{i,j}$:
-
-`$$\frac{\partial \mathcal{L}}{\partial x^{l-1}_{i,j}} = \sum_{m,n} 
-\frac{\partial \mathcal{L}}{\partial y^l_{i-m,j-n}} \cdot w^l_{m,n}$$`
-
-> [!NOTE]
-> The input gradient uses **transposed convolution** (or full convolution) with the flipped filter.
-
-
-
 
 
 ---
 
 ### Padding
+
+---
 
 ### Striding
