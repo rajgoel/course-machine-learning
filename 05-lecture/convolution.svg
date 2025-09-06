@@ -1,0 +1,249 @@
+<svg width="1290" height="400" xmlns="http://www.w3.org/2000/svg">
+    <!-- 6x6 input matrix -->
+    <g transform="translate(20,20)">
+        <!-- Row 0 (new top row) -->
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₁₁</text>
+
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₁₂</text>
+
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₁₃</text>
+
+        <rect x="180" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₁₄</text>
+
+        <rect x="240" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₁₅</text>
+
+        <rect x="300" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₁₆</text>
+
+        <!-- Row 1 -->
+        <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₂₁</text>
+
+        <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₂₂</text>
+
+        <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₂₃</text>
+
+        <rect x="180" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₂₄</text>
+
+        <rect x="240" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₂₅</text>
+
+        <rect x="300" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₂₆</text>
+
+        <!-- Row 2 -->
+        <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₃₁</text>
+
+        <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₃₂</text>
+
+        <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₃₃</text>
+
+        <rect x="180" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₃₄</text>
+
+        <rect x="240" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₃₅</text>
+
+        <rect x="300" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₃₆</text>
+
+        <!-- Row 3 -->
+        <rect x="0" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₄₁</text>
+
+        <rect x="60" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₄₂</text>
+
+        <rect x="120" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₄₃</text>
+
+        <rect x="180" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₄₄</text>
+
+        <rect x="240" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₄₅</text>
+
+        <rect x="300" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₄₆</text>
+
+        <!-- Row 4 -->
+        <rect x="0" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="280" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₅₁</text>
+
+        <rect x="60" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="280" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₅₂</text>
+
+        <rect x="120" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="280" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₅₃</text>
+
+        <rect x="180" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="280" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₅₄</text>
+
+        <rect x="240" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="280" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₅₅</text>
+
+        <rect x="300" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="280" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₅₆</text>
+
+        <!-- Row 5 -->
+        <rect x="0" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="340" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₆₁</text>
+
+        <rect x="60" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="340" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₆₂</text>
+
+        <rect x="120" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="340" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₆₃</text>
+
+        <rect x="180" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="340" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₆₄</text>
+
+        <rect x="240" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="340" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₆₅</text>
+
+        <rect x="300" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="340" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">x₆₆</text>
+    </g>
+
+
+    <!-- Font Awesome arrow -->
+    <g transform="translate(410, 175) scale(0.08)">
+        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" fill="black"/>
+    </g>
+
+    <!-- 3x3 filter matrix -->
+    <g transform="translate(480,110)">
+        <rect x="0" y="0" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="30" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₁₁</text>
+
+        <rect x="60" y="0" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="90" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₁₂</text>
+
+        <rect x="120" y="0" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="150" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₁₃</text>
+      
+        <rect x="0" y="60" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="30" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₂₁</text>
+
+        <rect x="60" y="60" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="90" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₂₂</text>
+
+        <rect x="120" y="60" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="150" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₂₃</text>
+        
+        <rect x="0" y="120" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="30" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₃₁</text>
+
+        <rect x="60" y="120" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="90" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₃₂</text>
+
+        <rect x="120" y="120" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="150" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="firebrick">w₃₃</text>
+    </g>
+
+    <!-- Hadamard product symbol -->
+    <text x="690" y="218" font-size="50" text-anchor="middle" fill="black">⊙</text>
+
+    <!-- 3x3 input matrix -->
+    <g transform="translate(720,110)">
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+      
+        <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+
+        <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+
+        <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+        
+        <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+
+        <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+
+        <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black"></text>
+    </g>
+
+    <!-- Font Awesome arrow -->
+    <g transform="translate(930, 175) scale(0.08)">
+        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" fill="black"/>
+    </g>
+    <text x="953" y="175" font-size="80" text-anchor="middle" fill="black">Σ</text>
+
+    <!-- 4x4 output matrix -->
+    <g transform="translate(1010,80)">
+        <!-- Row 1 -->
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₁₁</text>
+
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₁₂</text>
+
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₁₃</text>
+
+        <rect x="180" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₁₄</text>
+
+        <!-- Row 2 -->
+        <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₂₁</text>
+
+        <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₂₂</text>
+
+        <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₂₃</text>
+
+        <rect x="180" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₂₄</text>
+
+        <!-- Row 3 -->
+        <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₃₁</text>
+
+        <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₃₂</text>
+
+        <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₃₃</text>
+
+        <rect x="180" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₃₄</text>
+
+        <!-- Row 4 -->
+        <rect x="0" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₄₁</text>
+
+        <rect x="60" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₄₂</text>
+
+        <rect x="120" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₄₃</text>
+
+        <rect x="180" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">y₄₄</text>
+    </g>
+</svg>
+

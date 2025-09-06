@@ -172,6 +172,12 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 ![Image](05-lecture/filtering_16.svg)
 
 
+---
+
+## Convolution
+
+![Image](05-lecture/convolution.svg)
+
 ===
 
 ## Convolutional neural networks
