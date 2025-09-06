@@ -73,6 +73,105 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ![Image](05-lecture/filtering_4.svg)
 
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_5.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_6.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_7.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_8.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_9.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_10.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_11.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_12.svg)
+
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_13.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_14.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_15.svg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_16.svg)
+
+
 ===
 
 ## Convolutional neural networks
