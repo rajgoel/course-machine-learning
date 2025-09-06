@@ -89,8 +89,9 @@ function demo_image_filtering(image_path, kernel=kernels[:laplacian])
     
     # Try to display if GUI is available (skip in CI environments)
     try
-        using ImageView
-        imshow(result)
+        # Check if ImageView is available and use it
+        ImageView = Base.require(Main, :ImageView)
+        ImageView.imshow(result)
     catch e
         println("Display not available (headless environment). Image processing completed.")
     end
