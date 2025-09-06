@@ -8,7 +8,6 @@ This example shows how to:
 4. Evaluate model performance
 """
 
-using MLDatasets
 using Random
 using Flux
 using Statistics

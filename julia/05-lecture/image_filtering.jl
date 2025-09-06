@@ -1,4 +1,4 @@
-using Images, ImageView
+using Images
 
 # Available filter kernels for user access
 const kernels = Dict(
@@ -86,7 +86,15 @@ function demo_image_filtering(image_path, kernel=kernels[:laplacian])
 
     # Display and return the processed image
     result = Gray.(filtered)
-    imshow(result)
+    
+    # Try to display if GUI is available (skip in CI environments)
+    try
+        using ImageView
+        imshow(result)
+    catch e
+        println("Display not available (headless environment). Image processing completed.")
+    end
+    
     return result
 end
 
