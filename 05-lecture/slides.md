@@ -21,7 +21,7 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ### Example: Moving averages
 
-![Image](05-lecture/apple_stock.png)<!-- .element: style="width:800px;" -->
+![Image](05-lecture/apple_stock.png)<!-- .element: style="width:1000px;" -->
 
 ---
 
@@ -34,8 +34,36 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ## Sliding filters
 
+![Image](05-lecture/filtering_0.jpg)
+
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_1.jpg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_2.jpg)
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Sliding filters
+
+![Image](05-lecture/filtering_3.jpg)
 
 ===
 
