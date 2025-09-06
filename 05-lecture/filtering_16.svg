@@ -1,0 +1,252 @@
+<svg width="1290" height="400" xmlns="http://www.w3.org/2000/svg">
+    <!-- 6x6 input matrix -->
+    <g transform="translate(20,20)">
+        <!-- Row 0 (new top row) -->
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="180" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="240" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="300" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <!-- Row 1 -->
+        <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="100" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="100" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="100" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="180" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="100" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="240" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="100" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="300" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="100" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <!-- Row 2 -->
+        <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="160" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="160" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="160" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="180" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="160" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="240" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="160" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="300" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="160" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <!-- Row 3 -->
+        <rect x="0" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="220" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="220" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="120" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="220" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="180" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="220" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="240" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="220" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="300" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="220" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <!-- Row 4 -->
+        <rect x="0" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="280" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="280" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="120" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="280" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="180" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="280" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="240" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="280" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="300" y="240" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="280" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <!-- Row 5 -->
+        <rect x="0" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="340" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="340" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="120" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="340" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="180" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="340" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="240" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="270" y="340" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="300" y="300" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="330" y="340" font-size="32" text-anchor="middle" fill="black">1</text>
+    </g>
+
+
+    <!-- Font Awesome arrow -->
+    <g transform="translate(410, 175) scale(0.08)">
+        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" fill="black"/>
+    </g>
+
+    <!-- 3x3 filter matrix -->
+    <g transform="translate(480,110)">
+        <rect x="0" y="0" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="30" y="40" font-size="32" text-anchor="middle" fill="firebrick">0</text>
+
+        <rect x="60" y="0" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="90" y="40" font-size="32" text-anchor="middle" fill="firebrick">-1</text>
+
+        <rect x="120" y="0" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="150" y="40" font-size="32" text-anchor="middle" fill="firebrick">0</text>
+      
+        <rect x="0" y="60" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="30" y="100" font-size="32" text-anchor="middle" fill="firebrick">-1</text>
+
+        <rect x="60" y="60" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="90" y="100" font-size="32" text-anchor="middle" fill="firebrick">4</text>
+
+        <rect x="120" y="60" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="150" y="100" font-size="32" text-anchor="middle" fill="firebrick">-1</text>
+        
+        <rect x="0" y="120" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="30" y="160" font-size="32" text-anchor="middle" fill="firebrick">0</text>
+
+        <rect x="60" y="120" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="90" y="160" font-size="32" text-anchor="middle" fill="firebrick">-1</text>
+
+        <rect x="120" y="120" width="60" height="60" fill="#FFFFE0" stroke-width="5" stroke="firebrick"/>
+        <text x="150" y="160" font-size="32" text-anchor="middle" fill="firebrick">0</text>
+    </g>
+
+    <!-- Hadamard product symbol -->
+    <text x="690" y="218" font-size="50" text-anchor="middle" fill="black">⊙</text>
+
+    <!-- 3x3 input matrix -->
+    <g transform="translate(720,110)">
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-size="32" text-anchor="middle" fill="black">1</text>
+      
+        <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="100" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="100" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="100" font-size="32" text-anchor="middle" fill="black">1</text>
+        
+        <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="160" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="160" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="160" font-size="32" text-anchor="middle" fill="black">1</text>
+    </g>
+
+    <!-- Font Awesome arrow -->
+    <g transform="translate(930, 175) scale(0.08)">
+        <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" fill="black"/>
+    </g>
+    <text x="953" y="175" font-size="80" text-anchor="middle" fill="black">Σ</text>
+
+    <!-- 4x4 output matrix -->
+    <g transform="translate(1010,80)">
+        <!-- Row 1 -->
+        <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="40" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="40" font-size="32" text-anchor="middle" fill="black">-2</text>
+
+        <rect x="180" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="40" font-size="32" text-anchor="middle" fill="black">-1</text>
+
+        <!-- Row 2 -->
+        <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="100" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="100" font-size="32" text-anchor="middle" fill="black">-2</text>
+
+        <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="100" font-size="32" text-anchor="middle" fill="black">2</text>
+
+        <rect x="180" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="100" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <!-- Row 3 -->
+        <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="160" font-size="32" text-anchor="middle" fill="black">-1</text>
+
+        <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="160" font-size="32" text-anchor="middle" fill="black">2</text>
+
+        <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="160" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="180" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="160" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <!-- Row 4 -->
+        <rect x="0" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="30" y="220" font-size="32" text-anchor="middle" fill="black">-1</text>
+
+        <rect x="60" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="90" y="220" font-size="32" text-anchor="middle" fill="black">1</text>
+
+        <rect x="120" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="150" y="220" font-size="32" text-anchor="middle" fill="black">0</text>
+
+        <rect x="180" y="180" width="60" height="60" fill="lightgray" stroke="black"/>
+        <text x="210" y="220" font-size="32" text-anchor="middle" fill="black">0</text>
+    </g>
+
+    <rect data-id="input-slider" x="200" y="200" width="180" height="180" fill="none" stroke-width="5" stroke="firebrick"/>
+    <rect data-id="output-slider" x="1190" y="260" width="60" height="60" fill="none" stroke-width="5" stroke="firebrick"/>
+
+</svg>
