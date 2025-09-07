@@ -1,9 +1,5 @@
 # Filtering and convolution
 
-> [!CAUTION]
-> Incomplete
-
-
 ===
 
 ## Filtering
