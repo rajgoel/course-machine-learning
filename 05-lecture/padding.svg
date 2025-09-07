@@ -158,31 +158,31 @@
     <!-- 3x3 input matrix -->
     <g transform="translate(720,110)">
         <rect x="0" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="30" y="40" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
+        <text x="30" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₃₃</text>
 
         <rect x="60" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="90" y="40" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
+        <text x="90" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₃₄</text>
       
         <rect x="120" y="0" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="150" y="40" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
+        <text x="150" y="40" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">0</text>
 
         <rect x="0" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="30" y="100" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
+        <text x="30" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₄₃</text>
 
         <rect x="60" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="90" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₁₁</text>
+        <text x="90" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₄₄</text>
 
         <rect x="120" y="60" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="150" y="100" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₁₂</text>
+        <text x="150" y="100" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
 
         <rect x="0" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
         <text x="30" y="160" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
 
         <rect x="60" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="90" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₂₁</text>
+        <text x="90" y="160" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
 
         <rect x="120" y="120" width="60" height="60" fill="lightgray" stroke="black"/>
-        <text x="150" y="160" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">a₂₂</text>
+        <text x="150" y="160" font-family="Times New Roman" font-size="32" text-anchor="middle" fill="black">0</text>
     </g>
 
     <!-- Font Awesome arrow -->
@@ -246,8 +246,8 @@
         <text x="210" y="220" font-family="Times New Roman" font-style="italic"  font-size="32" text-anchor="middle" fill="black">z₄₄</text>
     </g>
 
-    <rect data-id="input-slider" x="20" y="20" width="180" height="180" fill="none" stroke-width="5" stroke="firebrick"/>
-    <rect data-id="output-slider" x="1010" y="80" width="60" height="60" fill="none" stroke-width="5" stroke="firebrick"/>
+    <rect data-id="input-slider" x="200" y="200" width="180" height="180" fill="none" stroke-width="5" stroke="firebrick"/>
+    <rect data-id="output-slider" x="1190" y="260" width="60" height="60" fill="none" stroke-width="5" stroke="firebrick"/>
 
 </svg>
 
