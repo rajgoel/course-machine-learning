@@ -1,7 +1,7 @@
 """
 LeNet-5 CNN Architecture Implementation using Flux.jl
 
-This implementation follows the original LeNet-5 architecture:
+This implementation follows the original LeNet-5 architecture (but uses ReLU instead of sigmoid):
 - Conv2D (6 filters, 5x5) + ReLU + AvgPool (2x2)
 - Conv2D (16 filters, 5x5) + ReLU + AvgPool (2x2)
 - Flatten
@@ -18,12 +18,19 @@ using Statistics
 include("../04-lecture/mnist_data.jl")
 
 """
-    create_lenet5()
+    create_lenet5(height, width, channels)
 
-Create the LeNet-5 CNN architecture using Flux.jl.
+Create the LeNet-5 CNN architecture using Flux.jl. The original LeNet-5 architecture uses sigmoid, here ReLU is used.
+
+# Parameters
+- `height`: Input height in pixels
+- `width`: Input width in pixels
+- `channels`: The number of input channels - 1 for grayscale, 3 for RGB
 
 # Returns
-- Flux.Chain: The LeNet-5 model
+- Tuple: (model, layer_dimensions)
+  - model: Flux.Chain LeNet-5 model  
+  - layer_dimensions: Array of tuples showing tensor dimensions at each layer
 
 The architecture consists of:
 1. Convolutional layer: 6 filters of size 5×5, ReLU activation
@@ -31,27 +38,59 @@ The architecture consists of:
 3. Convolutional layer: 16 filters of size 5×5, ReLU activation
 4. Average pooling: 2×2 pool size
 5. Flatten layer
-6. Dense layer: 120 units, ReLU activation
-7. Dense layer: 84 units, ReLU activation
-8. Output layer: 10 units (for 10 digit classes)
+6. Dense layer: calculated size → 120 units, ReLU activation
+7. Dense layer: 120 → 84 units, ReLU activation
+8. Output layer: 84 → 10 units (for 10 digit classes)
 """
-function create_lenet5()
-    return Flux.Chain(
+function create_lenet5(height, width, channels)
+    # Calculate layer dimensions
+    layer_dimensions = Vector{Any}(undef, 9)  # Pre-allocate for 9 layers
+    
+    # Layer 1: Input layer
+    layer_dimensions[1] = (height=height, width=width, channels=channels)
+ 
+    # Layer 2: Convolution (5x5, 6 filters)
+    layer_dimensions[2] = (height=layer_dimensions[1].height - 4, width=layer_dimensions[1].width - 4, channels=6)
+
+    # Layer 3: Average pooling (2x2)
+    layer_dimensions[3] = (height=div(layer_dimensions[2].height, 2), width=div(layer_dimensions[2].width, 2), channels=6)
+    
+    # Layer 4: Convolution (5x5, 16 filters)
+    layer_dimensions[4] = (height=layer_dimensions[3].height - 4, width=layer_dimensions[3].width - 4, channels=16)
+
+    # Layer 5: Average pooling (2x2)
+    layer_dimensions[5] = (height=div(layer_dimensions[4].height, 2), width=div(layer_dimensions[4].width, 2), channels=16)
+    
+    # Layer 6: Flattened
+    layer_dimensions[6] = (size=layer_dimensions[5].height * layer_dimensions[5].width * layer_dimensions[5].channels,)
+
+    # Layer 7: Dense (120)
+    layer_dimensions[7] = (size=120,)
+
+    # Layer 8: Dense (84)
+    layer_dimensions[8] = (size=84,)
+
+    # Layer 9: Dense (10)
+    layer_dimensions[9] = (size=10,)                                          
+    
+    model = Flux.Chain(
         # First convolutional block
-        Flux.Conv((5, 5), 1 => 6, Flux.relu),      # 28×28×1 → 24×24×6
-        Flux.MeanPool((2, 2)),                      # 24×24×6 → 12×12×6
+        Flux.Conv((5, 5), channels => 6, Flux.relu),
+        Flux.MeanPool((2, 2)),
         
         # Second convolutional block  
-        Flux.Conv((5, 5), 6 => 16, Flux.relu),     # 12×12×6 → 8×8×16
-        Flux.MeanPool((2, 2)),                      # 8×8×16 → 4×4×16
+        Flux.Conv((5, 5), 6 => 16, Flux.relu),
+        Flux.MeanPool((2, 2)),
         
         # Flatten and fully connected layers
-        Flux.flatten,                               # 4×4×16 → 256
-        Flux.Dense(256, 120, Flux.relu),           # 256 → 120
-        Flux.Dense(120, 84, Flux.relu),            # 120 → 84
-        Flux.Dense(84, 10),                        # 84 → 10
-        Flux.softmax                               # Apply softmax for probabilities
+        Flux.flatten,
+        Flux.Dense(layer_dimensions[6].size, layer_dimensions[7].size, Flux.relu),
+        Flux.Dense(layer_dimensions[7].size, layer_dimensions[8].size, Flux.relu),
+        Flux.Dense(layer_dimensions[8].size, layer_dimensions[9].size),
+        Flux.softmax
     )
+    
+    return model, layer_dimensions
 end
 
 """
@@ -86,7 +125,7 @@ function train_lenet5(; seed=42, train_size=5000, test_size=1000,
     println("\n1. Loading MNIST data for CNN...")
     X_train_raw, Y_train, X_test_raw, Y_test = load_mnist_data(train_size, test_size)
     
-    # Add channel dimension for CNN (28×28×samples → 28×28×1×samples)
+    # Flux CNN layers require 4D tensors: (height, width, channels, batch)
     X_train = reshape(X_train_raw, 28, 28, 1, train_size)
     X_test = reshape(X_test_raw, 28, 28, 1, test_size)
     
@@ -96,17 +135,18 @@ function train_lenet5(; seed=42, train_size=5000, test_size=1000,
     
     # Create LeNet-5 architecture
     println("\n2. Creating LeNet-5 architecture...")
-    model = create_lenet5()
+    model, layer_dimensions = create_lenet5(28, 28, 1)
     
-    println("   LeNet-5 Architecture:")
-    println("   - Conv2D: 1→6 filters (5×5), ReLU")
-    println("   - AvgPool: 2×2")
-    println("   - Conv2D: 6→16 filters (5×5), ReLU") 
-    println("   - AvgPool: 2×2")
-    println("   - Flatten")
-    println("   - Dense: 256→120, ReLU")
-    println("   - Dense: 120→84, ReLU")
-    println("   - Dense: 84→10, Softmax")
+    println("   LeNet-5 Architecture with Layer Dimensions:")
+    println("   - Input: $(layer_dimensions[1])")
+    println("   - Conv2D: $(layer_dimensions[1]) → $(layer_dimensions[2]) (5×5 filters, ReLU)")
+    println("   - AvgPool: $(layer_dimensions[2]) → $(layer_dimensions[3]) (2×2)")
+    println("   - Conv2D: $(layer_dimensions[3]) → $(layer_dimensions[4]) (5×5 filters, ReLU)")
+    println("   - AvgPool: $(layer_dimensions[4]) → $(layer_dimensions[5]) (2×2)")
+    println("   - Flatten: $(layer_dimensions[5]) → $(layer_dimensions[6])")
+    println("   - Dense: $(layer_dimensions[6]) → $(layer_dimensions[7]) (ReLU)")
+    println("   - Dense: $(layer_dimensions[7]) → $(layer_dimensions[8]) (ReLU)")
+    println("   - Dense: $(layer_dimensions[8]) → $(layer_dimensions[9]) (Softmax)")
     println("   Total parameters: ", sum(length, Flux.trainables(model)))
     
     # Define loss function and optimizer
@@ -186,10 +226,7 @@ LeNet-5 CNN demonstration on MNIST dataset.
 - `epochs`: Number of training epochs (default: 50)
 - `verbose`: Print training progress (default: true)
 """
-function demo_lenet5(; seed=42, train_size=5000, test_size=1000, 
-                     learning_rate=0.001, epochs=50, verbose=true)
-    model, losses = train_lenet5(seed=seed, train_size=train_size, 
-                                test_size=test_size, learning_rate=learning_rate,
-                                epochs=epochs, verbose=verbose)
+function demo_lenet5(; seed=42, train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
+    model, losses = train_lenet5(; seed, train_size, test_size, learning_rate, epochs, verbose)
     return model, losses
 end
