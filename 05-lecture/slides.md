@@ -231,9 +231,18 @@ Padding can be used to maintain dimensionality.
  
 ![Image](05-lecture/padding.svg)
 
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Padding
+
+Padding can be used to maintain dimensionality.
+ 
+![Image](05-lecture/padding.svg)
+
 > [!NOTE]
 > Instead of zero padding, we can also fill missing numbers with averages or similar. 
-
 
 ---
 
@@ -257,6 +266,8 @@ The convolution we used so far, assumes that we slide the input one field at a t
 
 ### Striding
 
+Convolution with a stride of 3.
+
 ![Image](05-lecture/striding_1.svg)
 
 ---
@@ -264,6 +275,8 @@ The convolution we used so far, assumes that we slide the input one field at a t
 <!-- .slide: data-auto-animate="true" -->
 
 ### Striding
+
+Convolution with a stride of 3.
 
 ![Image](05-lecture/striding_2.svg)
 
@@ -273,6 +286,8 @@ The convolution we used so far, assumes that we slide the input one field at a t
 
 ### Striding
 
+Convolution with a stride of 3.
+
 ![Image](05-lecture/striding_3.svg)
 
 ---
@@ -280,6 +295,8 @@ The convolution we used so far, assumes that we slide the input one field at a t
 <!-- .slide: data-auto-animate="true" -->
 
 ### Striding
+
+Convolution with a stride of 3.
 
 ![Image](05-lecture/striding_4.svg)
 
