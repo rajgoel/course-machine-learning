@@ -210,4 +210,46 @@ Multiple filters can be applied in parallel at each convolutional layer. Each fi
 
 ---
 
+The convolution we used so far, reduces dimensionality. This may be unwanted, in particular, when using multiple convolutional layers after each other.
+ 
+![Image](05-lecture/convolution.svg)
+
+
+---
+
+Padding can be used to maintain dimensionality.
+ 
+![Image](05-lecture/padding.svg)
+
+> [!NOTE]
+> Instead of zero padding, we can also fill missing numbers with averages or similar. 
+
+
+---
+
 ### Striding
+
+---
+
+
+The convolution we used so far, assumes that we slide the input one field at a time. For high dimensional data, we may want to move the filter in larger steps.
+ 
+![Image](05-lecture/convolution.svg)
+
+
+---
+ 
+![Image](05-lecture/striding_1.svg)
+
+---
+ 
+![Image](05-lecture/striding_2.svg)
+
+---
+ 
+![Image](05-lecture/striding_3.svg)
+
+---
+ 
+![Image](05-lecture/striding_4.svg)
+
