@@ -178,15 +178,33 @@ Filtering is the process of transforming an input to emphasize certain aspects w
 
 ---
 
-## Convolution
+### Learned filters
 
+In convolutional neural networks, the parameters $w_{i,j}$ are learned during training.
+ 
 ![Image](05-lecture/convolution.svg)
 
+> [!NOTE]
+> The gradient for backpropagation can be determined similar as before, but care must be taken to use the right indices. 
+
 ---
 
+### Convolutional layers
 
+Multiple filters can be applied in parallel at each convolutional layer. Each filter can learn to detect different features of the input.
+
+> [!IMPORTANT]
+> If all weights are initialized with the same values, the filters may end up learning the same features.
 
 ---
+
+### LeNet
+
+![Image](05-lecture/LeNet-5_architecture.svg)
+
+<small>Source: [Zhang, Lipton, Li, and Smola. Dive into Deep Learning](https://github.com/d2l-ai/d2l-en)</small>
+
+===
 
 ### Padding
 
