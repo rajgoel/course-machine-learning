@@ -206,16 +206,26 @@ Multiple filters can be applied in parallel at each convolutional layer. Each fi
 
 ===
 
+<!-- .slide: data-auto-animate="true" -->
+
 ### Padding
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
+### Padding
+
 The convolution we used so far, reduces dimensionality. This may be unwanted, in particular, when using multiple convolutional layers after each other.
  
-![Image](05-lecture/convolution.svg)
+![Image](05-lecture/no_padding.svg)
 
 
 ---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Padding
 
 Padding can be used to maintain dimensionality.
  
@@ -227,29 +237,49 @@ Padding can be used to maintain dimensionality.
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ### Striding
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
+### Striding
 
 The convolution we used so far, assumes that we slide the input one field at a time. For high dimensional data, we may want to move the filter in larger steps.
  
 ![Image](05-lecture/convolution.svg)
 
-
 ---
- 
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Striding
+
 ![Image](05-lecture/striding_1.svg)
 
 ---
- 
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Striding
+
 ![Image](05-lecture/striding_2.svg)
 
 ---
- 
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Striding
+
 ![Image](05-lecture/striding_3.svg)
 
 ---
- 
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Striding
+
 ![Image](05-lecture/striding_4.svg)
 
