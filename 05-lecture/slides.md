@@ -173,82 +173,6 @@ How do we come up with suitable filters?
 
 ===
 
-## RGB images and channels
-
----
-
-### RGB color model
-
-Real-world images are typically represented using the RGB color model with three channels:
-- **Red channel**: Intensity of red light (0-255)
-- **Green channel**: Intensity of green light (0-255) 
-- **Blue channel**: Intensity of blue light (0-255)
-
-![Image](05-lecture/rgb_channels.png)<!-- .element: style="width:800px;" -->
-
----
-
-### Multi-channel representation
-
-RGB images are 3D tensors with dimensions: **Height × Width × Channels**
-
-```
-Grayscale image: 28 × 28 × 1
-RGB image:       28 × 28 × 3
-```
-
-Each pixel contains three values instead of one:
-```
-Grayscale: [127]
-RGB:       [255, 128, 64]  # [R, G, B]
-```
-
----
-
-### Convolution with multiple channels
-
-For RGB inputs, filters must have the same number of input channels:
-- **Grayscale filter**: 3 × 3 × 1
-- **RGB filter**: 3 × 3 × 3
-
-![Image](05-lecture/rgb_convolution.svg)
-
-The convolution operation sums across all channels:
-$$y_{i,j} = \sum_{c=1}^{3} \sum_{u=-1}^{1} \sum_{v=-1}^{1} w_{u,v,c} \cdot x_{i+u,j+v,c}$$
-
----
-
-### Multiple output channels
-
-Convolutional layers can produce multiple output channels (feature maps):
-- **Input**: Height × Width × 3 (RGB)
-- **Filters**: N filters of size 3 × 3 × 3
-- **Output**: Height × Width × N
-
-Each filter learns to detect different features across all input channels.
-
----
-
-### Flux.jl differences
-
-When working with multi-channel data in Flux.jl:
-
-```julia
-# Define a convolutional layer for RGB input
-conv_layer = Conv((3, 3), 3 => 32, relu)  # 3 input channels, 32 output channels
-
-# Input tensor shape: (height, width, channels, batch_size)
-x = randn(Float32, 28, 28, 3, 1)  # Single RGB image
-
-# Forward pass
-y = conv_layer(x)  # Output: (26, 26, 32, 1)
-```
-
-> [!NOTE]
-> Flux uses **(height, width, channels, batch)** ordering, different from some other frameworks that use **(batch, channels, height, width)**.
-
-===
-
 ## Convolutional neural networks
 
 ---
@@ -356,4 +280,84 @@ Convolution with a stride of 3.
 Convolution with a stride of 3.
 
 ![Image](05-lecture/striding_4.svg)
+
+===
+
+## RGB images and channels
+
+> [!CAUTION]
+> This section requires revision.
+
+---
+
+### RGB color model
+
+Real-world images are typically represented using the RGB color model with three channels:
+- **Red channel**: Intensity of red light (0-255)
+- **Green channel**: Intensity of green light (0-255) 
+- **Blue channel**: Intensity of blue light (0-255)
+
+![Image](05-lecture/rgb_channels.png)<!-- .element: style="width:800px;" -->
+
+---
+
+### Multi-channel representation
+
+RGB images are 3D tensors with dimensions: **Height × Width × Channels**
+
+```
+Grayscale image: 28 × 28 × 1
+RGB image:       28 × 28 × 3
+```
+
+Each pixel contains three values instead of one:
+```
+Grayscale: [127]
+RGB:       [255, 128, 64]  # [R, G, B]
+```
+
+---
+
+### Convolution with multiple channels
+
+For RGB inputs, filters must have the same number of input channels:
+- **Grayscale filter**: 3 × 3 × 1
+- **RGB filter**: 3 × 3 × 3
+
+![Image](05-lecture/rgb_convolution.svg)
+
+The convolution operation sums across all channels:
+$$y_{i,j} = \sum_{c=1}^{3} \sum_{u=-1}^{1} \sum_{v=-1}^{1} w_{u,v,c} \cdot x_{i+u,j+v,c}$$
+
+---
+
+### Multiple output channels
+
+Convolutional layers can produce multiple output channels (feature maps):
+- **Input**: Height × Width × 3 (RGB)
+- **Filters**: N filters of size 3 × 3 × 3
+- **Output**: Height × Width × N
+
+Each filter learns to detect different features across all input channels.
+
+---
+
+### Flux.jl differences
+
+When working with multi-channel data in Flux.jl:
+
+```julia
+# Define a convolutional layer for RGB input
+conv_layer = Conv((3, 3), 3 => 32, relu)  # 3 input channels, 32 output channels
+
+# Input tensor shape: (height, width, channels, batch_size)
+x = randn(Float32, 28, 28, 3, 1)  # Single RGB image
+
+# Forward pass
+y = conv_layer(x)  # Output: (26, 26, 32, 1)
+```
+
+> [!NOTE]
+> Flux uses **(height, width, channels, batch)** ordering, different from some other frameworks that use **(batch, channels, height, width)**.
+
 
