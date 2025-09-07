@@ -202,8 +202,9 @@ Multiple filters can be applied in parallel at each convolutional layer. Each fi
 The LeNet-5 architecture, introduced by [LeCun, Bottou, Bengio, and Haffner (1998)](https://hal.science/hal-03926082/document), is considered as a foundational model for modern CNN architectures.
 
 ![Image](05-lecture/LeNet-5_architecture.svg)
+<!-- .element: style="margin-top:-100px;margin-bottom:-100px;" -->
 
-<small style="margin-top:-100px;">Source: [Zhang, Lipton, Li, and Smola. Dive into Deep Learning](https://github.com/d2l-ai/d2l-en)</small>
+<small >Source: [Zhang, Lipton, Li, and Smola. Dive into Deep Learning](https://github.com/d2l-ai/d2l-en)</small>
 
 ===
 
