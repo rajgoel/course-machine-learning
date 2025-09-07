@@ -208,12 +208,6 @@ The LeNet-5 architecture, introduced by [Lecun, Bottou, Bengio, Haffner (1998)](
 
 ### Padding
 
----
-
-<!-- .slide: data-auto-animate="true" -->
-
-### Padding
-
 The convolution we used so far, reduces dimensionality. This may be unwanted, in particular, when using multiple convolutional layers after each other.
  
 ![Image](05-lecture/no_padding.svg)
@@ -229,26 +223,11 @@ Padding can be used to maintain dimensionality.
  
 ![Image](05-lecture/padding.svg)
 
----
-
-<!-- .slide: data-auto-animate="true" -->
-
-### Padding
-
-Padding can be used to maintain dimensionality.
- 
-![Image](05-lecture/padding.svg)
-
 > [!NOTE]
 > Instead of zero padding, we can also fill missing numbers with averages or similar. 
+<!-- .element: class="fragment" -->
 
----
-
-<!-- .slide: data-auto-animate="true" -->
-
-### Striding
-
----
+===
 
 <!-- .slide: data-auto-animate="true" -->
 
