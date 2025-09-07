@@ -86,10 +86,11 @@ MNIST handwritten digit recognition demonstration using Flux.jl.
 - `test_size`: Number of test samples to use (default: 1000)
 - `learning_rate`: Learning rate for Adam optimizer (default: 0.001)
 - `epochs`: Number of training epochs (default: 50)
+- `batch_size`: Mini-batch size for SGD training (default: 128)
 - `verbose`: Print training progress (default: true)
 """
 function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, 
-              learning_rate=0.001, epochs=50, verbose=true)
+              learning_rate=0.001, epochs=50, batch_size=128, verbose=true)
     
     println("="^80)
     println("MNIST DIGIT RECOGNITION WITH FLUX.JL DEEP NEURAL NETWORK")
@@ -136,21 +137,34 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     loss(m, x, y) = Flux.Losses.crossentropy(m(x), y)
     optimizer = Flux.setup(Flux.Adam(learning_rate), model)
     
+    # Create data loader for mini-batch training
+    println("\n3. Creating mini-batch data loader...")
+    train_loader = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
+    
     # Train the network
-    println("\n3. Training network...")
+    println("\n4. Training network with mini-batch SGD...")
     println("   Learning rate: $(learning_rate), Epochs: $(epochs)")
-    println("   Optimizer: Adam")
+    println("   Batch size: $(batch_size), Optimizer: Adam")
     
     losses = Float64[]
     
     for epoch in 1:epochs
-        # Calculate loss for this epoch
-        epoch_loss = loss(model, X_train, Y_train)
-        push!(losses, epoch_loss)
+        epoch_losses = Float64[]
         
-        # Training step
-        grads = Flux.gradient(m -> loss(m, X_train, Y_train), model)[1]
-        Flux.update!(optimizer, model, grads)
+        # Train on mini-batches
+        for (x_batch, y_batch) in train_loader
+            # Calculate loss and gradients for this batch
+            batch_loss = loss(model, x_batch, y_batch)
+            push!(epoch_losses, batch_loss)
+            
+            # Training step
+            grads = Flux.gradient(m -> loss(m, x_batch, y_batch), model)[1]
+            Flux.update!(optimizer, model, grads)
+        end
+        
+        # Average loss for this epoch
+        epoch_loss = mean(epoch_losses)
+        push!(losses, epoch_loss)
         
         # Print progress
         if verbose && epoch % 10 == 0
@@ -159,7 +173,7 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     end
     
     # Evaluate on test set
-    println("\n4. Evaluating on test set...")
+    println("\n5. Evaluating on test set...")
     test_accuracy = evaluate_model(model, X_test, Y_test)
     
     # Summary
