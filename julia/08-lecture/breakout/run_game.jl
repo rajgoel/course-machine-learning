@@ -54,6 +54,7 @@ function breakout(control_file="08-lecture/breakout/control/keyboard.jl")
         game_include("core/game_logic.jl")
         game_include("core/screenshot.jl")
         game_include("core/display.jl")
+        game_include("core/flatten.jl")
         game_include("$control_path")
 
         # Import modules
@@ -61,6 +62,7 @@ function breakout(control_file="08-lecture/breakout/control/keyboard.jl")
         using .GameLogic
         using .Screenshot
         using .Display
+        using .Flatten
         using .Control
 
         # GameZero callbacks
