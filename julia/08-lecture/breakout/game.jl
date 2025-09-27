@@ -2,7 +2,6 @@
 Core game logic for Breakout.
 
 Manages game state, physics, collisions, and scoring mechanics.
-Designed to work with SDL rendering.
 """
 
 using Colors
