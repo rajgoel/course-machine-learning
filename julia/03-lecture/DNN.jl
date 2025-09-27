@@ -297,3 +297,75 @@ function predict(network::DNN, x::Vector{Float64})
     return activations[end]
 end
 
+"""
+    accuracy(network::DNN, X_test, Y_test)
+
+Calculate accuracy of DNN model on test data.
+
+# Arguments
+- `network::DNN`: Trained DNN network
+- `X_test::Vector{Vector{Float64}}`: Test input data
+- `Y_test::Vector{Vector{Float64}}`: Test target labels (one-hot encoded)
+
+# Returns
+- `Float64`: Test accuracy (0.0 to 1.0)
+"""
+function accuracy(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::Vector{Vector{Float64}})
+    correct = 0
+    total = length(X_test)
+    
+    for i in 1:total
+        â = predict(network, X_test[i])
+        predicted_class = argmax(â)
+        true_class = argmax(Y_test[i])
+        
+        if predicted_class == true_class
+            correct += 1
+        end
+    end
+    
+    return correct / total
+end
+
+"""
+    evaluate(network::DNN, X_test, Y_test, classes)
+
+Comprehensive evaluation of DNN model with confusion matrix and per-class metrics.
+
+# Arguments
+- `network::DNN`: Trained DNN network
+- `X_test::Vector{Vector{Float64}}`: Test input data
+- `Y_test::Vector{Vector{Float64}}`: Test target labels (one-hot encoded)
+- `classes`: Vector of class labels or number of classes
+
+# Returns
+- `NamedTuple`: (accuracy=Float64, predictions=Vector{Int}, true_labels=Vector{Int}, confusion_matrix=Matrix{Int})
+"""
+function evaluate(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::Vector{Vector{Float64}}, classes)
+    total = length(X_test)
+    predictions = Int[]
+    true_labels = Int[]
+    
+    for i in 1:total
+        â = predict(network, X_test[i])
+        predicted_class = argmax(â)
+        true_class = argmax(Y_test[i])
+        
+        push!(predictions, predicted_class)
+        push!(true_labels, true_class)
+    end
+    
+    # Calculate accuracy
+    correct = sum(predictions .== true_labels)
+    accuracy = correct / total
+    
+    # Create confusion matrix
+    num_classes = isa(classes, Integer) ? classes : length(classes)
+    confusion_matrix = zeros(Int, num_classes, num_classes)
+    for i in 1:total
+        confusion_matrix[true_labels[i], predictions[i]] += 1
+    end
+    
+    return (accuracy=accuracy, predictions=predictions, true_labels=true_labels, confusion_matrix=confusion_matrix)
+end
+

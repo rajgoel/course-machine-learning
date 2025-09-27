@@ -14,73 +14,6 @@ using Random
 # Import one_hot_encode from Lecture02
 using ..Lecture02: one_hot_encode
 
-"""
-    evaluate_model(network, X_test, Y_test)
-
-Evaluate neural network performance on test data and display detailed results.
-
-# Arguments
-- `network::DNN`: Trained neural network
-- `X_test::Vector{Vector{Float64}}`: Test input data
-- `Y_test::Vector{Vector{Float64}}`: Test target labels (one-hot encoded)
-
-# Returns
-- `Float64`: Test accuracy (0.0 to 1.0)
-
-Prints comprehensive evaluation including per-digit accuracy, confusion matrix summary, and sample predictions.
-"""
-function evaluate_model(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::Vector{Vector{Float64}})
-    correct = 0
-    total = length(X_test)
-    
-    predictions = Int[]
-    true_labels = Int[]
-    
-    println("Evaluating on $total test samples...")
-    
-    for i in 1:total
-        â = predict(network, X_test[i])
-        predicted_class = argmax(â) - 1  # Convert to 0-indexed (0-9 for MNIST)
-        true_class = argmax(Y_test[i]) - 1
-        
-        push!(predictions, predicted_class)
-        push!(true_labels, true_class)
-        
-        if predicted_class == true_class
-            correct += 1
-        end
-    end
-    
-    accuracy = correct / total
-    
-    println("Test Accuracy: $(round(accuracy*100, digits=2))%")
-    println("Correct predictions: $correct/$total")
-    
-    # Show confusion matrix summary
-    println("\nPer-digit accuracy:")
-    for digit in 0:9
-        digit_indices = findall(x -> x == digit, true_labels)
-        if length(digit_indices) > 0
-            digit_correct = sum(predictions[digit_indices] .== digit)
-            digit_accuracy = digit_correct / length(digit_indices)
-            println("  Digit $digit: $(round(digit_accuracy*100, digits=1))% ($(digit_correct)/$(length(digit_indices)))")
-        end
-    end
-    
-    # Show some example predictions
-    println("\nSample predictions:")
-    sample_indices = rand(1:total, min(10, total))
-    for i in sample_indices
-        â = predict(network, X_test[i])
-        predicted_class = argmax(â) - 1  # Convert to 0-indexed (0-9 for MNIST)
-        true_class = argmax(Y_test[i]) - 1
-        activation_string = join(["$d: $(round(â[d+1], digits=4))" for d in 0:9], ", ")
-        status = predicted_class == true_class ? "✓" : "✗"
-        println("  $status Predicted: $predicted_class, True: $true_class, Output: [ $(activation_string) ]")
-    end
-    
-    return accuracy
-end
 
 """
     load_mnist_data(train_size=5000, test_size=1000)
@@ -200,7 +133,38 @@ function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000
     
     # Evaluate on test set
     println("\n4. Evaluating on test set...")
-    test_accuracy = evaluate_model(dnn, X_test, Y_test)
+    # Get comprehensive evaluation results for MNIST (10 classes)
+    results = evaluate(dnn, X_test, Y_test, 10)
+    
+    println("Test Accuracy: $(round(results.accuracy*100, digits=2))%")
+    total = length(results.predictions)
+    correct = sum(results.predictions .== results.true_labels)
+    println("Correct predictions: $correct/$total")
+    
+    # Show confusion matrix summary
+    println("\nPer-digit accuracy:")
+    for digit in 1:10  # Classes 1-10 (MNIST digits 0-9)
+        digit_indices = findall(x -> x == digit, results.true_labels)
+        if length(digit_indices) > 0
+            digit_correct = sum(results.predictions[digit_indices] .== digit)
+            digit_accuracy = digit_correct / length(digit_indices)
+            println("  Digit $(digit-1): $(round(digit_accuracy*100, digits=1))% ($(digit_correct)/$(length(digit_indices)))")
+        end
+    end
+    
+    # Show some example predictions
+    println("\nSample predictions:")
+    sample_indices = rand(1:total, min(10, total))
+    for i in sample_indices
+        â = predict(dnn, X_test[i])
+        predicted_class = results.predictions[i] - 1  # Convert back to 0-indexed for display
+        true_class = results.true_labels[i] - 1
+        activation_string = join(["$d: $(round(â[d+1], digits=4))" for d in 0:9], ", ")
+        status = predicted_class == true_class ? "✓" : "✗"
+        println("  $status Predicted: $predicted_class, True: $true_class, Output: [ $(activation_string) ]")
+    end
+    
+    test_accuracy = results.accuracy
     
     # Summary
     println("\n" * "="^80)

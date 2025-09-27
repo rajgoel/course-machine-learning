@@ -45,8 +45,6 @@ include("DNN.jl")
 include("Demo.jl")
 
 # Essential public API:
-export DNN, train!, predict
-# Essential public API:
-export demo
+export DNN, train!, predict, accuracy, evaluate
 
 end # module Lecture03

@@ -1,31 +1,27 @@
 """
-Heuristic control module for Breakout.
+Heuristic control functions for Breakout.
 
 Provides AI agent that uses ball-following strategy to play the game.
 """
-module Control
-
-using GameZero
-using ..GameLogic
-
-export get_action
 
 """
-    get_action(g) -> Int
+    get_heuristic_action(game_state) -> Int
 
 Get paddle movement action using ball-following heuristic strategy.
 
 Implements a simple but effective strategy: move the paddle toward the ball's
 horizontal position with a small dead zone to reduce jittery movement.
 
+# Arguments
+- `game_state`: Current game state tuple
+
 # Returns
 - `-1`: Move paddle left (ball is to the left)
 - `1`: Move paddle right (ball is to the right)
 - `0`: No movement (ball is approximately centered)
 """
-function get_action(g)
-    # Get current game state
-    game_state = get_game_state()
+function get_heuristic_action(game_state)
+    # Extract game state components
     score, ball_x, ball_y, ball_vx, ball_vy, paddle_x, bricks = game_state
     
     # Ball-following heuristic with small dead zone
@@ -38,4 +34,3 @@ function get_action(g)
     end
 end
 
-end # module Control

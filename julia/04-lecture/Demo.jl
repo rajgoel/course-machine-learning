@@ -14,65 +14,6 @@ using Statistics
 
 include("mnist_data.jl")
 
-"""
-    evaluate_model(model, X_test, Y_test)
-
-Evaluate Flux model performance on test data and display detailed results.
-
-# Arguments
-- `model`: Trained Flux neural network
-- `X_test::Matrix{Float32}`: Test input data (features × samples)
-- `Y_test`: Test target labels (one-hot encoded, classes × samples)
-
-# Returns
-- `Float64`: Test accuracy (0.0 to 1.0)
-
-Prints comprehensive evaluation including per-digit accuracy and sample predictions.
-"""
-function evaluate_model(model, X_test::Matrix{Float32}, Y_test)
-    # Get predictions
-    ŷ = model(X_test)
-    
-    # Calculate overall accuracy
-    accuracy = mean(Flux.onecold(ŷ, 0:9) .== Flux.onecold(Y_test, 0:9))
-    
-    println("Test Accuracy: $(round(accuracy*100, digits=2))%")
-    
-    # Convert to class predictions for detailed analysis
-    predictions = Flux.onecold(ŷ, 0:9)  # Convert to class labels 0-9
-    true_labels = Flux.onecold(Y_test, 0:9)
-    
-    total = length(predictions)
-    correct = sum(predictions .== true_labels)
-    println("Correct predictions: $correct/$total")
-    
-    # Show per-digit accuracy
-    println("\nPer-digit accuracy:")
-    for digit in 0:9
-        digit_indices = findall(x -> x == digit, true_labels)
-        if length(digit_indices) > 0
-            digit_correct = sum(predictions[digit_indices] .== digit)
-            digit_accuracy = digit_correct / length(digit_indices)
-            println("  Digit $digit: $(round(digit_accuracy*100, digits=1))% ($(digit_correct)/$(length(digit_indices)))")
-        end
-    end
-    
-    # Show some example predictions
-    println("\nSample predictions:")
-    sample_indices = rand(1:total, min(10, total))
-    for i in sample_indices
-        predicted_class = predictions[i]
-        true_class = true_labels[i]
-        # Get softmax probabilities for this sample
-        probs = Flux.softmax(ŷ[:, i])
-        activation_string = join(["$d: $(round(probs[d+1], digits=4))" for d in 0:9], ", ")
-        status = predicted_class == true_class ? "✓" : "✗"
-        println("  $status Predicted: $predicted_class, True: $true_class, Output: [ $(activation_string) ]")
-    end
-    
-    return accuracy
-end
-
 
 """
     demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
@@ -114,67 +55,58 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     # Create network architecture for MNIST using Flux
     println("\n2. Creating Flux network architecture...")
     layers = [784, hidden_layers..., 10]
-    
-    # Build the model using Flux.Chain
-    model_layers = []
-    for i in 1:length(layers)-2
-        push!(model_layers, Flux.Dense(layers[i], layers[i+1], Flux.relu))
-    end
-    # Output layer with softmax
-    push!(model_layers, Flux.Dense(layers[end-1], layers[end]))
-    push!(model_layers, Flux.softmax)
-    
-    model = Flux.Chain(model_layers...)
+    network = FluxDNN(layers)
     
     println("   Network architecture: $(layers)")
-    println("   Total parameters: ", sum(length,Flux.trainables(model))  )
+    println("   Total parameters: ", sum(length,Flux.trainables(network.model)))
     for i in 1:length(layers)-1
         layer_params = layers[i] * layers[i+1] + layers[i+1]
         println("   - Layer $i: $(layers[i]) → $(layers[i+1]) ($layer_params parameters)")
     end
     
-    # Define loss function and optimizer
-    loss(m, x, y) = Flux.Losses.crossentropy(m(x), y)
-    optimizer = Flux.setup(Flux.Adam(learning_rate), model)
-    
-    # Create data loader for mini-batch training
-    println("\n3. Creating mini-batch data loader...")
-    train_loader = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
-    
     # Train the network
-    println("\n4. Training network with mini-batch SGD...")
+    println("\n3. Training network with mini-batch SGD...")
     println("   Learning rate: $(learning_rate), Epochs: $(epochs)")
     println("   Batch size: $(batch_size), Optimizer: Adam")
     
-    losses = Float64[]
+    losses = train!(network, X_train, Y_train, learning_rate, epochs; 
+                    batch_size=batch_size, verbose=verbose)
     
-    for epoch in 1:epochs
-        epoch_losses = Float64[]
-        
-        # Train on mini-batches
-        for (x_batch, y_batch) in train_loader
-            # Calculate loss and gradients for this batch
-            batch_loss = loss(model, x_batch, y_batch)
-            push!(epoch_losses, batch_loss)
-            
-            # Training step
-            grads = Flux.gradient(m -> loss(m, x_batch, y_batch), model)[1]
-            Flux.update!(optimizer, model, grads)
-        end
-        
-        # Average loss for this epoch
-        epoch_loss = mean(epoch_losses)
-        push!(losses, epoch_loss)
-        
-        # Print progress
-        if verbose && epoch % 10 == 0
-            println("   Epoch $epoch: Loss = $(round(epoch_loss, digits=6))")
+    # Evaluate on test set
+    println("\n4. Evaluating on test set...")
+    # Get comprehensive evaluation results for MNIST (10 classes)
+    results = evaluate(network, X_test, Y_test, 10)
+    
+    println("Test Accuracy: $(round(results.accuracy*100, digits=2))%")
+    total = length(results.predictions)
+    correct = sum(results.predictions .== results.true_labels)
+    println("Correct predictions: $correct/$total")
+    
+    # Show confusion matrix summary
+    println("\nPer-digit accuracy:")
+    for digit in 0:9  # MNIST digits 0-9
+        digit_indices = findall(x -> x == digit, results.true_labels)
+        if length(digit_indices) > 0
+            digit_correct = sum(results.predictions[digit_indices] .== digit)
+            digit_accuracy = digit_correct / length(digit_indices)
+            println("  Digit $digit: $(round(digit_accuracy*100, digits=1))% ($(digit_correct)/$(length(digit_indices)))")
         end
     end
     
-    # Evaluate on test set
-    println("\n5. Evaluating on test set...")
-    test_accuracy = evaluate_model(model, X_test, Y_test)
+    # Show some example predictions
+    println("\nSample predictions:")
+    sample_indices = rand(1:total, min(10, total))
+    for i in sample_indices
+        ŷ = network.model(X_test[:, i:i])  # Get prediction for single sample
+        predicted_class = results.predictions[i]
+        true_class = results.true_labels[i]
+        probs = Flux.softmax(ŷ[:, 1])
+        activation_string = join(["$d: $(round(probs[d+1], digits=4))" for d in 0:9], ", ")
+        status = predicted_class == true_class ? "✓" : "✗"
+        println("  $status Predicted: $predicted_class, True: $true_class, Output: [ $(activation_string) ]")
+    end
+    
+    test_accuracy = results.accuracy
     
     # Summary
     println("\n" * "="^80)
@@ -185,5 +117,5 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
         
     println("\nNetwork learned to classify handwritten digits with Flux.jl! ✓")
     
-    return model, losses
+    return network, losses
 end

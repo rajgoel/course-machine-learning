@@ -140,19 +140,22 @@ end
 
 Optimize neural network parameters using batch gradient descent.
 
-Implements gradient descent with
+Implements gradient descent with:
 - Maximum of 10,000 iterations 
 - Compute average gradients (∇W,∇b) across all samples
 - Stops when ‖(∇W,∇b)‖ < tolerance 1.0e-3
-- Update parameters: W ← W - α * ∇W, b ← b - α * ∇b with learning rate: α = 0.1
-
+- Update parameters: W ← W - α * ∇W, b ← b - α * ∇b with learning rate α = 0.1
 
 For each iteration:
- - 
+1. Compute average gradients across all training samples
+2. Calculate gradient norm for convergence checking
+3. Print progress information
+4. Check convergence criterion
+5. Update parameters using gradient descent rule
 
 # Arguments
-- `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs)
-- `b::Vector{Float64}`: Bias vector (n_outputs,)
+- `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs), modified in-place
+- `b::Vector{Float64}`: Bias vector (n_outputs,), modified in-place
 - `X::Vector{Vector{Float64}}`: Training input data
 - `Y::Vector{Vector{Float64}}`: Training target data (one-hot encoded)
 

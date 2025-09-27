@@ -1,14 +1,9 @@
 """
-Module for flattening the game state.
+Functions for flattening the game state.
 
 Converts game state into flattened vectors suitable for neural network input.
 Provides one-hot encoding for brick positions.
 """
-module Flatten
-
-using ..GameLogic
-
-export flatten, vector_size
 
 """
     flatten(game_state) -> Vector{Float32}
@@ -35,8 +30,8 @@ function flatten(game_state)
     # One-hot encoding for each brick position
     for brick in bricks
         # Convert to 0-based grid coordinates
-        col = (brick.brick.x - WALL_THICKNESS) ÷ BRICK_WIDTH
-        row = (brick.brick.y - (SCORE_AREA_HEIGHT + WALL_THICKNESS + 30)) ÷ BRICK_HEIGHT
+        col = Int((brick.rect.x - WALL_THICKNESS) ÷ BRICK_WIDTH)
+        row = Int((brick.rect.y - (SCORE_AREA_HEIGHT + WALL_THICKNESS + 30)) ÷ BRICK_HEIGHT)
         
         # Assert valid indices
         @assert 0 ≤ row < ROWS "Row index $row out of bounds [0, $(ROWS-1)]"
@@ -55,4 +50,3 @@ function flatten(game_state)
     return output
 end
 
-end # module Flatten
