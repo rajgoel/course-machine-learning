@@ -40,12 +40,12 @@ const GAME_HEIGHT = 210  # Classic Atari height
 const BALL_SIZE = 2
 const PADDLE_WIDTH = 20
 const PADDLE_HEIGHT = 3
-const MAX_ANGLE = 70  # Maximum ball angle deflection
+const MAX_VX = 1.0  # Maximum vertical speed
 
 # Mutable game state variables
 score = 0
 ball = Rect(GAME_WIDTH / 2, GAME_HEIGHT / 2, BALL_SIZE, BALL_SIZE)
-ball_vel = (0, 0)
+ball_vel = (0.0, 0.0)
 paddle = Rect(GAME_WIDTH / 2 - PADDLE_WIDTH/2, GAME_HEIGHT - 8, PADDLE_WIDTH, PADDLE_HEIGHT)
 bricks = []
 
@@ -69,7 +69,7 @@ function reset(keep_score=false)
     # Point values for each row (top to bottom: 10,8,6,4,2,1)
     point_values = [10, 8, 6, 4, 2, 1]
     
-    # Create brick wall positioned below walls with spacing
+    # Create brick wall positioned below walls
     brick_start_x = WALL_THICKNESS + 1
     brick_start_y = SCORE_AREA_HEIGHT + WALL_THICKNESS + 30
     for x in 1:COLS
@@ -89,13 +89,13 @@ function reset(keep_score=false)
     ball_start_y = brick_start_y + ROWS * BRICK_HEIGHT + 5
     ball.x = GAME_WIDTH / 2.0 - BALL_SIZE/2
     ball.y = ball_start_y - BALL_SIZE/2
-    global ball_vel = (rand(-60:60), 80)
+    global ball_vel = (rand() * 1.5 - .75, 1.0)  # Random vx in [-.75,.75]
     
     # Warm-up collision detection to avoid first-hit compilation delay
     collide(ball, paddle)
 end
 
-function update_step(dt)
+function update_step()
     """Update ball position and handle collisions"""
     global ball_vel
     vx, vy = ball_vel
@@ -106,8 +106,8 @@ function update_step(dt)
     end
     
     # Move ball rect directly
-    ball.x += vx * dt
-    ball.y += vy * dt
+    ball.x += vx
+    ball.y += vy
     
     # Wall collisions
     if ball.x <= WALL_THICKNESS
@@ -126,7 +126,7 @@ function update_step(dt)
     # Paddle collision
     if collide(ball, paddle)
         # Apply angle based on where ball hits paddle
-        vx = ((ball.x + BALL_SIZE/2) - (paddle.x + paddle.w/2)) / (paddle.w / 2) * MAX_ANGLE
+        vx = clamp( ((ball.x + BALL_SIZE/2) - (paddle.x + paddle.w/2)) / (paddle.w / 2), -1.0, 1.0) * MAX_VX
         vy = -abs(vy)
     else
         # Brick collisions
@@ -176,12 +176,27 @@ function update(action)
     end
     
     # Update ball physics and collisions
-    return update_step(1 / 60)
+    return update_step()
 end
 
-function get_game_state()
+function get_state()
     """Get current game state for RL agents"""
-    return (score, ball.x + BALL_SIZE/2, ball.y + BALL_SIZE/2, ball_vel[1], ball_vel[2], paddle.x + paddle.w/2, bricks)
+    return (score=score, 
+            ball_cx=ball.x + BALL_SIZE/2,
+            ball_cy=ball.y + BALL_SIZE/2, 
+            ball_vx=ball_vel[1],
+            ball_vy=ball_vel[2], 
+            paddle_cx=paddle.x + paddle.w/2, 
+            bricks=bricks)
+end
+
+function get_action_mask(game_state)
+    """Get boolean mask for valid actions given current game state"""
+    # Actions: [-1, 0, 1] -> [move_left, stay, move_right]
+    can_move_left = game_state.paddle_cx - PADDLE_WIDTH/2 > WALL_THICKNESS + 1
+    can_move_right = game_state.paddle_cx + PADDLE_WIDTH/2 < GAME_WIDTH - WALL_THICKNESS + 1 
+    
+    return [can_move_left, true, can_move_right]
 end
 
 # Initialize game

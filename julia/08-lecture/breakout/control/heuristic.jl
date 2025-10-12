@@ -22,12 +22,12 @@ horizontal position with a small dead zone to reduce jittery movement.
 """
 function get_heuristic_action(game_state)
     # Extract game state components
-    score, ball_x, ball_y, ball_vx, ball_vy, paddle_x, bricks = game_state
+    score, ball_cx, ball_cy, ball_vx, ball_vy, paddle_cx, bricks = game_state
     
     # Ball-following heuristic with small dead zone
-    if ball_x < paddle_x - 1
+    if ball_cx < paddle_cx - 1
         return -1  # Move left
-    elseif ball_x > paddle_x + 1
+    elseif ball_cx > paddle_cx + 1
         return 1   # Move right
     else
         return 0   # Stay in place (dead zone)

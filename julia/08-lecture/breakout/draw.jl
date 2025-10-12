@@ -52,6 +52,39 @@ function draw_digit(pixel_func, digit, x_pos, y_pos, scale=1)
 end
 
 """
+    draw_hash(pixel_func, x_pos, y_pos, scale=2)
+
+Draw a hash '#' symbol using the provided pixel callback function.
+
+# Arguments
+- `pixel_func`: Function(x, y) called for each pixel to draw
+- `x_pos, y_pos`: Position to draw at
+- `scale`: Scaling factor
+"""
+function draw_hash(pixel_func, x_pos, y_pos, scale=2)
+    # 5x5 pattern for '#' symbol
+    hash_pattern = [
+        0,1,0,1,0,
+        1,1,1,1,1,
+        0,1,0,1,0,
+        1,1,1,1,1,
+        0,1,0,1,0
+    ]
+    
+    for row in 1:5, col in 1:5
+        pixel_idx = (row-1) * 5 + col
+        hash_pattern[pixel_idx] == 1 || continue
+        
+        # Draw scaled pixel blocks
+        for dy in 0:(scale-1), dx in 0:(scale-1)
+            y_coord = y_pos + (row-1) * scale + dy
+            x_coord = x_pos + (col-1) * scale + dx
+            pixel_func(x_coord, y_coord)
+        end
+    end
+end
+
+"""
     draw_score(pixel_callback, score_value, x, y, scale=2, spacing=4)
 
 Draw a multi-digit score using bitmap font rendering.
@@ -76,26 +109,48 @@ function draw_score(pixel_callback, score_value, x, y, scale=2, spacing=4)
 end
 
 """
-    draw_game(game_state, draw_pixel)
+    draw_game(game_state, draw_pixel, current_game)
 
 Draw the complete game state using the provided pixel drawing function.
 
 # Arguments
-- `game_state`: Current game state tuple (score, ball_x, ball_y, ball_vx, ball_vy, paddle_x, bricks)
+- `game_state`: Current game state tuple (score, ball_cx, ball_cy, ball_vx, ball_vy, paddle_cx, bricks)
 - `draw_pixel(x, y, color)`: Callback function to draw a pixel at (x,y) with given color
+- `current_game`: Current game counter to display
 
 The color parameter format depends on the target:
 - For SDL: (r, g, b, a) as UInt8 values 0-255
 - For screenshots: grayscale Float64 value 0.0-1.0
 """
-function draw_game(game_state, draw_pixel)
-    score, ball_x, ball_y, ball_vx, ball_vy, paddle_x, bricks = game_state
+function draw_game(game_state, draw_pixel, current_game)
+    score, ball_cx, ball_cy, ball_vx, ball_vy, paddle_cx, bricks = game_state
     
-    # Draw score digits
-    score_x_start = GAME_WIDTH ÷ 2 - length(string(score)) * 4
+    # Draw score digits (centered in left half)
+    score_x_start = GAME_WIDTH ÷ 4 - length(string(score)) * 2
     draw_score(score, score_x_start, 6, 2, 4) do px, py
         if px >= 1 && px <= GAME_WIDTH && py >= 1 && py <= GAME_HEIGHT
             draw_pixel(px, py, (128, 128, 128, 255))  # Gray color for score
+        end
+    end
+    
+    # Draw game counter (centered in right half) with '#' prefix
+    hash_width = 5 * 2  # 5x5 pattern with scale=2
+    number_width = length(string(current_game)) * 4 * 2  # digits with scale=2 and spacing=4
+    total_width = hash_width + 2 + number_width  # hash + gap + number
+    game_counter_x_start = 3 * GAME_WIDTH ÷ 4 - total_width ÷ 2
+    
+    # Draw '#' symbol
+    draw_hash(game_counter_x_start, 6, 2) do px, py
+        if px >= 1 && px <= GAME_WIDTH && py >= 1 && py <= GAME_HEIGHT
+            draw_pixel(px, py, (128, 128, 128, 255))  # Gray color for hash
+        end
+    end
+    
+    # Draw the number after the '#' symbol
+    number_x_start = game_counter_x_start + hash_width + 2
+    draw_score(current_game, number_x_start, 6, 2, 4) do px, py
+        if px >= 1 && px <= GAME_WIDTH && py >= 1 && py <= GAME_HEIGHT
+            draw_pixel(px, py, (128, 128, 128, 255))  # Gray color for game counter
         end
     end
     
@@ -144,8 +199,8 @@ function draw_game(game_state, draw_pixel)
     end
     
     # Draw paddle (white)
-    paddle_x_start = max(WALL_THICKNESS+1, Int(floor(paddle_x - PADDLE_WIDTH/2)))
-    paddle_x_end = min(GAME_WIDTH-WALL_THICKNESS+1, Int(ceil(paddle_x + PADDLE_WIDTH/2)))
+    paddle_x_start = max(WALL_THICKNESS+1, Int(floor(paddle_cx - PADDLE_WIDTH/2)))
+    paddle_x_end = min(GAME_WIDTH-WALL_THICKNESS+1, Int(ceil(paddle_cx + PADDLE_WIDTH/2)))
     paddle_y_start = Int(GAME_HEIGHT - 8)
     paddle_y_end = min(GAME_HEIGHT, paddle_y_start + PADDLE_HEIGHT)
     
@@ -156,12 +211,17 @@ function draw_game(game_state, draw_pixel)
     end
     
     # Draw ball (white)
-    ball_x_int = Int(round(ball_x))
-    ball_y_int = Int(round(ball_y))
-    ball_size = BALL_SIZE
+    ball_center_x = Int(round(ball_cx))
+    ball_center_y = Int(round(ball_cy))
+    half_size = BALL_SIZE ÷ 2
     
-    for x in ball_x_int-ball_size÷2:ball_x_int+ball_size÷2
-        for y in ball_y_int-ball_size÷2:ball_y_int+ball_size÷2
+    left = ball_center_x - half_size
+    right = ball_center_x + half_size
+    top = ball_center_y - half_size
+    bottom = ball_center_y + half_size
+    
+    for x in left:right
+        for y in top:bottom
             if x >= 1 && x <= GAME_WIDTH && y >= 1 && y <= GAME_HEIGHT
                 draw_pixel(x, y, (255, 255, 255, 255))  # White ball
             end

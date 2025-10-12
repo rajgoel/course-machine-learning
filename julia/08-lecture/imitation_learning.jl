@@ -94,7 +94,7 @@ function collect_expert_data(num_episodes::Int=100, max_steps_per_episode::Int=1
         
         while episode_steps < max_steps_per_episode
             # Get current game state
-            game_state = Breakout.get_game_state()
+            game_state = Breakout.get_state()
             
             # Get expert action from heuristic
             action = expert_action(game_state)
@@ -268,7 +268,7 @@ function evaluate_agent(agent::ImitationAgent, num_episodes::Int=10)
         
         while episode_steps < 2000  # Max steps per episode
             # Get current state and agent action
-            game_state = Breakout.get_game_state()
+            game_state = Breakout.get_state()
             action = get_action(agent, game_state)
             
             # Update game with action
@@ -333,6 +333,7 @@ function save_agent(agent::ImitationAgent, filepath::String)
     # Save agent data
     jldsave(filepath; 
         network_layers = agent.network.layers,
+        hidden_layers = agent.network.layers[2:end-1],  # Extract just hidden layers
         network_state = Flux.state(agent.network.model),
         action_classes = agent.action_classes
     )
@@ -375,9 +376,9 @@ end
 Convenient interface function for training imitation learning agent.
 """
 function train_imitation(; num_episodes=50, max_steps_per_episode=500,
-                        hidden_layers=[32], learning_rate=0.001,
+                        hidden_layers=[64,16], learning_rate=0.001,
                         epochs=50, batch_size=64, validation_split=0.2,
-                        model_path="imitation_agent.jld2", verbose=true)
+                        model_path="models/imitation_agent.jld2", verbose=true)
     
     println("="^80)
     println("TRAINING IMITATION LEARNING AGENT")
@@ -413,7 +414,7 @@ end
 
 Convenient interface function for running Breakout with imitation agent.
 """
-function run_imitation(; model_path="imitation_agent.jld2")
+function run_imitation(; model_path="models/imitation_agent.jld2")
     println("="^60)
     println("BREAKOUT WITH IMITATION LEARNING AGENT")
     println("="^60)
@@ -440,5 +441,5 @@ function run_imitation(; model_path="imitation_agent.jld2")
     
     # Use the Breakout module that's already loaded
     println("Using imitation agent control...")
-    Breakout.breakout(agent_control)  # Default autorestart=true for interactive play
+    Breakout.breakout(agent_control;speed=nothing,max_steps=20000,autorestart=true)
 end

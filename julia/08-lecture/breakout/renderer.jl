@@ -61,7 +61,7 @@ function process_events(game_state=nothing)
     return true  # Continue
 end
 
-function render_display(game_state)
+function render_display(game_state, current_game)
     # 1. Clear the screen
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255)  # Black background
     SDL_RenderClear(renderer)
@@ -74,7 +74,7 @@ function render_display(game_state)
             SDL_SetRenderDrawColor(renderer, r, g, b, a)
             pixel_rect = SDL_Rect(x-1, y-1, 1, 1)  # Convert 1-based to 0-based coordinates
             SDL_RenderFillRect(renderer, Ref(pixel_rect))
-        end)
+        end, current_game)
     end
     
     # 3. Present the frame
@@ -91,12 +91,12 @@ SDL rendering, making it suitable for reinforcement learning agents and headless
 training environments.
 
 # Arguments
-- `game_state`: Tuple of (score, ball_x, ball_y, ball_vx, ball_vy, paddle_x, bricks)
+- `game_state`: Tuple of (score, ball_cx, ball_cy, ball_vx, ball_vy, paddle_cx, bricks)
 
 # Returns
 - 2D array (GAME_HEIGHT × GAME_WIDTH) with grayscale values 0.0-1.0
 """
-function render_screenshot(game_state)
+function render_screenshot(game_state, current_game=1)
     # Initialize empty game field
     pixels = zeros(Float64, GAME_HEIGHT, GAME_WIDTH)
     
@@ -108,7 +108,7 @@ function render_screenshot(game_state)
             gray_value = (0.299 * r + 0.587 * g + 0.114 * b) / 255.0
             pixels[y, x] = gray_value
         end
-    end)
+    end, current_game)
     
     return pixels
 end
