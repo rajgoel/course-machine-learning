@@ -146,7 +146,7 @@ where
 
 We can train our neural network by minimizing the squared error between the prediction and the target obtained by the Bellman equation
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{r_t) + \gamma \cdot \max_{X} Q_\theta(S_{t+1}, X)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_\theta(S_{t+1}, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
 
 > [!WARNING]
 > Consecutive observations are highly correlated. This can cause **overfitting** to recent training data.
