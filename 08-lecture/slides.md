@@ -121,7 +121,7 @@ In DQN, we use a neural network with parameters $\theta$ to learn an **action-va
 
 If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value, we would have
 
-`$$Q_\theta(S_t, X_t) = \underbrace{R(S_t, X_t)}_{= f(S_{t+1}) - f(S_t)} + \max_{X} Q_\theta(S_{t+1}, X)$$`
+`$$Q_\theta(S_t, X_t) = r_t + \max_{X} Q_\theta(S_{t+1}, X)$$`
 
 
 ---
@@ -130,14 +130,14 @@ If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always 
 
 To learn the action-value function $Q_\theta(S,X)$, we use a sample-based form of the Bellman equation:
 
-`$$Q_\theta(S_t, X_t) = R(S_t, X_t) + \class{highlight}{\gamma} \cdot \max_{X} Q_\theta(S_{t+1}, X)$$`
+`$$Q_\theta(S_t, X_t) = r_t + \gamma \cdot \max_{X} Q_\theta(S_{t+1}, X)$$`
 
 where
 - $\gamma \in [0,1]$ is a so-called **discount factor** for future rewards.
 
 
 > [!NOTE]
-> - Observed transitions `$\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$` allow us to omit computing expected values.
+> - Observed transitions `$\big(S_t,X_t,r_t,S_{t+1}\big)$` allow us to omit computing expected values.
 > - With $\gamma < 1$, future errors due to imperfect $Q$-values are discounted.
 
 ---
@@ -146,7 +146,7 @@ where
 
 We can train our neural network by minimizing the squared error between the prediction and the target obtained by the Bellman equation
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{R(S_t, X_t) + \gamma \max_{X} Q_\theta(S_{t+1}, X)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{r_t) + \gamma \cdot \max_{X} Q_\theta(S_{t+1}, X)}_{\textrm{Bellman target}}\Big)^2$$`
 
 > [!WARNING]
 > Consecutive observations are highly correlated. This can cause **overfitting** to recent training data.
