@@ -106,23 +106,27 @@ deactivate Environment
 
 ## Deep Q-Networks (DQN)
 
-In DQN, we use a neural network with parameters $\theta$ to learn an **action-value function** $Q_\theta(S,X)$ that estimates the expected cumulative reward from taking decision X in state S.
+In DQN, we use a neural network with parameters $\theta$ to learn an **action-value function** $Q_\theta(S,X)$ that estimates the expected cumulative reward from taking decision $X$ in state $S$.
 
 - The state $S$ defines the activations of the **input layer**.
 - Each **output neuron** provides the $Q$-value for one possible decision (i.e. action).
-- After training, the agent selects the decision with highest $Q$-value: $X_t = \arg\!\max_X Q_\theta(S_t, X)$.
-- During training, exploration strategies (e.g., ε-greedy) are used to improve the accuracy of $Q$-values of other actions.
+
+> [!NOTE]
+> - After training, the agent selects the decision with highest $Q$-value.
+> - During training, exploration strategies (e.g., ε-greedy) are used to improve the accuracy of $Q$-values of other actions.
 
 ---
 
 ## Q-learning principle
 
-If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value: $X_t = \arg\!\max_X Q_\theta(S_t, X)$, we would have
+If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value, we would have
 
 $$Q_\theta(S_t, X_t) = R(S_t, X_t) + \max_{X} Q_\theta(S_{t+1}, X)$$
+
 where
-- $R(S_t, X_t) =f(g(S_t, X_t, W_{t+1})) - f(S_t)$ is the reward of taking decision $X_t$ and
-- $S_{t+1} = g(S_t, X_t, W_{t+1})$ is the next state
+
+- $S_{t+1} = g(S_t, X_t, W_{t+1})$ is the next state, and
+- $R(S_t, X_t) = f(S_{t+1}) - f(S_t)$ is the immediate reward of taking decision $X_t$.
 
 ---
 
@@ -130,11 +134,9 @@ where
 
 To learn the action-value function $Q_\theta(S,X)$, we use a sample-based form of the Bellman equation:
 
-$$Q_\theta(S_t, X_t) = R(S_t, X_t) + \class{highlight}{\gamma} \max_{X} Q_\theta(S_{t+1}, X)$$
+$$Q_\theta(S_t, X_t) = R(S_t, X_t) + \class{highlight}{\gamma} \cdot \max_{X} Q_\theta(S_{t+1}, X)$$
 
 where
-- $R(S_t, X_t) = f(g(S_t, X_t, W_{t+1})) - f(S_t)$ is the immediate reward of taking decision $X_t$ and
-- $S_{t+1} = g(S_t, X_t, W_{t+1})$ is the next state
 - $\gamma \in [0,1]$ is a so-called **discount factor** for future rewards.
 
 
@@ -148,12 +150,15 @@ where
 
 We can train our neural network by minimizing the squared error between the prediction and the target obtained by the Bellman equation
 
-$$\mathscr{L}(\theta) = \Big(Q_\theta(S_t, X_t) - \underbrace{R(S_t, X_t) + \gamma \max_{X} Q_\theta(S_{t+1}, X)}_{\textrm{Bellman target}}\Big)^2$$
+$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{R(S_t, X_t) + \gamma \max_{X} Q_\theta(S_{t+1}, X)}_{\textrm{Bellman target}}\Big)^2$$
 
 > [!WARNING]
-> Training has to address major challenges, in particular:
-> - Consecutive observations $\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$, $\big(S_{t+1},X_{t+1},R(S_{t+1}, X_{t+1}),S_{t+2}\big)$, etc. are highly correlated. This can cause **overfitting** to recent training data.
-> - Both prediction and target depend on $\theta$ which is updated during training. This can create **instability** and can prevent convergence.
+> Consecutive observations $\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$, $\big(S_{t+1},X_{t+1},R(S_{t+1}, X_{t+1}),S_{t+2}\big)$, etc. are highly correlated. This can cause **overfitting** to recent training data.
+<!-- .element: class="fragment" -->
+
+> [!WARNING]
+> Both prediction and target depend on $\theta$ which is updated during training. This can create **instability** and can prevent convergence.
+<!-- .element: class="fragment" -->
 
 ---
 
