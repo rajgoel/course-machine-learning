@@ -110,17 +110,14 @@ In DQN, we use a neural network with parameters $\theta$ to learn an **action-va
 
 - The state $S$ defines the activations of the **input layer**.
 - Each **output neuron** provides the $Q$-value for one possible decision (i.e. action).
-- After training, the agent selects the decision with highest $Q$-value: $X_t = \argmax_X Q_theta(S_t, X)$.
+- After training, the agent selects the decision with highest $Q$-value: $X_t = \arg\!\max_X Q_\theta(S_t, X)$.
 - During training, exploration strategies (e.g., ε-greedy) are used to improve the accuracy of $Q$-values of other actions.
-
-> [!IMPORTANT]
-> We assume that in every state at most $k$ different decisions can be taken.
 
 ---
 
 ## Q-learning principle
 
-If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value: $X_t = \argmax_X Q_\theta(S_t, X)$, we would have
+If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value: $X_t = \arg\!\max_X Q_\theta(S_t, X)$, we would have
 
 $$Q_\theta(S_t, X_t) = R(S_t, X_t) + \max_{X} Q_\theta(S_{t+1}, X)$$
 where
