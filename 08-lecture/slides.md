@@ -155,7 +155,7 @@ $$\mathscr{L}(\theta) = \Big(Q_\theta(S_t, X_t) - \underbrace{R(S_t, X_t) + \gam
 
 > [!WARNING]
 > Training has to address major challenges, in particular:
-> - Consecutive observations $\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$ and $\big(S_{t+1},X_{t+1},R(S_{t+1}, X_{t+1}),S_{t+2}\big)$ are highly correlated. This can cause **overfitting** to recent training data.
+> - Consecutive observations $\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$, $\big(S_{t+1},X_{t+1},R(S_{t+1}, X_{t+1}),S_{t+2}\big)$, etc. are highly correlated. This can cause **overfitting** to recent training data.
 > - Both prediction and target depend on $\theta$ which is updated during training. This can create **instability** and can prevent convergence.
 
 ---
