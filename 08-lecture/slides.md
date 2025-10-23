@@ -121,12 +121,12 @@ In DQN, we use a neural network with parameters $\theta$ to learn an **action-va
 
 If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value, we would have
 
-$$Q_\theta(S_t, X_t) = R(S_t, X_t) + \max_{X} Q_\theta(S_{t+1}, X)$$
+`$$Q_\theta(S_t, X_t) = R(S_t, X_t) + \max_{X} Q_\theta(S_{t+1}, X)$$`
 
 where
 
-- $S_{t+1} = g(S_t, X_t, W_{t+1})$ is the next state, and
-- $R(S_t, X_t) = f(S_{t+1}) - f(S_t)$ is the immediate reward of taking decision $X_t$.
+- `$S_{t+1} = g(S_t, X_t, W_{t+1})$` is the next state, and
+- `$R(S_t, X_t) = f(S_{t+1}) - f(S_t)$` is the immediate reward of taking decision $X_t$.
 
 ---
 
@@ -134,14 +134,14 @@ where
 
 To learn the action-value function $Q_\theta(S,X)$, we use a sample-based form of the Bellman equation:
 
-$$Q_\theta(S_t, X_t) = R(S_t, X_t) + \class{highlight}{\gamma} \cdot \max_{X} Q_\theta(S_{t+1}, X)$$
+`$$Q_\theta(S_t, X_t) = R(S_t, X_t) + \class{highlight}{\gamma} \cdot \max_{X} Q_\theta(S_{t+1}, X)$$`
 
 where
 - $\gamma \in [0,1]$ is a so-called **discount factor** for future rewards.
 
 
 > [!NOTE]
-> - Observed transitions $\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$ allow us to omit computing expected values.
+> - Observed transitions `$\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$` allow us to omit computing expected values.
 > - With $\gamma < 1$, future errors due to imperfect $Q$-values are discounted.
 
 ---
@@ -150,10 +150,10 @@ where
 
 We can train our neural network by minimizing the squared error between the prediction and the target obtained by the Bellman equation
 
-$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{R(S_t, X_t) + \gamma \max_{X} Q_\theta(S_{t+1}, X)}_{\textrm{Bellman target}}\Big)^2$$
+`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{R(S_t, X_t) + \gamma \max_{X} Q_\theta(S_{t+1}, X)}_{\textrm{Bellman target}}\Big)^2$$`
 
 > [!WARNING]
-> Consecutive observations $\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$, $\big(S_{t+1},X_{t+1},R(S_{t+1}, X_{t+1}),S_{t+2}\big)$, etc. are highly correlated. This can cause **overfitting** to recent training data.
+> Consecutive observations `$\big(S_t,X_t,R(S_t, X_t),S_{t+1}\big)$`, `$\big(S_{t+1},X_{t+1},R(S_{t+1}, X_{t+1}),S_{t+2}\big)$`, etc. are highly correlated. This can cause **overfitting** to recent training data.
 <!-- .element: class="fragment" -->
 
 > [!WARNING]
