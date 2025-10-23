@@ -67,6 +67,7 @@ The goal is to **maximize** $f(S_T)$, where $T$ is the final time step.
 
 ---
 
+## Reinforcement learning for sequential decision processes
 
 <!--
 @startuml
