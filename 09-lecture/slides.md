@@ -75,17 +75,17 @@ where
 
 ## Trajectory-based gradient ascent
 
-For a given trajectory $(S_0, X_1, r_1, S_1, \ldots, S_T)$ of an episode, we simplify
+For a given trajectory $(S_0, X_1, r_1, S_1, \ldots, S_T)$ of an episode, we replace
 
 `$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
 
-to
+by
 
 `$$\sum_{t=1}^{T}  \Big( 1 \cdot \sum_{k=t}^T r_k \cdot  1 \cdot \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!NOTE]
 > For the given trajectory, the probability terms are replaced by 1 or 0 based on the actual observation. 
-> In repeated gradient ascent steps, this simplification proportionally approximates `$\nabla_{\!\theta}\ J(\theta)$`.
+> Averaged over multiple trajectories, this proportionally approximates `$\nabla_{\!\theta}\ J(\theta)$`.
 
 ---
 
