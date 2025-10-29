@@ -104,7 +104,20 @@ deactivate Environment
 
 ===
 
-## Deep Q-Networks (DQN)
+## Value-based methods
+
+---
+
+### Value functions
+
+Value-based methods learn value functions to estimate expected cumulative rewards:
+
+- **State-value function** $V(S)$: expected cumulative reward from state $S$
+- **Action-value function** $Q(S,X)$: expected cumulative reward from taking action $X$ in state $S$
+
+---
+
+### Deep Q-Networks (DQN)
 
 In DQN, we use a neural network with parameters $\theta$ to learn an **action-value function** $Q_\theta(S,X)$ that estimates the expected cumulative reward from taking decision $X$ in state $S$.
 
@@ -117,7 +130,7 @@ In DQN, we use a neural network with parameters $\theta$ to learn an **action-va
 
 ---
 
-## Q-learning principle
+### Q-learning principle
 
 If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value, we would have
 
@@ -126,7 +139,7 @@ If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always 
 
 ---
 
-## Bellman equation (sample-based)
+### Bellman equation (sample-based)
 
 To learn the action-value function $Q_\theta(S,X)$, we use a sample-based form of the Bellman equation:
 
@@ -142,7 +155,7 @@ where
 
 ---
 
-## Loss function and challenges in training
+### Loss function and challenges in training
 
 We can train our neural network by minimizing the squared error between the prediction and the target obtained by the Bellman equation
 
@@ -158,7 +171,7 @@ We can train our neural network by minimizing the squared error between the pred
 
 ---
 
-## Experience replay
+### Experience replay
 
 To reduce correlation of observations used for training, we can create a **replay buffer** in which we store observations.
 
@@ -170,7 +183,7 @@ During training we randomly pick observations from the replay buffer, and run st
 
 ---
 
-## Target networks
+### Target networks
 
 To address the **instability** problem, we can use a **target network** with parameters $\hat\theta$ and train our neural network by minimising
 
@@ -180,7 +193,7 @@ The target network has the same architecture as the main network and is updated 
 
 ---
 
-## DQN Algorithm
+### DQN Algorithm
 
 > [!TODO]
 
