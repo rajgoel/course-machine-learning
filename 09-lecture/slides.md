@@ -54,18 +54,41 @@ where
 
 <!-- .slide: data-auto-animate="true" -->
 
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \frac{\pi_\theta(S,X)}{\pi_\theta(S,X)} \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \frac{\nabla_{\!\theta} \ \pi_\theta(S,X)}{\pi_\theta(S,X)}   \Big)$$`
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
 ## Trajectory-based gradient ascent
 
-For a given trajectory $(S_0, X_1, r_1, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we approximate
+For a given trajectory $(S_0, X_1, r_1, S_1, \ldots, S_T)$ of an episode, we simplify
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
 
-by
+<!--
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \ln \pi_\theta(S,X) \Big)$$`
+-->
 
-`$$\sum_{t=1}^{T}  \Big( 1 \cdot \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_{t-1},X_t)} \cdot   \nabla_{\!\theta}\ \pi_\theta(S_{t-1},X_t) \Big)$$`
+to
+
+`$$\sum_{t=1}^{T}  \Big( 1 \cdot \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_{t-1},X_t)} \cdot  1 \cdot \nabla_{\!\theta}\ \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!NOTE]
-> For the given trajectory, we use $\mu_{\pi_\theta}(S)=1$ for all states in the trajectory and $\mu_{\pi_\theta}(S)=0$ for all other states.
+> For the given trajectory, we only consider the chosen decisions and simplify probabilities. In repeated gradient ascent steps, this simplification approximates $\nabla_{\!\theta}\ J(\theta)$.
+
 
 
 ---
