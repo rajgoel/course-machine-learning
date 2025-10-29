@@ -18,8 +18,8 @@ We can use a neural network with parameters $\theta$ to learn a **policy functio
 
 The goal is to find a policy that
 
-- creates a trajectory `$(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$`  and
-- maximises `$J(\theta) = \sum_{t=0}^T r_t$`
+- creates a trajectory `$(S_0, X_1, r_1, S_1, X_1, r_1, \ldots, S_T)$`  and
+- maximises `$J(\theta) = \sum_{t=1}^T r_t$`
 
 ---
 
@@ -56,16 +56,16 @@ where
 
 ## Trajectory-based gradient ascent
 
-For a given trajectory $(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we approximate
+For a given trajectory $(S_0, X_1, r_1, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we approximate
 
 `$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$`
 
 by
 
-`$$\sum_{t=0}^{T-1}  \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_t,X_t)} \cdot   \nabla_{\!\theta}\ \pi_\theta(X_t,S_t)$$`
+`$$\sum_{t=1}^{T}  \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_t,X_t)} \cdot   \nabla_{\!\theta}\ \pi_\theta(X_t,S_t)$$`
 
 > [!NOTE]
-> For the given trajectory, we can set $\mu_{\pi_\theta}(S)=1$ for all states in the trajectory and $\mu_{\pi_\theta}(S)=0$ for all other states.
+> For the given trajectory, we use $\mu_{\pi_\theta}(S)=1$ for all states in the trajectory and $\mu_{\pi_\theta}(S)=0$ for all other states.
 
 
 ---

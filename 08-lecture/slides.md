@@ -33,16 +33,15 @@ The set of state variables $S_t$ comprises all variables required to describe th
 
 ## Decision variables
 
-The set of decision variables $X_t$ comprises all variables required to describe a decision (action) that can be taken at time $t$.
+The set of decision variables $X_t$ comprises all variables required to describe a decision (action) that can be between time $t-1$ and $t$.
 
 ---
 
 ## Exogenous information
 
-The set of information $W_t$ comprises all information that is 
-revealed exogenously (from the world around) between time $t-1$ and $t$.
+The set of information $W_t$ comprises all information that is revealed exogenously (from the world around) between time $t-1$ and $t$.
 
-This includes random events, observations, and information arrivals that are not controlled by the decision-maker.
+This includes random events, observations, and information arrivals that are neither controlled nor known by the decision-maker.
 
 ---
 
@@ -50,9 +49,9 @@ This includes random events, observations, and information arrivals that are not
 
 The transition function $g$ describes how the system evolves from one state to the next. 
 
-Given the current state $S_t$, decision $X_t$, and new exogenous information $W_{t+1}$, it determines the next state by
+Given the latest observed state $S_{t-1}$, decision $X_t$, and new exogenous information $W_t$, it determines the state by
 
-$$S_{t+1} = g(S_t,X_t,W_{t+1}).$$
+$$S_{t} = g(S_{t-1},X_t,W_t).$$
 
 ---
 
@@ -81,17 +80,17 @@ activate Environment
 Agent -> Environment: get_state()
 Agent <-- Environment: state S₀
 ||20||
-loop for t=0 to T-1
+loop for t=1 to T
 ||20||
-    Agent -> Agent: Xₜ ← decide(Sₜ)
+    Agent -> Agent: Xₜ ← decide(Sₜ₋₁)
     Agent -> Environment: make_decision(Xₜ)
-    Environment -> Environment: Wₜ₊₁ ← get_exogenous_information()
-    Environment -> Environment: Sₜ₊₁ ← g(Sₜ, Xₜ, Wₜ₊₁)
-    Environment -> Environment: rₜ ← f(Sₜ₊₁) - f(Sₜ)
-    Agent <-- Environment: reward rₜ, state Sₜ₊₁
+    Environment -> Environment: Wₜ ← get_exogenous_information()
+    Environment -> Environment: Sₜ ← g(Sₜ₋₁, Xₜ, Wₜ)
+    Environment -> Environment: rₜ ← f(Sₜ) - f(Sₜ₋₁)
+    Agent <-- Environment: reward rₜ, state Sₜ
 ||20||
 
-    Agent -> Agent: learn(Sₜ, Xₜ, rₜ, Sₜ₊₁)
+    Agent -> Agent: learn(Sₜ₋₁, Xₜ, rₜ, Sₜ)
 ||20||
 end
 ||20||
@@ -134,7 +133,7 @@ In DQN, we use a neural network with parameters $\theta$ to learn an **action-va
 
 If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value, we would have
 
-`$$Q_\theta(S_t, X_t) = r_t + \max_{X} Q_\theta(S_{t+1}, X)$$`
+`$$Q_\theta(S_{t-1}, X_t) = r_t + \max_{X} Q_\theta(S_t, X)$$`
 
 
 ---
@@ -143,14 +142,14 @@ If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always 
 
 To learn the action-value function $Q_\theta(S,X)$, we use a sample-based form of the Bellman equation:
 
-`$$Q_\theta(S_t, X_t) = r_t + \gamma \cdot \max_{X} Q_\theta(S_{t+1}, X)$$`
+`$$Q_\theta(S_{t-1}, X_t) = r_t + \gamma \cdot \max_{X} Q_\theta(S_t, X)$$`
 
 where
 - $\gamma \in [0,1]$ is a so-called **discount factor** for future rewards.
 
 
 > [!NOTE]
-> - Observed transitions `$\big(S_t,X_t,r_t,S_{t+1}\big)$` allow us to omit computing expected values.
+> - Observed transitions `$\big(S_{t-1},X_t,r_t,S_t\big)$` allow us to omit computing expected values.
 > - With $\gamma < 1$, future errors due to imperfect $Q$-values are discounted.
 
 ---
@@ -159,7 +158,7 @@ where
 
 We can train our neural network by minimizing the squared error between the prediction and the target obtained by the Bellman equation
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_\theta(S_{t+1}, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_\theta(S_t, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
 
 > [!WARNING]
 > Consecutive observations are highly correlated. This can cause **overfitting** to recent training data.
@@ -187,7 +186,7 @@ During training we randomly pick observations from the replay buffer, and run st
 
 To address the **instability** problem, we can use a **target network** with parameters $\hat\theta$ and train our neural network by minimising
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\hat\theta}}(S_{t+1}, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\hat\theta}}(S_t, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
 
 The target network has the same architecture as the main network and is updated periodically by copying the parameters.
 
