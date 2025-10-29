@@ -18,7 +18,7 @@ We can use a neural network with parameters $\theta$ to learn a **policy functio
 
 The goal is to find a policy that can be used to 
 
-- create a trajectory `$(S_0, X_1, r_1, S_1, X_1, r_1, \ldots, S_T)$`  and
+- create a trajectory `$(S_0, X_1, r_1, S_1, \ldots, S_T)$`  and
 - maximise `$J(\theta) = \sum_{t=1}^T r_t$`
 
 ---
@@ -87,63 +87,11 @@ to
 `$$\sum_{t=1}^{T}  \Big( 1 \cdot \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_{t-1},X_t)} \cdot  1 \cdot \nabla_{\!\theta}\ \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!NOTE]
-> For the given trajectory, we only consider the chosen decisions and simplify probabilities. In repeated gradient ascent steps, this simplification approximates $\nabla_{\!\theta}\ J(\theta)$.
+> For the given trajectory, we only consider the chosen decisions and simplify probabilities. In repeated gradient ascent steps, this simplification proportionally approximates `$\nabla_{\!\theta}\ J(\theta)$`.
 
 
 
 ---
-
-<!-- .slide: data-auto-animate="true" -->
-
-<!--
-
-## Policy gradient estimation (sample-based)
-
-From a trajectory $(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we can estimate policy gradients as:
-
-$$\nabla_\theta J_t(\theta) = \nabla_\theta \log \pi_\theta(X_t,S_t) \cdot  \underbrace{\sum_{k=t}^T r_k}_{\textrm{value of} X_t} \textrm{ for all } 0 \leq t < T$$
-
-We can use the averaged gradient to update the policy parameters:
-
-$$\theta \leftarrow \theta + \alpha \cdot  \frac{1}{T} \sum_{t=0}^{T-1}\nabla_\theta J_t(\theta)$$
-
-> [!NOTE]
-> The log comes from the **log-derivative trick**: 
-> $$\nabla_\theta \pi_\theta(S,X) = \pi_\theta(S,X) \cdot \frac{\nabla_\theta \pi_\theta(S,X)}{\pi_\theta(S,X)} = \pi_\theta(S,X) \cdot \nabla_\theta \log \pi_\theta(S,X)$$
-> The sample-based average in the update, approximates multiplication with $\pi_\theta(S,X)$.
-
----
-
-Objective:
-  $$J(\theta) = \sum_{t=0}^T r_t$$
-
-  This is the total reward from one episode following policy $\pi_\theta$.
-
-  Gradient ascent:
-  To maximize J(θ), we update:
-  $$\theta \leftarrow \theta + \alpha \cdot \nabla_\theta J(\theta)$$
-
-  The gradient:
-  $$\nabla_\theta J(\theta) = \sum_{t=0}^{T-1} \nabla_\theta
-  \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T r_k\right)$$
-
-  Log-derivative trick:
-  Since $\nabla_\theta \pi_\theta(S,X) = \pi_\theta(S,X) \cdot
-  \nabla_\theta \log \pi_\theta(S,X)$:
-
-  $$\nabla_\theta J(\theta) = \sum_{t=0}^{T-1} \pi_\theta(X_t, S_t) \cdot
-  \nabla_\theta \log \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T
-  r_k\right)$$
-
-  When we sample actions according to $\pi_\theta$, the $\pi_\theta(X_t,
-  S_t)$ weighting is automatically included.
-
-  Final update:
-  $$\theta \leftarrow \theta + \alpha \cdot \sum_{t=0}^{T-1} \nabla_\theta
-  \log \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T r_k\right)$$
-
----
--->
 
 ## REINFORCE algorithm
 
