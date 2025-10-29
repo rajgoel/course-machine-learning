@@ -67,6 +67,7 @@ where
 <!-- .slide: data-auto-animate="true" -->
 
 `$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
+`$$\sum_{t=1}^{T}  \Big( 1 \cdot \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_{t-1},X_t)} \cdot  1 \cdot \nabla_{\!\theta}\ \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 ---
 
@@ -80,12 +81,11 @@ For a given trajectory $(S_0, X_1, r_1, S_1, \ldots, S_T)$ of an episode, we sim
 
 to
 
-`$$\sum_{t=1}^{T}  \Big( 1 \cdot \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_{t-1},X_t)} \cdot  1 \cdot \nabla_{\!\theta}\ \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\sum_{t=1}^{T}  \Big( 1 \cdot \sum_{k=t}^T r_k \cdot  1 \cdot \nabla_{\!\theta}\ \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!NOTE]
-> For the given trajectory, we only consider the chosen decisions and simplify probabilities. In repeated gradient ascent steps, this simplification proportionally approximates `$\nabla_{\!\theta}\ J(\theta)$`.
-
-
+> For the given trajectory, the probability terms are replaced by 1 or 0 based on the actual observation. 
+> In repeated gradient ascent steps, this simplification proportionally approximates `$\nabla_{\!\theta}\ J(\theta)$`.
 
 ---
 
