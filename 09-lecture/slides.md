@@ -41,7 +41,7 @@ $$\theta \leftarrow \theta + \alpha \cdot \nabla_\theta J(\theta)$$
 
 ## Policy gradient theorem
 
-According to the [policy gradient theorem](__link_to_Sutton, Barto, Chapter 13__), we have 
+According to the [policy gradient theorem](http://incompleteideas.net/book/RLbook2020.pdf#page=346), we have 
 
 $$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$
 
