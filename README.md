@@ -13,10 +13,10 @@ https://rajgoel.github.io/course-machine-learning
 | 03      | [Feed forward networks](https://rajgoel.github.io/course-machine-learning/?topic=03-lecture)          | Project work    |
 | 04      | [Architecture and pipeline](https://rajgoel.github.io/course-machine-learning/?topic=04-lecture) | Project work    |
 | 05      | [Filtering and convolution](https://rajgoel.github.io/course-machine-learning/?topic=05-lecture)  | Project work    |
-| 06      | [Object detection](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
+| 06      | [Graph neural networks](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
 | 07      | [Autoencoders](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
-| 08      | [Reinforcement learning](https://rajgoel.github.io/course-machine-learning/?topic=08-lecture)         | Project work    |
-| 09      | [Deep Reinforcement learning](https://rajgoel.github.io/course-machine-learning/?topic=09-lecture)         | Project work    |
+| 08      | [Reinforcement learning and value-based methods](https://rajgoel.github.io/course-machine-learning/?topic=08-lecture)         | Project work    |
+| 09      | [Policy-based methods](https://rajgoel.github.io/course-machine-learning/?topic=09-lecture)         | Project work    |
 | 10      | Miscellaneous            | Project work         |
 | 11      | Project presentation     | Project presentation |
 

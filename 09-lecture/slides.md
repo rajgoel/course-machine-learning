@@ -155,7 +155,7 @@ For each episode:
 
 ===
 
-# Actor-critic methods
+## Actor-critic methods
 
 ---
 
