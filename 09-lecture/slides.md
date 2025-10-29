@@ -16,26 +16,23 @@ Policy-based methods learn a **policy function** $\pi(X,S)$ to determine probabi
 
 We can use a neural network with parameters $\theta$ to learn a **policy function** $\pi_\theta(X,S)$.
 
-<!--
-The goal is to find a policy that maximise the cumulative rewards when always selecting the decision with the highest probability $\hat X =
-  \arg\!\max_X \pi_\theta(X,S)$.
--->
-
 The goal is to find a policy that
 
-- creates a trajectory $(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$  and
-- maximises $J(\theta) = \sum_{t=0}^T r_t$
+- creates a trajectory `$(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$`  and
+- maximises `$J(\theta) = \sum_{t=0}^T r_t$`
 
 ---
 
 ## Gradient ascent
 
-To maximize $J(\theta)$, we update our parameters by
+In order to 
 
-$$\theta \leftarrow \theta + \alpha \cdot \nabla_\theta J(\theta)$$
+`$$\textrm{maximise }maximize J(\theta)$$`
 
-> [!ATTENTION]
-> $\nabla_\theta J(\theta)$ depends on the decisions we make.
+we can use gradient ascent to update our parameters by
+
+`$$\theta \leftarrow \theta + \alpha \cdot \nabla_\theta J(\theta)$$`
+
 
 ---
 
@@ -43,16 +40,15 @@ $$\theta \leftarrow \theta + \alpha \cdot \nabla_\theta J(\theta)$$
 
 According to the [policy gradient theorem](http://incompleteideas.net/book/RLbook2020.pdf#page=346), we have 
 
-$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$`
 
 where
 
 - $\mu_{\pi_\theta}(S)$ is the probability of entering state $S$ under policy $\pi_\theta$
 - $Q_{\pi_\theta}(S,X)$ is action-value function for policy $\pi_\theta$.
 
-> [!ATTENTION]
+> [!IMPORTANT]
 > This requires knowing $\mu_{\pi_\theta}(S)$ and $Q_{\pi_\theta}(S,X)$ for all states and decisions. In  practice, we estimate these using observed trajectories.
-
 
 ---
 
@@ -62,11 +58,11 @@ where
 
 For a given trajectory $(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we approximate
 
-$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$`
 
 by
 
-$$\sum_{t=0}^{T-1}  \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_t,X_t)} \cdot   \nabla_{\!\theta}\ \pi_\theta(X_t,S_t)$$
+`$$\sum_{t=0}^{T-1}  \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_t,X_t)} \cdot   \nabla_{\!\theta}\ \pi_\theta(X_t,S_t)$$`
 
 > [!NOTE]
 > For the given trajectory, we can set $\mu_{\pi_\theta}(S)=1$ for all states in the trajectory and $\mu_{\pi_\theta}(S)=0$ for all other states.
