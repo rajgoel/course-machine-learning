@@ -4,22 +4,22 @@
 
 ## Policy functions
 
-Policy-based methods learn a **policy function** $\pi(X,S)$ to determine probabilities of taking a decision $X$ when in state $S$.
+Policy-based methods learn a **policy function** $\pi(S,X)$ to determine probabilities of taking a decision $X$ when in state $S$.
 
 > [!NOTE]
-> - During training, policy-based methods make decisions by sampling the probabilities $\pi(X,S)$.
-> - After training, policy-based methods make decisions by selecting the decision with the highest probability $\pi(X,S)$.
+> - During training, policy-based methods make decisions by sampling the probabilities $\pi(S,X)$.
+> - After training, policy-based methods make decisions by selecting the decision with the highest probability $\pi(S,X)$.
 
 ---
 
 ## Policy learning with neural networks
 
-We can use a neural network with parameters $\theta$ to learn a **policy function** $\pi_\theta(X,S)$.
+We can use a neural network with parameters $\theta$ to learn a **policy function** $\pi_\theta(S,X)$.
 
-The goal is to find a policy that
+The goal is to find a policy that can be used to 
 
-- creates a trajectory `$(S_0, X_1, r_1, S_1, X_1, r_1, \ldots, S_T)$`  and
-- maximises `$J(\theta) = \sum_{t=1}^T r_t$`
+- create a trajectory `$(S_0, X_1, r_1, S_1, X_1, r_1, \ldots, S_T)$`  and
+- maximise `$J(\theta) = \sum_{t=1}^T r_t$`
 
 ---
 
@@ -27,11 +27,11 @@ The goal is to find a policy that
 
 In order to 
 
-`$$\textrm{maximise }maximize J(\theta)$$`
+`$$\textrm{maximise } J(\theta)$$`
 
 we can use gradient ascent to update our parameters by
 
-`$$\theta \leftarrow \theta + \alpha \cdot \nabla_\theta J(\theta)$$`
+`$$\theta \leftarrow \theta + \alpha \cdot \nabla_{\!\theta}\ J(\theta)$$`
 
 
 ---
@@ -40,12 +40,12 @@ we can use gradient ascent to update our parameters by
 
 According to the [policy gradient theorem](http://incompleteideas.net/book/RLbook2020.pdf#page=346), we have 
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$`
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`
 
 where
 
 - $\mu_{\pi_\theta}(S)$ is the probability of entering state $S$ under policy $\pi_\theta$
-- $Q_{\pi_\theta}(S,X)$ is action-value function for policy $\pi_\theta$.
+- $Q_{\pi_\theta}(S,X)$ is the action-value function for policy $\pi_\theta$.
 
 > [!IMPORTANT]
 > This requires knowing $\mu_{\pi_\theta}(S)$ and $Q_{\pi_\theta}(S,X)$ for all states and decisions. In  practice, we estimate these using observed trajectories.
@@ -58,11 +58,11 @@ where
 
 For a given trajectory $(S_0, X_1, r_1, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we approximate
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(X,S) \Big)$$`
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`
 
 by
 
-`$$\sum_{t=1}^{T}  \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_t,X_t)} \cdot   \nabla_{\!\theta}\ \pi_\theta(X_t,S_t)$$`
+`$$\sum_{t=1}^{T}  \Big( 1 \cdot \underbrace{\sum_{k=t}^T r_k}_{\approx Q_{\pi_\theta}(S_{t-1},X_t)} \cdot   \nabla_{\!\theta}\ \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!NOTE]
 > For the given trajectory, we use $\mu_{\pi_\theta}(S)=1$ for all states in the trajectory and $\mu_{\pi_\theta}(S)=0$ for all other states.
@@ -86,8 +86,8 @@ $$\theta \leftarrow \theta + \alpha \cdot  \frac{1}{T} \sum_{t=0}^{T-1}\nabla_\t
 
 > [!NOTE]
 > The log comes from the **log-derivative trick**: 
-> $$\nabla_\theta \pi_\theta(X,S) = \pi_\theta(X,S) \cdot \frac{\nabla_\theta \pi_\theta(X,S)}{\pi_\theta(X,S)} = \pi_\theta(X,S) \cdot \nabla_\theta \log \pi_\theta(X,S)$$
-> The sample-based average in the update, approximates multiplication with $\pi_\theta(X,S)$.
+> $$\nabla_\theta \pi_\theta(S,X) = \pi_\theta(S,X) \cdot \frac{\nabla_\theta \pi_\theta(S,X)}{\pi_\theta(S,X)} = \pi_\theta(S,X) \cdot \nabla_\theta \log \pi_\theta(S,X)$$
+> The sample-based average in the update, approximates multiplication with $\pi_\theta(S,X)$.
 
 ---
 
@@ -105,8 +105,8 @@ Objective:
   \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T r_k\right)$$
 
   Log-derivative trick:
-  Since $\nabla_\theta \pi_\theta(X,S) = \pi_\theta(X,S) \cdot
-  \nabla_\theta \log \pi_\theta(X,S)$:
+  Since $\nabla_\theta \pi_\theta(S,X) = \pi_\theta(S,X) \cdot
+  \nabla_\theta \log \pi_\theta(S,X)$:
 
   $$\nabla_\theta J(\theta) = \sum_{t=0}^{T-1} \pi_\theta(X_t, S_t) \cdot
   \nabla_\theta \log \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T
