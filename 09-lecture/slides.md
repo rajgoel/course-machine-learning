@@ -18,23 +18,75 @@ Policy-based methods learn policy functions to determine probabilities of taking
 
 We can use a neural network with parameters $\theta$ to learn a **policy function** $\pi_\theta(X,S)$ that estimates the probability of taking decision $X$ in state $S$.
 
+<!--
 The goal is to find a policy that maximise the cumulative rewards when always selecting the decision with the highest probability $\hat X =
-  \arg\max_X \pi_\theta(X,S)$.
+  \arg\!\max_X \pi_\theta(X,S)$.
+-->
+
+The goal is to find a policy that creates a trajectory $(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$ when always selecting the decision with the highest probability $\hat X = \arg\!\max_X \pi_\theta(X,S)$, and that maximises  
+
+$$J(\theta) = \sum_{t=0}^T r_t$$
 
 ---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Gradient ascent
+
+Given a trajectory $(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we can update parameters $\theta$ by gradient ascent:
+
+$$\theta \leftarrow \theta + \alpha \cdot  \frac{1}{T} \sum_{t=0}^{T-1} \nabla_\theta \pi_\theta(X_t,S_t) \cdot  \underbrace{\sum_{k=t}^T r_k}_{\textrm{value of} X_t}$$
+
+where $\alpha$ is the learning rate.
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
 
 ## Policy gradient estimation (sample-based)
 
 From a trajectory $(S_0, X_0, r_0, S_1, X_1, r_1, \ldots, S_T)$ of an episode, we can estimate policy gradients as:
 
-$$\nabla_\theta J_t(\theta) = \nabla_\theta \log \pi_\theta(X_t|S_t) \cdot  \underbrace{\sum_{k=t}^T r_k}_{\textrm{value of} X_t} \textrm{ for all } 0 \leq t < T$$
+$$\nabla_\theta J_t(\theta) = \nabla_\theta \log \pi_\theta(X_t,S_t) \cdot  \underbrace{\sum_{k=t}^T r_k}_{\textrm{value of} X_t} \textrm{ for all } 0 \leq t < T$$
 
 We can use the averaged gradient to update the policy parameters:
 
 $$\theta \leftarrow \theta + \alpha \cdot  \frac{1}{T} \sum_{t=0}^{T-1}\nabla_\theta J_t(\theta)$$
 
 > [!NOTE]
-> Observed transitions allow us to omit computing expected values.
+> The log comes from the **log-derivative trick**: 
+> $$\nabla_\theta \pi_\theta(X,S) = \pi_\theta(X,S) \cdot \frac{\nabla_\theta \pi_\theta(X,S)}{\pi_\theta(X,S)} = \pi_\theta(X,S) \cdot \nabla_\theta \log \pi_\theta(X,S)$$
+> The sample-based average in the update, approximates multiplication with $\pi_\theta(X,S)$.
+
+---
+
+Objective:
+  $$J(\theta) = \sum_{t=0}^T r_t$$
+
+  This is the total reward from one episode following policy $\pi_\theta$.
+
+  Gradient ascent:
+  To maximize J(θ), we update:
+  $$\theta \leftarrow \theta + \alpha \cdot \nabla_\theta J(\theta)$$
+
+  The gradient:
+  $$\nabla_\theta J(\theta) = \sum_{t=0}^{T-1} \nabla_\theta
+  \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T r_k\right)$$
+
+  Log-derivative trick:
+  Since $\nabla_\theta \pi_\theta(X,S) = \pi_\theta(X,S) \cdot
+  \nabla_\theta \log \pi_\theta(X,S)$:
+
+  $$\nabla_\theta J(\theta) = \sum_{t=0}^{T-1} \pi_\theta(X_t, S_t) \cdot
+  \nabla_\theta \log \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T
+  r_k\right)$$
+
+  When we sample actions according to $\pi_\theta$, the $\pi_\theta(X_t,
+  S_t)$ weighting is automatically included.
+
+  Final update:
+  $$\theta \leftarrow \theta + \alpha \cdot \sum_{t=0}^{T-1} \nabla_\theta
+  \log \pi_\theta(X_t, S_t) \cdot \left(\sum_{k=t}^T r_k\right)$$
 
 ---
 
@@ -63,6 +115,11 @@ For each episode:
 > - Higher rewards increase probability of actions that led to them
 > - Can have high variance due to using full trajectory returns
 -->
+
+---
+
+> [!WARNING]
+> REINFORCE is essentially outdated for practical usage and training can be unstable and slow.
 
 ===
 
