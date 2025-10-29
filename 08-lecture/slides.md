@@ -40,7 +40,7 @@ The set of decision variables $X_t$ comprises all variables required to describe
 ## Exogenous information
 
 The set of information $W_t$ comprises all information that is 
-revealed endogenously (from the world around) between time $t-1$ and $t$.
+revealed exogenously (from the world around) between time $t-1$ and $t$.
 
 This includes random events, observations, and information arrivals that are not controlled by the decision-maker.
 
@@ -158,6 +158,62 @@ We can train our neural network by minimizing the squared error between the pred
 
 ---
 
+## Experience replay
+
+To reduce correlation of observations used for training, we can create a **replay buffer** in which we store observations.
+
+During training we randomly pick observations from the replay buffer, and run stochastic gradient descent on those mini-batches. 
+
+> [!NOTE]
+> With a sufficiently large replay buffer, observations selected for a mini-batch are likely to come from different episodes.
+
+
+---
+
+## Target networks
+
+To address the **instability** problem, we can use a **target network** with parameters $\hat\theta$ and train our neural network by minimising
+
+`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_t, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\hat\theta}}(S_{t+1}, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+
+The target network has the same architecture as the main network and is updated periodically by copying the parameters.
+
+---
+
+## DQN Algorithm
 
 > [!TODO]
-> Full algorithm with experience replay, target networks, etc.
+
+<!--
+```
+Initialize:
+  - Q-network with random weights θ
+  - Target network with weights θ⁻ = θ  
+  - Replay buffer D
+  - Environment
+
+For each episode:
+  1. Initialize state S₀
+  
+  For each time step t:
+    2. With probability ε: select random action Xₜ
+       Otherwise: select Xₜ = argmax Q_θ(Sₜ, X)
+    
+    3. Execute action Xₜ, observe reward rₜ and next state Sₜ₊₁
+    
+    4. Store transition (Sₜ, Xₜ, rₜ, Sₜ₊₁) in replay buffer D
+    
+    5. Sample random mini-batch from D
+    
+    6. Compute target: yⱼ = rⱼ + γ · max Q_θ⁻(Sⱼ₊₁, X)
+    
+    7. Update θ by minimizing loss: (Q_θ(Sⱼ, Xⱼ) - yⱼ)²
+    
+    8. Every C steps: update target network θ⁻ ← θ
+```
+
+> [!NOTE]
+> - ε-greedy exploration balances exploitation vs exploration
+> - Mini-batch sampling breaks correlation between consecutive updates
+> - Target network updates every C steps maintain training stability
+-->
