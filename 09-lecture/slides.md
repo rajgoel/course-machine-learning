@@ -118,7 +118,7 @@ The main idea of policy-based methods is to apply gradient ascent using
 as an estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`, assuming that with a sufficiently large number of trajectories, the gradient steps converge toward the optimum.
 
 > [!NOTE]
-> With **Flux.jl:** we can compute `$\nabla_{\!\theta}\ J(\theta)$` using the final layer `activations` the network parameters `θ`, and the chosen `action` by determining `∇_θ = Flux.gradient( () -> logsoftmax(activations)[action], θ )`
+> With **Flux.jl:** we can compute `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$` using the final layer `activations` the network parameters `θ`, and the chosen `action` by determining `∇_θ = Flux.gradient( () -> Flux.logsoftmax(activations)[action], θ )`.
 
 ---
 
