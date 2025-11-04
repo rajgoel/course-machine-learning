@@ -43,7 +43,7 @@ According to the [policy gradient theorem](http://incompleteideas.net/book/RLboo
 where
 
 - `$\mu_{\pi_\theta}(S)$` is the probability of entering state $S$ under policy $\pi_\theta$
-- `$Q_{\pi_\theta}(S,X)$` is the action-value function for policy $\pi_\theta$.
+- `$Q_{\pi_\theta}(S,X)$` is the action-value function for policy $\pi_\theta$
 - `$\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$` is the gradient of policy $\pi_\theta$ w.r.t. $\theta$
 
 > [!IMPORTANT]
@@ -63,7 +63,7 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\frac{\pi_\theta(S,X)}{\pi_\theta(S,X)}$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
+`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\frac{\pi_\theta(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X)}{\pi_\theta(S,X)} \Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
@@ -71,17 +71,15 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" -->
+`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}\Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-<!-- .slide: data-auto-animate="true" -->
-
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" -->
+`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
