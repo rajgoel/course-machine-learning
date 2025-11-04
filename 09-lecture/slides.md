@@ -115,15 +115,17 @@ using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and repla
 
 ---
 
-<!-- .slide: data-auto-animate="true" -->
-
 ## Trajectory-based policy updates
 
 The main idea of policy-based methods is to apply gradient ascent using 
 
 `$$\sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-as an estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`, assuming that with a sufficiently large number of trajectories, the gradient steps converge toward the optimum.
+as an estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`
+
+> [!NOTE]
+> The hope is that gradient estimates over many trajectories will lead to policy improvement similar to using true gradients.
+
 
 <!--
 > [!NOTE]
