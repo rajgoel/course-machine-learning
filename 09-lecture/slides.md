@@ -46,9 +46,6 @@ where
 - `$Q_{\pi_\theta}(S,X)$` is the action-value function for policy $\pi_\theta$
 - `$\nabla_{\!\theta} \ \pi_\theta(S,X)$` is the gradient of policy $\pi_\theta$ w.r.t. $\theta$
 
-> [!IMPORTANT]
-> This requires knowing $\mu_{\pi_\theta}(S)$ and $Q_{\pi_\theta}(S,X)$ for all states and decisions. In  practice, we estimate these using observed trajectories.
-
 ---
 
 <!-- .slide: data-auto-animate="true" -->
@@ -58,7 +55,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
 
 > [!WARNING]
-> In general, we cannot compute this sum as we can neither determine all possible states $S$ nor do we know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$ that could be taken in a state $S$.
+> In general, we cannot compute this sum as we can neither determine all possible states $S$, their probabilities $\mu_{\pi_\theta}(S)$, nor do we know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$ that could be taken in a state $S$.
 
 ---
 
