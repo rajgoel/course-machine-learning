@@ -109,11 +109,11 @@ which can be estimated using a trajectory of observations $(S_0, X_1, r_1, S_1, 
 
 ## Trajectory-based gradient ascent
 
-Averaged over multiple trajectories $(S_0, X_1, r_1, S_1, \ldots, S_T)$ of different episodes, 
+Averaged over multiple trajectories of different episodes, 
 
 `$$\sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-proportionally approximates `$\nabla_{\!\theta}\ J(\theta)$`.
+is assumed to proportionally approximate `$\nabla_{\!\theta}\ J(\theta)$`.
 
 ---
 
