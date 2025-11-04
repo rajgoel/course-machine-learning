@@ -58,7 +58,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \class{highlight}{\displaystyle\sum_X Q_{\pi_\theta}(S,X)}$`<!-- .element: data-id="del-J-a" --> $\class{highlight}{\cdot}$ `$\nabla_{\!\theta} \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
 
 > [!WARNING]
-> We cannot determine this term as we can neither determine all possible states $S$ nor do we know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$.
+> In general, we cannot compute this term as we can neither determine all possible states $S$ nor do we know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$ that could be taken in a state $S$.
 
 ---
 
@@ -77,7 +77,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 
 According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \class{highlight}{\nabla_{\!\theta} \ln \ \pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
 
 > [!NOTE]
 > We have `$\nabla_{\!\theta} \ln \ \pi_\theta(S,X) = \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}$`. 
