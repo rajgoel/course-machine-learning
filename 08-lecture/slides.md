@@ -71,6 +71,7 @@ The goal is to **maximize** $f(S_T)$, where $T$ is the final time step.
 
 <!--
 @startuml
+!pragma teoz true
 skinparam ParticipantPadding 240
 skinparam defaultFontSize 16
 participant Agent
@@ -82,9 +83,9 @@ Agent -> Environment: get_state()
 Agent <-- Environment: state S₀
 ||20||
 loop for t=1 to T
-||20||
     Environment -> Environment: Wₜ ← get_exogenous_information()
-    Agent -> Agent: Xₜ ← decide(Sₜ₋₁)
+&   Agent -> Agent: Xₜ ← decide(Sₜ₋₁)
+||20||
     Agent -> Environment: make_decision(Xₜ)
     Environment -> Environment: Sₜ ← g(Sₜ₋₁, Xₜ, Wₜ)
     Environment -> Environment: rₜ ← f(Sₜ) - f(Sₜ₋₁)
