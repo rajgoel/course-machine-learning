@@ -113,24 +113,34 @@ deactivate Environment
 Value-based methods learn value functions to estimate expected cumulative rewards:
 
 - **State-value function** $V(S)$: expected cumulative reward from state $S$
-- **Action-value function** $Q(S,X)$: expected cumulative reward from taking action $X$ in state $S$
+- **Action-value function** $Q(S,X)$: expected cumulative reward from taking action (or decision) $X$ in state $S$
+
+---
+
+## Q-learning
+
+In Q-learning, we learn a **parameterised action-value function** $Q_\theta(S,X)$ with parameters $\theta$ that estimates the expected cumulative reward from taking action $X$ in state $S$.
+
+> [!NOTE]
+> - After training, the action $X$ with the highest value of $Q_\theta(𝑆,𝑋)$ is taken.
+> - During training, exploration strategies are used that occasionally select other actions. 
 
 ---
 
 ## Deep Q-Networks (DQN)
 
-In DQN, we use a neural network with parameters $\theta$ to learn an **action-value function** $Q_\theta(S,X)$ that estimates the expected cumulative reward from taking decision $X$ in state $S$.
+In DQN, $Q_\theta(S,X)$ is represented by a neural network and $\theta$ represents the weights and biases of the neural network. 
 
 > [!NOTE]
 > - The state $S$ defines the activations of the **input layer**.
-> - Each **output neuron** provides the $Q$-value for one possible decision (i.e. action).
+> - Each **output neuron** estimates the Q-value for one possible action.
 
 
 ---
 
 ## Q-learning principle
 
-If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest $Q$-value, we would have
+If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always select the decision with highest Q-value, we would have
 
 `$$Q_\theta(S_{t-1}, X_t) = r_t + \max_{X} Q_\theta(S_t, X)$$`
 
