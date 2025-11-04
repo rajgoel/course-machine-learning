@@ -82,7 +82,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 > [!NOTE]
 > We have `$\nabla_{\!\theta} \ln \ \pi_\theta(S,X) = \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}$`. 
 
-> [!NOTE]
+> [!TIP]
 > Computing gradients of log-probabilities avoids underflow issues and can easily be done using **auto-differentiation** of modern deep learning frameworks.
 <!-- .element: class="fragment" -->
 
