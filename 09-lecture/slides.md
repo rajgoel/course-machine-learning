@@ -55,10 +55,10 @@ where
 
 According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\class{highlight}{\nabla_{\!\theta} \ \pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \class{highlight}{\displaystyle\sum_X Q_{\pi_\theta}(S,X)}$`<!-- .element: data-id="del-J-a" --> $\class{highlight}{\cdot}$ `$\class{highlight}{\nabla_{\!\theta} \ \pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
 
 > [!WARNING]
-> `$\nabla_{\!\theta} \ \pi_\theta(S,X)$` can be extremely small and may cause numerical issues (underflow).
+> We cannot estimate the sum over all decisions, as we do not know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$.
 
 ---
 
@@ -83,19 +83,18 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 > We have `$\nabla_{\!\theta} \ln \ \pi_\theta(S,X) = \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}$`. 
 
 > [!TIP]
-> Computing gradients of log-probabilities avoids underflow issues and can easily be done using **auto-differentiation** of modern deep learning frameworks.
-<!-- .element: class="fragment" -->
+> Computing gradients of log-probabilities  `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$` can easily be done using **auto-differentiation** of modern deep learning frameworks.
 
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-We can estimate
+Given a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$, we can estimate
 
-`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-final" -->
+`$$\displaystyle\sum_S \Big( \class{highlight}{\mu_{\pi_\theta}(S)} \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \class{highlight}{\pi_\theta(S,X)} \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-final" -->
 
-using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and by replacing probabilities by 1 or 0 based on the actual observation:
+using the observed rewards and by replacing probabilities by 1 or 0 based on the actual observation:
 <!-- .element: data-id="trajectories" -->
 
 `$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> $1 \cdot$ `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot  1 \cdot$ `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
@@ -104,11 +103,11 @@ using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and by re
 
 <!-- .slide: data-auto-animate="true" -->
 
-We can estimate
+Given a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$, we can estimate
 
 `$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-final" -->
 
-using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and by replacing probabilities by 1 or 0 based on the actual observation:
+using the observed rewards and by replacing probabilities by 1 or 0 based on the actual observation:
 <!-- .element: data-id="trajectories" -->
 
 `$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot$ `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
