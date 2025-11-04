@@ -58,7 +58,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \class{highlight}{\displaystyle\sum_X Q_{\pi_\theta}(S,X)}$`<!-- .element: data-id="del-J-a" --> $\class{highlight}{\cdot}$ `$\nabla_{\!\theta} \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
 
 > [!WARNING]
-> In general, we cannot compute this term as we can neither determine all possible states $S$ nor do we know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$ that could be taken in a state $S$.
+> In general, we cannot compute this expression as we can neither determine all possible states $S$ nor do we know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$ that could be taken in a state $S$.
 
 ---
 
