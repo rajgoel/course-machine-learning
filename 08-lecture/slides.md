@@ -24,7 +24,7 @@ They consist of
 
 ### State variables
 
-The set of state variables $S_t$ comprises all variables required to describe the state of a system at time $t$.
+The set of state variables $S_t$ comprises all variables required to describe the state of a system at (the end of) time $t$.
 
 > [!NOTE]
 > The term **time** does not necessarily represent clock time and can also be understood as a metaphor for step.
@@ -33,15 +33,16 @@ The set of state variables $S_t$ comprises all variables required to describe th
 
 ## Decision variables
 
-The set of decision variables $X_t$ comprises all variables required to describe a decision (action) that can be between time $t-1$ and $t$.
+The set of decision variables $X_t$ comprises all variables required to describe a decision (action) that can be taken between at time $t$.
 
 ---
 
 ## Exogenous information
 
-The set of information $W_t$ comprises all information that is revealed exogenously (from the world around) between time $t-1$ and $t$.
+The set of information $W_t$ comprises all information that is revealed exogenously (from the world around) at time $t$.
 
-This includes random events, observations, and information arrivals that are neither controlled nor known by the decision-maker.
+> [!IMPORTANT]
+> This includes random events, observations, and information arrivals that are **neither controlled nor known by the decision-maker**.
 
 ---
 
@@ -51,7 +52,7 @@ The transition function $g$ describes how the system evolves from one state to t
 
 Given the latest observed state $S_{t-1}$, decision $X_t$, and new exogenous information $W_t$, it determines the state by
 
-$$S_{t} = g(S_{t-1},X_t,W_t).$$
+$$S_{t} = g(S_{t-1},X_t,W_t)$$
 
 ---
 
@@ -82,9 +83,9 @@ Agent <-- Environment: state S₀
 ||20||
 loop for t=1 to T
 ||20||
+    Environment -> Environment: Wₜ ← get_exogenous_information()
     Agent -> Agent: Xₜ ← decide(Sₜ₋₁)
     Agent -> Environment: make_decision(Xₜ)
-    Environment -> Environment: Wₜ ← get_exogenous_information()
     Environment -> Environment: Sₜ ← g(Sₜ₋₁, Xₜ, Wₜ)
     Environment -> Environment: rₜ ← f(Sₜ) - f(Sₜ₋₁)
     Agent <-- Environment: reward rₜ, state Sₜ
@@ -120,12 +121,10 @@ Value-based methods learn value functions to estimate expected cumulative reward
 
 In DQN, we use a neural network with parameters $\theta$ to learn an **action-value function** $Q_\theta(S,X)$ that estimates the expected cumulative reward from taking decision $X$ in state $S$.
 
-- The state $S$ defines the activations of the **input layer**.
-- Each **output neuron** provides the $Q$-value for one possible decision (i.e. action).
-
 > [!NOTE]
-> - After training, the agent selects the decision with highest $Q$-value.
-> - During training, exploration strategies (e.g., ε-greedy) are used to improve the accuracy of $Q$-values of other actions.
+> - The state $S$ defines the activations of the **input layer**.
+> - Each **output neuron** provides the $Q$-value for one possible decision (i.e. action).
+
 
 ---
 
@@ -229,3 +228,10 @@ For each episode:
 > - Mini-batch sampling breaks correlation between consecutive updates
 > - Target network updates every C steps maintain training stability
 -->
+
+---
+
+> [!NOTE]
+> - After training, the agent selects the decision with highest $Q$-value.
+> - During training, exploration strategies (e.g., ε-greedy) are used to improve the accuracy of $Q$-values of other actions.
+
