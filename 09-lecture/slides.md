@@ -109,21 +109,18 @@ which can be estimated by using a trajectory of observations $(S_0, X_1, r_1, S_
 
 <!-- .slide: data-auto-animate="true" -->
 
-## Trajectory-based gradient ascent
+## Trajectory-based policy updates
 
-Averaged over multiple trajectories of different episodes, 
+The main idea of policy-based methods is to apply gradient ascent using 
 
 `$$\sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-is assumed to proportionally approximate `$\nabla_{\!\theta}\ J(\theta)$`.
+as an estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`, assuming that with a sufficiently large number of trajectories, the gradient steps converge toward the optimum.
 
 ---
 
 ## REINFORCE algorithm
 
-> [!TODO]
-
-<!--
 ```
 Initialize:
   - Policy network π_θ with random weights θ
@@ -132,18 +129,17 @@ Initialize:
 For each episode:
   1. Collect trajectory: (S₀, X₁, r₁, S₁, ..., S_T)
   
-  2. For each time step t = T-1 down to 0:
-     - Compute cumulative reward: R_t = r_t + R_{t+1} (with R_T = 0)
-     - Compute gradient: ∇_θ J_t(θ) = ∇_θ log π_θ(X_t|S_t) × R_t
+  2. For each time step t = T down to 1:
+     - Compute cumulative reward: Rₜ = rₜ + R_{t+1} (with R_{T+1} = 0)
+     - Compute gradient: ∇ₜ = ∇_θ log π_θ(Sₜ₋₁,Xₜ) × Rₜ
   
-  3. Update policy: θ ← θ + α × (1/T) × Σ(t=0 to T-1) ∇_θ J_t(θ)
+  3. Update policy: θ ← θ + α × (1/T) × Σ(t=1 to T) ∇ₜ
 ```
 
 > [!NOTE]
 > - REINFORCE learns from complete episodes (Monte Carlo approach)
 > - Higher rewards increase probability of actions that led to them
 > - Can have high variance due to using full trajectory returns
--->
 
 ---
 
