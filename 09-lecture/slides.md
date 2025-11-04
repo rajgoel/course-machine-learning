@@ -38,13 +38,13 @@ we can use gradient ascent to update our parameters by
 
 According to the [policy gradient theorem](http://incompleteideas.net/book/RLbook2020.pdf#page=346), we have 
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J" -->
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`
 
 where
 
-- $\mu_{\pi_\theta}(S)$ is the probability of entering state $S$ under policy $\pi_\theta$
-- $Q_{\pi_\theta}(S,X)$ is the action-value function for policy $\pi_\theta$.
-- $\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$ is the gradient of policy $\pi_\theta$ w.r.t. $\theta$
+- `$\mu_{\pi_\theta}(S)$` is the probability of entering state $S$ under policy $\pi_\theta$
+- `$Q_{\pi_\theta}(S,X)$` is the action-value function for policy $\pi_\theta$.
+- `$\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$` is the gradient of policy $\pi_\theta$ w.r.t. $\theta$
 
 > [!IMPORTANT]
 > This requires knowing $\mu_{\pi_\theta}(S)$ and $Q_{\pi_\theta}(S,X)$ for all states and decisions. In  practice, we estimate these using observed trajectories.
@@ -53,33 +53,35 @@ where
 
 <!-- .slide: data-auto-animate="true" -->
 
-We can rewrite
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J" -->
-
-as 
-
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \frac{\pi_\theta(S,X)}{\pi_\theta(S,X)} \cdot \nabla_{\!\theta} \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J'" -->
+`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \frac{\pi_\theta(S,X)}{\pi_\theta(S,X)} \cdot \nabla_{\!\theta} \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J'" -->
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-is equivalent to 
-
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}   \Big)$$`<!-- .element: data-id="del-J''" -->
+`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\frac{\pi_\theta(S,X)}{\pi_\theta(S,X)}$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}   \Big)$$`<!-- .element: data-id="del-J''" -->
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-is equivalent to 
+`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" -->
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-ln" -->
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+<!-- .slide: data-auto-animate="true" -->
+
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+
+`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
