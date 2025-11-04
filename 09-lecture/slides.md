@@ -88,6 +88,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
 
 which can be estimated using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and replacing probabilities by 1 or 0 based on the actual observation:
+<!-- .element: data-id="trajectories" -->
 
 `$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> $1 \cdot$ `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot  1 \cdot$ `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
 
@@ -100,6 +101,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
 
 which can be estimated by using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and replacing probabilities by 1 or 0 based on the actual observation:
+<!-- .element: data-id="trajectories" -->
 
 `$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot$ `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
 
