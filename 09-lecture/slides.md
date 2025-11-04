@@ -55,10 +55,10 @@ where
 
 According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \class{highlight}{\displaystyle\sum_X Q_{\pi_\theta}(S,X)}$`<!-- .element: data-id="del-J-a" --> $\class{highlight}{\cdot}$ `$\class{highlight}{\nabla_{\!\theta} \ \pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \class{highlight}{\displaystyle\sum_X Q_{\pi_\theta}(S,X)}$`<!-- .element: data-id="del-J-a" --> $\class{highlight}{\cdot}$ `$\nabla_{\!\theta} \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
 
 > [!WARNING]
-> We cannot estimate the sum over all decisions, as we do not know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$.
+> We cannot determine this term as we can neither determine all possible states $S$ nor do we know $Q_{\pi_\theta}(S,X)$ for all possible actions $X$.
 
 ---
 
