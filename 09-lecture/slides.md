@@ -4,19 +4,17 @@
 
 ## Policy functions
 
-Policy-based methods learn a **policy function** $\pi(S,X)$ to determine probabilities of taking a decision $X$ when in state $S$.
+Policy-based methods learn a **parameterised policy function** $\pi_\theta(S,X)$ with parameters $\theta$ to determine probabilities of taking a decision $X$ when in state $S$.
 
 > [!NOTE]
-> - During training, policy-based methods make decisions by sampling the probabilities $\pi(S,X)$.
-> - After training, policy-based methods make decisions by selecting the decision with the highest probability $\pi(S,X)$.
+> - After training, the decision with the highest probability $\pi_\theta(S,X)$ is taken.
+> - During training, the decision is chosen by sampling using probabilities $\pi_\theta(S,X)$.
 
 ---
 
 ## Policy learning with neural networks
 
-We can use a neural network with parameters $\theta$ to learn a **policy function** $\pi_\theta(S,X)$.
-
-The goal is to find a policy that can be used to 
+We can use a neural network with parameters $\theta$ to learn $\pi_\theta(S,X)$ to be used to 
 
 - create a trajectory `$(S_0, X_1, r_1, S_1, \ldots, S_T)$`  and
 - maximise `$J(\theta) = \sum_{t=1}^T r_t$`
@@ -40,12 +38,13 @@ we can use gradient ascent to update our parameters by
 
 According to the [policy gradient theorem](http://incompleteideas.net/book/RLbook2020.pdf#page=346), we have 
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J" -->
 
 where
 
 - $\mu_{\pi_\theta}(S)$ is the probability of entering state $S$ under policy $\pi_\theta$
 - $Q_{\pi_\theta}(S,X)$ is the action-value function for policy $\pi_\theta$.
+- $\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$ is the gradient of policy $\pi_\theta$ w.r.t. $\theta$
 
 > [!IMPORTANT]
 > This requires knowing $\mu_{\pi_\theta}(S)$ and $Q_{\pi_\theta}(S,X)$ for all states and decisions. In  practice, we estimate these using observed trajectories.
@@ -54,20 +53,43 @@ where
 
 <!-- .slide: data-auto-animate="true" -->
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \frac{\pi_\theta(S,X)}{\pi_\theta(S,X)} \cdot \nabla_{\!\theta} \pi_\theta(S,X) \Big)$$`
+We can rewrite
+
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J" -->
+
+as 
+
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \frac{\pi_\theta(S,X)}{\pi_\theta(S,X)} \cdot \nabla_{\!\theta} \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J'" -->
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}   \Big)$$`
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \frac{\pi_\theta(S,X)}{\pi_\theta(S,X)} \cdot \nabla_{\!\theta} \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J'" -->
+
+is equivalent to 
+
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}   \Big)$$`<!-- .element: data-id="del-J''" -->
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
-`$$\sum_{t=1}^{T}  \Big( 1 \cdot \sum_{k=t}^T r_k \cdot  1 \cdot \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}   \Big)$$`<!-- .element: data-id="del-J''" -->
+
+is equivalent to 
+
+`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-ln" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+`$\nabla_{\!\theta}\ J(\theta)$`<!-- .element: data-id="del-J" --> `$\propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-ln" -->
+
+can be estimated using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and replacing probabilities by 1 or 0 based on the actual observation:
+
+`$$\sum_{t=1}^{T}  \Big( 1 \cdot \sum_{k=t}^T r_k \cdot  1 \cdot \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`<!-- .element: data-id="del-J-estimate" -->
 
 ---
 
@@ -75,16 +97,11 @@ where
 
 ## Trajectory-based gradient ascent
 
-For a given trajectory $(S_0, X_1, r_1, S_1, \ldots, S_T)$ of an episode, we replace
-
-`$$\nabla_{\!\theta}\ J(\theta) \propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
-
-by
+For a given trajectory $(S_0, X_1, r_1, S_1, \ldots, S_T)$ of an episode, we estimate `$\nabla_{\!\theta}\ J(\theta)$`<!-- .element: data-id="del-J" --> by
 
 `$$\sum_{t=1}^{T}  \Big( 1 \cdot \sum_{k=t}^T r_k \cdot  1 \cdot \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!NOTE]
-> For the given trajectory, the probability terms are replaced by 1 or 0 based on the actual observation. 
 > Averaged over multiple trajectories, this proportionally approximates `$\nabla_{\!\theta}\ J(\theta)$`.
 
 ---
