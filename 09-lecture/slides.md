@@ -50,7 +50,7 @@ where
 
 <!-- .slide: data-auto-animate="true" -->
 
-According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> `$\Big)$`
 
@@ -61,7 +61,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 
 <!-- .slide: data-auto-animate="true" -->
 
-According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$` `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\displaystyle\frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
 
@@ -72,7 +72,7 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 
 <!-- .slide: data-auto-animate="true" -->
 
-According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \class{highlight}{\nabla_{\!\theta} \ln \ \pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
 
