@@ -55,7 +55,7 @@ where
 
 According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> $\Big)$
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\class{highöight}{\nabla_{\!\theta} \ \pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> $\Big)$
 
 > [!WARNING]
 > `$\nabla_{\!\theta} \ \pi_\theta(S,X)$` can be extremely small and may cause numerical issues (underflow).
