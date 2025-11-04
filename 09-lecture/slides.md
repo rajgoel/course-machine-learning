@@ -17,7 +17,7 @@ Policy-based methods learn a **parameterised policy function** $\pi_\theta(S,X)$
 We can use a neural network with parameters $\theta$ to learn $\pi_\theta(S,X)$ to be used to 
 
 - create a trajectory `$(S_0, X_1, r_1, S_1, \ldots, S_T)$`  and
-- maximise `$J(\theta) = \sum_{t=1}^T r_t$`
+- maximise `$J(\theta) = \displaystyle\sum_{t=1}^T r_t$`
 
 ---
 
@@ -65,6 +65,9 @@ where
 
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\displaystyle\frac{\pi_\theta(S,X)\ \cdot\ \nabla_{\!\theta} \ \pi_\theta(S,X)}{\pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> $\Big)$
 
+> [!NOTE]
+> Multiplication with $\frac{\pi_\theta(S,X)}{\pi_\theta(S,X)} = 1$
+
 ---
 
 <!-- .slide: data-auto-animate="true" -->
@@ -80,6 +83,9 @@ where
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> $\Big)$
+
+> [!NOTE]
+> We have $\nabla \ln f = \frac{\nabla f}{f}$.
 
 ---
 
