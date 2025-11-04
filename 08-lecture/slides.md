@@ -33,7 +33,7 @@ The set of state variables $S_t$ comprises all variables required to describe th
 
 ## Decision variables
 
-The set of decision variables $X_t$ comprises all variables required to describe a decision (action) that can be taken between at time $t$.
+The set of decision variables $X_t$ comprises all variables required to describe a decision (action) that can be taken at time $t$.
 
 ---
 
@@ -50,7 +50,7 @@ The set of information $W_t$ comprises all information that is revealed exogenou
 
 The transition function $g$ describes how the system evolves from one state to the next. 
 
-Given the latest observed state $S_{t-1}$, decision $X_t$, and new exogenous information $W_t$, it determines the state by
+Given the latest observed state $S_{t-1}$, decision $X_t$, and new exogenous information $W_t$, it updates the state by
 
 $$S_{t} = g(S_{t-1},X_t,W_t)$$
 
