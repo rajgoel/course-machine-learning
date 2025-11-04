@@ -55,7 +55,7 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
@@ -63,7 +63,7 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\frac{\pi_\theta(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X)}{\pi_\theta(S,X)} \Big)$`<!-- .element: data-id="del-J-b" -->
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\displaystyle\frac{\pi_\theta(S,X) \cdot \nabla_{\!\theta} \ \pi_\theta(S,X)}{\pi_\theta(S,X)} \Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
@@ -71,7 +71,7 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}\Big)$`<!-- .element: data-id="del-J-b" -->
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$\displaystyle\frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}\Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
@@ -79,13 +79,13 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> $\cdot$ `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$`<!-- .element: data-id="del-J-b" -->
 
 ---
 
 <!-- .slide: data-auto-animate="true" -->
 
-`$\nabla_{\!\theta}\ J(\theta)$`<!-- .element: data-id="del-J" --> `$\propto \sum_S \Big( \mu_{\pi_\theta}(S) \cdot \sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-ln" -->
+`$\nabla_{\!\theta}\ J(\theta)$`<!-- .element: data-id="del-J" --> `$\propto \displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-ln" -->
 
 can be estimated using a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$ and replacing probabilities by 1 or 0 based on the actual observation:
 
