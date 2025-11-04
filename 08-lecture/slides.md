@@ -183,9 +183,9 @@ During training we randomly pick observations from the replay buffer, and run st
 
 ## Target networks
 
-To address the **instability** problem, we can use a **target network** with parameters $\hat\theta$ and train our neural network by minimising
+To address the **instability** problem, we can use a **target network** with parameters $\theta_{\text{target}}$ and train our neural network by minimising
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\hat\theta}}(S_t, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
 
 The target network has the same architecture as the main network and is updated periodically by copying the parameters.
 
@@ -193,45 +193,39 @@ The target network has the same architecture as the main network and is updated 
 
 ## DQN Algorithm
 
-> [!TODO]
-
-<!--
 ```
 Initialize:
   - Q-network with random weights θ
-  - Target network with weights θ⁻ = θ  
+  - Target network Q_target with weights θ_target = θ 
   - Replay buffer D
+  - Target network update frequency C
   - Environment
 
 For each episode:
   1. Initialize state S₀
   
   For each time step t:
-    2. With probability ε: select random action Xₜ
-       Otherwise: select Xₜ = argmax Q_θ(Sₜ, X)
+    1a. With probability ε: select random action Xₜ
+        Otherwise: select Xₜ = argmax Q(Sₜ₋₁, X)
     
-    3. Execute action Xₜ, observe reward rₜ and next state Sₜ₊₁
+    1b. Execute action Xₜ, observe reward rₜ and state Sₜ
     
-    4. Store transition (Sₜ, Xₜ, rₜ, Sₜ₊₁) in replay buffer D
+    1c. Store transition (Sₜ₋₁, Xₜ, rₜ, Sₜ) in replay buffer D
     
-    5. Sample random mini-batch from D
+    1d. Sample random mini-batch from D
     
-    6. Compute target: yⱼ = rⱼ + γ · max Q_θ⁻(Sⱼ₊₁, X)
+    1e. For each transition in the mini-batch:
+        Compute target: yⱼ = rⱼ + γ · max Q_target(Sⱼ₋₁, X)
     
-    7. Update θ by minimizing loss: (Q_θ(Sⱼ, Xⱼ) - yⱼ)²
+    1f. Update θ by minimizing average loss over mini-batch: avg( (Q(Sⱼ₋₁, Xⱼ) - yⱼ)² ) 
     
-    8. Every C steps: update target network θ⁻ ← θ
+    1g. if t mod C == 0: update target network θ_target ← θ
+
+  2. Update ε
 ```
 
 > [!NOTE]
 > - ε-greedy exploration balances exploitation vs exploration
 > - Mini-batch sampling breaks correlation between consecutive updates
 > - Target network updates every C steps maintain training stability
--->
-
----
-
-> [!NOTE]
-> - After training, the agent selects the decision with highest $Q$-value.
-> - During training, exploration strategies (e.g., ε-greedy) are used to improve the accuracy of $Q$-values of other actions.
 
