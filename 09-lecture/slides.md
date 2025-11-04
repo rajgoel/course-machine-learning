@@ -57,6 +57,9 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 
 `$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> $\cdot$ `$\nabla_{\!\theta} \ \pi_\theta(S,X)$`<!-- .element: data-id="del-J-b" --> $\Big)$
 
+> [!WARNING]
+> `$\nabla_{\!\theta} \ \pi_\theta(S,X)$` can be extremely small and may cause numerical issues (underflow).
+
 ---
 
 <!-- .slide: data-auto-animate="true" -->
@@ -118,7 +121,7 @@ The main idea of policy-based methods is to apply gradient ascent using
 as an estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`, assuming that with a sufficiently large number of trajectories, the gradient steps converge toward the optimum.
 
 > [!NOTE]
-> With **Flux.jl:** we can compute `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$` using the final layer `activations` the network parameters `θ`, and the chosen `action` by determining `∇_θ = Flux.gradient( () -> Flux.logsoftmax(activations)[action], θ )`.
+> With **Flux.jl** we can compute `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$` using the final layer `activations` the network parameters `θ`, and the chosen `action` by determining `∇_θ = Flux.gradient( () -> Flux.logsoftmax(activations)[action], θ )`.
 
 ---
 
