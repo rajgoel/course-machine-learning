@@ -200,7 +200,7 @@ Moreover, we have
 
 `$0$`<!-- .element: data-id="zero" -->
 `$= \nabla_{\!\theta}\ 1$`<!-- .element: data-id="zero-1" --> 
-`$= \nabla_{\!\theta}\ \sum_X \pi_\theta(S,X)$`<!-- .element: data-id="zero-2" -->
+`$= \nabla_{\!\theta}\ \sum_X \pi_\theta(S,X)$`<!-- .element: data-id="zero-2" class="fragment" -->
 
 ---
 
@@ -234,7 +234,7 @@ Moreover, we have
 `$= \sum_X \nabla_{\!\theta}\  \pi_\theta(S,X)$`<!-- .element: data-id="zero-3" -->
 `$= B(S) \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-4" class="fragment" -->
 
-for any given baseline $B(S)$.
+for any given baseline $B(S)$. <!-- .element: data-fragment-id="1" class="fragment" -->
 
 ---
 
