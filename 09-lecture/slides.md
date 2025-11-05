@@ -346,13 +346,12 @@ as an estimation of the policy gradient.
 
 To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimise the loss of the critic
 
-`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}}  \Big)^2$$`
+`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{ \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
 
-The **temporal difference (TD) error** appears in the gradient of this loss:
+Treating the Bellman target as a constant, we have
 
 `$$\frac{\partial \mathscr{L}}{\partial \theta_\text{critic}} = 2 \delta_t \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
 
-where `$\delta_t = r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1})$`
 
 <!--
 The gradient of this loss is the **temporal difference (TD) error** 
@@ -378,7 +377,9 @@ For each episode:
      a. Sample action Xₜ ~ π_θ(Sₜ₋₁, ·)
      b. Execute action Xₜ, observe reward rₜ and next state Sₜ
      c. Compute TD error: δₜ = rₜ + γ V_θ_critic(Sₜ) - V_θ_critic(Sₜ₋₁)
-     d. Update policy: θ ← θ + α × δₜ × ∇_θ log π_θ(Sₜ₋₁,Xₜ)
-     e. Update critic: θ_critic ← θ_critic + α_critic × δₜ × ∇_θ_critic V_θ_critic(Sₜ₋₁)
+     d. Compute policy gradient: ∇_θ ← ∇_θ log π_θ(Sₜ₋₁,Xₜ) via automatic differentiation
+     e. Update policy: θ ← θ + α × δₜ × ∇_θ
+     f. Compute critic gradient: ∇_θ_critic ← ∇_θ_critic V_θ_critic(Sₜ₋₁) via automatic differentiation
+     g. Update critic: θ_critic ← θ_critic + α_critic × δₜ × ∇_θ_critic
 ```
 
