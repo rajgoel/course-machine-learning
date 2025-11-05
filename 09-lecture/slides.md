@@ -317,7 +317,7 @@ can be estimated by
 ---
 
 
-As we do not need to wait for termination of an episode, we can do a gradient update after each step $t$ using 
+As we do not need to wait for termination of an episode, we can estimate the policy gradient **for step** $t$ by 
 
 `$$\big( r_t + V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
 
@@ -333,7 +333,7 @@ and
 
 `$$\delta_t \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
 
-as an estimation of the policy gradient. 
+as an estimation of the policy gradient **for step** $t$. 
 
 ---
 
