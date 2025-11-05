@@ -113,7 +113,7 @@ using the observed rewards and by replacing probabilities by 1 or 0 based on the
 
 ## Trajectory-based policy updates
 
-The main idea of policy-based methods is to apply gradient ascent using 
+We can apply gradient ascent using 
 
 `$$\sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
