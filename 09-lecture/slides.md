@@ -262,13 +262,13 @@ for any given baseline $B(S)$.
 
 According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \class{highlight}{\displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X)} \Big)$$`
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
 
 Moreover, we have
 
 `$0$`<!-- .element: data-id="zero" -->
 `$= \displaystyle\sum_X B(S)  \cdot \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-5" -->
-`$= \class{highlight}{\displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)}$`<!-- .element: data-id="zero-6" class="fragment" -->
+`$= \displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="zero-6" class="fragment" -->
 
 for any given baseline $B(S)$.
 
@@ -280,12 +280,12 @@ for any given baseline $B(S)$.
 
 According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="pgt" -->
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \class{highlight}{\displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X)} \Big)$$`<!-- .element: data-id="pgt" -->
 
 Moreover, we have
 
 `$0$`<!-- .element: data-id="zero" -->
-`$= \displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="zero-6" -->
+`$= \class{highlight}{\displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)}$`<!-- .element: data-id="zero-6" -->
 
 and `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 `$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \class{highlight}{\big( Q_{\pi_\theta}(S,X) - B(S) \big)} \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
