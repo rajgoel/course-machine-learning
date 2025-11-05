@@ -169,8 +169,14 @@ For each episode:
 
 According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$$\displaystyle\sum_S \Big( \class{highlight}{\mu_{\pi_\theta}(S)} \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \class{highlight}{\pi_\theta(S,X)} \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-final" -->
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-final" -->
 
 Moreover, we have
 
-`$$0 = \nabla_{\!\theta}\ 1 = \nabla_{\!\theta}\ \sum_X \pi_\theta(S,X) = \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X) = \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X) B(S)$$`
+`$$0 = \nabla_{\!\theta}\ 1 = \nabla_{\!\theta}\ \sum_X \pi_\theta(S,X) = \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X) = B(S) \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X) $$`
+`$$= B(S) \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X) $$` 
+`$$= \nabla_{\!\theta} B(S) \ln \ \pi_\theta(S,X) $$`
+
+Thus, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) - B(S) \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-final" -->
+
