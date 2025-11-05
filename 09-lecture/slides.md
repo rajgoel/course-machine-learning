@@ -312,7 +312,7 @@ can be estimated by
 `$$\sum_{t=1}^{T}  \Big( \big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!IMPORTANT]
-> For every $t$ we can now compute all terms without waiting for the episode to be completed. 
+> For each step $t$ we can now compute all terms without waiting for the episode to be completed. 
 
 ---
 
