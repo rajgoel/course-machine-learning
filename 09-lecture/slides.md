@@ -378,6 +378,6 @@ For each episode:
      d. Compute policy gradient: ∇_θ ← ∇_θ log π_θ(Sₜ₋₁,Xₜ) via automatic differentiation
      e. Update policy: θ ← θ + α × δₜ × ∇_θ
      f. Compute critic gradient: ∇_θ_critic ← ∇_θ_critic V_θ_critic(Sₜ₋₁) via automatic differentiation
-     g. Update critic: θ_critic ← θ_critic + α_critic × δₜ × ∇_θ_critic
+     g. Update critic: θ_critic ← θ_critic + α_critic × 2δₜ × ∇_θ_critic
 ```
 
