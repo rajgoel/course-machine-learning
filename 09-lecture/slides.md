@@ -152,11 +152,6 @@ For each episode:
 > - Higher rewards increase probability of actions that led to them
 > - Can have high variance due to using full trajectory returns
 
----
-
-> [!WARNING]
-> REINFORCE is essentially outdated for practical usage and training can be unstable and slow.
-
 ===
 
 # Actor-critic methods
