@@ -354,8 +354,8 @@ The [(semi-)gradient](http://incompleteideas.net/book/RLbook2020.pdf#page=222) w
 
 where $\delta_t$ is the temporal difference (TD) error, i.e., the difference between Bellmann target and prediction.
 
-> [!WARNING]
-> Standard [actor-critic methods](http://incompleteideas.net/book/RLbook2020.pdf#page=353) treat the Bellman target as constant, although it depends on $\theta_\text{critic}$. Target networks (like in DQN) can be used to improve stability.
+> [!NOTE]
+> We could add a target network (like in DQN) to improve stability.
 
 
 ---
