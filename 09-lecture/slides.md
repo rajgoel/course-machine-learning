@@ -321,19 +321,64 @@ can be estimated by
 
 ---
 
+
 As we do not need to wait for termination of an episode we can do our gradient updates using 
 
 `$$\big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
 
 ---
 
-Inspired by the Bellmann equation, we can use a **discount factor** $\gamma \in [0,1]$ in our estimation
+## TD-error and policy gradient
 
-`$$\big( r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
+Inspired by the Bellmann equation, we can use a **discount factor** $\gamma \in [0,1]$ to define the **temporal difference (TD) error**
+
+`$$\delta_t = r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1})$$`
+
+and
+
+`$$\delta_t \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
+
+as an estimation of the policy gradient. 
 
 ---
 
+## TD-error loss of the critic
+
 To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimise the loss of the critic
 
-`$$\mathscr{L}_\text{critic}(\theta_\text{critic}) = \Big( \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+
+The **temporal difference (TD) error** appears in the gradient of this loss:
+
+`$$\frac{\partial \mathscr{L}}{\partial \theta_\text{critic}} = -2 \delta_t \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
+
+where `$\delta_t = r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1})$`
+
+<!--
+The gradient of this loss is the **temporal difference (TD) error** 
+
+`$$\delta_t = r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1})$$`
+-->
+
+
+---
+
+## Actor-critic algorithm
+
+```
+Initialize:
+  - Policy network π_θ with random weights θ
+  - Critic network V_θ_critic with random weights θ_critic
+  - Environment
+
+For each episode:
+  1. Initialize state S₀
+  
+  2. For each time step t = 1 to T:
+     a. Sample action Xₜ ~ π_θ(Sₜ₋₁, ·)
+     b. Execute action Xₜ, observe reward rₜ and next state Sₜ
+     c. Compute TD error: δₜ = rₜ + γ V_θ_critic(Sₜ) - V_θ_critic(Sₜ₋₁)
+     d. Update policy: θ ← θ + α × δₜ × ∇_θ log π_θ(Sₜ₋₁,Xₜ)
+     e. Update critic: θ_critic ← θ_critic + α_critic × δₜ × ∇_θ_critic V_θ_critic(Sₜ₋₁)
+```
 
