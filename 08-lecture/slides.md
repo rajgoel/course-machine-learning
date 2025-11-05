@@ -166,9 +166,9 @@ where
 
 ## Loss function and challenges in training
 
-We can train our neural network by minimizing the squared error between the prediction and the target obtained by the Bellman equation
+We can train our neural network by minimizing the squared error between the target obtained by the Bellman equation and the prediction
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_\theta(S_t, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_\theta(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} \Big)^2$$`
 
 > [!WARNING]
 > Consecutive observations are highly correlated. This can cause **overfitting** to recent training data.
@@ -196,7 +196,7 @@ During training we randomly pick observations from the replay buffer, and run st
 
 To address the **instability** problem, we can use a **target network** with parameters $\theta_{\text{target}}$ and train our neural network by minimising
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} \Big)^2$$`
 
 The target network has the same architecture as the main network and is updated periodically by copying the parameters.
 
@@ -228,9 +228,11 @@ For each episode:
     1e. For each transition in the mini-batch:
         Compute target: yⱼ = rⱼ + γ · max Q_target(Sⱼ₋₁, X)
     
-    1f. Update θ by minimizing average loss over mini-batch: avg( (Q(Sⱼ₋₁, Xⱼ) - yⱼ)² ) 
+    1f. Compute gradient: ∇_θ ← ∇_θ avg( (yⱼ - Q(Sⱼ₋₁, Xⱼ))² ) via automatic differentiation
     
-    1g. if t mod C == 0: update target network θ_target ← θ
+    1g. Update θ: θ ← θ - α × ∇_θ 
+    
+    1h. if t mod C == 0: update target network θ_target ← θ
 
   2. Update ε
 ```
