@@ -232,7 +232,7 @@ Moreover, we have
 
 `$0$`<!-- .element: data-id="zero" -->
 `$= \displaystyle\sum_X \nabla_{\!\theta}\  \pi_\theta(S,X)$`<!-- .element: data-id="zero-3" -->
-`$= B(S) \displaystyle\sum_X \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-4" data-fragment-index="0" class="fragment" -->
+`$= B(S)  \cdot \displaystyle\sum_X \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-4" data-fragment-index="0" class="fragment" -->
 
 for any given baseline $B(S)$. <!-- .element: data-fragment-index="0" class="fragment" -->
 
@@ -249,8 +249,8 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 Moreover, we have
 
 `$0$`<!-- .element: data-id="zero" -->
-`$= B(S) \displaystyle\sum_X \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-4" -->
-`$= \displaystyle\sum_X B(S) \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-5" class="fragment" -->
+`$= B(S)  \cdot \displaystyle\sum_X \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-4" -->
+`$= \displaystyle\sum_X B(S)  \cdot \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-5" class="fragment" -->
 
 for any given baseline $B(S)$.
 
@@ -267,8 +267,8 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 Moreover, we have
 
 `$0$`<!-- .element: data-id="zero" -->
-`$= \displaystyle\sum_X B(S) \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-5" -->
-`$= \displaystyle\sum_X B(S) \pi_\theta(S,X) \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="zero-6" class="fragment" -->
+`$= \displaystyle\sum_X B(S)  \cdot \nabla_{\!\theta}\ \pi_\theta(S,X)$`<!-- .element: data-id="zero-5" -->
+`$= \displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="zero-6" class="fragment" -->
 
 for any given baseline $B(S)$.
 
@@ -285,12 +285,12 @@ According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is pr
 Moreover, we have
 
 `$0$`<!-- .element: data-id="zero" -->
-`$= \displaystyle\sum_X B(S) \pi_\theta(S,X) \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="zero-6" -->
+`$= \displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="zero-6" -->
 
 for any given baseline $B(S)$.
 
 Thus, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
-`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) - B(S) \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \class{highlight}{\big( Q_{\pi_\theta}(S,X) - B(S) \big)} \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
 
 ---
 
