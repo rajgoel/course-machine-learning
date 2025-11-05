@@ -117,7 +117,7 @@ The main idea of policy-based methods is to apply gradient ascent using
 
 `$$\sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-as an estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`
+as a proportional estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`
 
 > [!NOTE]
 > The hope is that gradient estimates over many trajectories will lead to policy improvement similar to using true gradients.
@@ -144,7 +144,7 @@ For each episode:
      - Compute cumulative reward: Rₜ = rₜ + R_{t+1} (with R_{T+1} = 0)
      - Compute gradient: ∇ₜ = ∇_θ log π_θ(Sₜ₋₁,Xₜ) × Rₜ
   
-  3. Update policy: θ ← θ + α × (1/T) × Σ(t=1 to T) ∇ₜ
+  3. Update policy: θ ← θ + α × Σ(t=1 to T) ∇ₜ
 ```
 
 > [!NOTE]
@@ -302,7 +302,7 @@ Then, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to
 `$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) \class{highlight}{- V_{\theta_\text{critic}}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
 
 <span class="fragment">
-and can be estimated by 
+which can be estimated by 
 
 `$$\sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k \class{highlight}{- V_{\theta_\text{critic}}(S_{t-1})} \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
@@ -310,10 +310,20 @@ and can be estimated by
 
 ---
 
-`$$\sum_{t=1}^{T}  \Big( \big( \underbrace{r_t + V_{\theta_\text{critic}}(S_t)}_{\text{estimates}\ \displaystyle\sum_{k=t}^T r_k} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\sum_{t=1}^{T}  \Big( \big( \class{highlight}{\sum_{k=t}^T r_k} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+
+can be estimated by
+
+`$$\sum_{t=1}^{T}  \Big( \big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)}} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+
+> [!NOTE]
+> Every term can now be computed directly after taking an action when the reward and new state become known. 
 
 ---
 
+Inspired by the Bellmann equation, we can use a **discount factor** $\gamma \in [0,1]$ in our estimation
 
-`$$\sum_{t=1}^{T}  \Big( \big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\sum_{t=1}^{T}  \Big( \big( r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+
+---
 
