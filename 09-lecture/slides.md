@@ -159,11 +159,21 @@ For each episode:
 
 ===
 
-## Actor-critic methods
+# Actor-critic methods
 
 ---
 
-> [!TODO]
-> PPO algorithm
+<!-- .slide: data-auto-animate="true" -->
+
+## Policy gradient theorem with baseline
+
+According to the policy gradient theorem, we have 
+
+`$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+
+`$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> $1 \cdot$ `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot  1 \cdot$ `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
 
 
+Moreover, we have
+
+`$$0 = \nabla_{\!\theta}\ 1 = \nabla_{\!\theta}\ \sum_X \pi_\theta(S,X) = \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X) = \sum_X \nabla_{\!\theta}\ \pi_\theta(S,X) B(S)$$`
