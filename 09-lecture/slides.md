@@ -306,9 +306,6 @@ and can be estimated by
 
 `$$\sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k \class{highlight}{- V_{\theta_\text{critic}}(S_{t-1})} \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-> [!NOTE]
-> The estimation of `$\nabla_{\!\theta}\ J(\theta)$` is analogous to the one used for REINFORCE, but with a learnable baseline.
-
 </span>
 
 ---
