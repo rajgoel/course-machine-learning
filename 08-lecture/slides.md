@@ -205,13 +205,15 @@ To address the **instability** problem, we can use a **target network** with par
 
 ## TD-error and gradient of the loss
 
-The **temporal difference (TD) error** is defined as
+The gradient of the loss
 
-`$$\delta_t = \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_{\theta_{\text{target}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}}$$`
+`$$\mathscr{L}(\theta) = \Big(  \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_{\theta_{\text{target}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} \Big)^2$$`
 
-The gradient of the loss `$\mathscr{L}(\theta) = \delta_t^2$` with respect to $\theta$ is 
+with respect to $\theta$ is 
 
 `$$\nabla_{\!\theta}\ \mathscr{L} = 2\delta_t \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{t-1}, X_t)$$`
+
+where $\delta_t$ is the **temporal difference (TD) error**, i.e., the difference between Bellmann target and prediction.
 
 > [!NOTE]
 > With the target network, the Bellman target does not depend on $\theta$.
