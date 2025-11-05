@@ -198,7 +198,13 @@ To address the **instability** problem, we can use a **target network** with par
 
 `$$\mathscr{L}(\theta) = \Big( \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} \Big)^2$$`
 
-The target network has the same architecture as the main network and is updated periodically by copying the parameters.
+As the Bellman target no longer depends on $\theta$, we have
+$$\frac{\partial \mathscr{L}}{\partial \theta} = 2( \big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big) - 
+  Q_\theta(S_{j-1}, X_j)) \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{j-1},
+  X_j)$$
+
+> [!NOTE]
+> The target network has the same architecture as the main network and is updated periodically by copying the parameters.
 
 ---
 
@@ -228,9 +234,7 @@ For each episode:
     1e. For each transition in the mini-batch:
         Compute target: yⱼ = rⱼ + γ · max Q_target(Sⱼ₋₁, X)
     
-    1f. Compute gradient: ∇_θ ← ∇_θ avg( (yⱼ - Q(Sⱼ₋₁, Xⱼ))² ) via automatic differentiation
-    
-    1g. Update θ: θ ← θ - α × ∇_θ 
+    1f. Update θ: θ ← θ - α × avg( 2(yⱼ - Q(Sⱼ₋₁, Xⱼ)) × (-1) × ∇_θ Q(Sⱼ₋₁, Xⱼ) ) 
     
     1h. if t mod C == 0: update target network θ_target ← θ
 
