@@ -342,15 +342,15 @@ as an estimation of the policy gradient.
 
 ---
 
-## TD-error loss of the critic
+## TD-error and loss of the critic
 
 To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimise the loss of the critic
 
-`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}}\Big)^2$$`
+`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}}  \Big)^2$$`
 
 The **temporal difference (TD) error** appears in the gradient of this loss:
 
-`$$\frac{\partial \mathscr{L}}{\partial \theta_\text{critic}} = -2 \delta_t \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
+`$$\frac{\partial \mathscr{L}}{\partial \theta_\text{critic}} = 2 \delta_t \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
 
 where `$\delta_t = r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1})$`
 
