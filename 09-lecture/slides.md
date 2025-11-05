@@ -296,19 +296,18 @@ for any given baseline $B(S)$.
 
 ## Value-function baseline
 
-The main idea of actor-critic methods is to use a learned state-value function $V_{\theta_\text{critic}(S)$ with parameters $\theta_\text{critic}$ as a baseline.
+The main idea of actor-critic methods is to use a learned state-value function `$V_{\theta_\text{critic}}(S)$` with parameters `$\theta_\text{critic}$` as a baseline.
 
 Then, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
-`$$\di
-splaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) - \class{highlight}{V_{\theta_\text{critic}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) - \class{highlight}{V_{\theta_\text{critic}}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
 
 and can be estimated by 
 
-`$$\sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k - V_{\theta_\text{critic}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 ---
 
-`$$\sum_{t=1}^{T}  \Big( \big( r_t + V_{\theta_\text{critic}(S_t) - V_{\theta_\text{critic}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\sum_{t=1}^{T}  \Big( \big( r_t + V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-`$$\sum_{t=1}^{T}  \Big( \big( r_t + \gamma \cdot V_{\theta_\text{critic}(S_t) - V_{\theta_\text{critic}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\sum_{t=1}^{T}  \Big( \big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
