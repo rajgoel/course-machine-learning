@@ -16,7 +16,7 @@ https://rajgoel.github.io/course-machine-learning
 | 06      | [Graph neural networks](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
 | 07      | [Autoencoders](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
 | 08      | [Reinforcement learning and value-based methods](https://rajgoel.github.io/course-machine-learning/?topic=08-lecture)         | Project work    |
-| 09      | [Policy-based methods](https://rajgoel.github.io/course-machine-learning/?topic=09-lecture)         | Project work    |
+| 09      | [Policy-based and actor-critic methods](https://rajgoel.github.io/course-machine-learning/?topic=09-lecture)         | Project work    |
 | 10      | Miscellaneous            | Project work         |
 | 11      | Project presentation     | Project presentation |
 

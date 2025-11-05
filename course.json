@@ -13,7 +13,7 @@
     { "topic": "Graph neural networks", "src": "slides.md", "folder": "06-lecture" },
     { "topic": "Autoencoders", "src": "slides.md", "folder": "07-lecture" },
     { "topic": "Reinforcement learning and value-based methods", "src": "slides.md", "folder": "08-lecture" },
-    { "topic": "Policy-based methods", "src": "slides.md", "folder": "09-lecture" }
+    { "topic": "Policy-based and actor-critic methods", "src": "slides.md", "folder": "09-lecture" }
   ]
 }
 
