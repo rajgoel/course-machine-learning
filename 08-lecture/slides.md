@@ -213,7 +213,7 @@ with respect to $\theta$ is
 
 `$$\nabla_{\!\theta}\ \mathscr{L} = 2\delta_t \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{t-1}, X_t)$$`
 
-where $\delta_t$ is the **temporal difference (TD) error**, i.e., the difference between Bellmann target and prediction.
+where $\delta_t$ is the **temporal difference (TD) error**, i.e., the difference between Bellman target and prediction.
 
 > [!NOTE]
 > With the target network, the Bellman target does not depend on $\theta$.

@@ -352,7 +352,7 @@ The [(semi-)gradient](http://incompleteideas.net/book/RLbook2020.pdf#page=222) w
 
 `$$\nabla_{\!\theta_\text{critic}}\ \mathscr{L} = 2 \delta_t \cdot (-1) \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
 
-where $\delta_t$ is the temporal difference (TD) error, i.e., the difference between Bellmann target and prediction.
+where $\delta_t$ is the **temporal difference (TD) error**, i.e., the difference between Bellman target and prediction.
 
 > [!NOTE]
 > We could add a target network (like in DQN) to improve stability.
