@@ -321,9 +321,19 @@ can be estimated by
 
 ---
 
-Inspired by the Bellmann equation, we can use a **discount factor** $\gamma \in [0,1]$ in our estimation
+As we do not need to wait for termination of an episode we can do our gradient updates using 
 
-`$$\sum_{t=1}^{T}  \Big( \big( r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
 
 ---
+
+Inspired by the Bellmann equation, we can use a **discount factor** $\gamma \in [0,1]$ in our estimation
+
+`$$\big( r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
+
+---
+
+To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimise the loss of the critic
+
+`$$\mathscr{L}_\text{critic}(\theta_\text{critic}) = \Big( \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} - \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}}\Big)^2$$`
 
