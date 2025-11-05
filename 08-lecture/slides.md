@@ -196,14 +196,26 @@ During training we randomly pick observations from the replay buffer, and run st
 
 To address the **instability** problem, we can use a **target network** with parameters $\theta_{\text{target}}$ and train our neural network by minimising
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{\underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
-
-As the Bellman target no longer depends on $\theta$, we have
-$$\frac{\partial \mathscr{L}}{\partial \theta} = 2\delta_t \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{j-1},
-  X_j)$$
+`$$\mathscr{L}(\theta) = \Big( \underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} \Big)^2$$`
 
 > [!NOTE]
 > The target network has the same architecture as the main network and is updated periodically by copying the parameters.
+
+---
+
+## Gradient of the loss
+
+The gradient of the loss
+
+`$$\mathscr{L}(\theta) = \Big( \underbrace{\underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
+
+is
+
+`$$\frac{\partial \mathscr{L}}{\partial \theta} = 2\delta_t \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{j-1}, X_j)$$`
+
+> [!NOTE]
+> With the target network, the Bellman target does not depend on $\theta$.
+
 
 ---
 
