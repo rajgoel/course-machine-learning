@@ -207,7 +207,7 @@ To address the **instability** problem, we can use a **target network** with par
 
 The gradient of the loss
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{\underbrace{\big( r_t + \gamma \cdot \max_{X} \class{highlight}{Q_{\theta_{\text{target}}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
+`$$\mathscr{L}(\theta) = \Big( \underbrace{\underbrace{\big( r_t + \gamma \cdot \max_{X} Q_{\theta_{\text{target}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
 
 is
 
