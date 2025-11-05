@@ -305,3 +305,10 @@ splaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\p
 and can be estimated by 
 
 `$$\sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k - V_{\theta_\text{critic}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+
+---
+
+`$$\sum_{t=1}^{T}  \Big( \big( r_t + V_{\theta_\text{critic}(S_t) - V_{\theta_\text{critic}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+
+`$$\sum_{t=1}^{T}  \Big( \big( r_t + \gamma \cdot V_{\theta_\text{critic}(S_t) - V_{\theta_\text{critic}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+
