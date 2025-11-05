@@ -317,7 +317,7 @@ can be estimated by
 `$$\sum_{t=1}^{T}  \Big( \big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!NOTE]
-> Every term can now be computed directly after taking an action when the reward and new state become known. 
+> Every term can now be computed directly when the reward and new state become known  after taking an action. 
 
 ---
 
