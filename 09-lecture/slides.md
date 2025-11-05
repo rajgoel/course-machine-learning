@@ -333,7 +333,7 @@ and
 
 `$$\delta_t \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
 
-as an estimation of the policy gradient **for step** $t$. 
+as an estimation of the policy gradient **for step** $t$ of the episode. 
 
 ---
 
