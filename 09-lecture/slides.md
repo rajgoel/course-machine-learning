@@ -350,7 +350,7 @@ To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimis
 
 The [(semi-)gradient](http://incompleteideas.net/book/RLbook2020.pdf#page=222) which treats the Bellman target as a constant is
 
-`$$\nabla_{\!\theta_\text{critic}}\ \mathscr{L} = 2 \delta_t \cdot (-1) \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
+`$$\nabla_{\!\theta_\text{critic}}\ \mathscr{L} = 2 \delta_t \cdot (-1) \cdot \nabla_{\!\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
 
 where $\delta_t$ is the **temporal difference (TD) error**, i.e., the difference between Bellman target and prediction.
 
