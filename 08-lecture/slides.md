@@ -203,15 +203,15 @@ To address the **instability** problem, we can use a **target network** with par
 
 ---
 
-## Gradient of the loss
+## TD-error and gradient of the loss
 
-The gradient of the loss
+The **temporal difference (TD) error** is defined as
 
-`$$\mathscr{L}(\theta) = \Big( \underbrace{\underbrace{\big( r_t + \gamma \cdot \max_{X} Q_{\theta_{\text{target}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
+`$$\delta_t = \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_{\theta_{\text{target}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}}$$`
 
-with respect to $\theta$ is 
+The gradient of the loss `$\mathscr{L}(\theta) = \delta_t^2$` with respect to $\theta$ is 
 
-`$$\nabla_{\!\theta}\ \mathscr{L} = 2\delta_t \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{j-1}, X_j)$$`
+`$$\nabla_{\!\theta}\ \mathscr{L} = 2\delta_t \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{t-1}, X_t)$$`
 
 > [!NOTE]
 > With the target network, the Bellman target does not depend on $\theta$.
@@ -243,9 +243,10 @@ For each episode:
     1d. Sample random mini-batch from D
     
     1e. For each transition in the mini-batch:
-        Compute target: yⱼ = rⱼ + γ · max Q_target(Sⱼ₋₁, X)
+        Compute target: yⱼ = rⱼ + γ · max Q_target(Sⱼ, X)
+        Compute TD-error: δⱼ = yⱼ - Q(Sⱼ₋₁, Xⱼ)
     
-    1f. Update θ: θ ← θ - α × avg( 2(yⱼ - Q(Sⱼ₋₁, Xⱼ)) × (-1) × ∇_θ Q(Sⱼ₋₁, Xⱼ) ) 
+    1f. Update θ: θ ← θ + α × avg( 2δⱼ × ∇_θ Q(Sⱼ₋₁, Xⱼ) ) 
     
     1h. if t mod C == 0: update target network θ_target ← θ
 
