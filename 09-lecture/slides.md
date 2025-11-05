@@ -291,7 +291,7 @@ for any given baseline $B(S)$.
 
 ## Value-function baseline
 
-The main idea of actor-critic methods is to use a learnable **state-value function** `$V_{\theta_\text{critic}}(S)$` with parameters `$\theta_\text{critic}$` as a baseline.
+The main idea of actor-critic methods is to use a baseline obtained from a learnable **state-value function** `$V_{\theta_\text{critic}}(S)$` with parameters `$\theta_\text{critic}$`.
 
 Then, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 `$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) \class{highlight}{- V_{\theta_\text{critic}}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
@@ -311,15 +311,15 @@ can be estimated by
 
 `$$\sum_{t=1}^{T}  \Big( \big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-> [!NOTE]
-> Every term can now be computed directly when the reward and new state become known  after taking an action. 
+> [!IMPORTANT]
+> For every $t$ we can now compute all terms without waiting for the episode to be completed. 
 
 ---
 
 
-As we do not need to wait for termination of an episode we can do our gradient updates using 
+As we do not need to wait for termination of an episode, we can do a gradient update after each step $t$ using 
 
-`$$\big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
+`$$\big( r_t + V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
 
 ---
 
