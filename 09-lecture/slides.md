@@ -348,16 +348,13 @@ To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimis
 
 `$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{ \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
 
-Treating the Bellman target as a constant, we have
+The (semi-)gradient which treats the Bellman target as a constant is
 
-`$$\frac{\partial \mathscr{L}}{\partial \theta_\text{critic}} = 2 \delta_t \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
+`$$\nabla_{\!\theta_\text{critic}}\ \mathscr{L} = 2 \delta_t \cdot (-1) \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
 
 
-<!--
-The gradient of this loss is the **temporal difference (TD) error** 
-
-`$$\delta_t = r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1})$$`
--->
+> [!WARNING]
+> Standard [actor-critic methods](http://incompleteideas.net/book/RLbook2020.pdf#page=353) treat the Bellman target as constant, although it depends on $\theta_\text{critic}$. Target networks (like in DQN) can be used to improve stability.
 
 
 ---
