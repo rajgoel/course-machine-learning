@@ -344,14 +344,15 @@ as an estimation of the policy gradient.
 
 ## TD-error and loss of the critic
 
-To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimise the loss of the critic
+To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimise the loss 
 
-`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{ \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}}}_{\delta_t} \Big)^2$$`
+`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} \Big)^2$$`
 
-The (semi-)gradient which treats the Bellman target as a constant is
+The [(semi-)gradient](http://incompleteideas.net/book/RLbook2020.pdf#page=222) which treats the Bellman target as a constant is
 
 `$$\nabla_{\!\theta_\text{critic}}\ \mathscr{L} = 2 \delta_t \cdot (-1) \cdot \nabla_{\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
 
+where $\delta_t$ is the temporal difference (TD) error, i.e., the difference between Bellmann target and prediction.
 
 > [!WARNING]
 > Standard [actor-critic methods](http://incompleteideas.net/book/RLbook2020.pdf#page=353) treat the Bellman target as constant, although it depends on $\theta_\text{critic}$. Target networks (like in DQN) can be used to improve stability.
