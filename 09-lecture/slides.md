@@ -287,10 +287,10 @@ Moreover, we have
 `$0$`<!-- .element: data-id="zero" -->
 `$= \displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$`<!-- .element: data-id="zero-6" -->
 
-for any given baseline $B(S)$.
-
-Thus, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+and `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 `$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \class{highlight}{\big( Q_{\pi_\theta}(S,X) - B(S) \big)} \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
+
+for any given baseline $B(S)$.
 
 ---
 
