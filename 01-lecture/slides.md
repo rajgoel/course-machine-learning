@@ -344,9 +344,10 @@ $$\left( \begin{align} \hat{a}_{1} \\  \hat{a}_{2} \end{align} \right) = \hat{a}
 </table>
 
 > [!TIP]
-> Here, $\hat{a} = \sigma(z)$ and $z = W a + b$ where
+> We compute $\hat{a}$ by $\hat{a} = \sigma(z)$ and $z = W a + b$ where
 > - $W$ is a matrix containing a **weight** $w_{i,j}$ for each edge going from input neuron $j$ to output neuron $i$, and 
 > - $b$ is a vector containing a **bias** $b_i$ for each output neuron $i$. 
+> - $\sigma$ is a (usually non-linear) activation function. 
 
 ---
 
@@ -385,6 +386,9 @@ b_{2}
 \right)$$`
 </span>
 
+> [!IMPORTANT]
+> Assuming a linear activation function is a simplification for teaching purposes. In practice, non-linear activation functions are used.
+ 
 ---
 
 ### Determining weights and biases
@@ -527,10 +531,31 @@ our neural network can perfectly recognise both symbols.
 
 If we find weights and biases such that
 
-`$$w_{1,2} + w_{1,3} + b_1 = 1$$`
-`$$w_{2,2} + w_{2,3} + b_2 = 0$$`
-`$$w_{1,1} + w_{1,4} + b_1 = 0$$`
-`$$w_{2,1} + w_{2,4} + b_2 = 1$$`
+`$0 \cdot$` `$w_{1,1}$` `$ + 1 \cdot$` `$ w_{1,2}$` `$ + 1 \cdot$` `$ w_{1,3}$` `$ + 0 \cdot$` `$ w_{1,4}$` `$ + b_1 = 1$`
+
+`$0 \cdot$` `$ w_{2,1}$` `$ + 1 \cdot$` `$ w_{2,2}$` `$ + 1 \cdot$` `$ w_{2,3}$` `$ + 0 \cdot$` `$ w_{2,4}$` `$ + b_2 = 0$`
+
+and
+
+`$1 \cdot$` `$ w_{1,1}$` `$ + 0 \cdot$` `$ w_{1,2}$` `$ + 0 \cdot w_{1,3}$` `$ + 1 \cdot$` `$ w_{1,4}$` `$ + b_1 = 0$`
+`$1 \cdot$` `$ w_{2,1}$` `$ + 0 \cdot$` `$ w_{2,2}$` `$ + 0 \cdot w_{2,3}$` `$ + 1 \cdot$` `$ w_{2,4}$` `$ + b_2 = 1$`
+
+our neural network can perfectly recognise both symbols. 
+
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+If we find weights and biases such that
+
+`$w_{1,2}$` `$ + $` `$w_{1,3}$` `$ + b_1 = 1$`
+
+`$w_{2,2}$` `$ + $` `$w_{2,3}$` `$ + b_2 = 0$`
+
+`$w_{1,1}$` `$ + $` `$w_{1,4}$` `$ + b_1 = 0$`
+
+`$w_{2,1}$` `$ + $` `$w_{2,4}$` `$ + b_2 = 1$`
 
 our neural network can perfectly recognise both symbols. 
 
