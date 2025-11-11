@@ -112,12 +112,12 @@ and so on.
 <td style="vertical-align: middle;width:50px;position:relative;left:150px;">
 $$a = 
 \left(
-\begin{align}
+\begin{array}{c}
 a_{1} \\
 a_{2} \\
 \vdots \\
 a_{25}
-\end{align}
+\end{array}
 \right)
 $$
 </td>
@@ -129,7 +129,7 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;width:50px;position:relative;left:-150px;">
-$$ \left( \begin{align} \hat{a}_{0} \\  \hat{a}_{1} \\ \vdots \\ \hat{a}_{9}  \end{align} \right) = \sigma(Wa + b)$$
+$$ \left( \begin{array}{c} \hat{a}_{0} \\  \hat{a}_{1} \\ \vdots \\ \hat{a}_{9}  \end{array} \right) = \sigma(Wa + b)$$
 </td>
 </tr>
 </table>
