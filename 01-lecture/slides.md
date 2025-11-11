@@ -357,7 +357,6 @@ If we assume $\sigma(z) = z$, we have
 
 $$\hat{a} = \sigma(Wa + b) = Wa + b$$
 
-<span class="fragment">
 or
 
 `$$\left(
@@ -384,7 +383,6 @@ b_{1} \\
 b_{2} 
 \end{array}
 \right)$$`
-</span>
 
 > [!IMPORTANT]
 > Assuming a linear activation function is a simplification for teaching purposes. In practice, non-linear activation functions are used.
