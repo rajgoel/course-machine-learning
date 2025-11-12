@@ -9,6 +9,8 @@
 
 <svg width="1000" height="500">
 <g data-id="graph">
+  <text x="225" y="50" font-size="30" fill="black" text-anchor="middle"> Original graph </text>
+
   <line data-id="AB" x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="AC" x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BC" x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -50,6 +52,8 @@
 
 <svg width="1000" height="500">
 <g data-id="graph">
+  <text x="225" y="50" font-size="30" fill="black" text-anchor="middle"> Original graph </text>
+
   <line data-id="AB" x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="AC" x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BC" x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -84,6 +88,8 @@
 </g>
 
 <g data-id="layer1">
+  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+
   <g data-id="A">
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="600" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -112,6 +118,8 @@
 
 <svg width="1000" height="500">
 <g data-id="graph">
+  <text x="225" y="50" font-size="30" fill="black" text-anchor="middle"> Original graph </text>
+
   <line data-id="AB" x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="AC" x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BC" x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -146,6 +154,8 @@
 </g>
 
 <g data-id="layer1">
+  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+
   <g>
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="600" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -167,6 +177,8 @@
   </g>
 </g>
 <g data-id="layer2">
+  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
+
   <g data-id="A">
     <circle cx="900" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="900" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -195,6 +207,8 @@
 
 <svg width="1000" height="500">
 <g data-id="graph">
+  <text x="225" y="50" font-size="30" fill="black" text-anchor="middle"> Original graph </text>
+
   <line x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -247,6 +261,8 @@
 </g>
 
 <g data-id="layer1">
+  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+
   <g>
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="600" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -268,6 +284,8 @@
   </g>
 </g>
 <g data-id="layer2">
+  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
+
   <g>
     <circle cx="900" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="900" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
