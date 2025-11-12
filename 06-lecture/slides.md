@@ -8,7 +8,7 @@
 <!-- .slide: data-auto-animate="true" -->
 
 <svg width="1000" height="500">
-<g id="graph">
+<g data-id="graph">
   <line data-id="AB" x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="AC" x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BC" x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -49,7 +49,7 @@
 <!-- .slide: data-auto-animate="true" -->
 
 <svg width="1000" height="500">
-<g id="graph">
+<g data-id="graph">
   <line data-id="AB" x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="AC" x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BC" x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -83,7 +83,7 @@
   </g>
 </g>
 
-<g id="layer1">
+<g data-id="layer1">
   <g data-id="A">
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="600" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -111,7 +111,7 @@
 <!-- .slide: data-auto-animate="true" -->
 
 <svg width="1000" height="500">
-<g id="graph">
+<g data-id="graph">
   <line data-id="AB" x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="AC" x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BC" x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -145,7 +145,7 @@
   </g>
 </g>
 
-<g id="layer1">
+<g data-id="layer1">
   <g>
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="600" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -166,7 +166,7 @@
     <text x="600" y="412.5" font-size="40" fill="black" text-anchor="middle"> D </text>
   </g>
 </g>
-<g id="layer2">
+<g data-id="layer2">
   <g data-id="A">
     <circle cx="900" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="900" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -194,7 +194,7 @@
 <!-- .slide: data-auto-animate="true" -->
 
 <svg width="1000" height="500">
-<g id="graph">
+<g data-id="graph">
   <line x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
@@ -229,7 +229,7 @@
 </g>
 
 <!-- connections from layer1 -> layer2 based on graph -->
-<g id="gnn-links" stroke="lightgray" stroke-width="3">
+<g data-id="gnn-links" stroke="lightgray" stroke-width="3">
   <!-- A connections -->
   <line data-id="AB" x1="600" y1="100" x2="900" y2="200" />
   <line data-id="AC" x1="600" y1="100" x2="900" y2="300" />
@@ -246,7 +246,7 @@
   <line data-id="DC" x1="600" y1="400" x2="900" y2="300" />
 </g>
 
-<g id="layer1">
+<g data-id="layer1">
   <g>
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="600" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
@@ -267,7 +267,7 @@
     <text x="600" y="412.5" font-size="40" fill="black" text-anchor="middle"> D </text>
   </g>
 </g>
-<g id="layer2">
+<g data-id="layer2">
   <g>
     <circle cx="900" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="900" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
