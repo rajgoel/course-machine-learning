@@ -1,8 +1,5 @@
 # Graph neural networks 
 
-> [!CAUTION]
-> Incomplete
-
 ---
 
 ## Graphs
@@ -560,9 +557,9 @@ The **scalar product** (or **dot product**) between two vectors measures their s
 
 ## Learning embeddings
 
-Graph convolutional networks can be used to learn embeddings of nodes such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer (i.e. layer $L$) activations for node $i$ and $j$, i.e., the scalar product
+Graph convolutional networks with $k$ layers can be used to learn embeddings of nodes such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer activations for node $i$ and $j$, i.e., the scalar product
 
-$$(a_i^L)^T \cdot a_j^L$$
+$$(a_i^k)^T \cdot a_j^k$$
 
 approximates $v_{i,j}$
 
@@ -573,12 +570,19 @@ approximates $v_{i,j}$
 
 ## Loss
 
-The mean squared error is
+For a GCN with $k$ layers, the mean squared error is
 
-`$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^L)^T \cdot a_j^L \right)^2$$`
+`$$\mathscr{L}_{(v_{i,j})_{(i,j)\in E}}(W,a^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^k)^T \cdot a_j^k \right)^2$$`
 
-where
+where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
 
-- $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$
-- $L$ is the final GNN layer
+===
 
+# Example: MovieLens
+
+The [MovieLens](https://juliaml.github.io/MLDatasets.jl/dev/datasets/graphs/#MLDatasets.MovieLens) dataset contains ratings of users for a variety of movies.
+
+---
+
+> [!WARNING]
+> Not yet complete
