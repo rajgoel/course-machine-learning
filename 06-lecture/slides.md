@@ -691,7 +691,7 @@ Graph neural networks can be used to learn embeddings of nodes by aggregating em
 
 Let $j$ be a node in the original graph and let $i_1, ldots, i_k$ denote the neighbouring nodes of $j$. For any node $i$ let $a_i^l$ denote the embedding for any node $i$ in layer $l$, then the embedding of node $j$ in layer $l+1$ is computed by
 
-$$a_j^{l+1} = f( a_j^l, a_{i_1}^l, \ldots, a_{i_k}^l )$$ 
+$$a_j^{l+1} = f( a_j^l, \underbrace{a_{i_1}^l, \ldots, a_{i_k}^l}_{\text{neighbour embeddings}} )$$ 
 
 ---
 
