@@ -114,9 +114,9 @@ The **scalar product** (dot product) between two vectors measures their similari
 
 > [!TIP]
 > **Examples**: 
-> - Pulp Fiction vs Terminator: $(0.3, 0.2) \cdot (0.4, 0.9)^T =0.12 + 0.18 = 0.30$
-> - Titanic vs Terminator: $(0.1, -0.8) \cdot (0.4, 0.9)^T  = 0.04 - 0.72 = -0.68$
-> - Titanic vs Warm Bodies: $(0.1, -0.8) \cdot (-0.5, -0.3)^T  = -0.05 + 0.24 = 0.19$
+> - Pulp Fiction (0.3, 0.2) ↔ Terminator (0.4, 0.9): 0.12 + 0.18 = 0.30
+> - Titanic (0.1, -0.8) ↔ Terminator (0.4, 0.9): 0.04 - 0.72 = -0.68
+> - Titanic (0.1, -0.8) ↔ Warm Bodies (-0.5, -0.3): -0.05 + 0.24 = 0.19
 
 
 ---
