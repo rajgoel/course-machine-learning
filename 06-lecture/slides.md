@@ -572,7 +572,7 @@ approximates $v_{i,j}$
 
 For a GCN with $k$ layers, the mean squared error is
 
-`$$\mathscr{L}_{(v_{i,j})_{(i,j)\in E}}(W,a^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^k)^T \cdot a_j^k \right)^2$$`
+`$$\mathscr{L}(W,a^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^k)^T \cdot a_j^k \right)^2$$`
 
 where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
 
