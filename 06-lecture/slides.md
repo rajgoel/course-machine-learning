@@ -718,10 +718,14 @@ In **graph convolutional networks (GCN)** we use
 
 $$a_j^l = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
 
+and
+
+`$$g( a^{l-1}, j ) = \displaystyle\sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$$`
+
 where 
-- `$g( a^{l-1}, j ) = \displaystyle\sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$`, 
+
 - $N_i$ is the set of neighbours of any node $i$,
-- $v_{i,j}$ is the edge weight for each node $i \in N_j$,
+- $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{j,j}=1$,
 - $W^l$ is a learnable weight matrix shared across all nodes in the original graph, and 
 - $\sigma$ is an element-wise activation function, e.g., ReLU.
 
