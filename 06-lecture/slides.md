@@ -110,9 +110,9 @@ An embedding maps entities to multi-dimensional vectors with the goal of positio
 
 The **scalar product** (dot product) between two vectors measures their similarity:
 
-$$(a_1, \ldots, a_n) \cdot \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$
+`$$(a_1, \ldots, a_n) \cdot \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$`
 
-> [!NOTE]
+> [!TIP]
 > **Examples**: 
 > - Pulp Fiction vs Terminator: $(0.3, 0.2) \cdot (0.4, 0.9)^T =0.12 + 0.18 = 0.30$
 > - Titanic vs Terminator: $(0.1, -0.8) \cdot (0.4, 0.9)^T  = 0.04 - 0.72 = -0.68$
