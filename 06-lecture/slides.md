@@ -537,7 +537,7 @@ The main idea of using GNN for recommender systems is to learn similarities betw
 
 ## Embeddings
 
-An embedding maps entities to multi-dimensional vectors with the goal of positioning similar objects near each other.
+An [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) maps entities to multi-dimensional vectors with the goal of positioning similar objects near each other.
 
 ![Image](06-lecture/2D-movies.svg)
 
@@ -545,7 +545,7 @@ An embedding maps entities to multi-dimensional vectors with the goal of positio
 
 ## Measuring similarity
 
-The **scalar product (or dot product)** between two vectors measures their similarity:
+The **scalar product** (or **dot product**) between two vectors measures their similarity:
 
 `$$(a_1, \ldots, a_n) \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$`
 
@@ -575,11 +575,10 @@ approximates $v_{i,j}$
 
 The mean squared error is
 
-$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(i,j) \in E} \left( r_{u,i} - (a_u^L)^T \cdot a_i^L \right)^2$$
+`$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^L)^T \cdot a_j^L \right)^2$$`
 
 where
 
-- $E$ is the set of observed user-item interactions (edges)
-- $r_{i,j}$ is the true rating of user $i$ for item $j$
+- $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$
 - $L$ is the final GNN layer
 
