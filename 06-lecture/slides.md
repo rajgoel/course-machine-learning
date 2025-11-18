@@ -699,19 +699,18 @@ Graph neural networks can be used to learn embeddings of nodes by aggregating em
 
 The embedding of node $j$ in GNN layer $l$ is computed by
 
+<!--
 `$$a_j^l = f_{\theta^l}( a_j^{l-1}, \underbrace{a_{i_1}^{l-1}, \ldots, a_{i_n}^{l-1}}_{{\text{neighbour}}\atop{\text{embeddings}}} )$$`
 
 where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
+-->
 
----
-
-## Forward propagation with edge weights
-
-If edge weights $v_{i,j}$ are given for every edge $(i,j)$ in the original graph, the embedding of node $j$ in GNN layer $l$ is computed by
-
-`$$a_j^l = f_{\theta^l}( a_j^{l-1}, \underbrace{a_{i_1}^{l-1}, \ldots, a_{i_n}^{l-1}}_{{\text{neighbour}}\atop{\text{embeddings}}}, \underbrace{v_{i_1,j}, \ldots, v_{i_n,j}}_{{\text{edge}}\atop{\text{weights}}} )$$`
+`$$a_j^l = f_{\theta^l}( a^{l-1}, j )$$`
 
 where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
+
+> [!IMPORTANT]
+> $f$ only uses the embeddings of node $j$ and its neighbours. 
 
 ---
 
@@ -719,9 +718,31 @@ where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\th
 
 Most GNN formulations compute
 
-$$a_j^l = h_{\theta_h^l}\left( a_j^{l-1}, g_{\theta_g^l}(a_{i_1}^{l-1}, \ldots,
-   a_{i_n}^{l-1}, v_{i_1,j}, \ldots, v_{i_n,j}) \right)$$
+`$$a_j^l = h_{\theta^l}( g_{\bar\theta^l}( a^{l-1}, j ) )$$`
 
-where $g_{\theta_g^l}$ is an aggregation function (e.g. sum, mean, max, attention, etc.) and $h_{\theta_h^l}$ is the actual update function.
+where $g_{\bar\theta^l}$ is an aggregation function (e.g. weighted sum) and $h_{\theta^l}$ is the actual update function.
+
+---
+
+## Graph convolutional networks 
+
+In **graph convolutional networks (GCN)** we have
+
+$$g( a^{l-1}, j ) = \sum_{i \in N(j)\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N(i)| \cdot | N(j)|}} a_i^{l-1}$$
+
+where $N(i)$ is the set of neighbours of node $i$.
+
+Moreover, 
+
+$$a_j^l = h_{W^l}( a^{l-1}, j ) = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
+
+where $W^l$ is a learnable weight matrix.
+
+> [!NOTE]
+> - $g$ does not have any learnable parameters and return a new embedding.
+> - The same $W^l$ is used for all nodes in the original graph.
+
+
+
 
 
