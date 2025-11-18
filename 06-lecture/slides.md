@@ -557,11 +557,7 @@ The **scalar product** (or **dot product**) between two vectors measures their s
 
 ## Learning embeddings
 
-Graph convolutional networks with $k$ layers can be used to learn embeddings of nodes such that 
-
-- for every edge $(i,j)$ with a weight $v_{i,j}$, 
-
-the similarity of the final layer activations, i.e., the scalar product
+Graph convolutional networks with $k$ layers can be used to learn embeddings of nodes such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer activations, i.e., the scalar product
 
 $$(a_i^k)^T \cdot a_j^k$$
 
