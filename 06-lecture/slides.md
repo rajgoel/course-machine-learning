@@ -564,7 +564,7 @@ $$(a_i^k)^T \cdot a_j^k$$
 approximates $v_{i,j}$
 
 > [!IMPORTANT]
-> We can start with arbitrary first layer embeddings and learn the weights **and** the first layer embeddings simultaneously.
+> We can start with arbitrary first layer embeddings.
 
 ---
 
@@ -575,6 +575,9 @@ For a GCN with $k$ layers, the mean squared error is
 `$$\mathscr{L}(W,a^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^k)^T \cdot a_j^k \right)^2$$`
 
 where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
+
+> [!IMPORTANT]
+> We learn the weights **and** the first layer embeddings simultaneously.
 
 ===
 
