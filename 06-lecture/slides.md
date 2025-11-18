@@ -558,53 +558,53 @@ Graph neural networks can be used to learn embeddings of nodes (or edges) by agg
 
 ## GNN with 3 layers 
 
-<svg width="700" height="500">
+<svg width="900" height="500">
 <!-- connections from layer1 -> layer2 based on graph -->
 <g data-id="gnn-links" stroke="lightgray" stroke-width="3">
   <!-- A connections -->
-  <line data-id="AB" x1="150" y1="100" x2="350" y2="200" />
-  <line data-id="AC" x1="150" y1="100" x2="350" y2="300" />
+  <line data-id="AB" x1="150" y1="100" x2="450" y2="200" />
+  <line data-id="AC" x1="150" y1="100" x2="450" y2="300" />
   <!-- B connections -->
-  <line data-id="BA" x1="150" y1="200" x2="350" y2="100" />
-  <line data-id="BC" x1="150" y1="200" x2="350" y2="300" />
-  <line data-id="BD" x1="150" y1="200" x2="350" y2="400" />
+  <line data-id="BA" x1="150" y1="200" x2="450" y2="100" />
+  <line data-id="BC" x1="150" y1="200" x2="450" y2="300" />
+  <line data-id="BD" x1="150" y1="200" x2="450" y2="400" />
   <!-- C connections -->
-  <line data-id="CA" x1="150" y1="300" x2="350" y2="100" />
-  <line data-id="CB" x1="150" y1="300" x2="350" y2="200" />
-  <line data-id="CD" x1="150" y1="300" x2="350" y2="400" />
+  <line data-id="CA" x1="150" y1="300" x2="450" y2="100" />
+  <line data-id="CB" x1="150" y1="300" x2="450" y2="200" />
+  <line data-id="CD" x1="150" y1="300" x2="450" y2="400" />
   <!-- D connections -->
-  <line data-id="DB" x1="150" y1="400" x2="350" y2="200" />
-  <line data-id="DC" x1="150" y1="400" x2="350" y2="300" />
+  <line data-id="DB" x1="150" y1="400" x2="450" y2="200" />
+  <line data-id="DC" x1="150" y1="400" x2="450" y2="300" />
 </g>
 
 <!-- connections from layer2 -> layer3 based on graph -->
 <g data-id="gnn-links2" stroke="lightgray" stroke-width="3">
   <!-- A connections -->
-  <line data-id="AB" x1="350" y1="100" x2="550" y2="200" />
-  <line data-id="AC" x1="350" y1="100" x2="550" y2="300" />
+  <line data-id="AB" x1="450" y1="100" x2="750" y2="200" />
+  <line data-id="AC" x1="450" y1="100" x2="750" y2="300" />
   <!-- B connections -->
-  <line data-id="BA" x1="350" y1="200" x2="550" y2="100" />
-  <line data-id="BC" x1="350" y1="200" x2="550" y2="300" />
-  <line data-id="BD" x1="350" y1="200" x2="550" y2="400" />
+  <line data-id="BA" x1="450" y1="200" x2="750" y2="100" />
+  <line data-id="BC" x1="450" y1="200" x2="750" y2="300" />
+  <line data-id="BD" x1="450" y1="200" x2="750" y2="400" />
   <!-- C connections -->
-  <line data-id="CA" x1="350" y1="300" x2="550" y2="100" />
-  <line data-id="CB" x1="350" y1="300" x2="550" y2="200" />
-  <line data-id="CD" x1="350" y1="300" x2="550" y2="400" />
+  <line data-id="CA" x1="450" y1="300" x2="750" y2="100" />
+  <line data-id="CB" x1="450" y1="300" x2="750" y2="200" />
+  <line data-id="CD" x1="450" y1="300" x2="750" y2="400" />
   <!-- D connections -->
-  <line data-id="DB" x1="350" y1="400" x2="550" y2="200" />
-  <line data-id="DC" x1="350" y1="400" x2="550" y2="300" />
+  <line data-id="DB" x1="450" y1="400" x2="750" y2="200" />
+  <line data-id="DC" x1="450" y1="400" x2="750" y2="300" />
 </g>
 
 <g data-id="gnn-self-links" stroke="lightgray" stroke-width="3">
-  <line x1="150" y1="100" x2="350" y2="100" />
-  <line x1="150" y1="200" x2="350" y2="200" />
-  <line x1="150" y1="300" x2="350" y2="300" />
-  <line x1="150" y1="400" x2="350" y2="400" />
+  <line x1="150" y1="100" x2="450" y2="100" />
+  <line x1="150" y1="200" x2="450" y2="200" />
+  <line x1="150" y1="300" x2="450" y2="300" />
+  <line x1="150" y1="400" x2="450" y2="400" />
   
-  <line x1="350" y1="100" x2="550" y2="100" />
-  <line x1="350" y1="200" x2="550" y2="200" />
-  <line x1="350" y1="300" x2="550" y2="300" />
-  <line x1="350" y1="400" x2="550" y2="400" />
+  <line x1="450" y1="100" x2="750" y2="100" />
+  <line x1="450" y1="200" x2="750" y2="200" />
+  <line x1="450" y1="300" x2="750" y2="300" />
+  <line x1="450" y1="400" x2="750" y2="400" />
 </g>
 
 <g data-id="layer1">
@@ -632,50 +632,50 @@ Graph neural networks can be used to learn embeddings of nodes (or edges) by agg
 </g>
 
 <g data-id="layer2">
-  <text x="350" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
+  <text x="450" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
 
   <g>
-    <circle cx="350" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="350" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
+    <circle cx="450" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
   </g>
   
   <g>
-    <circle cx="350" cy="200" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="350" y="212.5" font-size="40" fill="black" text-anchor="middle"> B </text>
+    <circle cx="450" cy="200" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="212.5" font-size="40" fill="black" text-anchor="middle"> B </text>
   </g>
   
   <g>
-    <circle cx="350" cy="300" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="350" y="312.5" font-size="40" fill="black" text-anchor="middle"> C </text>
+    <circle cx="450" cy="300" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="312.5" font-size="40" fill="black" text-anchor="middle"> C </text>
   </g>
   
   <g>
-    <circle cx="350" cy="400" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="350" y="412.5" font-size="40" fill="black" text-anchor="middle"> D </text>
+    <circle cx="450" cy="400" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="412.5" font-size="40" fill="black" text-anchor="middle"> D </text>
   </g>
 </g>
 
 <g data-id="layer3">
-  <text x="550" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 3 </text>
+  <text x="750" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 3 </text>
 
   <g>
-    <circle cx="550" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="550" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
+    <circle cx="750" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="750" y="112.5" font-size="40" fill="black" text-anchor="middle"> A </text>
   </g>
   
   <g>
-    <circle cx="550" cy="200" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="550" y="212.5" font-size="40" fill="black" text-anchor="middle"> B </text>
+    <circle cx="750" cy="200" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="750" y="212.5" font-size="40" fill="black" text-anchor="middle"> B </text>
   </g>
   
   <g>
-    <circle cx="550" cy="300" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="550" y="312.5" font-size="40" fill="black" text-anchor="middle"> C </text>
+    <circle cx="750" cy="300" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="750" y="312.5" font-size="40" fill="black" text-anchor="middle"> C </text>
   </g>
   
   <g>
-    <circle cx="550" cy="400" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
-    <text x="550" y="412.5" font-size="40" fill="black" text-anchor="middle"> D </text>
+    <circle cx="750" cy="400" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="750" y="412.5" font-size="40" fill="black" text-anchor="middle"> D </text>
   </g>
 </g>
 </svg>
