@@ -720,20 +720,16 @@ where
 
 ## Graph convolutional networks 
 
-In **graph convolutional networks (GCN)** we have
-
-$$g( a^{l-1}, j ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$$
-
-where $N_i$ is the set of neighbours of any node $i$.
-Moreover, 
+In **graph convolutional networks (GCN)** we use
 
 $$a_j^l = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
 
-where $W^l$ is a learnable weight matrix and $\sigma$ is an activation function, e.g., ReLU.
-
-> [!NOTE]
-> - $g$ does not have any learnable parameters and returns a new embedding.
-> - The same $W^l$ is shared across all nodes in the original graph.
+where 
+- $N_i$ is the set of neighbours of any node $i$,
+- $v_{i,j}$ is the edge weight for each edge $(i,j)$ in the original graph,
+- $g( a^{l-1}, j ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$, 
+- $W^l$ is a learnable weight matrix shared across all nodes in the original graph, and 
+- $\sigma$ is an activation function, e.g., ReLU.
 
 
 
