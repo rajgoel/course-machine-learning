@@ -556,7 +556,7 @@ Graph neural networks can be used to learn embeddings of nodes (or edges) by agg
 
 ---
 
-## GNN with 3 layers 
+## GNN with $k$ layers 
 
 <svg width="900" height="500">
 <!-- connections from layer1 -> layer2 based on graph -->
@@ -680,3 +680,5 @@ Graph neural networks can be used to learn embeddings of nodes (or edges) by agg
 </g>
 </svg>
 
+> [!NOTE]
+> With $k$ GNN layers, information can flow between nodes that are $k$ connections apart in the original graph.
