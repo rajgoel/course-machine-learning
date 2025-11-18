@@ -50,82 +50,11 @@ Graphs can be used to describe relationships between entities, e.g., in **social
 
 ---
 
-## Embeddings
+## Learning with graph neural networks
 
-An embedding maps entities to multi-dimensional vectors with the goal of positioning similar objects near each other.
-
-<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="600" height="600" fill="white"/>
-  
-  <!-- Center axes -->
-  <line x1="50" y1="300" x2="550" y2="300" stroke="black" stroke-width="2"/>
-  <line x1="300" y1="50" x2="300" y2="550" stroke="black" stroke-width="2"/>
-  
-  <!-- Arrow heads -->
-  <polygon points="545,295 545,305 555,300" fill="black"/>
-  <polygon points="55,295 55,305 45,300" fill="black"/>
-  <polygon points="295,55 305,55 300,45" fill="black"/>
-  <polygon points="295,545 305,545 300,555" fill="black"/>
-  
-  <!-- Axis labels -->
-  <text x="50" y="280" text-anchor="middle" font-size="16" font-weight="bold">Comedy</text>
-  <text x="550" y="280" text-anchor="middle" font-size="16" font-weight="bold">Thriller</text>
-  <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="bold">Action</text>
-  <text x="300" y="580" text-anchor="middle" font-size="16" font-weight="bold">Romance</text>
-  
-  <!-- Scale markers -->
-  <text x="50" y="315" text-anchor="middle" font-size="12" fill="black">-1</text>
-  <text x="550" y="315" text-anchor="middle" font-size="12" fill="black">1</text>
-  
-  <text x="315" y="60" text-anchor="middle" font-size="12" fill="black">1</text>
-  <text x="315" y="540" text-anchor="middle" font-size="12" fill="black">-1</text>
-  
-  <!-- Movies positioned using vector coordinates -->
-  <!-- Pulp Fiction (0.3, 0.2) -->
-  <circle cx="375" cy="250" r="8" fill="black"/>
-  <text x="440" y="240" text-anchor="middle" font-size="12" font-weight="bold">Pulp Fiction (0.3, 0.2)</text>
-  
-  <!-- Terminator (0.4, 0.9) -->
-  <circle cx="400" cy="75" r="8" fill="black"/>
-  <text x="460" y="62.5" text-anchor="middle" font-size="12" font-weight="bold">Terminator (0.4, 0.9) </text>
-  
-  <!-- Titanic (0.1, -0.8) -->
-  <circle cx="325" cy="500" r="8" fill="black"/>
-  <text x="385" y="502.5" text-anchor="middle" font-size="12" font-weight="bold">Titanic (0.1, -0.8)</text>
-  
-  <!-- Iron Sky (-0.7, 0.2) -->
-  <circle cx="125" cy="250" r="8" fill="black"/>
-  <text x="70" y="235" text-anchor="middle" font-size="12" font-weight="bold">Iron Sky (-0.7, 0.2)</text>
-  
-  <!-- Warm Bodies (-0.5, -0.3) -->
-  <circle cx="175" cy="375" r="8" fill="black"/>
-  <text x="95" y="377.5" text-anchor="middle" font-size="12" font-weight="bold">Warm Bodies (-0.5, -0.3)</text>
-  
-</svg>
+Graph neural networks (GNN) can be used to learn by aggregating information from neighbouring nodes.
 
 ---
-
-## Measuring similarity
-
-The **scalar product (or dot product)** between two vectors measures their similarity:
-
-`$$(a_1, \ldots, a_n) \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$`
-
-> [!TIP]
-> **Examples**: 
-> - Pulp Fiction (0.3, 0.2) ↔ Terminator (0.4, 0.9): 0.12 + 0.18 = 0.30
-> - Titanic (0.1, -0.8) ↔ Terminator (0.4, 0.9): 0.04 - 0.72 = -0.68
-> - Titanic (0.1, -0.8) ↔ Warm Bodies (-0.5, -0.3): -0.05 + 0.24 = 0.19
-<!-- .element: style="font-size:28pt;" -->
-
----
-
-## Learning embeddings
-
-Graph neural networks can be used to learn embeddings of nodes (or edges) by aggregating information from local neighborhoods.
-
-===
 
 <!-- .slide: data-auto-animate="true" -->
 
@@ -558,7 +487,7 @@ Graph neural networks can be used to learn embeddings of nodes (or edges) by agg
 
 ## GNN with $k$ layers 
 
-<svg width="900" height="500">
+<svg width="900" height="450">
 <!-- connections from layer1 -> layer2 based on graph -->
 <g data-id="gnn-links" stroke="lightgray" stroke-width="3">
   <!-- A connections -->
@@ -681,4 +610,86 @@ Graph neural networks can be used to learn embeddings of nodes (or edges) by agg
 </svg>
 
 > [!NOTE]
-> With $k$ GNN layers, information can flow between nodes that are $k$ connections apart in the original graph.
+> In a GNN with $k$ layers, information can flow between nodes that are $k$ connections apart in the original graph.
+
+===
+
+## Embeddings
+
+An embedding maps entities to multi-dimensional vectors with the goal of positioning similar objects near each other.
+
+<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="600" fill="white"/>
+  
+  <!-- Center axes -->
+  <line x1="50" y1="300" x2="550" y2="300" stroke="black" stroke-width="2"/>
+  <line x1="300" y1="50" x2="300" y2="550" stroke="black" stroke-width="2"/>
+  
+  <!-- Arrow heads -->
+  <polygon points="545,295 545,305 555,300" fill="black"/>
+  <polygon points="55,295 55,305 45,300" fill="black"/>
+  <polygon points="295,55 305,55 300,45" fill="black"/>
+  <polygon points="295,545 305,545 300,555" fill="black"/>
+  
+  <!-- Axis labels -->
+  <text x="50" y="280" text-anchor="middle" font-size="16" font-weight="bold">Comedy</text>
+  <text x="550" y="280" text-anchor="middle" font-size="16" font-weight="bold">Thriller</text>
+  <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="bold">Action</text>
+  <text x="300" y="580" text-anchor="middle" font-size="16" font-weight="bold">Romance</text>
+  
+  <!-- Scale markers -->
+  <text x="50" y="315" text-anchor="middle" font-size="12" fill="black">-1</text>
+  <text x="550" y="315" text-anchor="middle" font-size="12" fill="black">1</text>
+  
+  <text x="315" y="60" text-anchor="middle" font-size="12" fill="black">1</text>
+  <text x="315" y="540" text-anchor="middle" font-size="12" fill="black">-1</text>
+  
+  <!-- Movies positioned using vector coordinates -->
+  <!-- Pulp Fiction (0.3, 0.2) -->
+  <circle cx="375" cy="250" r="8" fill="black"/>
+  <text x="440" y="240" text-anchor="middle" font-size="12" font-weight="bold">Pulp Fiction (0.3, 0.2)</text>
+  
+  <!-- Terminator (0.4, 0.9) -->
+  <circle cx="400" cy="75" r="8" fill="black"/>
+  <text x="460" y="62.5" text-anchor="middle" font-size="12" font-weight="bold">Terminator (0.4, 0.9) </text>
+  
+  <!-- Titanic (0.1, -0.8) -->
+  <circle cx="325" cy="500" r="8" fill="black"/>
+  <text x="385" y="502.5" text-anchor="middle" font-size="12" font-weight="bold">Titanic (0.1, -0.8)</text>
+  
+  <!-- Iron Sky (-0.7, 0.2) -->
+  <circle cx="125" cy="250" r="8" fill="black"/>
+  <text x="70" y="235" text-anchor="middle" font-size="12" font-weight="bold">Iron Sky (-0.7, 0.2)</text>
+  
+  <!-- Warm Bodies (-0.5, -0.3) -->
+  <circle cx="175" cy="375" r="8" fill="black"/>
+  <text x="95" y="377.5" text-anchor="middle" font-size="12" font-weight="bold">Warm Bodies (-0.5, -0.3)</text>
+  
+</svg>
+
+---
+
+## Measuring similarity
+
+The **scalar product (or dot product)** between two vectors measures their similarity:
+
+`$$(a_1, \ldots, a_n) \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$`
+
+> [!TIP]
+> **Examples**: 
+> - Pulp Fiction (0.3, 0.2) ↔ Terminator (0.4, 0.9): 0.12 + 0.18 = 0.30
+> - Titanic (0.1, -0.8) ↔ Terminator (0.4, 0.9): 0.04 - 0.72 = -0.68
+> - Titanic (0.1, -0.8) ↔ Warm Bodies (-0.5, -0.3): -0.05 + 0.24 = 0.19
+<!-- .element: style="font-size:28pt;" -->
+
+---
+
+## Learning embeddings
+
+Graph neural networks can be used to learn embeddings of nodes (or edges) by aggregating information from local neighborhoods.
+
+---
+
+
+
