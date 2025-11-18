@@ -1,4 +1,4 @@
-<svg width="500" height="450">
+<svg width="500" height="450" xmlns="http://www.w3.org/2000/svg">
 <!-- connections from layer1 -> layer2 based on graph -->
 <g data-id="gnn-links" stroke="lightgray" stroke-width="3">
   <!-- A connections -->

@@ -1,32 +1,27 @@
-<svg width="450" height="450">
+<svg width="450" height="450" xmlns="http://www.w3.org/2000/svg">
 <g data-id="graph">
   <line data-id="AB" x1="50" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="AC" x1="50" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BC" x1="200" y1="100" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
   <line data-id="BD" x1="200" y1="100" x2="400" y2="250" stroke="lightgray" stroke-width="4" />
   <line data-id="CD" x1="250" y1="400" x2="400" y2="250" stroke="lightgray" stroke-width="4" />
-
   <line data-id="BA" x1="200" y1="100" x2="50" y2="250" stroke="lightgray" stroke-width="4" />
   <line data-id="CA" x1="250" y1="400" x2="50" y2="250" stroke="lightgray" stroke-width="4" />
   <line data-id="CB" x1="250" y1="400" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="DB" x1="400" y1="250" x2="200" y2="100" stroke="lightgray" stroke-width="4" />
   <line data-id="DC" x1="400" y1="250" x2="250" y2="400" stroke="lightgray" stroke-width="4" />
-
   <g data-id="A">
     <circle cx="50" cy="250" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="50" y="262.5" font-size="40" fill="black" text-anchor="middle"> A </text>
   </g>
-  
   <g data-id="B">
     <circle cx="200" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="200" y="112.5" font-size="40" fill="black" text-anchor="middle"> B </text>
   </g>
-  
   <g data-id="C">
     <circle cx="250" cy="400" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="250" y="412.5" font-size="40" fill="black" text-anchor="middle"> C </text>
-  </g>
-  
+  </g>  
   <g data-id="D">
     <circle cx="400" cy="250" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
     <text x="400" y="262.5" font-size="40" fill="black" text-anchor="middle"> D </text>
