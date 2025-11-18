@@ -654,6 +654,89 @@ where
 
 ---
 
+[Recommender systems](https://en.wikipedia.org/wiki/Recommender_system) are systems that provide suggestions for items that may be of interest to a particular user.
+
+> [!NOTE]
+> **Examples:**
+> - Netflix: Movie recommendations based on viewing history
+> - Amazon: Product suggestions from purchase patterns
+> - Spotify: Music recommendations from listening behavior
+
+---
+
+## Graphs representation
+
+User-item relationships can be represented by a [bipartite graphs](https://en.wikipedia.org/wiki/Bipartite_graph)
+
+
+<svg width="500" height="450">
+<!-- connections from layer1 -> layer2 based on graph -->
+<g data-id="gnn-links" stroke="lightgray" stroke-width="3">
+  <!-- A connections -->
+  <line data-id="A2" x1="50" y1="150" x2="450" y2="200" />
+  <line data-id="A3" x1="50" y1="150" x2="450" y2="300" />
+  <!-- B connections -->
+  <line data-id="B1" x1="50" y1="250" x2="450" y2="100" />
+  <line data-id="B2" x1="50" y1="250" x2="450" y2="300" />
+  <line data-id="B4" x1="50" y1="250" x2="450" y2="400" />
+  <!-- C connections -->
+  <line data-id="C1" x1="50" y1="350" x2="450" y2="100" />
+  <line data-id="C2" x1="50" y1="350" x2="450" y2="200" />
+  <line data-id="C4" x1="50" y1="350" x2="450" y2="400" />
+</g>
+
+<g data-id="layer1">
+  <text x="50" y="50" font-size="30" fill="black" text-anchor="middle"> Users </text>
+
+  <g>
+    <circle cx="50" cy="150" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="50" y="162.5" font-size="40" fill="black" text-anchor="middle"> A </text>
+  </g>
+  
+  <g>
+    <circle cx="50" cy="250" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="50" y="262.5" font-size="40" fill="black" text-anchor="middle"> B </text>
+  </g>
+  
+  <g>
+    <circle cx="50" cy="350" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="50" y="362.5" font-size="40" fill="black" text-anchor="middle"> C </text>
+  </g>
+  
+</g>
+
+<g data-id="layer2">
+  <text x="450" y="50" font-size="30" fill="black" text-anchor="middle"> Items </text>
+
+  <g>
+    <circle cx="450" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="112.5" font-size="40" fill="black" text-anchor="middle"> 1 </text>
+  </g>
+  
+  <g>
+    <circle cx="450" cy="200" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="212.5" font-size="40" fill="black" text-anchor="middle"> 2 </text>
+  </g>
+  
+  <g>
+    <circle cx="450" cy="300" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="312.5" font-size="40" fill="black" text-anchor="middle"> 3 </text>
+  </g>
+  
+  <g>
+    <circle cx="450" cy="400" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
+    <text x="450" y="412.5" font-size="40" fill="black" text-anchor="middle"> 4 </text>
+  </g>
+</g>
+</svg>
+
+Interactions (e.g., ratings) between users and items are represented by an edge between the respective nodes with an **edge weight** indicating the level of interaction.
+
+> [!NOTE]
+> The structure of the bipartite graph can be used by a GNN to learn similarities between different nodes.
+
+---
+
 ## Embeddings
 
 An embedding maps entities to multi-dimensional vectors with the goal of positioning similar objects near each other.
