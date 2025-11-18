@@ -563,7 +563,7 @@ $$(a_i^k)^T \cdot a_j^k$$
 
 approximates $v_{i,j}$
 
-> [!IMPORTANT]
+> [!NOTE]
 > We can start with arbitrary first layer embeddings.
 
 ---
