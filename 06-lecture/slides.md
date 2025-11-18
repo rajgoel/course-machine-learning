@@ -701,19 +701,27 @@ The embedding of node $j$ in GNN layer $l$ is computed by
 
 `$$a_j^l = f_{\theta^l}( a_j^{l-1}, \underbrace{a_{i_1}^{l-1}, \ldots, a_{i_n}^{l-1}}_{{\text{neighbour}}\atop{\text{embeddings}}} )$$`
 
-where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$.
+where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
  
 ---
 
 ## Forward propagation with edge weights
 
-If edge weights $v_{i,j}$ are given for every edge $(i,j)$ in the original graph, the embedding of node $j$ in GNN layer $l+1$ is computed by
+If edge weights $v_{i,j}$ are given for every edge $(i,j)$ in the original graph, the embedding of node $j$ in GNN layer $l$ is computed by
 
-`$$a_j^{l} = f_{\theta^l}( a_j^{l-1}, \underbrace{a_{i_1}^{l-1}, \ldots, a_{i_n}^{l-1}}_{{\text{neighbour}}\atop{\text{embeddings}}}, \underbrace{v_{i_1,j}, \ldots, v_{i_n,j}}_{{\text{edge}}\atop{\text{weights}}} )$$`
+`$$a_j^l = f_{\theta^l}( a_j^{l-1}, \underbrace{a_{i_1}^{l-1}, \ldots, a_{i_n}^{l-1}}_{{\text{neighbour}}\atop{\text{embeddings}}}, \underbrace{v_{i_1,j}, \ldots, v_{i_n,j}}_{{\text{edge}}\atop{\text{weights}}} )$$`
 
-where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$.
+where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
 ---
 
+## Aggregation-based forward propagation
+
+Most GNN formulations compute
+
+$$a_j^l = h_{\theta_h^l}\left( a_j^{l-1}, g_{\theta_g^l}(a_{i_1}^{l-1}, \ldots,
+   a_{i_n}^{l-1}, v_{i_1,j}, \ldots, v_{i_n,j}) \right)$$
+
+where $g_{\theta_g^l}$ is an aggregation function (e.g. sum, mean, max, attention, etc.) and $h_{\theta_h^l}$ is the actual update function.
 
 
