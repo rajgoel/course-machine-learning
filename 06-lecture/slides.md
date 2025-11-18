@@ -699,12 +699,6 @@ Graph neural networks can be used to learn embeddings of nodes by aggregating em
 
 The embedding of node $j$ in GNN layer $l$ is computed by
 
-<!--
-`$$a_j^l = f_{\theta^l}( a_j^{l-1}, \underbrace{a_{i_1}^{l-1}, \ldots, a_{i_n}^{l-1}}_{{\text{neighbour}}\atop{\text{embeddings}}} )$$`
-
-where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
--->
-
 `$$a_j^l = f_{\theta^l}( a^{l-1}, j )$$`
 
 where 
