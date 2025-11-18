@@ -614,6 +614,10 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 
 ===
 
+# Recommender systems
+
+---
+
 ## Embeddings
 
 An embedding maps entities to multi-dimensional vectors with the goal of positioning similar objects near each other.
@@ -689,9 +693,13 @@ The **scalar product (or dot product)** between two vectors measures their simil
 
 Graph neural networks can be used to learn embeddings of nodes by aggregating embeddings from neighbouring nodes and itself.
 
-For any node $i$ let $a_i^l$ denote the embedding for any node $i$ in layer $l$, then the embedding of node $j$ in layer $l+1$ is computed by
+---
 
-$$a_j^{l+1} = f( a_j^l, \underbrace{a_{i_1}^l, \ldots, a_{i_n}^l}_{{\text{neighbour}}\atop{\text{embeddings}}} )$$ 
+## Forward propagation
+
+For any node $i$ let $a_i^l$ denote the embedding for any node $i$ in GNN layer $l$, then the embedding of node $j$ in GNN layer $l+1$ is computed by
+
+$$a_j^{l+1} = f_{\theta^l}}( a_j^l, \underbrace{a_{i_1}^l, \ldots, a_{i_n}^l}_{{\text{neighbour}}\atop{\text{embeddings}}}, \underbrace{v_{i_1,j}, \ldots, v_{i_n,j}}_{{\text{edge}}\atop{\text{weights}}} )$$ 
 
 ---
 
