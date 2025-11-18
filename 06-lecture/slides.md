@@ -510,17 +510,28 @@ where
 
 ---
 
-## Graphs representation
+## Graph representation
 
 User-item relationships can be represented by a [bipartite graph](https://en.wikipedia.org/wiki/Bipartite_graph).
 
 
 ![Image](06-lecture/bipartite_graph.svg)
 
-Interactions (e.g., ratings) between users and items are represented by an edge between the respective nodes with an **edge weight** indicating the level of interaction.
+> [!NOTE]
+> Interactions (e.g., ratings) between users and items are represented by an edge between the respective nodes with an **edge weight** (not shown) indicating the level of interaction.
+
+---
+
+## Main idea
+
+The main idea of using GNN for recommender systems is to learn similarities between
+
+- users and users,
+- items and items, and
+- users and items.
 
 > [!NOTE]
-> The structure of the bipartite graph can be used by a GNN to learn similarities between different nodes.
+> Depending on use-case the recommendation will be the user or item with the largest similarity.
 
 ---
 
