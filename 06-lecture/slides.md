@@ -564,7 +564,7 @@ $$(a_i^k)^T \cdot a_j^k$$
 approximates $v_{i,j}$
 
 > [!NOTE]
-> We can start with arbitrary first layer embeddings.
+> We can start with arbitrary first layer embeddings and do not need any genre information or similar.
 
 ---
 
