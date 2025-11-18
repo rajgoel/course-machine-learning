@@ -725,7 +725,6 @@ In **graph convolutional networks (GCN)** we have
 $$g( a^{l-1}, j ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$$
 
 where $N_i$ is the set of neighbours of any node $i$.
-
 Moreover, 
 
 $$a_j^l = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
