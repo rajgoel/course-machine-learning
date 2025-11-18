@@ -110,7 +110,7 @@ An embedding maps entities to multi-dimensional vectors with the goal of positio
 
 The **scalar product** (dot product) between two vectors measures their similarity:
 
-`$$(a_1, \ldots, a_n) \cdot \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$`
+`$$(a_1, \ldots, a_n) \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$`
 
 > [!TIP]
 > **Examples**: 
