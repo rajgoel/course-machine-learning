@@ -560,14 +560,14 @@ The **scalar product (or dot product)** between two vectors measures their simil
 
 ## Learning embeddings
 
-Graph convolutional networks can be used to learn embeddings of nodes by aggregating embeddings from neighbouring nodes and itself.
+Graph convolutional networks can be used to learn embeddings of nodes such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer (i.e. layer $L$) activations for node $i$ and $j$, i.e., the scalar product
 
----
+$$(a_i^L)^T \cdot a_j^L$$
 
-## 
+approximates $v_{i,j}$
 
-> [!NOTE]
-> For recommender systems we learn the weights **and** the initial embeddings simultaneously.
+> [!IMPORTANT]
+> We can start with arbitrary first layer embeddings and learn the weights **and** the first layer embeddings simultaneously.
 
 ---
 
@@ -575,12 +575,11 @@ Graph convolutional networks can be used to learn embeddings of nodes by aggrega
 
 The mean squared error is
 
-$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(u,i) \in E} \left( r_{u,i} - \hat{r}_{u,i} \right)^2$$
+$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(i,j) \in E} \left( r_{u,i} - (a_u^L)^T \cdot a_i^L \right)^2$$
 
 where
 
 - $E$ is the set of observed user-item interactions (edges)
-- $r_{u,i}$ is the true rating of user $u$ for item $i$
-- $\hat{r}_{u,i} = a_u^L \cdot a_i^L$ is the predicted rating (dot product of final embeddings)
-  - $L$ is the final GNN layer
+- $r_{i,j}$ is the true rating of user $i$ for item $j$
+- $L$ is the final GNN layer
 
