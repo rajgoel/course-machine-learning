@@ -575,10 +575,9 @@ Graph convolutional networks can be used to learn embeddings of nodes by aggrega
 
 The mean squared error is
 
-$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(u,i) \in E} \left( r_{u,i} -
-  \hat{r}_{u,i} \right)^2$$
+$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(u,i) \in E} \left( r_{u,i} - \hat{r}_{u,i} \right)^2$$
 
-where:
+where
 
 - $E$ is the set of observed user-item interactions (edges)
 - $r_{u,i}$ is the true rating of user $u$ for item $i$
