@@ -622,8 +622,8 @@ The activations of node $j$ in GNN layer $l$ is computed by
 
 where 
 
-- $a_i^l$ denotes a vector of activation values for any node $i$ in GNN layer $l$, 
-- $a^l$ contains the matrix of all activation values of all nodes in GNN layer $l$, and 
+- $a_i^l$ denotes a vector of activation values for any node $i$ in layer $l$, 
+- $a^l$ contains the matrix of all activation values of all nodes in layer $l$, and 
 - $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
 > [!IMPORTANT]
@@ -645,7 +645,7 @@ where
 
 - $N_i$ is the set of neighbours of any node $i$,
 - $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{j,j}=1$,
-- $W^l$ is a learnable weight matrix shared across all nodes in the original graph, and 
+- $W^l$ is a learnable weight matrix shared across all nodes in layer $l$, and 
 - $\sigma$ is an element-wise activation function, e.g., ReLU.
 
 ===
@@ -660,52 +660,41 @@ An embedding maps entities to multi-dimensional vectors with the goal of positio
 
 <svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
-  <rect width="600" height="600" fill="white"/>
-  
+  <rect width="600" height="600" fill="white"/> 
   <!-- Center axes -->
   <line x1="50" y1="300" x2="550" y2="300" stroke="black" stroke-width="2"/>
   <line x1="300" y1="50" x2="300" y2="550" stroke="black" stroke-width="2"/>
-  
   <!-- Arrow heads -->
   <polygon points="545,295 545,305 555,300" fill="black"/>
   <polygon points="55,295 55,305 45,300" fill="black"/>
   <polygon points="295,55 305,55 300,45" fill="black"/>
   <polygon points="295,545 305,545 300,555" fill="black"/>
-  
   <!-- Axis labels -->
-  <text x="50" y="280" text-anchor="middle" font-size="16" font-weight="bold">Comedy</text>
-  <text x="550" y="280" text-anchor="middle" font-size="16" font-weight="bold">Thriller</text>
-  <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="bold">Action</text>
-  <text x="300" y="580" text-anchor="middle" font-size="16" font-weight="bold">Romance</text>
-  
+  <text x="50" y="280" text-anchor="middle" font-size="16" font-weight="bold" fill="black">Comedy</text>
+  <text x="550" y="280" text-anchor="middle" font-size="16" font-weight="bold" fill="black">Thriller</text>
+  <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="black">Action</text>
+  <text x="300" y="580" text-anchor="middle" font-size="16" font-weight="bold" fill="black">Romance</text>
   <!-- Scale markers -->
   <text x="50" y="315" text-anchor="middle" font-size="12" fill="black">-1</text>
   <text x="550" y="315" text-anchor="middle" font-size="12" fill="black">1</text>
-  
   <text x="315" y="60" text-anchor="middle" font-size="12" fill="black">1</text>
   <text x="315" y="540" text-anchor="middle" font-size="12" fill="black">-1</text>
-  
   <!-- Movies positioned using vector coordinates -->
   <!-- Pulp Fiction (0.3, 0.2) -->
   <circle cx="375" cy="250" r="8" fill="black"/>
-  <text x="440" y="240" text-anchor="middle" font-size="12" font-weight="bold">Pulp Fiction (0.3, 0.2)</text>
-  
+  <text x="440" y="240" text-anchor="middle" font-size="12" font-weight="bold">Pulp Fiction (0.3, 0.2)</text> 
   <!-- Terminator (0.4, 0.9) -->
   <circle cx="400" cy="75" r="8" fill="black"/>
   <text x="460" y="62.5" text-anchor="middle" font-size="12" font-weight="bold">Terminator (0.4, 0.9) </text>
-  
   <!-- Titanic (0.1, -0.8) -->
   <circle cx="325" cy="500" r="8" fill="black"/>
   <text x="385" y="502.5" text-anchor="middle" font-size="12" font-weight="bold">Titanic (0.1, -0.8)</text>
-  
   <!-- Iron Sky (-0.7, 0.2) -->
   <circle cx="125" cy="250" r="8" fill="black"/>
   <text x="70" y="235" text-anchor="middle" font-size="12" font-weight="bold">Iron Sky (-0.7, 0.2)</text>
-  
   <!-- Warm Bodies (-0.5, -0.3) -->
   <circle cx="175" cy="375" r="8" fill="black"/>
   <text x="95" y="377.5" text-anchor="middle" font-size="12" font-weight="bold">Warm Bodies (-0.5, -0.3)</text>
-  
 </svg>
 
 ---
@@ -729,5 +718,26 @@ The **scalar product (or dot product)** between two vectors measures their simil
 
 Graph convolutional networks can be used to learn embeddings of nodes by aggregating embeddings from neighbouring nodes and itself.
 
+---
 
+## 
+
+> [!NOTE]
+> For recommender systems we learn the weights **and** the initial embeddings simultaneously.
+
+---
+
+## Loss
+
+The mean squared error is
+
+$$\mathcal{L}_{W} = \frac{1}{|E|} \sum_{(u,i) \in E} \left( r_{u,i} -
+  \hat{r}_{u,i} \right)^2$$
+
+where:
+
+- $E$ is the set of observed user-item interactions (edges)
+- $r_{u,i}$ is the true rating of user $u$ for item $i$
+- $\hat{r}_{u,i} = a_u^L \cdot a_i^L$ is the predicted rating (dot product of final embeddings)
+  - $L$ is the final GNN layer
 
