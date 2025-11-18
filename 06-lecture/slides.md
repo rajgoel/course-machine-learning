@@ -612,6 +612,42 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 > [!NOTE]
 > In a GNN with $k$ layers, information can flow between nodes that are $k$ connections apart in the original graph.
 
+---
+
+## Forward propagation
+
+The activations of node $j$ in GNN layer $l$ is computed by
+
+`$$a_j^l = f_{\theta^l}( a^{l-1}, j )$$`
+
+where 
+
+- $a_i^l$ denotes a vector of activation values for any node $i$ in GNN layer $l$, 
+- $a^l$ contains the matrix of all activation values of all nodes in GNN layer $l$, and 
+- $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
+
+> [!IMPORTANT]
+> $f_{\theta^l}$ only uses the activation values of node $j$ and its neighbours. 
+
+---
+
+## Graph convolutional networks 
+
+In **graph convolutional networks (GCN)** we use
+
+$$a_j^l = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
+
+and
+
+`$$g( a^{l-1}, j ) = \displaystyle\sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$$`
+
+where 
+
+- $N_i$ is the set of neighbours of any node $i$,
+- $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{j,j}=1$,
+- $W^l$ is a learnable weight matrix shared across all nodes in the original graph, and 
+- $\sigma$ is an element-wise activation function, e.g., ReLU.
+
 ===
 
 # Recommender systems
@@ -691,45 +727,7 @@ The **scalar product (or dot product)** between two vectors measures their simil
 
 ## Learning embeddings
 
-Graph neural networks can be used to learn embeddings of nodes by aggregating embeddings from neighbouring nodes and itself.
-
----
-
-## Forward propagation
-
-The embedding of node $j$ in GNN layer $l$ is computed by
-
-`$$a_j^l = f_{\theta^l}( a^{l-1}, j )$$`
-
-where 
-
-- $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$, 
-- $a^l$ contains the embeddings of all nodes in GNN layer $l$, and 
-- $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
-
-> [!IMPORTANT]
-> $f_{\theta^l}$ only uses the embeddings of node $j$ and its neighbours. 
-
----
-
-## Graph convolutional networks 
-
-In **graph convolutional networks (GCN)** we use
-
-$$a_j^l = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
-
-and
-
-`$$g( a^{l-1}, j ) = \displaystyle\sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$$`
-
-where 
-
-- $N_i$ is the set of neighbours of any node $i$,
-- $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{j,j}=1$,
-- $W^l$ is a learnable weight matrix shared across all nodes in the original graph, and 
-- $\sigma$ is an element-wise activation function, e.g., ReLU.
-
-
+Graph convolutional networks can be used to learn embeddings of nodes by aggregating embeddings from neighbouring nodes and itself.
 
 
 
