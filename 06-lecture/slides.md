@@ -707,20 +707,14 @@ where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\th
 
 `$$a_j^l = f_{\theta^l}( a^{l-1}, j )$$`
 
-where $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$ and $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
+where 
+
+- $a_i^l$ denotes the embedding of any node $i$ in GNN layer $l$, 
+- $a^l$ contains the embeddings of all nodes in GNN layer $l$, and 
+- $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
 > [!IMPORTANT]
-> $f$ only uses the embeddings of node $j$ and its neighbours. 
-
----
-
-## Aggregation-based forward propagation
-
-Most GNN formulations compute
-
-`$$a_j^l = h_{\theta^l}( g_{\bar\theta^l}( a^{l-1}, j ) )$$`
-
-where $g_{\bar\theta^l}$ is an aggregation function (e.g. weighted sum) and $h_{\theta^l}$ is the actual update function.
+> $f_{\theta^l}$ only uses the embeddings of node $j$ and its neighbours. 
 
 ---
 
@@ -734,13 +728,13 @@ where $N(i)$ is the set of neighbours of node $i$.
 
 Moreover, 
 
-$$a_j^l = h_{W^l}( a^{l-1}, j ) = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
+$$a_j^l = \sigma\left( W^l \cdot g( a^{l-1}, j ) \right)$$
 
-where $W^l$ is a learnable weight matrix.
+where $W^l$ is a learnable weight matrix and $\sigma$ is an activation function, e.g., ReLU.
 
 > [!NOTE]
-> - $g$ does not have any learnable parameters and return a new embedding.
-> - The same $W^l$ is used for all nodes in the original graph.
+> - $g$ does not have any learnable parameters and returns a new embedding.
+> - The same $W^l$ is shared across all nodes in the original graph.
 
 
 
