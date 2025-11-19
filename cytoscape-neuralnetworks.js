@@ -111,27 +111,51 @@ function showNeuralNetwork(container,options) {
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "hidden1' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50+150 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 2; i++) {
-		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50+350 + ' } }');
 		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 16; i++) {
+		for ( var j = 1; j<= 10; j++) {
+			var edge = JSON.parse('{ "data": { "source": "input' + i + '", "target": "hidden1' + j + '" } }');
+			edges.push(edge);
+		}
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		for ( var j = 1; j<= 2; j++) {
+			var edge = JSON.parse('{ "data": { "source": "hidden1' + i + '", "target": "latent' + j + '" } }');
+			edges.push(edge);
+		}
 	  }
     }
 	else if ( options.type == "decoder") {
 	  for ( var i = 1; i<= 2; i++) {
-		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50+350 + ' } }');
         node.position.y += 100;
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "hidden2' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50+150 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 16; i++) {
-		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "output' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50 + ' } }');
 		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 2; i++) {
+		for ( var j = 1; j<= 10; j++) {
+			var edge = JSON.parse('{ "data": { "source": "latent' + i + '", "target": "hidden2' + j + '" } }');
+			edges.push(edge);
+		}
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		for ( var j = 1; j<= 16; j++) {
+			var edge = JSON.parse('{ "data": { "source": "hidden2' + i + '", "target": "output' + j + '" } }');
+			edges.push(edge);
+		}
 	  }
     }
 	else if ( options.type == "autoencoder") {
@@ -141,20 +165,44 @@ function showNeuralNetwork(container,options) {
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 200, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "hidden1' + i + '" }, "position": { "x": 200, "y": ' + (i+1)*50+150 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 2; i++) {
-		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 400, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 400, "y": ' + (i+1)*50+350 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "hidden2' + i + '" }, "position": { "x": 400, "y": ' + (i+1)*50+150 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 16; i++) {
-		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 800, "y": ' + (i+1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "output' + i + '" }, "position": { "x": 800, "y": ' + (i+1)*50 + ' } }');
 		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 16; i++) {
+		for ( var j = 1; j<= 10; j++) {
+			var edge = JSON.parse('{ "data": { "source": "input' + i + '", "target": "hidden1' + j + '" } }');
+			edges.push(edge);
+		}
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		for ( var j = 1; j<= 2; j++) {
+			var edge = JSON.parse('{ "data": { "source": "hidden1' + i + '", "target": "latent' + j + '" } }');
+			edges.push(edge);
+		}
+	  }
+	  for ( var i = 1; i<= 2; i++) {
+		for ( var j = 1; j<= 10; j++) {
+			var edge = JSON.parse('{ "data": { "source": "latent' + i + '", "target": "hidden2' + j + '" } }');
+			edges.push(edge);
+		}
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		for ( var j = 1; j<= 16; j++) {
+			var edge = JSON.parse('{ "data": { "source": "hidden2' + i + '", "target": "output' + j + '" } }');
+			edges.push(edge);
+		}
 	  }
     }
 	container.style.left = 0;  
