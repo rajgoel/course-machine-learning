@@ -103,7 +103,60 @@ function showNeuralNetwork(container,options) {
 			edges.push(edge);
 		}
 	  }
-        }
+    }
+	else if ( options.type == "encoder") {
+	  for ( var i = 1; i<= 16; i++) {
+		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50 + ' } }');
+        node.position.y += 100;
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 2; i++) {
+		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+    }
+	else if ( options.type == "decoder") {
+	  for ( var i = 1; i<= 2; i++) {
+		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50 + ' } }');
+        node.position.y += 100;
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 16; i++) {
+		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+    }
+	else if ( options.type == "autoencoder") {
+	  for ( var i = 1; i<= 16; i++) {
+		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50 + ' } }');
+        node.position.y += 100;
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 200, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 2; i++) {
+		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 400, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 10; i++) {
+		var node = JSON.parse('{ "data": { "id": "first' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+	  for ( var i = 1; i<= 16; i++) {
+		var node = JSON.parse('{ "data": { "id": "second' + i + '" }, "position": { "x": 800, "y": ' + (i+1)*50 + ' } }');
+		nodes.push(node);
+	  }
+    }
 	container.style.left = 0;  
 	container.style.right = 0;  
 	container.style.top = 0;  
