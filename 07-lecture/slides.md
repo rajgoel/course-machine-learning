@@ -5,7 +5,38 @@
 
 ---
 
-Autoencoders are neural networks that learn compressed representations of input data through unsupervised learning.
+[Autoencoders](https://en.wikipedia.org/wiki/Autoencoder) are neural networks that learn compressed representations of input data through unsupervised learning.
+
+---
+
+## Encoder
+
+<div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
+<!--
+{"type": "encoder" }
+-->
+</div>
+
+---
+
+## Decoder
+
+<div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
+<!--
+{"type": "decoder" }
+-->
+</div>
+
+---
+
+
+## Autoencoder
+
+<div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
+<!--
+{"type": "autoencoder" }
+-->
+</div>
 
 ---
 
