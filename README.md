@@ -14,7 +14,7 @@ https://rajgoel.github.io/course-machine-learning
 | 04      | [Architecture and pipeline](https://rajgoel.github.io/course-machine-learning/?topic=04-lecture) | Project work    |
 | 05      | [Filtering and convolution](https://rajgoel.github.io/course-machine-learning/?topic=05-lecture)  | Project work    |
 | 06      | [Graph neural networks and recommender systems](https://rajgoel.github.io/course-machine-learning/?topic=06-lecture)               | Project work    |
-| 07      | [Autoencoders](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
+| 07      | [Autoencoders and anomaly detection](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
 | 08      | [Reinforcement learning and value-based methods](https://rajgoel.github.io/course-machine-learning/?topic=08-lecture)         | Project work    |
 | 09      | [Policy-based and actor-critic methods](https://rajgoel.github.io/course-machine-learning/?topic=09-lecture)         | Project work    |
 | 10      | Miscellaneous            | Project work         |

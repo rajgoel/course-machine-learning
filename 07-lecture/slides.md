@@ -63,3 +63,7 @@ The 2D latent space reveals clustering of similar digits.
 
 > [!NOTE]
 > Although auto-encoders can be used for 2D-mapping of fixed data, [t-distributed stochastic neighbor embedding (t-SNE)](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding) is usually superior.
+
+===
+
+#  Anomaly detection
