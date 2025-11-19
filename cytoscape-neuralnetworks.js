@@ -106,39 +106,39 @@ function showNeuralNetwork(container,options) {
     }
 	else if ( options.type == "encoder") {
 	  for ( var i = 1; i<= 16; i++) {
-		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i+1)*50 + ' } }');
         node.position.y += 100;
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "hidden1' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50+150 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "encoder' + i + '" }, "position": { "x": 300, "y": ' + (i+4)*50 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 2; i++) {
-		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 600, "y": ' + (i+1)*50+350 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 600, "y": ' + (i+8)*50 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 16; i++) {
 		for ( var j = 1; j<= 10; j++) {
-			var edge = JSON.parse('{ "data": { "source": "input' + i + '", "target": "hidden1' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "input' + i + '", "target": "encoder' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
 	  for ( var i = 1; i<= 10; i++) {
 		for ( var j = 1; j<= 2; j++) {
-			var edge = JSON.parse('{ "data": { "source": "hidden1' + i + '", "target": "latent' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "encoder' + i + '", "target": "latent' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
     }
 	else if ( options.type == "decoder") {
 	  for ( var i = 1; i<= 2; i++) {
-		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50+350 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 0, "y": ' + (i+8)*50 + ' } }');
         node.position.y += 100;
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "hidden2' + i + '" }, "position": { "x": 300, "y": ' + (i+1)*50+150 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "decoder' + i + '" }, "position": { "x": 300, "y": ' + (i+4)*50 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 16; i++) {
@@ -147,33 +147,33 @@ function showNeuralNetwork(container,options) {
 	  }
 	  for ( var i = 1; i<= 2; i++) {
 		for ( var j = 1; j<= 10; j++) {
-			var edge = JSON.parse('{ "data": { "source": "latent' + i + '", "target": "hidden2' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "latent' + i + '", "target": "decoder' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
 	  for ( var i = 1; i<= 10; i++) {
 		for ( var j = 1; j<= 16; j++) {
-			var edge = JSON.parse('{ "data": { "source": "hidden2' + i + '", "target": "output' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "decoder' + i + '", "target": "output' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
     }
 	else if ( options.type == "autoencoder") {
 	  for ( var i = 1; i<= 16; i++) {
-		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i-1)*50 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "input' + i + '" }, "position": { "x": 0, "y": ' + (i+8)*50 + ' } }');
         node.position.y += 100;
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "hidden1' + i + '" }, "position": { "x": 200, "y": ' + (i+1)*50+150 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "encoder' + i + '" }, "position": { "x": 200, "y": ' + (i+2)*50 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 2; i++) {
-		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 400, "y": ' + (i+1)*50+350 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 400, "y": ' + (i+8)*50 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
-		var node = JSON.parse('{ "data": { "id": "hidden2' + i + '" }, "position": { "x": 400, "y": ' + (i+1)*50+150 + ' } }');
+		var node = JSON.parse('{ "data": { "id": "decoder' + i + '" }, "position": { "x": 600, "y": ' + (i+4)*50 + ' } }');
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 16; i++) {
@@ -182,25 +182,25 @@ function showNeuralNetwork(container,options) {
 	  }
 	  for ( var i = 1; i<= 16; i++) {
 		for ( var j = 1; j<= 10; j++) {
-			var edge = JSON.parse('{ "data": { "source": "input' + i + '", "target": "hidden1' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "input' + i + '", "target": "encoder' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
 	  for ( var i = 1; i<= 10; i++) {
 		for ( var j = 1; j<= 2; j++) {
-			var edge = JSON.parse('{ "data": { "source": "hidden1' + i + '", "target": "latent' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "encoder' + i + '", "target": "latent' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
 	  for ( var i = 1; i<= 2; i++) {
 		for ( var j = 1; j<= 10; j++) {
-			var edge = JSON.parse('{ "data": { "source": "latent' + i + '", "target": "hidden2' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "latent' + i + '", "target": "decoder' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
 	  for ( var i = 1; i<= 10; i++) {
 		for ( var j = 1; j<= 16; j++) {
-			var edge = JSON.parse('{ "data": { "source": "hidden2' + i + '", "target": "output' + j + '" } }');
+			var edge = JSON.parse('{ "data": { "source": "decoder' + i + '", "target": "output' + j + '" } }');
 			edges.push(edge);
 		}
 	  }
