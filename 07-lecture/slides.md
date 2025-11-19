@@ -5,11 +5,13 @@
 
 ---
 
-[Autoencoders](https://en.wikipedia.org/wiki/Autoencoder) are neural networks that learn compressed representations of input data through unsupervised learning.
+[Autoencoders](https://en.wikipedia.org/wiki/Autoencoder) are neural networks that **learn compressed representations** of input data through unsupervised learning.
 
 ---
 
 ## Encoder
+
+An encoder turns high-dimensional input into lower-dimensional output.
 
 <div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
 <!--
@@ -21,6 +23,8 @@
 
 ## Decoder
 
+A decoder reconstructs high-dimensional output from lower-dimensional input. 
+
 <div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
 <!--
 {"type": "decoder" }
@@ -29,8 +33,9 @@
 
 ---
 
-
 ## Autoencoder
+
+An autoencoder combines encoder and decoder through a **latent representation** of low dimension, also called the **bottleneck**.
 
 <div class="neuralnetwork" style="height: 700px; width: 1280px!important;">
 <!--
@@ -40,24 +45,22 @@
 
 ---
 
-## Architecture
+## Loss function
 
-An autoencoder consists of two parts:
-- **Encoder**: Maps input $\mathbf{x} \in \mathbb{R}^d$ to latent representation $\mathbf{z} \in \mathbb{R}^k$ where $k < d$
-- **Decoder**: Reconstructs input from latent representation $\hat{\mathbf{x}} \in \mathbb{R}^d$
+Autoencoders minimise the **reconstruction error**, i.e., the mean squared error between an input and the reconstructed output.
 
-$$\mathbf{z} = f_{\text{enc}}(\mathbf{x})$$
-$$\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z})$$
+$$\mathscr{L} = \frac{1}{n} \sum_{i=1}^{n} \|\mathbf{x}_i - \hat{\mathbf{x}}_i\|^2$$
 
 ---
 
-## Loss function
+## Use cases
 
-Autoencoders minimize reconstruction error:
+- **Data compression**: Reduce storage requirements for images, audio
+- **Denoising**: Remove noise from corrupted data
+- **Anomaly detection**: Identify outliers by reconstruction error
+- **Feature learning**: Pre-train representations for downstream tasks
+- **Data generation**: Sample from latent space to create new data
 
-$$\mathcal{L} = \frac{1}{n} \sum_{i=1}^{n} \|\mathbf{x}_i - \hat{\mathbf{x}}_i\|^2$$
-
-The network learns to preserve essential information while discarding noise.
 
 ---
 
@@ -84,13 +87,6 @@ The 2D latent space reveals clustering of similar digits.
 
 ---
 
-## Use cases
-
-- **Data compression**: Reduce storage requirements for images, audio
-- **Denoising**: Remove noise from corrupted data
-- **Anomaly detection**: Identify outliers by reconstruction error
-- **Feature learning**: Pre-train representations for downstream tasks
-- **Data generation**: Sample from latent space to create new data
 
 > [!NOTE]
 > Although auto-encoders can be used for 2D-mapping of fixed data, [t-distributed stochastic neighbor embedding (t-SNE)](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding) is usually superior.
