@@ -47,9 +47,9 @@ An autoencoder combines encoder and decoder through a **latent representation** 
 
 ## Loss function
 
-Autoencoders minimise the **reconstruction error**, i.e., the mean squared error between an input and the reconstructed output.
+Autoencoders minimise the **reconstruction error**, i.e., the mean squared error between an input and the reconstructed output of a given input $a$.
 
-$$\mathscr{L} = \frac{1}{n} \sum_{i=1}^{n} \|\mathbf{x}_i - \hat{\mathbf{x}}_i\|^2$$
+$$\mathscr{L}_a(\theta) = \frac{1}{n} \sum_{i=1}^{n} ( \hat{a}_i - a_i) ^2$$
 
 ---
 
