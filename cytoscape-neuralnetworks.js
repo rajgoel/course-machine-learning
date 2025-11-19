@@ -167,7 +167,6 @@ function showNeuralNetwork(container,options) {
 	  }
 	  for ( var i = 1; i<= 2; i++) {
 		var node = JSON.parse('{ "data": { "id": "latent' + i + '" }, "position": { "x": 400, "y": ' + (i+8)*50 + ' } }');
-        node.select();
 		nodes.push(node);
 	  }
 	  for ( var i = 1; i<= 10; i++) {
@@ -286,6 +285,10 @@ function showNeuralNetwork(container,options) {
 		});
 	}
 */
+    if ( options.type == "autoencoder") {
+      cy.$('#latent1').select();
+      cy.$('#latent2').select();
+    }
 	container.cy = cy;
 	container.updatePredictions = function(results) {
 		for (var i = 0; i < results.length; i++) {
