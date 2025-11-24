@@ -30,7 +30,7 @@ A bonus of up to **1.0 point on the final course grade** can be obtained by mean
 
 ## Module description
 
-This module, which builds up on the module “Fundamentals of Data Science”, introduces neural networks and how they can be used within machine learning. It provides hands on exercises developing classification and regression with neural networks. Moreover students will learn how to use reinforcement learning and deep reinforcement learning.
+This module, which builds up on the module “Fundamentals of Data Science”, introduces neural networks and how they can be used within machine learning. It provides hands on exercises developing classification and regression with neural networks. Moreover students will learn how to use deep reinforcement learning.
 
 ### Learning outcomes
 
@@ -40,14 +40,14 @@ On successful completion of this module, the students will be able to:
 and evaluate predictive models for diverse applications
 - know how systematically select, evaluate, and improve deep learning
 architectures
-- use deep learning for a wide range of tasks including, prediction and
+- use deep learning for a wide range of tasks, including prediction and
 classification
 
 ### Literature
 
-Nielsen 2019. Neural Networks and Deep Learning. http://neuralnetworksanddeeplearning.com/
+I. Goodfellow, Y. Bengio, and A. Courville: [Deep Learning](https://www.deeplearningbook.org/), An MIT Press book, 2016
 
-Sutton, Barto 2018. Reinforcement Learning, second edition: An Introduction.
+R.S. Sutton and A.G. Barto: [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/RLbook2020.pdf), second edition, 2020.
 
 ## License
 
