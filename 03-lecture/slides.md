@@ -1,5 +1,5 @@
 
-# Feedforward neural networks
+# Feedforward neural networks and backpropagation
 
 ---
 
