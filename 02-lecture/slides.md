@@ -372,25 +372,21 @@ with respect to $b_i$ is
 
 ### Gradient descent in Julia
 
-```julia[1-23|2-4|6-22|7-11|13-17|19-21|1-23]
+```julia[1-19|2-4|5-20|6-9|10-14|15-17|1-19]
 function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
     tolerance::Float64 = 1.0e-3
     max_iterations::Int = 10000
     α::Float64 = 0.1  # learning rate
-    
     for iter in 1:max_iterations
         # Compute the average gradients ∇W and ∇b
         ∇W, ∇b = compute_average_gradients(W, b, X, Y)
         grad_norm = gradient_norm(∇W, ∇b)
-        
-        println("Iteration $iter, ‖(∇W,∇b)‖ = $grad_norm")
-        
+        println("Iteration $iter, ‖(∇W,∇b)‖ = $grad_norm")        
         # Break if the gradient norm is smaller than the tolerance
         if grad_norm < tolerance
             println("Gradient norm below tolerance. Stopping.")
             break
-        end
-        
+        end        
         # Parameter updates: W ← W - α * ∇W, b ← b - α * ∇b
         W .-= α .* ∇W
         b .-= α .* ∇b
