@@ -478,7 +478,7 @@ where
 
 In **graph convolutional networks (GCN)** we use
 
-`$$a_j^l = \sigma^l\left( W^l \cdot g( a^{l-1}, j ) \right)$$`
+`$$a_j^l = \phi^l\left( W^l \cdot g( a^{l-1}, j ) \right)$$`
 
 and
 
@@ -489,7 +489,7 @@ where
 - $N_i$ is the set of neighbours of any node $i$,
 - $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{j,j}=1$,
 - $W^l$ is a learnable weight matrix shared across all nodes in layer $l$, and 
-- $\sigma^l$ is an element-wise activation function, e.g., ReLU.
+- $\phi^l$ is an element-wise activation function, e.g., ReLU.
 
 ===
 
@@ -557,7 +557,7 @@ The **scalar product** (or **dot product**) between two vectors measures their s
 
 ## Learning embeddings
 
-Graph convolutional networks with $k$ layers can be used to learn embeddings of nodes such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer activations, i.e., the scalar product
+Graph convolutional networks with $k$ layers can be used to learn embeddings of nodes, such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer activations, i.e., the scalar product
 
 $$(a_i^k)^T \cdot a_j^k$$
 

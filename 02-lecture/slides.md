@@ -131,13 +131,13 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;width:50px;position:relative;left:-150px;">
-$$ \left( \begin{array}{c} \hat{a}_{0} \\  \hat{a}_{1} \\ \vdots \\ \hat{a}_{9}  \end{array} \right) = \sigma(Wa + b)$$
+$$ \left( \begin{array}{c} \hat{a}_{0} \\  \hat{a}_{1} \\ \vdots \\ \hat{a}_{9}  \end{array} \right) = \phi(Wa + b)$$
 </td>
 </tr>
 </table>
 
 > [!IMPORTANT]
-> Again we assume a linear activation with $\sigma(z) = z$, and thus, $\hat{a} = Wa + b$.
+> Again we assume a linear activation with $\phi(z) = z$, and thus, $\hat{a} = Wa + b$.
 
 ---
 
@@ -395,6 +395,10 @@ end
 ```
 <!-- .element: class="fullscreen stretch" -->
 
+---
+
+> [!TIP]
+> You find a full implementation in `Lecture02` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
 
 
 ===

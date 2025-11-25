@@ -68,9 +68,9 @@ mutable struct DNN
 end
 
 """
-    σ(z)
+    ϕ(z)
 
-ReLU activation function: σ(z) = max(0, z).
+ReLU activation function: ϕ(z) = max(0, z).
 
 # Arguments
 - `z::Real`: Input value
@@ -78,15 +78,15 @@ ReLU activation function: σ(z) = max(0, z).
 # Returns
 - `Float64`: Activated value (0.0 if z ≤ 0, z if z > 0)
 """
-function σ(z::Real)
+function ϕ(z::Real)
     # ReLU activation function
     return max(0.0, z)
 end
 
 """
-    ∂σ_∂z(z)
+    ∂ϕ_∂z(z)
 
-Derivative of ReLU activation function: ∂σ/∂z = 1 if z > 0, 0 if z ≤ 0.
+Derivative of ReLU activation function: ∂ϕ/∂z = 1 if z > 0, 0 if z ≤ 0.
 
 # Arguments
 - `z::Real`: Input value
@@ -94,7 +94,7 @@ Derivative of ReLU activation function: ∂σ/∂z = 1 if z > 0, 0 if z ≤ 0.
 # Returns
 - `Float64`: Derivative value (1.0 if z > 0, 0.0 if z ≤ 0)
 """
-function ∂σ_∂z(z::Real)
+function ∂ϕ_∂z(z::Real)
     return z > 0 ? 1.0 : 0.0
 end
 
@@ -105,7 +105,7 @@ Compute forward propagation through the neural network.
 
 Mathematical formulation:
 - z^l = W^l * a^[l-1] + b^l
-- a^l = σ(z^l) for hidden layers, a^l = z^l for output layer
+- a^l = ϕ(z^l) for hidden layers, a^l = z^l for output layer
 
 # Arguments
 - `network::DNN`: Neural network structure
@@ -131,11 +131,11 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
         z = network.W[l] * a + network.b[l]
         push!(z_values, z)
         
-        # Activation: a^l = σ(z^l)
+        # Activation: a^l = ϕ(z^l)
         if l == network.L  # Output layer
             a = z  # Linear output
         else  # Hidden layers
-            a = σ.(z)
+            a = ϕ.(z)
         end
         push!(activations, a)
     end
@@ -179,11 +179,11 @@ function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}
     for l in network.L-1:-1:1 
         # Compute
         # - ∂ℒ_∂a^l = W^[l+1]' ∂ℒ/∂a^[l+1] for l = L-1 
-        # - ∂ℒ_∂a^l = W^[l+1]' (∂ℒ/∂a^[l+1] ⨀ ∂σ^l/∂z^[l+1])  for l < L-1 
+        # - ∂ℒ_∂a^l = W^[l+1]' (∂ℒ/∂a^[l+1] ⨀ ∂ϕ^l/∂z^[l+1])  for l < L-1 
         δ = network.W[l+1]' * δ
 
-        # Compute δ = ∂ℒ/∂a^l ⨀ ∂σ^l/∂z^l
-        δ .*= ∂σ_∂z.(z_values[l])
+        # Compute δ = ∂ℒ/∂a^l ⨀ ∂ϕ^l/∂z^l
+        δ .*= ∂ϕ_∂z.(z_values[l])
 
         # Gradient for layer l
         pushfirst!(∇W, δ * activations[l-1]')

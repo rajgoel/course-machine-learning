@@ -101,7 +101,7 @@ An artificial neural network (ANN) is a computational model inspired by the stru
 
 ## Artificial neurons
 
-Artificial neurons compute an activation value $\hat{a}$ using an **activation function** $\sigma(\cdot)$ applied on a **linear transformation** of the input $a$.
+Artificial neurons compute an activation value $\hat{a}$ using an **activation function** $\phi(\cdot)$ applied on a **linear transformation** of the input $a$.
 
 <table class="stretch">
 <tr>
@@ -125,7 +125,7 @@ $$
 </div>
 </td>
 <td style="vertical-align: middle;">
-$$\begin{array}{l}z = w^T a + b,\\ \hat{a} = \sigma(z)\end{array}$$
+$$\begin{array}{l}z = w^T a + b,\\ \hat{a} = \phi(z)\end{array}$$
 </td>
 </tr>
 </table>
@@ -344,18 +344,18 @@ $$\left( \begin{align} \hat{a}_{1} \\  \hat{a}_{2} \end{align} \right) = \hat{a}
 </table>
 
 > [!TIP]
-> We compute $\hat{a}$ by $\hat{a} = \sigma(z)$ and $z = W a + b$ where
+> We compute $\hat{a}$ by $\hat{a} = \phi(z)$ and $z = W a + b$ where
 > - $W$ is a matrix containing a **weight** $w_{i,j}$ for each edge going from input neuron $j$ to output neuron $i$, and 
 > - $b$ is a vector containing a **bias** $b_i$ for each output neuron $i$. 
-> - $\sigma$ is a (usually non-linear) **activation function**. 
+> - $\phi$ is a (usually non-linear) **activation function**. 
 
 ---
 
 ### Simplification: Linear activation
 
-If we assume $\sigma(z) = z$, we have
+If we assume $\phi(z) = z$, we have
 
-$$\hat{a} = \sigma(Wa + b) = Wa + b$$
+$$\hat{a} = \phi(Wa + b) = Wa + b$$
 
 or
 

@@ -59,7 +59,6 @@ $$\mathscr{L}_a(\theta) = \frac{1}{n} \sum_{i=1}^{n} ( \hat{a}_i - a_i) ^2$$
 - **Denoising**: Remove noise from corrupted data
 - **Anomaly detection**: Identify outliers by reconstruction error
 - **Feature learning**: Pre-train representations for downstream tasks
-- **Data generation**: Sample from latent space to create new data
 
 
 ===

@@ -20,12 +20,12 @@ In a feedforward neural network, the activations of one layer determine the acti
 For each layer $l$ in the feedforward neural network let
 - $a^l$ denote the vector of activation values,
 - $W^l$ and $b^l$ denote the weights and biases, and
-- $\sigma^l$ denote the vector of activation functions.
+- $\phi^l$ denote the vector of activation functions.
 
 Then, the activation values of layer $l$ can be computed by
 
 `$$z^l = W^l a^{l-1} + b^l,$$`
-`$$a^{l} = \sigma^l(z^l).$$`
+`$$a^{l} = \phi^l(z^l).$$`
 
 ---
 
@@ -136,10 +136,10 @@ For neuron $j$ in layer $l-1$, we have
 
 <span class="fragment">
 
-`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs-j" style="margin-left:150px;" -->
+`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs-j" style="margin-left:150px;" -->
 
 > [!IMPORTANT]
-> To unify notation we use $\sigma^{L}_i(z^L_i) = z^L_i$ for the last layer.
+> To unify notation we use $\phi^{L}_i(z^L_i) = z^L_i$ for the last layer.
 
 </span>
 
@@ -152,12 +152,12 @@ For neuron $j$ in layer $l-1$, we have
 For neuron $j$ in layer $l-1$, we have
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs-j" -->
-`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs-j"-->
+`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs-j"-->
 
 > [!NOTE]
 > 
-> For ReLU activation, we have `$\sigma^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and use
-> `$$\genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
+> For ReLU activation, we have `$\phi^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and use
+> `$$\genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
 
 
 ---
@@ -168,17 +168,17 @@ For neuron $j$ in layer $l-1$, we have
 
 We can rewrite 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j }$`<!-- .element: data-id="lhs-j" -->
-`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs-j"-->
+`$ = \displaystyle\sum_{i=1}^{n^{l}} \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_i)}{\partial z^l_i } \cdot w^{l}_{i,j}$`<!-- .element: data-id="rhs-j"-->
 
 as
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l-1}_j } =$`<!-- .element: data-id="lhs" --> 
 `$( w^l_{1,j}, w^l_{2,j}, \ldots, w^l_{n^l,j} )\ \cdot $`<!-- .element: data-id="weights" --> 
 `$\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_2(z^l_2)}{\partial z^l_1 } \\
 \vdots \\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
 \right)$`<!-- .element: data-id="factor" -->
 
@@ -209,10 +209,10 @@ w^l_{1,n^{l-1}} & w^l_{2,n^{l-1}} & \ldots & w^l_{n^l,n^{l-1}} \\
 \end{array}
 \right) \cdot $`<!-- .element: data-id="weights" --> 
 `$\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_2(z^l_2)}{\partial z^l_2 } \\
 \vdots \\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
 \right)$`<!-- .element: data-id="factor" -->
 
@@ -236,10 +236,10 @@ For layer $l - 1$, we have
 \right) =$`<!-- .element: data-id="lhs" -->
 `$(W^l)^T \cdot $`<!-- .element: data-id="weights" --> 
 `$\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_2(z^l_2)}{\partial z^l_2 } \\
 \vdots \\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^l}} \cdot \genfrac{}{}{1pt}{1}{\partial \phi^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
 \right)$`<!-- .element: data-id="factor" -->
 
@@ -270,10 +270,10 @@ For layer $l - 1$, we have
 \odot
 \left(
 \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_2(z^l_2)}{\partial z^l_2 } \\
 \vdots \\
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
 \right) \right)$`<!-- .element: data-id="factor" -->
 
@@ -288,7 +288,7 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} }$`<!-- .element: data-id="lhs-w" -->
 `$ = \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \displaystyle\genfrac{}{}{1pt}{1}{\partial a^l_i}{\partial z^l_i } \cdot \displaystyle\genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial w^l_{i,j} }$` 
 
-`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i }  $`<!-- .element: class="fragment"  data-fragment-index="1" data-id="rhs-w" style="margin-left:150px;" -->
+`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i }  $`<!-- .element: class="fragment"  data-fragment-index="1" data-id="rhs-w" style="margin-left:150px;" -->
 `$\cdot a^{l-1}_j $`<!-- .element: class="fragment"  data-fragment-index="1" data-id="rhs-a" -->
 
 ---
@@ -300,7 +300,7 @@ For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain r
 For each neuron $i$ of layer $l$ and each neuron $j$ of layer $l-1$, the chain rule implies that
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial w^l_{i,j} }$`<!-- .element: data-id="lhs-w" -->
-`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } $`<!-- .element:  data-id="rhs-w" -->
+`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } $`<!-- .element:  data-id="rhs-w" -->
 `$\cdot a^{l-1}_j $`<!-- .element:  data-id="rhs-a" -->
 
 ---
@@ -319,10 +319,10 @@ For layer $l$ and each neuron $j$ of layer $l-1$, we have
 \end{array}
 \right)$`<!-- .element: data-id="lhs-w" -->
 `$=\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_1 }\\ 
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_2 }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_1 }\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_2 }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{l}} } 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_{n^{l}} } 
 \end{array}
 \right)$`<!-- .element:  data-id="rhs-w" -->
 `$\cdot a^{l-1}_j$`<!-- .element: data-id="rhs-a" -->
@@ -345,10 +345,10 @@ For layer $l$, we have
 \end{array}
 \right)$`<!-- .element: data-id="lhs-w" -->
 `$=\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_1 }\\ 
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_2 }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_1 }\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_2 }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{l}} } 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_{n^{l}} } 
 \end{array}
 \right)$`<!-- .element: data-id="rhs-w" -->
 `$\cdot (a^{l-1}_1,\ldots,a^{l-1}_{n^{l-1}})$`<!-- .element: data-id="rhs-a" -->
@@ -373,10 +373,10 @@ For layer $l$, we have
 \end{array}
 \right)$`<!-- .element: data-id="lhs-w" -->
 `$=\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_1 }\\ 
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_2 }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_1 }\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_2 }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_{n^{l}} } 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_{n^{l}} } 
 \end{array}
 \right)$`<!-- .element: data-id="rhs-w" -->
 `$\cdot (a^{l-1})^T$`<!-- .element: data-id="rhs-a" -->
@@ -411,10 +411,10 @@ For layer $l$, we have
 \odot
 \left(
 \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_2(z^l_2)}{\partial z^l_2 } \\
 \vdots \\
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
 \right) \right)$`<!-- .element: data-id="rhs-w" -->
 `$\cdot (a^{l-1})^T$`<!-- .element: data-id="rhs-a" -->
@@ -432,9 +432,9 @@ For each neuron $i$ of layer $l$, we have
 `$\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_{i} }$`<!-- .element: data-id="lhs-b" --> 
 `$=  \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i}  \cdot \genfrac{}{}{1pt}{1}{\partial a^{l}_i}{\partial z^l_j} \cdot \genfrac{}{}{1pt}{1}{\partial z^{l}_i}{\partial b^l_j}$`
 
-`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } \cdot \genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i } $`<!-- .element: class="fragment" style="margin-left:180px;"-->
+`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } \cdot \genfrac{}{}{1pt}{1}{\partial z^l_i}{\partial b^l_i } $`<!-- .element: class="fragment" style="margin-left:180px;"-->
 
-`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i }$`<!-- .element: data-id="rhs-b" class="fragment"  style="margin-left:100px;"-->
+`$= \genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_i} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i }$`<!-- .element: data-id="rhs-b" class="fragment"  style="margin-left:100px;"-->
 
 
 ---
@@ -446,7 +446,7 @@ For each neuron $i$ of layer $l$, we have
 For each neuron $i$ of layer $l$, we have
 
 `$\displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial b^l_i }$`<!-- .element: data-id="lhs-b" -->
-`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_i(z^l_i)}{\partial z^l_i } $`<!-- .element:  data-id="rhs-b" -->
+`$= \displaystyle\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^l_i } \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } $`<!-- .element:  data-id="rhs-b" -->
 
 
 ---
@@ -465,10 +465,10 @@ For layer $l$, we have
 \end{array}
 \right)$`<!-- .element: data-id="lhs-b" -->
 `$=\left( \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_1(z^l_1)}{\partial z^l_1 }\\ 
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_2(z^l_2)}{\partial z^l_2 }\\
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_1} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_1(z^l_1)}{\partial z^l_1 }\\ 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_2} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_2(z^l_2)}{\partial z^l_2 }\\
 \vdots\\
-\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \sigma^l_{n^{l}}(z^l_{n^{l}})}{\partial z^l_{n^{l}} } 
+\genfrac{}{}{1pt}{1}{\partial \mathscr{L}_{(a,a^*)}}{\partial a^{l}_{n^{l}}} \cdot  \genfrac{}{}{1pt}{1}{\partial \phi^l_{n^{l}}(z^l_{n^{l}})}{\partial z^l_{n^{l}} } 
 \end{array}
 \right)$`<!-- .element: data-id="rhs-b" -->
 
@@ -497,10 +497,10 @@ For layer $l$, we have
 \odot
 \left(
 \begin{array}{c}
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_i(z^l_1)}{\partial z^l_1 } \\
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_2(z^l_2)}{\partial z^l_2 } \\
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_i(z^l_1)}{\partial z^l_1 } \\
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_2(z^l_2)}{\partial z^l_2 } \\
 \vdots \\
-\genfrac{}{}{1pt}{1}{\partial \sigma^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
+\genfrac{}{}{1pt}{1}{\partial \phi^{l}_{n^l}(z^l_{n^l})}{\partial z^l_{n^l} }
 \end{array}
 \right) \right)$`<!-- .element: data-id="rhs-b" -->
 
