@@ -65,6 +65,8 @@ $$
 </tr>
 </table>
 
+and so on.
+
 ---
 
 ### Output encoding
@@ -147,7 +149,7 @@ Assume we are given a collection of $(X,Y)$ pairs each encoded as $(a,a^*)$.
 
 <!-- .slide: data-auto-animate="true" -->
 
-Assume we are given a collection of $(X,Y)$ pairs each encoded as activations by $(a,a^*)$. 
+Assume we are given a collection of $(X,Y)$ pairs each encoded as $(a,a^*)$. 
 
 If we could find weights and biases such that for each pair $(a,a^*)$, we have
 
