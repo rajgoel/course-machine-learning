@@ -209,7 +209,7 @@ our neural network would be able to perfectly recognise the given digits.
 - With 30 pairs of training data, we would have 30 $\cdot$ 10 = 300 equations.
 
 > [!NOTE]
-> A system of equations with 300 equations and 260 variables cannot be solved in general, therefore, we need to approximate. 
+> A system of equations with 300 equations and 260 variables cannot be solved in general, therefore, we need to approximate (minimise the error). 
 
 ---
 
