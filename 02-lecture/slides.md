@@ -372,7 +372,7 @@ with respect to $b_i$ is
 
 ### Gradient descent in Julia
 
-```julia[1-19|2-4|5-20|6-9|10-14|15-17|1-19]
+```julia[1-19|2-4|5-18|6-9|10-14|15-17|1-19]
 function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
     tolerance::Float64 = 1.0e-3
     max_iterations::Int = 10000
