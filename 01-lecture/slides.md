@@ -565,7 +565,7 @@ our neural network can perfectly recognise both symbols.
 
 ### Optimal weights and biases
 
-Below weights and biases are optimal.
+Below weights and biases are optimal and we have
 
 `$$\left(
 \begin{array}{cccc}
