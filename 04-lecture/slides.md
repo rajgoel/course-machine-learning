@@ -162,7 +162,7 @@ The [rectified linear unit (ReLU)](https://en.wikipedia.org/wiki/Rectified_linea
 
 For `$\phi(z) = \max\lbrace 0,z \rbrace$` we have
  
-`$$\genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
+`$$\genfrac{}{}{1pt}{1}{\partial \phi(z)}{\partial z } = \begin{cases}1 \textrm{ if } z > 0 \\ \class{highlight}{0 \textrm{ if } z = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z < 0 \end{cases}$$`
 
 ---
 
@@ -208,6 +208,9 @@ is used when activation values shall be between 0 and 1.
 
 ![Figure](04-lecture/sigmoid.svg)
 
+> [!NOTE]
+> Sigmoid is mainly used in final layers to represent probabilities. 
+
 ---
 
 
@@ -219,13 +222,13 @@ we have
 `$$\phi'(z) = \phi(z)(1-\phi(z))$$`
 
 > [!NOTE]
-> Sigmoid is mainly used in final layers to represent probabilities. In hidden layers, sigmoid may cause the [vanishing gradient problem](https://en.wikipedia.org/wiki/Vanishing_gradient_problem) as gradients approach 0 for large $|z|$ values.
+> In hidden layers, sigmoid may cause the [vanishing gradient problem](https://en.wikipedia.org/wiki/Vanishing_gradient_problem) as gradients approach 0 for large $|z|$ values.
 
 ---
 
 ### Softmax
 
-In **classification** with $k$ mutually exclusive alternatives, the [softmax](https://en.wikipedia.org/wiki/Softmax_function) function is used on the full output layer to convert activation values into probabilities
+In **classification** with $k$ mutually exclusive alternatives, the [softmax](https://en.wikipedia.org/wiki/Softmax_function) function is used on the **full output layer** to convert activation values into probabilities
 
 `$$\phi_i(z) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}}$$`
 
