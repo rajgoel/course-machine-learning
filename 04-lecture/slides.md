@@ -4,7 +4,7 @@
 
 In gradient descent we repeatedly compute the gradient of the **average loss over all training samples** and move in the opposite direction of that gradient.
 
-![Image](04-lecture/gradient descent.png)
+![Image](04-lecture/gradient_descent.png)
 
 > [!IMPORTANT]
 > We need many samples for successful learning, however, computing the average gradient over a large number of samples can become computationally expensive.
@@ -22,7 +22,7 @@ Stochastic gradient descent randomly draws **mini-batches** of training samples 
 
 ## Local optima in gradient descent
 
-![Image](04-lecture/gradient descent.png)
+![Image](04-lecture/gradient_descent.png)
 <!-- \frac{1}{3}\left(1\ +\ \sin\left(.8x-1\right)\ +\frac{\left(0.7x-3\right)^{2}}{10}\ +\ 1\ +\ \sin\left(1.1x\right)\ +\frac{\left(\frac{x}{3}-5\right)^{2}}{5}+\ 1\ +\ \sin\left(0.7x-1\right)\ +\frac{\left(x-5\right)^{2}}{10}\right) -->
 
 > [!NOTE]
@@ -32,7 +32,7 @@ Stochastic gradient descent randomly draws **mini-batches** of training samples 
 
 ## Local optima in stochastic gradient descent
 
-![Image](04-lecture/stochastic_gradient descent.png)
+![Image](04-lecture/stochastic_gradient_descent.png)
 
 > [!NOTE]
 > The average loss over a mini-batch has different local optima than the average loss over all samples. Using different mini-batches, stochastic gradient is less risky to be trapped in local optima of poor quality.
