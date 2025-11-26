@@ -119,7 +119,7 @@ Implementing a deep neural network involves many decisions:
 
 ### Capacity
 
-The **number of layers (depth)** and **number of neurons of each layer (width)** of a neural network determine the **capacity**, i.e., the ability of representing complex relationships and learning from data.
+The **number of layers (depth)** and **number of neurons of each layer (width)** of a neural network determine the **capacity**, i.e., the ability to represent complex relationships and learn from data.
 
 ---
 
@@ -152,17 +152,20 @@ Non-linear [activation functions](https://fluxml.ai/Flux.jl/stable/reference/mod
 
 ### Rectified Linear Unit (ReLU)
 
-The [rectified linear unit (ReLU)](https://en.wikipedia.org/wiki/Rectified_linear_unit) is 
-
-$$\phi(z) = \max\{0,z\}$$
+The [rectified linear unit (ReLU)](https://en.wikipedia.org/wiki/Rectified_linear_unit) is `$\phi(z) = \max\lbrace 0,z \rbrace$`.
 
 ![Figure](04-lecture/ReLU.svg)
 
-We have 
-`$$\genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
-
 > [!NOTE]
 > ReLU is commonly used for hidden layers because it is easy to compute. 
+
+---
+
+### Derivative of ReLU
+
+For `$\phi(z) = \max\lbrace 0,z \rbrace$` we have
+ 
+`$$\genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
 
 ---
 
@@ -185,7 +188,14 @@ can be used with $\alpha$ being a small positive constant (typically 0.01).
 
 ![Figure](04-lecture/leakyReLU.svg)
 
-We have 
+---
+
+### Derivative of leaky ReLU
+
+For
+`$$\phi(z) = \begin{cases}z & \text{if } z > 0 \\ \alpha z& \text{if } z \leq 0\end{cases}$$`
+
+we have 
 
 `$$\phi'(z) = \begin{cases}1 & \text{if } z > 0 \\ \alpha & \text{if } z \leq 0\end{cases}$$`
 
@@ -195,13 +205,19 @@ We have
 
 The [sigmoid](https://en.wikipedia.org/wiki/Sigmoid_function) activation function
 
-$$\phi(z) = \frac{1}{1+e^{-z}}$$
+`$$\phi(z) = \frac{1}{1+e^{-z}}$$`
 
 is used when activation values shall be between 0 and 1.
 
 ![Figure](04-lecture/sigmoid.svg)
 
-We have 
+---
+
+
+For
+`$$\phi(z) = \frac{1}{1+e^{-z}}$$`
+
+we have 
 
 `$$\phi'(z) = \phi(z)(1-\phi(z))$$`
 
