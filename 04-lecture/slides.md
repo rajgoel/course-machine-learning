@@ -1,67 +1,420 @@
-# Architecture and pipeline
+# Stochastic gradient descent
 
-> [!CAUTION]
-> This session needs revision!
+---
+
+In gradient descent we repeatedly compute the gradient of the **average loss over all training samples** and move in the opposite direction of that gradient.
+
+![Image](04-lecture/gradient descent.png)
+
+> [!IMPORTANT]
+> We need many samples for successful learning, however, computing the average gradient over a large number of samples can become computationally expensive.
+
+---
+
+## Mini-batches
+
+Stochastic gradient descent randomly draws **mini-batches** of training samples and performs gradient descent on the **average loss of the sampled mini-batch**.
+
+> [!NOTE]
+> The minibatch size is usually relatively small, ranging from 1 to a few hundred. 
+
+---
+
+## Local optima in gradient descent
+
+![Image](04-lecture/gradient descent.png)
+<!-- \frac{1}{3}\left(1\ +\ \sin\left(.8x-1\right)\ +\frac{\left(0.7x-3\right)^{2}}{10}\ +\ 1\ +\ \sin\left(1.1x\right)\ +\frac{\left(\frac{x}{3}-5\right)^{2}}{5}+\ 1\ +\ \sin\left(0.7x-1\right)\ +\frac{\left(x-5\right)^{2}}{10}\right) -->
+
+> [!NOTE]
+> Gradient descent can get stuck in local optima of poor quality.
+
+---
+
+## Local optima in stochastic gradient descent
+
+![Image](04-lecture/stochastic_gradient descent.png)
+
+> [!NOTE]
+> The average loss over a mini-batch has different local optima than the average loss over all samples. Using different mini-batches, stochastic gradient is less risky to be trapped in local optima of poor quality.
+
+---
+
+Due to its computational efficiency and the capability to produce good solutions, stochastic gradient descent is the standard algorithm for training neural networks.
+
+---
+
+<!-- .slide: data-fullscreen="yes"  -->
+
+### Stochastic gradient descent with [Flux.jl](https://fluxml.ai/Flux.jl/stable/)
+
+```julia[1-2|4-11|13-35|16-25|27-34|37]
+function train!(network::FluxDNN, X_train::Matrix{Float32}, Y_train, learning_rate, epochs; 
+               batch_size=128, verbose=true)
+    
+    # Define loss function and optimizer
+    loss(m, x, y) = Flux.Losses.logitcrossentropy(m(x), y)
+    optimizer = Flux.setup(Flux.Adam(learning_rate), network.model)
+    
+    # Create data loader for mini-batch training
+    minibatches = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
+    
+    losses = Float64[]
+    
+    for epoch in 1:epochs
+        epoch_losses = Float64[]
+        
+        # Train on mini-batches (which are implicitly re-shuffled)
+        for (x_batch, y_batch) in minibatches
+            # Calculate loss and gradients for this batch
+            batch_loss = loss(network.model, x_batch, y_batch)
+            push!(epoch_losses, batch_loss)
+            
+            # Training step
+            grads = Flux.gradient(m -> loss(m, x_batch, y_batch), network.model)[1]
+            Flux.update!(optimizer, network.model, grads)
+        end
+        
+        # Average loss for this epoch
+        epoch_loss = mean(epoch_losses)
+        push!(losses, epoch_loss)
+        
+        # Print progress
+        if verbose && epoch % 10 == 0
+            println("   Epoch $epoch: Loss = $(round(epoch_loss, digits=6))")
+        end
+    end
+    
+    return losses
+end
+```
+<!-- .element: class="fullscreen stretch" -->
+
+---
+
+> [!TIP]
+> You find a full implementation in `Lecture04` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
 
 ===
 
-### Sigmoid
+# Implementation details
 
-`$$g(x) = \frac{1}{1+e^{-x}}$$`
+---
 
-![Figure](04-lecture/sigmoid.svg)
+Implementing a deep neural network involves many decisions:
 
-<!-- 
-Derivative: 
-dg(x)/d = (1+e^{-x})^{-1} = -(1+e^{-x})^{-2}(-e^{-x})
--->
+- Number of layers (depth)
+- Number of neurons for each layer (width)
+- Activation function $\phi$
+- Loss function $\mathscr{L}$
+- Number of epochs
+- Mini-batch size
+- Step size in (stochastic) gradient descent
+- Training data
 
-<!--
-Usage: as an output layer activation function in binary classification
--->
+---
+
+### Capacity
+
+The **number of layers (depth)** and **number of neurons of each layer (width)** of a neural network determine the **capacity**, i.e., the ability of representing complex relationships and learning from data.
+
+---
+
+### Universal approximation theorem
+
+The [universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem) states that with a sufficient number of neurons, a single hidden layer is sufficient to approximate any continuous function to any desired degree of accuracy.
+
+> [!IMPORTANT]
+> The total number of neurons required may be unnecessarily high for shallow networks (i.e., networks with few layers).
+
+---
+
+### Depth vs. width
+
+Despite the universal approximation theorem, deeper networks often outperform shallow ones, as they can learn hierarchical features (through aggregation from previous layers).
+
+> [!IMPORTANT]
+> In backpropagation, very deep networks may suffer from [vanishing (and exploding) gradients](https://en.wikipedia.org/wiki/Vanishing_gradient_problem), slowing down learning or making learning unstable.
+
+---
+
+## Activation functions
+
+Non-linear [activation functions](https://fluxml.ai/Flux.jl/stable/reference/models/activation/) are crucial for learning complex relationships.
+
+> [!IMPORTANT]
+> Without non-linear activation functions, a deep neural network reduces to a linear transformation.
 
 ---
 
 ### Rectified Linear Unit (ReLU)
 
-`$$g(x) = \max\{0,x\}$$`
+The [rectified linear unit (ReLU)](https://en.wikipedia.org/wiki/Rectified_linear_unit) is 
+
+$$\phi(z) = \max\{0,z\}$$
 
 ![Figure](04-lecture/ReLU.svg)
 
+We have 
+`$$\genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
+
 > [!NOTE]
-> $\frac{ \partial g}{ \partial x }$ is not defined for $x=0$, but we can anyhow use a value of 0 or 1 in back propagation.
+> ReLU is commonly used for hidden layers because it is easy to compute. 
+
+---
+
+#### "Dead" neurons
+
+Whenever a neuron receives a negative input, it's gradient becomes zero. This may cause backpropagation to stop updating weights for this neuron, the neuron dies and no longer contributes to learning.
+
+> [!NOTE]
+> Theoretically, the neuron can recover as a sufficiently large shift in the bias could potentially bring the neuron back to life.
+
+---
+
+### Leaky ReLU
+
+To overcome the problem of dead neurons, the **Leaky ReLU** 
+
+`$$\phi(z) = \begin{cases}z & \text{if } z > 0 \\ \alpha z& \text{if } z \leq 0\end{cases}$$`
+
+can be used with $\alpha$ being a small positive constant (typically 0.01).
+
+![Figure](04-lecture/leakyReLU.svg)
+
+We have 
+
+`$$\phi'(z) = \begin{cases}1 & \text{if } z > 0 \\ \alpha & \text{if } z \leq 0\end{cases}$$`
+
+---
+
+### Sigmoid
+
+The [sigmoid](https://en.wikipedia.org/wiki/Sigmoid_function) activation function
+
+$$\phi(z) = \frac{1}{1+e^{-z}}$$
+
+is used when activation values shall be between 0 and 1.
+
+![Figure](04-lecture/sigmoid.svg)
+
+We have 
+
+`$$\phi'(z) = \phi(z)(1-\phi(z))$$`
+
+> [!NOTE]
+> Sigmoid is mainly used in final layers to represent probabilities. In hidden layers, sigmoid may cause the [vanishing gradient problem](https://en.wikipedia.org/wiki/Vanishing_gradient_problem) as gradients approach 0 for large $|z|$ values.
+
+---
+
+### Softmax
+
+In **classification** with $k$ mutually exclusive alternatives, the [softmax](https://en.wikipedia.org/wiki/Softmax_function) function is used on the full output layer to convert activation values into probabilities
+
+`$$\phi_i(z) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}}$$`
+
+> [!NOTE]
+> The sum over all probabilities is 1.
 
 <!--
-Usage: most commonly used activation function for hidden layers.
+ and
+`$$\frac{\partial \phi_i(z)}{\partial z_j} = \begin{cases} \phi_i(z)(1 - \phi_i(z)) & \text{if } i = j \\ -\phi_i(z) \phi_j(z) & \text{if } i \neq j \end{cases}$$`
 -->
 
----
+===
 
-### Pooling
+> [!CAUTION]
+> Everything below needs revision!
 
-Operation: Reduces the spatial resolution of a feature map by aggregating values in local regions (e.g., max pooling takes the maximum, average pooling takes the mean).
+===
 
-Purpose: Provides translational invariance and reduces dimensionality, which lowers computation and risk of overfitting.
-
-Effect: Keeps the most important information while discarding spatial detail.
-
-Not learnable: Pooling is a fixed operation without trainable parameters.
+## Overfitting and underfitting
 
 ---
 
-## Stochastic Gradient Descent
+### Width vs. depth
+
+
+===
+
+## Regularisation
+
+===
+
+## Data augmentation
+
+===
+
+## Normalisation
+
+
+===
+
+# Architecture
+
+> [!CAUTION]
+> This session needs revision!
 
 ---
 
 
-#### Architecture parameters in a Neural Net
+---
 
-- **Number of hidden Layers:** More complex problems benefit from more layers (Deep Learning)
-- **Number of nodes per hidden layer:**  used to be common to have a pyramid like structure, nowadays is fairly common to use the same 
-number of neurons in all hidden layers.
-- Example: input layer, 2 hidden layers, output layer → 4 total layers
+## Loss functions 
+
+> [!CAUTION]
+> This session needs revision!
+
+
+===
 
 ---
+
+## Capacity, Overﬁtting and Underﬁtting 
+
+<!--
+Typically, when training a machine learning model, we have access to a training
+set, we can compute some error measure on the training set called the training
+error, and we reduce this training error. So far, what we have described is simply
+an optimization problem. What separates machine learning from optimization is
+that we want the generalization error, also called the test error, to be low as
+well. The generalization error is deﬁned as the expected value of the error on a
+new input. Here the expectation is taken across diﬀerent possible inputs, drawn
+from the distribution of inputs we expect the system to encounter in practice.
+We typically estimate the generalization error of a machine learning model by
+measuring its performance on a test set of examples that were collected separately
+from the training set.
+
+In our linear regression example, we trained the model by minimizing the
+training error, but we actually care about the test error.
+
+We typically make a set of assumptions
+known collectively as the i.i.d. assumptions. These assumptions are that the
+examples in each dataset are independent from each other, and that the train
+set and test set are identically distributed.
+
+One immediate connection we can observe between the training and test error
+is that the expected training error of a randomly selected model is equal to the
+expected test error of that model.
+
+Underﬁtting occurs when the model is not able to
+obtain a suﬃciently low error value on the training set. Overﬁtting occurs when
+the gap between the training error and test error is too large.
+
+We can control whether a model is more likely to overﬁt or underﬁt by altering
+its capacity.
+
+Machine learning algorithms will generally perform best when their capacity
+is appropriate for the true complexity of the task they need to perform and the
+amount of training data they are provided with. Models with insuﬃcient capacity
+are unable to solve complex tasks. Models with high capacity can solve complex
+tasks, but when their capacity is higher than needed to solve the present task they
+may overﬁt.
+
+![EXAMPLE](04-lecture/over_and_underfitting.svg)
+
+
+Typically, training error decreases until it asymptotes to the minimum possible error value as model
+capacity increases (assuming the error measure has a minimum value). Typically,
+generalization error has a U-shaped curve as a function of model capacity.
+
+Training and test error
+behave diﬀerently.  As we increase capacity, training error
+decreases, but the gap between training and test error increases. Eventually,
+the size of this gap outweighs the decrease in training error, and we enter the overﬁtting
+regime, where capacity is too large, above the optimal capacity.
+
+![EXAMPLE](04-lecture/over_and_underfitting.svg)
+
+As capacity increases (x-axis), bias (dotted) tends to decrease and variance
+(dashed) tends to increase, yielding another U-shaped curve for generalization error (bold
+curve). If we vary capacity along one axis, there is an optimal capacity, with underﬁtting
+when the capacity is below this optimum and overﬁtting when it is above.
+
+
+### Regularisation
+
+Regularization is any modiﬁcation we make to a
+learning algorithm that is intended to reduce its generalization error but not its
+training error.
+
+- L2 Parameter Regularization: weight decay. This regularization strategy drives the weights closer to the origin
+by adding a regularization term Ω(θ) = ½w² to the objective function
+- Dropout
+
+### Hyperparameters and Validation Sets
+
+It is important that the
+test examples are not used in any way to make choices about the model, including
+its hyperparameters. For this reason, no example from the test set can be used
+in the validation set. Therefore, we always construct the validation set from the
+training data. Speciﬁcally, we split the training data into two disjoint subsets. One
+of these subsets is used to learn the parameters. The other subset is our validation
+set, used to estimate the generalization error during or after training, allowing
+for the hyperparameters to be updated accordingly. The subset of data used to
+learn the parameters is still typically called the training set, even though this
+may be confused with the larger pool of data used for the entire training process.
+The subset of data used to guide the selection of hyperparameters is called the
+validation set. Typically, one uses about 80% of the training data for training and
+20% for validation. Since the validation set is used to “train” the hyperparameters,
+the validation set error will underestimate the generalization error, though typically
+by a smaller amount than the training error. After all hyperparameter optimization
+is complete, the generalization error may be estimated using the test set.
+
+
+--> 
+
+===
+
+# Data
+
+> [!CAUTION]
+> This session needs revision!
+
+## Dataset Augmentation
+
+[only on training data]
+
+---
+
+===
+
+# Training
+
+> [!CAUTION]
+> This session needs revision!
+
+---
+
+---
+
+<!-- Above content is sorted and complete. -->
+
+<!--
+1. Architecture Design Principles
+    - Layer sizing heuristics and depth/width decisions
+    - Activation function selection (ReLU, sigmoid, LeakyReLU with
+  derivatives)
+    - Loss function selection for different tasks (MSE, cross-entropy, 
+  etc.)
+    - Optimization algorithms (SGD, Adam, RMSprop with mathematical
+  formulations)
+    - Learning rate scheduling and convergence analysis
+  2. Data Pipeline Implementation
+    - Train/validation/test splits with mathematical formulation
+    - Data augmentation
+    - Data preprocessing (normalization, encoding)
+  3. Training & Evaluation
+    - Initialization strategies (Xavier/He with mathematical justification)
+    - Batch size considerations and training dynamics
+    - Regularization techniques (dropout, weight decay, early stopping)
+    - Practical debugging (vanishing/exploding gradients)
+    - Overfitting detection and validation strategies
+    - Hyperparameter tuning methodologies
+    - Model evaluation metrics and performance monitoring
+
+-->
+===
+
 
 #### Hyperparameters in a Neural Net
 
@@ -96,12 +449,6 @@ number of neurons in all hidden layers.
 
 ### Training Heuristics
 
-<img src="feedforwardnetworks/training_guidelines.png" />
-
----
-
-### Training Heuristics
-
 - **Training a NN is highly iterative:** Evaluate the predictions on the right metric, make changes and evaluate again.
 
 <div class=highlight-box> 
@@ -112,30 +459,6 @@ should reduce the variance.
 
 
 ===
-
-
-## Course Context
-
-You've learned traditional ML in "Fundamentals of Data Science"
-- Decision trees, SVMs, linear regression
-- When to use what algorithm
-- Basic evaluation and validation
-
-**Today**: Design choices specific to deep learning
-
----
-
-## Learning Objectives
-
-By the end of this lecture, you will know how to make informed decisions about:
-- Data preprocessing for neural networks
-- Architecture design choices
-- Training strategies that avoid common pitfalls
-- Bias prevention throughout the pipeline
-
----
-
-# Part I: Data Pipeline Decisions
 
 ---
 
@@ -149,22 +472,6 @@ By the end of this lecture, you will know how to make informed decisions about:
 - **Min-max scaling**: [0,1] range
 - **Z-score standardization**: mean=0, std=1  
 - **Robust scaling**: uses median and IQR
-
----
-
-## Data Preprocessing: Handling Missing Data
-
-**Traditional ML**: Often use imputation or removal
-
-**Deep Learning considerations:**
-- Neural networks can't handle NaN values
-- Large datasets → removal might be viable
-- Complex patterns → learned imputation possible
-
-**Common approaches:**
-- Mean/median imputation for numerical
-- Mode imputation for categorical
-- Learn embeddings for "missing" as category
 
 ---
 
@@ -223,71 +530,6 @@ By the end of this lecture, you will know how to make informed decisions about:
 
 **Rule**: Anything computed on training data cannot use validation/test data
 
----
-
-# Part II: Network Architecture Decisions
-
----
-
-## Depth vs Width Trade-offs
-
-**Deeper networks:**
-- Can learn more complex representations
-- Risk: vanishing gradients, harder to train
-- Better for hierarchical feature learning
-
-**Wider networks:**
-- More parameters at each level
-- Easier to train but less expressive
-- Better for parallel feature learning
-
----
-
-## Layer Types: When to Use What
-
-**Fully Connected (Dense):**
-- Final classification layers
-- Small, structured data
-- When relationships between all features matter
-
-**Convolutional:**
-- Spatial data (images)
-- Translation invariance needed
-- Local pattern detection
-
-**Pooling:**
-- Dimensionality reduction
-- Translation invariance
-- Computational efficiency
-
----
-
-## Activation Function Selection
-
-**ReLU**: Default choice
-- Fast computation, no vanishing gradients
-- Problem: "dying ReLU" issue
-
-**Leaky ReLU**: Fixes dying ReLU
-- Small negative slope prevents dead neurons
-
-**Swish/GELU**: Modern alternatives
-- Smooth, differentiable everywhere
-- Often better performance, slightly more expensive
-
----
-
-## When to Use Sigmoid/Tanh
-
-**Sigmoid**: 
-- Output layer for binary classification
-- When you need probabilities [0,1]
-- **Avoid** in hidden layers (vanishing gradients)
-
-**Tanh**:
-- Similar to sigmoid but [-1,1] range
-- Zero-centered (better than sigmoid)
-- Still avoid in deep hidden layers
 
 ---
 
@@ -327,23 +569,6 @@ By the end of this lecture, you will know how to make informed decisions about:
 - Acts as regularization
 
 **Placement**: Usually after linear layer, before activation
-
----
-
-## Architecture Bias Considerations
-
-**Inductive bias**: Assumptions built into architecture
-
-**Examples:**
-- CNNs assume spatial locality and translation invariance
-- RNNs assume sequential dependencies
-- Fully connected assumes all features interact equally
-
-**Fairness impact**: Some architectures may amplify demographic biases
-
----
-
-# Part III: Training Strategy Design
 
 ---
 
@@ -540,89 +765,6 @@ By the end of this lecture, you will know how to make informed decisions about:
 - Performance consistency across subgroups
 
 ---
-
-# Part IV: Evaluation and Validation Framework
-
----
-
-## Beyond Accuracy: Comprehensive Evaluation
-
-**For classification:**
-- Precision, recall, F1-score
-- ROC curves and AUC
-- Confusion matrices
-- Per-class performance analysis
-
-**For regression:**  
-- R², MAE, RMSE
-- Residual analysis
-- Performance across value ranges
-
----
-
-## Fairness Metrics
-
-**Demographic parity**: Equal positive prediction rates across groups
-
-**Equalized odds**: Equal true/false positive rates across groups
-
-**Individual fairness**: Similar individuals get similar predictions
-
-**Choose based on your application's fairness requirements**
-
----
-
-## Documentation and Reproducibility
-
-**Essential documentation:**
-- Data sources and preprocessing steps
-- Architecture choices and rationale
-- Hyperparameter search process
-- Training environment and random seeds
-
-**Version control**: Track data, code, and model versions
-
-**Goal**: Another researcher should be able to reproduce your results
-
----
-
-## Practical Tools and Frameworks
-
-**Bias detection:**
-- Fairness toolkits (AIF360, Fairlearn)
-- What-if tools for model analysis
-- Dataset bias analyzers
-
-**Experiment tracking:**
-- Weights & Biases, MLflow
-- TensorBoard for monitoring
-- Version control for experiments
-
----
-
-## Key Takeaways
-
-**Design choices are interconnected:**
-- Data preprocessing affects model requirements
-- Architecture choices influence training strategies  
-- Evaluation metrics should align with business goals
-
-**Always prioritize fairness and robustness**
-- Bias can enter at any stage
-- Comprehensive evaluation is essential
-- Document and monitor throughout
-
----
-
-## Next Steps
-
-**In upcoming lectures, we'll see these principles applied to:**
-- Feed-forward networks (Lecture 3)
-- Convolutional architectures (Lectures 5-6) 
-- Autoencoders (Lecture 7)
-- Reinforcement learning (Lectures 8-9)
-
-**Remember**: These design principles apply to every architecture we'll study!
 
 ===
 
