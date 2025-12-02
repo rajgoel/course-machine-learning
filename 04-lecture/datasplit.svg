@@ -12,7 +12,7 @@
   
   <!-- Dev/Validation set -->
   <rect x="490" y="220" width="120" height="80" fill="#80bfff" stroke="#333" stroke-width="2"/>
-  <text x="550" y="255" font-family="Arial" font-size="18" text-anchor="middle">Dev Set</text>
+  <text x="550" y="255" font-family="Arial" font-size="18" text-anchor="middle">Validation Set</text>
   <text x="550" y="280" font-family="Arial" font-size="18" text-anchor="middle">(10-20%)</text>
   
   <!-- Test set -->
