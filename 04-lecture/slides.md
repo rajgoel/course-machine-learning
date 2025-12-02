@@ -293,9 +293,6 @@ If the learning rate is to low, convergence will be slow and gradient descent ma
 
 ![Image](04-lecture/under_and_overfitting.png")
 
-> [!TIP]
-> Use validation data to monitor training progress and apply early stopping to avoid overfitting.
-
 ---
 
 ## Data split
@@ -305,14 +302,14 @@ If the learning rate is to low, convergence will be slow and gradient descent ma
 
 | Training set purpose | Validation set purpose | Test set purpose |
 |----------------------|-----------------|------------------|
-| Train the model parameters | Tune hyperparameters | Final evaluation |
+| Train the model parameters | Preliminary evaluation | Final evaluation |
 | Learn patterns from data | Identify overfitting | Unbiased assessment |
 
 ---
 
 ## Early stopping
 
-![Image](lecture04/training_progress.png)
+![Image](04-lecture/training_progress.png)
 
 > [!TIP]
 > To prevent overfitting, we should stop training when the validation loss is no longer improving.
