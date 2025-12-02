@@ -299,7 +299,7 @@ A crucial implementation detail for (stochastic) gradient descent is choice of t
 
 ## Data split
 
-![Image](04-lecture/datasplit.svg)<!-- .element: width="800"  -->
+![Image](04-lecture/datasplit.svg)<!-- .element: width="1200"  -->
 
 The data should be split according to different purposes: 
 - **Training set:** Learn patterns from data 
@@ -310,7 +310,7 @@ The data should be split according to different purposes:
 
 ## Early stopping
 
-![Image](04-lecture/training_progress.png)
+![Image](04-lecture/training_progress.png)<!-- .element: height="600"  -->
 
 > [!TIP]
 > To prevent overfitting, we should stop training when the validation loss is no longer improving.
