@@ -11,12 +11,13 @@ This example shows how to:
 using Random
 using Flux
 using Statistics
+using Plots
 
 include("mnist_data.jl")
 
 
 """
-    demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
+    demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true, validation_size=0, patience=10)
 
 MNIST handwritten digit recognition demonstration using Flux.jl.
 
@@ -29,9 +30,11 @@ MNIST handwritten digit recognition demonstration using Flux.jl.
 - `epochs`: Number of training epochs (default: 50)
 - `batch_size`: Mini-batch size for SGD training (default: 128)
 - `verbose`: Print training progress (default: true)
+- `validation_size`: Number of validation samples for early stopping (default: 0 - no validation)
+- `patience`: Number of epochs to wait before early stopping (default: 10)
 """
 function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, 
-              learning_rate=0.001, epochs=50, batch_size=128, verbose=true)
+              learning_rate=0.001, epochs=50, batch_size=128, verbose=true, validation_size=0, patience=10)
     
     println("="^80)
     println("MNIST DIGIT RECOGNITION WITH FLUX.JL DEEP NEURAL NETWORK")
@@ -42,15 +45,29 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     
     # Load and preprocess data
     println("\n1. Loading MNIST data...")
-    X_train_raw, Y_train, X_test_raw, Y_test = load_mnist_data(train_size, test_size)
+    X_train_raw, Y_train_full, X_test_raw, Y_test = load_mnist_data(train_size + validation_size, test_size)
     
-    # Flatten images for fully connected network (28×28×samples → 784×samples)
-    X_train = reshape(X_train_raw, 784, train_size)
+    # Split data if validation is requested
+    if validation_size > 0
+        X_train = reshape(X_train_raw[:, :, 1:train_size], 784, train_size)
+        Y_train = Y_train_full[:, 1:train_size]
+        X_val = reshape(X_train_raw[:, :, (train_size+1):end], 784, validation_size)
+        Y_val = Y_train_full[:, (train_size+1):end]
+        
+        println("Flattened for fully connected network:")
+        println("  Training: $(size(X_train)) (features × samples)")
+        println("  Validation: $(size(X_val)) (features × samples)")
+        println("  Test: $(size(X_test_raw)) (features × samples)")
+    else
+        X_train = reshape(X_train_raw, 784, train_size)
+        Y_train = Y_train_full
+        
+        println("Flattened for fully connected network:")
+        println("  Training: $(size(X_train)) (features × samples)")
+        println("  Test: $(size(X_test_raw)) (features × samples)")
+    end
+    
     X_test = reshape(X_test_raw, 784, test_size)
-    
-    println("Flattened for fully connected network:")
-    println("  Training: $(size(X_train)) (features × samples)")
-    println("  Test: $(size(X_test)) (features × samples)")
     
     # Create network architecture for MNIST using Flux
     println("\n2. Creating Flux network architecture...")
@@ -69,8 +86,14 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     println("   Learning rate: $(learning_rate), Epochs: $(epochs)")
     println("   Batch size: $(batch_size), Optimizer: Adam")
     
-    losses = train!(network, X_train, Y_train, learning_rate, epochs; 
-                    batch_size=batch_size, verbose=verbose)
+    if validation_size > 0
+        println("   Using validation set with early stopping (patience: $patience)")
+        losses = train!(network, X_train, Y_train, X_val, Y_val, learning_rate, epochs; 
+                        batch_size=batch_size, verbose=verbose, early_stopping_patience=patience)
+    else
+        losses = train!(network, X_train, Y_train, learning_rate, epochs; 
+                        batch_size=batch_size, verbose=verbose)
+    end
     
     # Evaluate on test set
     println("\n4. Evaluating on test set...")
@@ -112,10 +135,39 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     println("\n" * "="^80)
     println("TRAINING SUMMARY")
     println("="^80)
-    println("Final training loss: $(round(losses[end], digits=4))")
+    if validation_size > 0
+        println("Final training loss: $(round(losses.train_losses[end], digits=4))")
+        println("Final validation loss: $(round(losses.val_losses[end], digits=4))")
+    else
+        println("Final training loss: $(round(losses[end], digits=4))")
+    end
     println("Test accuracy: $(round(test_accuracy*100, digits=2))%")
         
     println("\nNetwork learned to classify handwritten digits with Flux.jl! ✓")
     
     return network, losses
+end
+
+"""
+    plot_losses(losses; title="Training Progress")
+
+Create a plot of training losses. Handles both single training losses and training+validation losses.
+
+# Arguments
+- `losses`: Either Vector{Float64} (training only) or NamedTuple with train_losses and val_losses
+- `title`: Plot title (default: "Training Progress")
+
+# Returns
+- Plot object showing training and validation loss curves
+"""
+function plot_losses(losses; title="Training Progress")
+    if isa(losses, NamedTuple) && haskey(losses, :train_losses) && haskey(losses, :val_losses)
+        # Training and validation losses
+        p = plot(losses.train_losses, label="Training Loss", lw=2, color=:firebrick, xlabel="Epoch", ylabel="Loss", title=title)
+        plot!(p, losses.val_losses, label="Validation Loss", lw=2, color=:red)
+    else
+        # Training losses only
+        p = plot(losses, label="Training Loss", lw=2, color=:firebrick, xlabel="Epoch", ylabel="Loss", title=title)
+    end
+    return p
 end

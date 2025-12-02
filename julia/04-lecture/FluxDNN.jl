@@ -18,6 +18,7 @@ Flux Deep Neural Network structure with fully connected layers.
 
 # Arguments
 - `layers::Vector{Int}`: Number of neurons per layer [input, hidden..., output]
+- `ϕ`: Activation function for hidden layers
 
 # Fields
 - `layers::Vector{Int}`: Layer architecture specification
@@ -35,15 +36,15 @@ mutable struct FluxDNN
     layers::Vector{Int}
     model::Flux.Chain
     
-    function FluxDNN(layers::Vector{Int})
+    function FluxDNN(layers::Vector{Int}; ϕ = Flux.relu)
         # Build the model using Flux.Chain
         model_layers = []
         for i in 1:length(layers)-2
-            push!(model_layers, Flux.Dense(layers[i], layers[i+1], Flux.relu))
+            # Add hidden layer with given activation function
+            push!(model_layers, Flux.Dense(layers[i], layers[i+1], ϕ))
         end
-        # Output layer with softmax
+        # Add last layer without activation function
         push!(model_layers, Flux.Dense(layers[end-1], layers[end]))
-        push!(model_layers, Flux.softmax)
         
         model = Flux.Chain(model_layers...)
         new(layers, model)
@@ -71,19 +72,19 @@ function train!(network::FluxDNN, X_train::Matrix{Float32}, Y_train, learning_ra
                batch_size=128, verbose=true)
     
     # Define loss function and optimizer
-    loss(m, x, y) = Flux.Losses.crossentropy(m(x), y)
+    loss(m, x, y) = Flux.Losses.logitcrossentropy(m(x), y)
     optimizer = Flux.setup(Flux.Adam(learning_rate), network.model)
     
     # Create data loader for mini-batch training
-    train_loader = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
+    minibatches = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
     
     losses = Float64[]
     
     for epoch in 1:epochs
         epoch_losses = Float64[]
         
-        # Train on mini-batches
-        for (x_batch, y_batch) in train_loader
+        # Train on mini-batches (which are implicitly re-shuffled)
+        for (x_batch, y_batch) in minibatches
             # Calculate loss and gradients for this batch
             batch_loss = loss(network.model, x_batch, y_batch)
             push!(epoch_losses, batch_loss)
@@ -107,6 +108,85 @@ function train!(network::FluxDNN, X_train::Matrix{Float32}, Y_train, learning_ra
 end
 
 """
+    train!(network::FluxDNN, X_train, Y_train, X_validate, Y_validate, learning_rate, epochs; batch_size=128, verbose=true, early_stopping_patience=10)
+
+Train a FluxDNN model using supervised learning with validation data and early stopping.
+
+# Arguments
+- `network::FluxDNN`: FluxDNN network to train
+- `X_train::Matrix{Float32}`: Training input data (features × samples)
+- `Y_train`: Training target labels (one-hot encoded)
+- `X_validate::Matrix{Float32}`: Validation input data (features × samples)
+- `Y_validate`: Validation target labels (one-hot encoded)
+- `learning_rate::Float64`: Adam optimizer learning rate
+- `epochs::Int`: Number of training epochs
+- `batch_size::Int`: Mini-batch size (default: 128)
+- `verbose::Bool`: Print training progress (default: true)
+- `early_stopping_patience::Int`: Number of epochs to wait before early stopping (default: 10)
+
+# Returns
+- `NamedTuple`: (train_losses=Vector{Float64}, val_losses=Vector{Float64})
+"""
+function train!(network::FluxDNN, X_train::Matrix{Float32}, Y_train, X_validate::Matrix{Float32}, Y_validate,
+               learning_rate, epochs; batch_size=128, verbose=true, early_stopping_patience=10)
+    
+    # Define loss function and optimizer
+    loss(m, x, y) = Flux.Losses.logitcrossentropy(m(x), y)
+    optimizer = Flux.setup(Flux.Adam(learning_rate), network.model)
+    
+    # Create data loader for mini-batch training
+    minibatches = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
+    
+    train_losses = Float64[]
+    val_losses = Float64[]
+    best_val_loss = Inf
+    patience_counter = 0
+    
+    for epoch in 1:epochs
+        epoch_losses = Float64[]
+        
+        # Train on mini-batches
+        for (x_batch, y_batch) in minibatches
+            batch_loss = loss(network.model, x_batch, y_batch)
+            push!(epoch_losses, batch_loss)
+            
+            grads = Flux.gradient(m -> loss(m, x_batch, y_batch), network.model)[1]
+            Flux.update!(optimizer, network.model, grads)
+        end
+        
+        # Calculate training loss for this epoch
+        epoch_loss = mean(epoch_losses)
+        push!(train_losses, epoch_loss)
+        
+        # Calculate validation loss
+        val_loss = loss(network.model, X_validate, Y_validate)
+        push!(val_losses, val_loss)
+        
+        # Early stopping check
+        if val_loss < best_val_loss
+            best_val_loss = val_loss
+            patience_counter = 0
+        else
+            patience_counter += 1
+        end
+        
+        if patience_counter >= early_stopping_patience
+            if verbose
+                println("Early stopping at epoch $epoch")
+            end
+            break
+        end
+        
+        # Print progress
+        if verbose && epoch % 10 == 0
+            println("   Epoch $epoch: Train Loss = $(round(epoch_loss, digits=6)), Val Loss = $(round(val_loss, digits=6))")
+        end
+    end
+    
+    return (train_losses=train_losses, val_losses=val_losses)
+end
+
+"""
     predict(network::FluxDNN, X)
 
 Make predictions using trained FluxDNN network.
@@ -119,7 +199,7 @@ Make predictions using trained FluxDNN network.
 - Predictions from the network (output × samples)
 """
 function predict(network::FluxDNN, X::Matrix{Float32})
-    return network.model(X)
+    return Flux.softmax( network.model(X) )
 end
 
 """
@@ -137,7 +217,7 @@ Calculate accuracy of FluxDNN model on test data.
 """
 function accuracy(network::FluxDNN, X_test::Matrix{Float32}, Y_test)
     # Get predictions
-    ŷ = network.model(X_test)
+    ŷ = predict(network, X_test)
     
     # Determine class indices based on Y_test structure
     num_classes = size(Y_test, 1)
@@ -163,7 +243,7 @@ Comprehensive evaluation of FluxDNN model with confusion matrix and per-class me
 """
 function evaluate(network::FluxDNN, X_test::Matrix{Float32}, Y_test, classes)
     # Get predictions
-    ŷ = network.model(X_test)
+    ŷ = predict(network, X_test)
     
     # Determine class indices based on Y_test structure and classes argument
     num_classes = isa(classes, Integer) ? classes : length(classes)

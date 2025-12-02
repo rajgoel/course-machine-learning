@@ -97,9 +97,9 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
     
     println("Preprocessing for neural network training...")
     
-    # Convert to Float32 and normalize to [0,1]
-    X_train = Float32.(X_train_raw) ./ 255.0f0
-    X_test = Float32.(X_test_raw) ./ 255.0f0
+    # Data is already Float32 and normalized to [0,1] by MLDatasets
+    X_train = X_train_raw
+    X_test = X_test_raw
     
     # One-hot encode labels (Flux format: classes × samples)
     Y_train = Flux.onehotbatch(Y_train_raw, 0:9)
