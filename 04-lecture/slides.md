@@ -247,7 +247,7 @@ For **regression** with $k$ output neurons, we usually use the **squared error**
 
 For **classification** with $k$ mutually exclusive alternatives, we usually use the **cross-entropy** for each prediction-expectation pair $(a,a^*)$:
 
-`$$\mathscr{L} = -\sum_{i=1}^{k} a^*_i \log(\hat{a}_i)}$$`
+`$$\mathscr{L} = -\sum_{i=1}^{k} a^*_i \log(\hat{a}_i)$$`
 
 > [!TIP]
 > In [Flux.jl](https://fluxml.ai/Flux.jl/stable/reference/models/losses/#Flux.Lossesy) it is advised to use `logitcrossentropy` rather than using `crossentropy` with `softmax` activation. 
@@ -258,7 +258,8 @@ For **classification** with $k$ mutually exclusive alternatives, we usually use 
 
 The mini-batch size determines how many samples are used to compute each gradient update.
 
-Small batches cause more frequent updates with noisier gradients allowing to escape local optima, while larger batches provide more stable gradient estimates.
+- Small batches cause more frequent updates with noisier gradients allowing to escape local optima.
+- Large batches provide more stable gradient estimates.
 
 > [!TIP]
 > Powers of 2 (32, 64, 128, 256) are often computationally more efficient.
@@ -278,7 +279,8 @@ The number of epochs determines how many times the entire training dataset is pr
 
 A crucial implementation detail for (stochastic) gradient descent is choice of the learning rate $\eta$ indicating the step size.
 
-If the learning rate is to low, convergence will be slow and gradient descent may get stuck in local optima. If the learning rate is too high, gradient descent may overshoot, causing oscillations and divergence.
+- If the learning rate is to low, convergence will be slow and gradient descent may get stuck in local optima. 
+- If the learning rate is too high, gradient descent may overshoot, causing oscillations and divergence.
 
 > [!NOTE]
 >  Modern optimisers like [Adam](https://fluxml.ai/Flux.jl/stable/reference/training/optimisers/#Optimisers.Adam) automatically adapt the learning rate during training.
@@ -291,19 +293,18 @@ If the learning rate is to low, convergence will be slow and gradient descent ma
 - When model **capacity is too small**, the underlying patterns in the data cannot be captured (**underfitting**).
 - When model **capacity is large**, **intensive training** may result in memorising the training data instead of learning generalisable patterns  (**overfitting**).
 
-![Image](04-lecture/under_and_overfitting.png")
+![Image](04-lecture/under_and_overfitting.png)
 
 ---
 
 ## Data split
 
-
 ![Image](04-lecture/datasplit.svg)<!-- .element: width="800"  -->
 
-| Training set purpose | Validation set purpose | Test set purpose |
-|----------------------|-----------------|------------------|
-| Train the model parameters | Preliminary evaluation | Final evaluation |
-| Learn patterns from data | Identify overfitting | Unbiased assessment |
+The data should be split according to different purposes: 
+- **Training set:** Learn patterns from data 
+- **Validation set:** Select hyperparameters and detect overfitting
+- **Test set:** Final unbiased evaluation
 
 ---
 
