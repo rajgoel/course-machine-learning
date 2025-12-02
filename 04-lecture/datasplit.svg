@@ -1,29 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
 
   <!-- Main data rectangle -->
-  <rect x="50" y="80" width="700" height="100" fill="#e6f2ff" stroke="#333" stroke-width="2"/>
-  <text x="400" y="130" font-family="Arial" font-size="20" text-anchor="middle">Complete Dataset</text>
+  <rect x="50" y="30" width="700" height="100" fill="#e6f2ff" stroke="#333" stroke-width="2"/>
+  <text x="400" y="80" font-family="Arial" font-size="20" text-anchor="middle">Complete Dataset</text>
   
   <!-- Segmented data sections -->
   <!-- Training set -->
-  <rect x="60" y="220" width="420" height="80" fill="#b3d9ff" stroke="#333" stroke-width="2"/>
-  <text x="270" y="255" font-family="Arial" font-size="18" text-anchor="middle">Training Set</text>
-  <text x="270" y="280" font-family="Arial" font-size="18" text-anchor="middle">(60-80%)</text>
+  <rect x="60" y="170" width="420" height="80" fill="#b3d9ff" stroke="#333" stroke-width="2"/>
+  <text x="270" y="205" font-family="Arial" font-size="18" text-anchor="middle">Training Set</text>
+  <text x="270" y="230" font-family="Arial" font-size="18" text-anchor="middle">(60-80%)</text>
   
   <!-- Dev/Validation set -->
-  <rect x="490" y="220" width="120" height="80" fill="#80bfff" stroke="#333" stroke-width="2"/>
-  <text x="550" y="255" font-family="Arial" font-size="18" text-anchor="middle">Validation Set</text>
-  <text x="550" y="280" font-family="Arial" font-size="18" text-anchor="middle">(10-20%)</text>
+  <rect x="490" y="170" width="120" height="80" fill="#80bfff" stroke="#333" stroke-width="2"/>
+  <text x="550" y="205" font-family="Arial" font-size="18" text-anchor="middle">Validation Set</text>
+  <text x="550" y="230" font-family="Arial" font-size="18" text-anchor="middle">(10-20%)</text>
   
   <!-- Test set -->
-  <rect x="620" y="220" width="120" height="80" fill="#4da6ff" stroke="#333" stroke-width="2"/>
-  <text x="680" y="255" font-family="Arial" font-size="18" text-anchor="middle">Test Set</text>
-  <text x="680" y="280" font-family="Arial" font-size="18" text-anchor="middle">(10-20%)</text>
+  <rect x="620" y="170" width="120" height="80" fill="#4da6ff" stroke="#333" stroke-width="2"/>
+  <text x="680" y="205" font-family="Arial" font-size="18" text-anchor="middle">Test Set</text>
+  <text x="680" y="230" font-family="Arial" font-size="18" text-anchor="middle">(10-20%)</text>
   
   <!-- Arrows connecting segments -->
-  <path d="M 270 180 L 270 220" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
-  <path d="M 550 180 L 550 220" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
-  <path d="M 680 180 L 680 220" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 270 130 L 270 170" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 550 130 L 550 170" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 680 130 L 680 170" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
   
   <!-- Arrowhead definition -->
   <defs>
