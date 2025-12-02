@@ -293,7 +293,7 @@ A crucial implementation detail for (stochastic) gradient descent is choice of t
 - When model **capacity is too small**, the underlying patterns in the data cannot be captured (**underfitting**).
 - When model **capacity is large**, **intensive training** may result in memorising the training data instead of learning generalisable patterns  (**overfitting**).
 
-![Image](04-lecture/under_and_overfitting.png)
+![Image](04-lecture/under_and_overfitting.png)<!-- .element: width="1200"  -->
 
 ---
 
