@@ -628,4 +628,22 @@ A simple neural network with
 
 can be used to perfectly recognize both symbols given a 2x2 black and white pixel image.
 
+===
+
+# Sample implementations
+
+You find sample implementations for all sessions in the `julia/` directory of the course repository.
+
+**Installation:**
+```julia
+using Pkg
+Pkg.add(url="https://github.com/rajgoel/course-machine-learning", subdir="julia")
+```
+
+**Usage:**
+
+```julia
+using MachineLearningCourse
+Lecture01.demo()
+```
 
