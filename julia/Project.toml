@@ -27,6 +27,7 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SimpleDirectMediaLayer = "98e33af6-2ee5-5afd-9e75-cbc738b767c4"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+Suppressor = "fd094767-a336-5f1f-9728-57cf17d0bbfb"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
@@ -38,4 +39,5 @@ Images = "0.26"
 OffsetArrays = "1.17"
 SimpleDirectMediaLayer = "0.4.0"
 Statistics = "1"
+Suppressor = "0.2.8"
 julia = "1.11"
