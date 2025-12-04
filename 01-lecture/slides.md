@@ -191,7 +191,7 @@ A deep neural network (DNN) is an artificial neural network in which artificial 
 <td style="vertical-align: middle;padding:0;padding:0;width:200px!important;">
 <svg width="200" height="200">
   <rect width="200" height="200" style="fill:black;" />
-  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">/</text>
+  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">⟋</text>
 </svg>
 </td>
 </tr>
@@ -211,7 +211,7 @@ A deep neural network (DNN) is an artificial neural network in which artificial 
 <td style="vertical-align: middle;padding:0;padding:0;width:200px!important;">
 <svg width="200" height="200">
   <rect width="200" height="200" style="fill:black;" />
-  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">&bsol;</text>
+  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">⟍</text>
 </svg>
 </td>
 </tr>
@@ -285,7 +285,7 @@ Each output $Y$ is represented by a **one-hot encoding** with a 2-dimensional ve
 <td style="vertical-align: middle;padding:0;width:200px!important;">
 <svg width="200" height="200">
   <rect width="200" height="200" style="fill:black;" />
-  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">/</text>
+  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">⟋</text>
 </svg>
 </td>
 <td style="vertical-align: middle;padding:0;font-size:100px;width:200px!important;">
@@ -299,7 +299,7 @@ Each output $Y$ is represented by a **one-hot encoding** with a 2-dimensional ve
 <td style="vertical-align: middle;padding:0;width:200px!important;">
 <svg width="200" height="200">
   <rect width="200" height="200" style="fill:black;" />
-  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">&bsol;</text>
+  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">⟍</text>
 </svg>
 </td>
 <td style="vertical-align: middle;padding:0;font-size:100px;width:200px!important;">
@@ -412,7 +412,7 @@ We want to find weights and biases, so that our neural network can reliably reco
 <td style="vertical-align: middle;padding:0;padding:0;width:200px!important;">
 <svg width="200" height="200">
   <rect width="200" height="200" style="fill:black;" />
-  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">/</text>
+  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">⟋</text>
 </svg>
 </td>
 </tr>
@@ -432,7 +432,7 @@ We want to find weights and biases, so that our neural network can reliably reco
 <td style="vertical-align: middle;padding:0;padding:0;width:200px!important;">
 <svg width="200" height="200">
   <rect width="200" height="200" style="fill:black;" />
-  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">&bsol;</text>
+  <text  x="100" y="175" font-size="200" text-anchor="middle"  style="fill:white;stroke:white;">⟍</text>
 </svg>
 </td>
 </tr>
@@ -453,11 +453,11 @@ We want to find weights and biases, so that our neural network can reliably reco
 
 If we find weights and biases such that
 
-> The input of `/` is recognised.
+> The input of `⟋` is recognised.
 
 and
 
-> The input of `\` is recognised.
+> The input of `⟍` is recognised.
 
 our neural network can perfectly recognise both symbols. 
 

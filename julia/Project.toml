@@ -25,6 +25,7 @@ Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SimpleDirectMediaLayer = "98e33af6-2ee5-5afd-9e75-cbc738b767c4"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
