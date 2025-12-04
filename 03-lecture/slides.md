@@ -603,7 +603,7 @@ end
 
 ### MNIST database
 
-The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale values of a 28x28 pixel image representing a handwritten digits. 
+The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale values of 28x28 pixel images representing handwritten digits. 
 
 ![Digits](03-lecture/digits.jpg)
 
