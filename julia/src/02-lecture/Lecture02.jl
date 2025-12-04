@@ -1,30 +1,17 @@
 """
-# Lecture02: Gradient Descent
+    Lecture02
 
-A vanilla implementation of gradient descent.
+Vanilla implementation of gradient descent.
 
-## Exported Functions
+# Available Functions
 
-- [`gradient_descent!`](@ref): Gradient descent optimization algorithm
-- [`ℒ`](@ref): Mean squared error loss function 
-- [`∂ℒ_∂â`](@ref): Loss gradient computation
-- [`one_hot_encode`](@ref): Convert class labels to one-hot vectors
+- `demo()`: Gradient descent demo for 5x5 pixel symbol recognition
 
-## Usage Examples
-
-Apply gradient descent:
+# Usage
 
 ```julia
-using MachineLearningCourse.Lecture02
-
-# Use individual functions
-W = randn(2, 3) * 0.1
-b = randn(2) * 0.1
-X_train = [[1.0, 0.0, 1.0], [0.0, 1.0, 1.0]]
-Y_train = [[1.0, 0.0], [0.0, 1.0]]
-
-# Train with gradient descent
-gradient_descent!(W, b, X_train, Y_train)
+using MachineLearningCourse
+Lecture02.demo()
 ```
 """
 module Lecture02
@@ -33,7 +20,6 @@ module Lecture02
 include("GradientDescent.jl")
 include("Demo.jl")
 
-# Essential public API:
-export gradient_descent!, one_hot_encode, ℒ, ∂ℒ_∂â
+export demo
 
 end # module Lecture02

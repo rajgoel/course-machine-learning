@@ -219,7 +219,7 @@ For each given pair $(a,a^*)$ we can define the loss (i.e., error function) as t
 
 `$$
 \begin{align}
-\mathscr{L}_{(a,a^*)}(W,b) & = \| \hat{a} - a^* \|^2 \\
+\mathscr{L}_{(a,a^*)}(W,b) & = ( \hat{a} - a^* )^2 \\
 & = \displaystyle\sum_{i=0}^{9} \Big( \hat{a}_i - a^*_i \Big)^2 \\
 & = \displaystyle\sum_{i=0}^{9} \Big( \displaystyle\sum_{j=1}^{25} w_{i,j} a_{j} + b_i - a^*_i \Big)^2
 \end{align}
@@ -376,7 +376,7 @@ with respect to $b_i$ is
 function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
     tolerance::Float64 = 1.0e-3
     max_iterations::Int = 10000
-    α::Float64 = 0.1  # learning rate
+    η::Float64 = 0.1  # learning rate
     for iter in 1:max_iterations
         # Compute the average gradients ∇W and ∇b
         ∇W, ∇b = compute_average_gradients(W, b, X, Y)
@@ -387,9 +387,9 @@ function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vec
             println("Gradient norm below tolerance. Stopping.")
             break
         end        
-        # Parameter updates: W ← W - α * ∇W, b ← b - α * ∇b
-        W .-= α .* ∇W
-        b .-= α .* ∇b
+        # Parameter updates: W ← W - η * ∇W, b ← b - η * ∇b
+        W .-= η .* ∇W
+        b .-= η .* ∇b
     end
 end
 ```
@@ -397,8 +397,16 @@ end
 
 ---
 
+# Implementation
+
+You find a full implementation in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
 > [!TIP]
-> You find a full implementation in `Lecture02` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture02.demo()
+> ```
 
 
 ===

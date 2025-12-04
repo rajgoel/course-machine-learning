@@ -144,7 +144,7 @@ Implements gradient descent with:
 - Maximum of 10,000 iterations 
 - Compute average gradients (∇W,∇b) across all samples
 - Stops when ‖(∇W,∇b)‖ < tolerance 1.0e-3
-- Update parameters: W ← W - α * ∇W, b ← b - α * ∇b with learning rate α = 0.1
+- Update parameters: W ← W - η * ∇W, b ← b - η * ∇b with learning rate η = 0.1
 
 For each iteration:
 1. Compute average gradients across all training samples
@@ -163,7 +163,7 @@ For each iteration:
 function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
     tolerance::Float64 = 1.0e-3
     max_iterations::Int = 10000
-    α::Float64 = 0.1  # learning rate  
+    η::Float64 = 0.1  # learning rate  
     for iter in 1:max_iterations
         # Compute the average gradients ∇W and ∇b
                 ∇W, ∇b = compute_average_gradients(W, b, X, Y)
@@ -174,8 +174,8 @@ function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vec
             println("Gradient norm below tolerance. Stopping.")
             break
         end
-        # Parameter updates: W ← W - α * ∇W, b ← b - α * ∇b
-        W .-= α .* ∇W
-        b .-= α .* ∇b
+        # Parameter updates: W ← W - η * ∇W, b ← b - η * ∇b
+        W .-= η .* ∇W
+        b .-= η .* ∇b
     end
 end
