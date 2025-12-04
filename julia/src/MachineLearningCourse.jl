@@ -15,13 +15,15 @@ using MachineLearningCourse
 
 # Run lecture demos
 Lecture01.demo()
+Lecture02.demo()
+Lecture03.demo()
 ```
 
 ## Course Structure
 
-- **Lecture01**: Introduction to neural networks with a simple linear classifier.
-- **Lecture02**: Gradient descent 
-- **Lecture03**: Feed forward networks 
+- **Lecture01**: A simple linear classifier
+- **Lecture02**: Vanilla implementation of gradient descent
+- **Lecture03**: Vanilla deep neural network implementation
 - **Lecture04**: MNIST handwritten digit classifier with Flux.jl
 - **Lecture05**: Convolutional neural networks
 - **Lecture06**: Graph neural networks

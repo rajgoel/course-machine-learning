@@ -194,34 +194,34 @@ function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}
 end
 
 """
-    update_parameters!(network, ∇W, ∇b, α)
+    update_parameters!(network, ∇W, ∇b, η)
 
 Update network parameters using gradient descent.
 
 Parameter updates:
-- W^l ← W^l - α * ∂ℒ/∂W^l
-- b^l ← b^l - α * ∂ℒ/∂b^l
+- W^l ← W^l - η * ∂ℒ/∂W^l
+- b^l ← b^l - η * ∂ℒ/∂b^l
 
 # Arguments
 - `network::DNN`: Neural network (modified in-place)
 - `∇W::Vector{Matrix{Float64}}`: Weight gradients
 - `∇b::Vector{Vector{Float64}}`: Bias gradients  
-- `α::Float64`: Learning rate
+- `η::Float64`: Learning rate
 """
 function update_parameters!(network::DNN, ∇W::Vector{Matrix{Float64}}, 
-                           ∇b::Vector{Vector{Float64}}, α::Float64)
+                           ∇b::Vector{Vector{Float64}}, η::Float64)
     
     for l in 1:network.L  # l = 1, 2, ..., L
-        # Update weights: W^l ← W^l - α * ∇W^l
-        network.W[l] .-= α .* ∇W[l]
+        # Update weights: W^l ← W^l - η * ∇W^l
+        network.W[l] .-= η .* ∇W[l]
         
-        # Update biases: b^l ← b^l - α * ∇b^l
-        network.b[l] .-= α .* ∇b[l]
+        # Update biases: b^l ← b^l - η * ∇b^l
+        network.b[l] .-= η .* ∇b[l]
     end
 end
 
 """
-    train!(network, X, Y, α=0.01, epochs=1000, verbose=true)
+    train!(network, X, Y, η=0.01, epochs=1000, verbose=true)
 
 Train the neural network using gradient descent.
 
@@ -235,7 +235,7 @@ Implements the complete training algorithm:
 - `network::DNN`: Neural network (modified in-place)
 - `X::Vector{Vector{Float64}}`: Training input data
 - `Y::Vector{Vector{Float64}}`: Training target data
-- `α::Float64`: Learning rate (default: 0.01)
+- `η::Float64`: Learning rate (default: 0.01)
 - `epochs::Int`: Number of training epochs (default: 1000)
 - `verbose::Bool`: Print training progress (default: true)
 
@@ -243,7 +243,7 @@ Implements the complete training algorithm:
 - `Vector{Float64}`: Training losses for each epoch
 """
 function train!(network::DNN, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}}, 
-               α::Float64=0.01, epochs::Int=1000, verbose::Bool=true)
+               η::Float64=0.01, epochs::Int=1000, verbose::Bool=true)
     
     losses = Float64[]
     
@@ -262,7 +262,7 @@ function train!(network::DNN, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float
                         ∇W, ∇b = backpropagation(network, activations, z_values, Y[i])
             
             # Update parameters
-            update_parameters!(network, ∇W, ∇b, α)
+            update_parameters!(network, ∇W, ∇b, η)
         end
         
         # Average loss for the epoch

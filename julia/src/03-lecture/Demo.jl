@@ -1,13 +1,3 @@
-"""
-MNIST Digit Classification using Deep Neural Network
-Demonstrates use of the DNN implementation
-
-This example shows how to:
-1. Load MNIST data using MLDatasets.jl
-2. Preprocess data for neural networks
-3. Train and evaluate on MNIST digits
-"""
-
 using MLDatasets
 using Random
 
@@ -88,7 +78,7 @@ end
 """
     demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
 
-MNIST handwritten digit recognition demonstration.
+Vanilla MNIST handwritten digit recognition demonstration.
 
 # Parameters
 - `seed`: Random seed (default: 42)

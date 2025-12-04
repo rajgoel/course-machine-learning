@@ -1,7 +1,7 @@
 """
     Lecture01
 
-Introduction to neural networks with a simple linear classifier.
+A simple linear classifier.
 
 # Available Functions
 
@@ -18,7 +18,6 @@ module Lecture01
 
 include("Demo.jl")
 
-# Re-export demo function from Demo.jl
 export demo
 
 end # module Lecture01

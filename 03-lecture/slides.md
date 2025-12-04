@@ -49,11 +49,11 @@ function forwardpropagation(network::DNN, x::Vector{Float64})
         z = network.W[l] * a + network.b[l]
         push!(z_values, z)
         
-        # Activation: a^l = σ(z^l)
+        # Activation: a^l = ϕ(z^l)
         if l == network.L  # Output layer
             a = z  # Linear output
         else  # Hidden layers
-            a = σ.(z)
+            a = ϕ.(z)
         end
         push!(activations, a)
     end
@@ -156,7 +156,7 @@ For neuron $j$ in layer $l-1$, we have
 
 > [!NOTE]
 > 
-> For ReLU activation, we have `$\phi^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and use
+> For [ReLU activation](https://en.wikipedia.org/wiki/Rectified_linear_unit), we have `$\phi^l_i(z^l_i) = \max \lbrace 0, z^l_i \rbrace$` and use
 > `$$\genfrac{}{}{1pt}{1}{\partial \phi^l_i(z^l_i)}{\partial z^l_i } = \begin{cases}1 \textrm{ if } z^l_i > 0 \\ \class{highlight}{0 \textrm{ if } z^l_i = 0 \textsf{ (formally undefined!)}} \\ 0 \textrm{ if } z^l_i < 0 \end{cases}$$`
 
 
@@ -530,11 +530,11 @@ function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}
     for l in network.L-1:-1:1 
         # Compute
         # - ∂ℒ_∂a^l = W^[l+1]' ∂ℒ/∂a^[l+1] for l = L-1 
-        # - ∂ℒ_∂a^l = W^[l+1]' (∂ℒ/∂a^[l+1] ⨀ ∂σ^l/∂z^[l+1])  for l < L-1 
+        # - ∂ℒ_∂a^l = W^[l+1]' (∂ℒ/∂a^[l+1] ⨀ ∂ϕ^l/∂z^[l+1])  for l < L-1 
         δ = network.W[l+1]' * δ
 
-        # Compute δ = ∂ℒ/∂a^l ⨀ ∂σ^l/∂z^l
-        δ .*= ∂σ_∂z.(z_values[l])
+        # Compute δ = ∂ℒ/∂a^l ⨀ ∂ϕ^l/∂z^l
+        δ .*= ∂ϕ_∂z.(z_values[l])
 
         # Gradient for layer l
         pushfirst!(∇W, δ * activations[l-1]')
@@ -607,8 +607,19 @@ The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale val
 
 ![Digits](03-lecture/digits.jpg)
 
+---
+
+### Implementation
+
+You find a full implementation in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
 > [!TIP]
-> You find a full implementation in `Lecture03` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture03.demo()
+> ```
+> Type `?Lecture03.demo()` for an overview over all (optional) parameters.
 
 
 ===
