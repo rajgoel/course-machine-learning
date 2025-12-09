@@ -599,30 +599,7 @@ end
 </tr>
 </table>
 
-===
-
-### MNIST database
-
-The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale values of 28x28 pixel images representing handwritten digits. 
-
-![Digits](03-lecture/digits.jpg)
-
 ---
-
-### Implementation
-
-You find a full implementation in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
-
-> [!TIP]
-> Run:
-> ```julia
-> using MachineLearningCourse
-> Lecture03.demo()
-> ```
-> Type `?Lecture03.demo()` for an overview over all (optional) parameters.
-
-
-===
 
 
 <table style="table-layout: fixed!important;width:900px;">
@@ -645,4 +622,120 @@ You find a full implementation in the [course repository](https://rajgoel.github
 
 > [!IMPORTANT]
 > The neural network will predict a digit for any input, even if no digit is provided!
+
+
+===
+
+### MNIST database
+
+The [MNIST database](https://yann.lecun.com/exdb/mnist/) contains gray scale values of 28x28 pixel images representing handwritten digits. 
+
+![Digits](03-lecture/digits.jpg)
+
+---
+
+### Implementation
+
+You find a full implementation for recognising handwritten digits in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
+> [!TIP]
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture03.demo()
+> ```
+> Type `?Lecture03.demo()` for an overview over all (optional) parameters.
+
+===
+
+## Machine learning library
+
+[Flux.jl](https://fluxml.ai/Flux.jl/stable/) is an intuitive and powerful machine learning library in Julia.
+
+```julia
+using Pkg
+Pkg.add("FLux")
+```
+
+> ![NOTE]
+> For Python, there is [PyTorch](https://docs.pytorch.org/docs/stable/) which is based on C++ implementation of [LibTorch](https://docs.pytorch.org/cppdocs/).
+
+---
+
+<!-- .slide: data-fullscreen="yes"  -->
+
+### Minimal MNIST implementation with Flux.jl
+
+```julia[1|16|20-27|29-34|36-49|51-57]
+using Flux
+
+"""
+    flux_demo(;train_size=1000, epochs=10)
+
+Minimal MNIST demonstration using gradient descent.
+
+# Arguments  
+- `train_size::Int`: Number of training samples (default: 5000)
+- `test_size::Int`: Number of test samples (default: 1000)
+- `epochs::Int`: Number of training epochs (default: 1000)
+
+# Returns
+- Trained model and final accuracy
+"""
+function flux_demo(; train_size::Int=5000, test_size::Int=1000, epochs::Int=1000)
+    println("Minimal Flux.jl MNIST Demo")
+    println("=" ^ 30)
+    
+    X_train, Y_train, X_test, Y_test = load_mnist_data(train_size, test_size)
+    
+    # Convert to Flux format (features × samples) and Float32
+    X_train_flux = Float32.(reshape(X_train, 784, train_size))  # 784 × train_size
+    Y_train_flux = Float32.(Y_train)     # 10 × train_size  
+    X_test_flux = Float32.(reshape(X_test, 784, test_size))    # 784 × test_size
+    Y_test_flux = Float32.(Y_test)       # 10 × test_size
+    
+    # Create simple model
+    model = Flux.Chain(
+        Flux.Dense(784 => 128, Flux.relu),
+        Flux.Dense(128 => 64, Flux.relu),
+        Flux.Dense(64 => 10)
+    )
+    
+    # Setup training
+    opt_state = Flux.setup(Flux.Adam(0.001), model)
+    
+    println("Training...")
+    
+    # Training loop using Flux.train!
+    for epoch in 1:epochs
+        Flux.train!(model, [(X_train_flux, Y_train_flux)], opt_state) do m, x, y
+            Flux.logitcrossentropy(m(x), y)
+        end
+        
+        train_loss = Flux.logitcrossentropy(model(X_train_flux), Y_train_flux)
+        println("Epoch $epoch: Loss = $(round(train_loss, digits=4))")
+    end
+    
+    # Evaluate
+    predictions = Flux.softmax(model(X_test_flux))  # Apply softmax for predictions
+    pred_classes = [argmax(predictions[:, i]) - 1 for i in 1:size(predictions, 2)]
+    true_classes = [argmax(Y_test_flux[:, i]) - 1 for i in 1:size(Y_test_flux, 2)]
+    
+    accuracy = sum(pred_classes .== true_classes) / length(pred_classes)
+    println("Test Accuracy: $(round(accuracy * 100, digits=1))%")
+    
+    return model, accuracy
+end
+```
+<!-- .element: class="fullscreen stretch" -->
+
+---
+
+You can find the implementation in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
+> [!TIP]
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture03.flux_demo()
 

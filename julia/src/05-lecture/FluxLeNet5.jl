@@ -2,19 +2,16 @@
 LeNet-5 CNN Architecture Implementation using Flux.jl
 
 Provides FluxLeNet5 struct following the same API pattern as FluxDNN.
-This implementation follows the original LeNet-5 architecture (but uses ReLU instead of sigmoid):
-- Conv2D (6 filters, 5x5) + ReLU + AvgPool (2x2)
-- Conv2D (16 filters, 5x5) + ReLU + AvgPool (2x2)
+This implementation follows the original LeNet-5 architecture (but uses ϕ = ReLU as default instead of ϕ = sigmoid):
+- Conv2D (6 filters, 5x5) + ϕ + AvgPool (2x2)
+- Conv2D (16 filters, 5x5) + ϕ + AvgPool (2x2)
 - Flatten
-- Dense (120) + ReLU
-- Dense (84) + ReLU
-- Dense (10) + Softmax
+- Dense (120) + ϕ
+- Dense (84) + ϕ
+- Dense (10)
 """
 
 using Flux, Statistics
-
-# Import reusable functions from Lecture04's FluxDNN
-import ..Lecture04: predict, accuracy, train!, evaluate
 
 export FluxLeNet5, train!, predict, accuracy, evaluate
 
@@ -25,13 +22,14 @@ LeNet-5 CNN structure with convolutional layers.
 
 # Arguments
 - `input_dims::Vector{Int}`: Input dimensions [height, width, channels]
+- `ϕ`: Activation function for hidden layers
 
 # Fields
 - `input_dims::Vector{Int}`: Input dimensions specification
 - `model::Flux.Chain`: The underlying Flux model
 - `layer_dimensions::Vector`: Layer dimension information
 
-Uses LeNet-5 architecture with ReLU activation.
+Uses LeNet-5 architecture.
 
 # Example
 ```julia
@@ -44,7 +42,7 @@ mutable struct FluxLeNet5
     model::Flux.Chain
     layer_dimensions::Vector{Any}
     
-    function FluxLeNet5(input_dims::Vector{Int})
+    function FluxLeNet5(input_dims::Vector{Int}; ϕ = Flux.relu)
         height, width, channels = input_dims
         
         # Calculate layer dimensions
@@ -79,29 +77,53 @@ mutable struct FluxLeNet5
         
         model = Flux.Chain(
             # First convolutional block
-            Flux.Conv((5, 5), channels => 6, Flux.relu),
+            Flux.Conv((5, 5), channels => 6, ϕ),
             Flux.MeanPool((2, 2)),
             
             # Second convolutional block  
-            Flux.Conv((5, 5), 6 => 16, Flux.relu),
+            Flux.Conv((5, 5), 6 => 16, ϕ),
             Flux.MeanPool((2, 2)),
             
             # Flatten and fully connected layers
             Flux.flatten,
-            Flux.Dense(layer_dimensions[6].size, layer_dimensions[7].size, Flux.relu),
-            Flux.Dense(layer_dimensions[7].size, layer_dimensions[8].size, Flux.relu),
-            Flux.Dense(layer_dimensions[8].size, layer_dimensions[9].size),
-            Flux.softmax
+            Flux.Dense(layer_dimensions[6].size, layer_dimensions[7].size, ϕ),
+            Flux.Dense(layer_dimensions[7].size, layer_dimensions[8].size, ϕ),
+            Flux.Dense(layer_dimensions[8].size, layer_dimensions[9].size)
         )
         
         new(input_dims, model, layer_dimensions)
     end
 end
 
+"""
+    predict(network::FluxLeNet5, X)
+
+Make predictions using trained LeNet-5 CNN.
+
+# Arguments
+- `network::FluxLeNet5`: Trained LeNet-5 network
+- `X::Array{Float32, 4}`: Input data (height × width × channels × samples)
+
+# Returns
+- Predictions from the network (classes × samples)
+"""
 function predict(network::FluxLeNet5, X::Array{Float32, 4})
-    return network.model(X)
+    return Flux.softmax( network.model(X) )
 end
 
+"""
+    accuracy(network::FluxLeNet5, X, Y_onehot)
+
+Calculate accuracy of LeNet-5 CNN on test data.
+
+# Arguments
+- `network::FluxLeNet5`: Trained LeNet-5 network  
+- `X::Array{Float32, 4}`: Input data (height × width × channels × samples)
+- `Y_onehot::Matrix{Float32}`: One-hot encoded target labels (classes × samples)
+
+# Returns
+- `Float64`: Accuracy as a fraction between 0 and 1
+"""
 function accuracy(network::FluxLeNet5, X::Array{Float32, 4}, Y_onehot)
     predictions = predict(network, X)
     predicted_classes = Flux.onecold(predictions) .- 1  # Convert to 0-based indexing
@@ -109,23 +131,40 @@ function accuracy(network::FluxLeNet5, X::Array{Float32, 4}, Y_onehot)
     return mean(predicted_classes .== true_classes)
 end
 
+"""
+    train!(network::FluxLeNet5, X_train, Y_train, learning_rate, epochs; batch_size=128, verbose=true)
+
+Train a LeNet-5 CNN using mini-batch SGD.
+
+# Arguments
+- `network::FluxLeNet5`: LeNet-5 network to train
+- `X_train::Array{Float32, 4}`: Training input data (height × width × channels × samples)
+- `Y_train::Matrix{Float32}`: Training target labels (one-hot encoded, classes × samples)
+- `learning_rate::Float64`: Adam optimizer learning rate
+- `epochs::Int`: Number of training epochs
+- `batch_size::Int`: Mini-batch size (default: 128)
+- `verbose::Bool`: Print training progress (default: true)
+
+# Returns
+- `Vector{Float64}`: Training losses per epoch
+"""
 function train!(network::FluxLeNet5, X_train::Array{Float32, 4}, Y_train, learning_rate, epochs; 
                batch_size=128, verbose=true)
     
     # Define loss function and optimizer
-    loss(m, x, y) = Flux.Losses.crossentropy(m(x), y)
+    loss(m, x, y) = Flux.Losses.logitcrossentropy(m(x), y)
     optimizer = Flux.setup(Flux.Adam(learning_rate), network.model)
     
     # Create data loader for mini-batch training
-    train_loader = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
+    minibatches = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
     
     losses = Float64[]
     
     for epoch in 1:epochs
         epoch_losses = Float64[]
         
-        # Train on mini-batches
-        for (x_batch, y_batch) in train_loader
+        # Train on mini-batches (which are implicitly re-shuffled)
+        for (x_batch, y_batch) in minibatches
             # Calculate loss and gradients for this batch
             batch_loss = loss(network.model, x_batch, y_batch)
             push!(epoch_losses, batch_loss)
@@ -147,6 +186,20 @@ function train!(network::FluxLeNet5, X_train::Array{Float32, 4}, Y_train, learni
     return losses
 end
 
+"""
+    evaluate(network::FluxLeNet5, X_test, Y_test, num_classes)
+
+Comprehensive evaluation of LeNet-5 CNN with confusion matrix and per-class metrics.
+
+# Arguments
+- `network::FluxLeNet5`: Trained LeNet-5 network
+- `X_test::Array{Float32, 4}`: Test input data (height × width × channels × samples)
+- `Y_test::Matrix{Float32}`: Test target labels (one-hot encoded, classes × samples)  
+- `num_classes::Int`: Number of classes
+
+# Returns
+- `NamedTuple`: (accuracy=Float64, predictions=Vector, true_labels=Vector, confusion_matrix=Matrix{Int})
+"""
 function evaluate(network::FluxLeNet5, X_test::Array{Float32, 4}, Y_test, num_classes)
     predictions = predict(network, X_test)
     predicted_classes = Flux.onecold(predictions) .- 1  # Convert to 0-based indexing

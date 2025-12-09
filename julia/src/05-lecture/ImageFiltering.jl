@@ -40,8 +40,26 @@ const kernels = Dict(
 )
 
 """
-Apply image filtering using sliding filters
-Color images are automatically converted to grayscale before filtering
+    apply_filter(image, kernel)
+
+Apply image filtering using sliding filters.
+
+# Arguments
+- `image`: Input image (color or grayscale)
+- `kernel::AbstractMatrix`: Filter kernel to apply
+
+# Returns
+- `Gray`: Filtered grayscale image normalized to [0,1]
+
+# Notes
+Color images are automatically converted to grayscale before filtering.
+
+# Example
+```julia
+using Images
+img = load("image.jpg")
+filtered = apply_filter(img, kernels[:edge_enhance])
+```
 """
 function apply_filter(image, kernel)
     # Resolve kernel
@@ -71,10 +89,34 @@ function apply_filter(image, kernel)
 end
 
 """
-Demonstrate image filtering with a given image and kernel
-Color images are automatically converted to grayscale before filtering
+    filter_image(image_path=joinpath(@__DIR__, "containers_CC0.jpg"), kernel=kernels[:laplacian])
+
+Demonstrate image filtering with a given image and kernel.
+
+# Arguments  
+- `image_path::String`: Path to image file (default: containers_CC0.jpg in current directory)
+- `kernel::AbstractMatrix`: Filter kernel to apply (default: Laplacian edge detection)
+
+# Returns
+- `Gray`: Filtered grayscale image
+
+# Notes
+Color images are automatically converted to grayscale before filtering.
+
+# Example
+```julia
+# Use default image and Laplacian filter
+filtered = filter_image()
+
+# Use custom image and Sobel filter
+filtered = filter_image("my_image.png", kernels[:sobel_x])
+
+# Display with ImageView
+using ImageView
+imshow(filtered)
+```
 """
-function demo_image_filtering(image_path, kernel=kernels[:laplacian])
+function filter_image(image_path=joinpath(@__DIR__, "containers_CC0.jpg"), kernel=kernels[:laplacian])
     # Load image
     if !isfile(image_path)
         error("Image file '$image_path' not found! Please check the file path.")
@@ -82,13 +124,4 @@ function demo_image_filtering(image_path, kernel=kernels[:laplacian])
 
     return apply_filter(load(image_path), kernel)
 end
-
-# Usage examples:
-# demo_image_filtering("my_image.png")
-# demo_image_filtering("my_image.png", kernels[:emboss])
-# demo_image_filtering("my_image.png", [0 -1 0; -1 5 -1; 0 -1 0])
-#
-# using ImageView
-# imshow(demo_image_filtering("my_image.png"))
-
 

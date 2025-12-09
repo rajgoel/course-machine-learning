@@ -1,20 +1,8 @@
-"""
-MNIST Digit Classification using Flux.jl Deep Neural Network
-
-This example shows how to:
-1. Load MNIST data using MLDatasets.jl
-2. Build neural networks with Flux.jl
-3. Train using Adam optimizer and softmax output
-4. Evaluate model performance
-"""
-
 using Random
 using Flux
 using Statistics
 using Plots
-
-include("mnist_data.jl")
-
+using ..Lecture03: load_mnist_data
 
 """
     demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true, validation_size=0, patience=10)
@@ -45,29 +33,30 @@ function demo(; seed=42, hidden_layers=[128, 64], train_size=5000, test_size=100
     
     # Load and preprocess data
     println("\n1. Loading MNIST data...")
-    X_train_raw, Y_train_full, X_test_raw, Y_test = load_mnist_data(train_size + validation_size, test_size)
+    X_train_raw, Y_train_raw, X_test_raw, Y_test_raw = load_mnist_data(train_size + validation_size, test_size)
     
     # Split data if validation is requested
     if validation_size > 0
-        X_train = reshape(X_train_raw[:, :, 1:train_size], 784, train_size)
-        Y_train = Y_train_full[:, 1:train_size]
-        X_val = reshape(X_train_raw[:, :, (train_size+1):end], 784, validation_size)
-        Y_val = Y_train_full[:, (train_size+1):end]
+        X_train = Float32.(reshape(X_train_raw[:, :, 1:train_size], 784, train_size))
+        Y_train = Float32.(Y_train_raw[:, 1:train_size])
+        X_val = Float32.(reshape(X_train_raw[:, :, (train_size+1):end], 784, validation_size))
+        Y_val = Float32.(Y_train_raw[:, (train_size+1):end])
         
         println("Flattened for fully connected network:")
         println("  Training: $(size(X_train)) (features × samples)")
         println("  Validation: $(size(X_val)) (features × samples)")
         println("  Test: $(size(X_test_raw)) (features × samples)")
     else
-        X_train = reshape(X_train_raw, 784, train_size)
-        Y_train = Y_train_full
+        X_train = Float32.(reshape(X_train_raw, 784, train_size))
+        Y_train = Float32.(Y_train_raw)
         
         println("Flattened for fully connected network:")
         println("  Training: $(size(X_train)) (features × samples)")
         println("  Test: $(size(X_test_raw)) (features × samples)")
     end
     
-    X_test = reshape(X_test_raw, 784, test_size)
+    X_test = Float32.(reshape(X_test_raw, 784, test_size))
+    Y_test = Float32.(Y_test_raw)
     
     # Create network architecture for MNIST using Flux
     println("\n2. Creating Flux network architecture...")

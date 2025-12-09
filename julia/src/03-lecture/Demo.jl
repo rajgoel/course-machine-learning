@@ -1,79 +1,4 @@
-using MLDatasets
 using Random
-
-# Import one_hot_encode from Lecture02
-using ..Lecture02: one_hot_encode
-
-
-"""
-    load_mnist_data(train_size=5000, test_size=1000)
-
-Load and preprocess MNIST handwritten digit dataset.
-
-# Arguments
-- `train_size::Int`: Number of training samples to use (default: 5000)
-- `test_size::Int`: Number of test samples to use (default: 1000)
-
-# Returns
-- `Tuple`: (X_train, Y_train, X_test, Y_test)
-  - `X_train::Vector{Vector{Float64}}`: Training images (flattened and normalized)
-  - `Y_train::Vector{Vector{Float64}}`: Training labels (one-hot encoded)
-  - `X_test::Vector{Vector{Float64}}`: Test images (flattened and normalized)
-  - `Y_test::Vector{Vector{Float64}}`: Test labels (one-hot encoded)
-
-Images are flattened from 28×28 to 784-dimensional vectors and normalized to [0,1].
-Labels are one-hot encoded for 10-class classification (digits 0-9).
-"""
-function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
-    println("Loading MNIST dataset...")
-    
-    # Load MNIST data
-    train_x, train_y = MNIST(split=:train)[:]  # 60,000 training samples
-    test_x, test_y = MNIST(split=:test)[:]     # 10,000 test samples
-    
-    println("Original data shapes:")
-    println("  Training: $(size(train_x)) images, $(length(train_y)) labels")
-    println("  Test: $(size(test_x)) images, $(length(test_y)) labels")
-    
-    # Take subset for faster training (educational purposes)
-    train_indices = randperm(size(train_x, 3))[1:train_size]
-    test_indices = randperm(size(test_x, 3))[1:test_size]
-    
-    # Preprocess training data
-    X_train = Vector{Float64}[]
-    Y_train = Vector{Float64}[]
-    
-    for i in train_indices
-        # Flatten 28×28 image to 784-dimensional vector
-        image = vec(train_x[:, :, i])
-        # Normalize pixel values to [0, 1]
-        image = Float64.(image) ./ 255.0
-        push!(X_train, image)
-        
-        # One-hot encode label
-        label = one_hot_encode(Int(train_y[i])+1, 10)   # +1 because Julia is 1-indexed, MNIST labels are 0-9
-        push!(Y_train, label)
-    end
-    
-    # Preprocess test data
-    X_test = Vector{Float64}[]
-    Y_test = Vector{Float64}[]
-    
-    for i in test_indices
-        image = vec(test_x[:, :, i])
-        image = Float64.(image) ./ 255.0
-        push!(X_test, image)
-        
-        label = one_hot_encode(Int(test_y[i])+1, 10)  # +1 because Julia is 1-indexed, MNIST labels are 0-9
-        push!(Y_test, label)
-    end
-    
-    println("Preprocessed data:")
-    println("  Training: $(length(X_train)) samples, $(length(X_train[1]))-dimensional inputs")
-    println("  Test: $(length(X_test)) samples, $(length(Y_test[1]))-dimensional outputs")
-    
-    return X_train, Y_train, X_test, Y_test
-end
 
 """
     demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
@@ -89,7 +14,7 @@ Vanilla MNIST handwritten digit recognition demonstration.
 - `epochs`: Number of training epochs (default: 50)
 - `verbose`: Print training progress (default: true)
 """
-function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000, test_size = 1000, verbose = true, hidden_layers = [128, 64])
+function demo(; learning_rate = 0.001, epochs = 100, seed = 42, train_size = 5000, test_size = 1000, verbose = true, hidden_layers = [128, 64])
     println("="^80)
     println("MNIST DIGIT RECOGNITION WITH DEEP NEURAL NETWORK")
     println("="^80)
@@ -99,7 +24,14 @@ function demo(; learning_rate = 0.001, epochs = 50, seed = 42, train_size = 5000
     
     # Load and preprocess data
     println("\n1. Loading MNIST data...")
-    X_train, Y_train, X_test, Y_test = load_mnist_data(train_size, test_size)
+    X_train_raw, Y_train_raw, X_test_raw, Y_test_raw = load_mnist_data(train_size, test_size)
+    
+    # Convert from 3D array format to vector format for vanilla DNN
+    # X_train_raw is 28×28×samples, need to flatten each image and convert to vectors
+    X_train = [vec(X_train_raw[:, :, i]) for i in 1:size(X_train_raw, 3)]
+    Y_train = [Y_train_raw[:, i] for i in 1:size(Y_train_raw, 2)]
+    X_test = [vec(X_test_raw[:, :, i]) for i in 1:size(X_test_raw, 3)]
+    Y_test = [Y_test_raw[:, i] for i in 1:size(Y_test_raw, 2)]
     
     # Create network architecture for MNIST
     println("\n2. Creating network architecture...")

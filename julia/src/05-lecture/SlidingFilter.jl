@@ -1,11 +1,24 @@
 """
-   Generic sliding filter for N-dimensional data
-    
-Args:
-    data: Input array (1D, 2D, 3D, etc.)
-    kernel: Filter kernel (same dimensionality as data)
-    operation: Function to apply (sum, mean, maximum, etc.)
-    stride: Step size for sliding
+    sliding_filter(data, kernel; operation=sum, stride=1)
+
+Generic sliding filter for N-dimensional data.
+
+# Arguments
+- `data::AbstractArray`: Input array (1D, 2D, 3D, etc.)
+- `kernel::AbstractArray`: Filter kernel (same dimensionality as data)
+- `operation::Function`: Function to apply (sum, mean, maximum, etc.) (default: sum)
+- `stride::Int`: Step size for sliding window (default: 1)
+
+# Returns
+- `AbstractArray`: Filtered output array with reduced dimensions
+
+# Example
+```julia
+# 1D sliding average
+data = [1, 2, 3, 4, 5]
+kernel = [0.5, 0.5]
+result = sliding_filter(data, kernel; operation=sum)
+```
 """
 function sliding_filter(data, kernel; operation=sum, stride=1)
     

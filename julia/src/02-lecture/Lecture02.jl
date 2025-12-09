@@ -17,6 +17,7 @@ Lecture02.demo()
 module Lecture02
 
 # Include the implementation files
+include("OneHotEncode.jl")
 include("GradientDescent.jl")
 include("Demo.jl")
 

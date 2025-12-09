@@ -59,7 +59,7 @@ Train a FluxDNN model using supervised learning.
 # Arguments
 - `network::FluxDNN`: FluxDNN network to train
 - `X_train::Matrix{Float32}`: Training input data (features × samples)
-- `Y_train`: Training target labels (one-hot encoded)
+- `Y_train::Matrix{Float32}`: Training target labels (one-hot encoded)
 - `learning_rate::Float64`: Adam optimizer learning rate
 - `epochs::Int`: Number of training epochs
 - `batch_size::Int`: Mini-batch size (default: 128)
@@ -78,10 +78,10 @@ function train!(network::FluxDNN, X_train::Matrix{Float32}, Y_train, learning_ra
     # Create data loader for mini-batch training
     minibatches = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
     
-    losses = Float64[]
+    losses = Float32[]
     
     for epoch in 1:epochs
-        epoch_losses = Float64[]
+        epoch_losses = Float32[]
         
         # Train on mini-batches (which are implicitly re-shuffled)
         for (x_batch, y_batch) in minibatches
@@ -115,9 +115,9 @@ Train a FluxDNN model using supervised learning with validation data and early s
 # Arguments
 - `network::FluxDNN`: FluxDNN network to train
 - `X_train::Matrix{Float32}`: Training input data (features × samples)
-- `Y_train`: Training target labels (one-hot encoded)
+- `Y_train::Matrix{Float32}`: Training target labels (one-hot encoded)
 - `X_validate::Matrix{Float32}`: Validation input data (features × samples)
-- `Y_validate`: Validation target labels (one-hot encoded)
+- `Y_validate::Matrix{Float32}`: Validation target labels (one-hot encoded)
 - `learning_rate::Float64`: Adam optimizer learning rate
 - `epochs::Int`: Number of training epochs
 - `batch_size::Int`: Mini-batch size (default: 128)
@@ -137,13 +137,13 @@ function train!(network::FluxDNN, X_train::Matrix{Float32}, Y_train, X_validate:
     # Create data loader for mini-batch training
     minibatches = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
     
-    train_losses = Float64[]
-    val_losses = Float64[]
+    train_losses = Float32[]
+    val_losses = Float32[]
     best_val_loss = Inf
     patience_counter = 0
     
     for epoch in 1:epochs
-        epoch_losses = Float64[]
+        epoch_losses = Float32[]
         
         # Train on mini-batches
         for (x_batch, y_batch) in minibatches
@@ -210,7 +210,7 @@ Calculate accuracy of FluxDNN model on test data.
 # Arguments
 - `network::FluxDNN`: Trained FluxDNN network
 - `X_test::Matrix{Float32}`: Test input data (features × samples)
-- `Y_test`: Test target labels (one-hot encoded, classes × samples)
+- `Y_test::Matrix{Float32}`: Test target labels (one-hot encoded, classes × samples)
 
 # Returns
 - `Float64`: Test accuracy (0.0 to 1.0)
@@ -235,7 +235,7 @@ Comprehensive evaluation of FluxDNN model with confusion matrix and per-class me
 # Arguments
 - `network::FluxDNN`: Trained FluxDNN network
 - `X_test::Matrix{Float32}`: Test input data (features × samples)
-- `Y_test`: Test target labels (one-hot encoded, classes × samples)
+- `Y_test::Matrix{Float32}`: Test target labels (one-hot encoded, classes × samples)
 - `classes`: Vector of class labels or number of classes
 
 # Returns
