@@ -17,7 +17,7 @@ Lecture04.demo()
 ```julia
 using Plots
 using MachineLearningCourse
-_, losses = Lecture04.demo(validation_size=1000, learning_rate=0.005, epochs=200, patience=200)
+_, losses = Lecture04.demo(validation_size=1000, epochs=100, patience=100)
 plot = Lecture04.plot_losses(losses)
 plot!(plot, size=(1200, 800))
 savefig(plot, "training_progress.png")
@@ -26,7 +26,7 @@ savefig(plot, "training_progress.png")
 """
 module Lecture04
 
-include("FluxDNN.jl")
+include("DNN.jl")
 include("Demo.jl")
 
 export demo, plot_losses

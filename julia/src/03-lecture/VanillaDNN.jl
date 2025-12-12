@@ -10,17 +10,17 @@ using Random
 using ..Lecture02: ℒ, ∂ℒ_∂â
 
 """
-    DNN(layers)
+    VanillaDNN(layers)
 
-Deep Neural Network structure with fully connected layers.
+Vanilla Deep Neural Network structure with fully connected layers (educational implementation).
 
 # Arguments
 - `layers::Vector{Int}`: Number of neurons per layer [input, hidden..., output]
 
 # Fields
 - `layers::OffsetVector{Int}`: Layer architecture specification
-- `W::Vector{Matrix{Float64}}`: Weight matrices W^[l] for each layer
-- `b::Vector{Vector{Float64}}`: Bias vectors b^[l] for each layer  
+- `W::Vector{Matrix{Float32}}`: Weight matrices W^[l] for each layer
+- `b::Vector{Vector{Float32}}`: Bias vectors b^[l] for each layer  
 - `L::Int`: Total number of layers (excluding input layer)
 
 Uses He initialization for weights and zero initialization for biases.
@@ -29,37 +29,37 @@ ReLU activation for hidden layers, linear activation for output layer.
 # Example
 ```julia
 # Create network: 784 inputs → 128 hidden → 64 hidden → 10 outputs
-network = DNN([784, 128, 64, 10])
+network = VanillaDNN([784, 128, 64, 10])
 ```
 """
-mutable struct DNN
+mutable struct VanillaDNN
     layers::OffsetVector{Int}     # [n^0, n^1, ..., n^L]
-    W::Vector{Matrix{Float64}}    # Weight matrices W^l
-    b::Vector{Vector{Float64}}    # Bias vectors b^l
+    W::Vector{Matrix{Float32}}    # Weight matrices W^l
+    b::Vector{Vector{Float32}}    # Bias vectors b^l
     L::Int                        # Number of layers excluding input layer
     
     # Convenience constructor for regular Vector
-    function DNN(layers::Vector{Int})
+    function VanillaDNN(layers::Vector{Int})
         offset_layers = OffsetArray(layers, 0:length(layers)-1)
-        DNN(offset_layers)
+        VanillaDNN(offset_layers)
     end
 
     # Constructor for OffsetVector
-    function DNN(layers::OffsetVector{Int})
+    function VanillaDNN(layers::OffsetVector{Int})
         L = length(layers)-1
         
         # Initialize weight matrices W^l and bias vectors b^l
         # Note: We have L weight matrices (no weights for input layer)
-        W = Matrix{Float64}[]
-        b = Vector{Float64}[]
+        W = Matrix{Float32}[]
+        b = Vector{Float32}[]
         
         for l in 1:L
             # W^[l] ∈ ℝ^{n^l × n^l-1}
-            W_l = randn(layers[l], layers[l-1]) * sqrt(2.0 / layers[l-1])  # He initialization
+            W_l = Float32.(randn(layers[l], layers[l-1]) * sqrt(2.0 / layers[l-1]))  # He initialization
             push!(W, W_l)
             
             # b^l ∈ ℝ^{n^l}
-            b_l = zeros(layers[l])
+            b_l = zeros(Float32, layers[l])
             push!(b, b_l)
         end
         
@@ -76,7 +76,7 @@ ReLU activation function: ϕ(z) = max(0, z).
 - `z::Real`: Input value
 
 # Returns
-- `Float64`: Activated value (0.0 if z ≤ 0, z if z > 0)
+- `Float32`: Activated value (0.0f0 if z ≤ 0, z if z > 0)
 """
 function ϕ(z::Real)
     # ReLU activation function
@@ -92,7 +92,7 @@ Derivative of ReLU activation function: ∂ϕ/∂z = 1 if z > 0, 0 if z ≤ 0.
 - `z::Real`: Input value
 
 # Returns
-- `Float64`: Derivative value (1.0 if z > 0, 0.0 if z ≤ 0)
+- `Float32`: Derivative value (1.0f0 if z > 0, 0.0f0 if z ≤ 0)
 """
 function ∂ϕ_∂z(z::Real)
     return z > 0 ? 1.0 : 0.0
@@ -108,18 +108,18 @@ Mathematical formulation:
 - a^l = ϕ(z^l) for hidden layers, a^l = z^l for output layer
 
 # Arguments
-- `network::DNN`: Neural network structure
-- `x::Vector{Float64}`: Input vector
+- `network::VanillaDNN`: Neural network structure
+- `x::Vector{Float32}`: Input vector
 
 # Returns
-- `Tuple{Vector{Vector{Float64}}, Vector{Vector{Float64}}}`: (activations, z_values)
+- `Tuple{Vector{Vector{Float32}}, Vector{Vector{Float32}}}`: (activations, z_values)
   - `activations`: [a^0, a^1, ..., a^L] - activations for each layer
   - `z_values`: [z^1, z^2, ..., z^L] - linear combinations for each layer
 """
-function forwardpropagation(network::DNN, x::Vector{Float64})
+function forwardpropagation(network::VanillaDNN, x::Vector{Float32})
     # Initialize storage for activations and z-values
-    activations = OffsetVector(Vector{Float64}[], 0:-1)
-    z_values = Vector{Vector{Float64}}()
+    activations = OffsetVector(Vector{Float32}[], 0:-1)
+    z_values = Vector{Vector{Float32}}()
     
     # Input layer: a^0 = x
     a = copy(x)
@@ -152,20 +152,20 @@ Compute gradients using backpropagation algorithm.
 
 # Arguments
 - `network::DNN`: Neural network structure
-- `activations::OffsetVector{Vector{Float64}}`: Layer activations from forward pass
-- `z_values::Vector{Vector{Float64}}`: Linear combinations from forward pass
-- `y::Vector{Float64}`: True target values
+- `activations::OffsetVector{Vector{Float32}}`: Layer activations from forward pass
+- `z_values::Vector{Vector{Float32}}`: Linear combinations from forward pass
+- `y::Vector{Float32}`: True target values
 
 # Returns
-- `Tuple{Vector{Matrix{Float64}}, Vector{Vector{Float64}}}`: (∇W, ∇b)
+- `Tuple{Vector{Matrix{Float32}}, Vector{Vector{Float32}}}`: (∇W, ∇b)
   - `∇W`: Weight gradients for each layer
   - `∇b`: Bias gradients for each layer
 """
-function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}}, 
-                        z_values::Vector{Vector{Float64}}, y::Vector{Float64})
+function backpropagation(network::VanillaDNN, activations::OffsetVector{Vector{Float32}}, 
+                        z_values::Vector{Vector{Float32}}, y::Vector{Float32})
 
-        ∇W = Matrix{Float64}[]
-        ∇b = Vector{Float64}[]
+        ∇W = Matrix{Float32}[]
+        ∇b = Vector{Float32}[]
 
     # Output error
     â = activations[end]
@@ -204,12 +204,12 @@ Parameter updates:
 
 # Arguments
 - `network::DNN`: Neural network (modified in-place)
-- `∇W::Vector{Matrix{Float64}}`: Weight gradients
-- `∇b::Vector{Vector{Float64}}`: Bias gradients  
-- `η::Float64`: Learning rate
+- `∇W::Vector{Matrix{Float32}}`: Weight gradients
+- `∇b::Vector{Vector{Float32}}`: Bias gradients  
+- `η::Float32`: Learning rate
 """
-function update_parameters!(network::DNN, ∇W::Vector{Matrix{Float64}}, 
-                           ∇b::Vector{Vector{Float64}}, η::Float64)
+function update_parameters!(network::VanillaDNN, ∇W::Vector{Matrix{Float32}}, 
+                           ∇b::Vector{Vector{Float32}}, η::Float32)
     
     for l in 1:network.L  # l = 1, 2, ..., L
         # Update weights: W^l ← W^l - η * ∇W^l
@@ -232,20 +232,20 @@ Implements the complete training algorithm:
 4. Parameter update
 
 # Arguments
-- `network::DNN`: Neural network (modified in-place)
-- `X::Vector{Vector{Float64}}`: Training input data
-- `Y::Vector{Vector{Float64}}`: Training target data
-- `η::Float64`: Learning rate (default: 0.01)
+- `network::VanillaDNN`: Neural network (modified in-place)
+- `X::Vector{Vector{Float32}}`: Training input data
+- `Y::Vector{Vector{Float32}}`: Training target data
+- `η::Float32`: Learning rate (default: 0.01)
 - `epochs::Int`: Number of training epochs (default: 1000)
 - `verbose::Bool`: Print training progress (default: true)
 
 # Returns
-- `Vector{Float64}`: Training losses for each epoch
+- `Vector{Float32}`: Training losses for each epoch
 """
-function train!(network::DNN, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}}, 
-               η::Float64=0.01, epochs::Int=1000, verbose::Bool=true)
+function train!(network::VanillaDNN, X::Vector{Vector{Float32}}, Y::Vector{Vector{Float32}}, 
+               η::Float32=0.01f0, epochs::Int=1000, verbose::Bool=true)
     
-    losses = Float64[]
+    losses = Float32[]
     
     for epoch in 1:epochs
         epoch_loss = 0.0
@@ -287,30 +287,30 @@ Performs forward propagation to compute network output ŷ.
 
 # Arguments
 - `network::DNN`: Trained neural network
-- `x::Vector{Float64}`: Input vector
+- `x::Vector{Float32}`: Input vector
 
 # Returns
-- `Vector{Float64}`: Network predictions (output layer activations)
+- `Vector{Float32}`: Network predictions (output layer activations)
 """
-function predict(network::DNN, x::Vector{Float64})
+function predict(network::VanillaDNN, x::Vector{Float32})
     activations, _ = forwardpropagation(network, x)
     return activations[end]
 end
 
 """
-    accuracy(network::DNN, X_test, Y_test)
+    accuracy(network::VanillaDNN, X_test, Y_test)
 
 Calculate accuracy of DNN model on test data.
 
 # Arguments
 - `network::DNN`: Trained DNN network
-- `X_test::Vector{Vector{Float64}}`: Test input data
-- `Y_test::Vector{Vector{Float64}}`: Test target labels (one-hot encoded)
+- `X_test::Vector{Vector{Float32}}`: Test input data
+- `Y_test::Vector{Vector{Float32}}`: Test target labels (one-hot encoded)
 
 # Returns
-- `Float64`: Test accuracy (0.0 to 1.0)
+- `Float32`: Test accuracy (0.0f0 to 1.0f0)
 """
-function accuracy(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::Vector{Vector{Float64}})
+function accuracy(network::VanillaDNN, X_test::Vector{Vector{Float32}}, Y_test::Vector{Vector{Float32}})
     correct = 0
     total = length(X_test)
     
@@ -328,20 +328,20 @@ function accuracy(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::Vector{
 end
 
 """
-    evaluate(network::DNN, X_test, Y_test, classes)
+    evaluate(network::VanillaDNN, X_test, Y_test, classes)
 
 Comprehensive evaluation of DNN model with confusion matrix and per-class metrics.
 
 # Arguments
 - `network::DNN`: Trained DNN network
-- `X_test::Vector{Vector{Float64}}`: Test input data
-- `Y_test::Vector{Vector{Float64}}`: Test target labels (one-hot encoded)
+- `X_test::Vector{Vector{Float32}}`: Test input data
+- `Y_test::Vector{Vector{Float32}}`: Test target labels (one-hot encoded)
 - `classes`: Vector of class labels or number of classes
 
 # Returns
-- `NamedTuple`: (accuracy=Float64, predictions=Vector{Int}, true_labels=Vector{Int}, confusion_matrix=Matrix{Int})
+- `NamedTuple`: (accuracy=Float32, predictions=Vector{Int}, true_labels=Vector{Int}, confusion_matrix=Matrix{Int})
 """
-function evaluate(network::DNN, X_test::Vector{Vector{Float64}}, Y_test::Vector{Vector{Float64}}, classes)
+function evaluate(network::VanillaDNN, X_test::Vector{Vector{Float32}}, Y_test::Vector{Vector{Float32}}, classes)
     total = length(X_test)
     predictions = Int[]
     true_labels = Int[]
