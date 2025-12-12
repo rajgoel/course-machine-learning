@@ -34,10 +34,10 @@ Then, the activation values of layer $l$ can be computed by
 ### Forward propagation in Julia
 
 ```julia[1-26|2-8|10-23|12-14|16-22|1-26]
-function forwardpropagation(network::DNN, x::Vector{Float64})
+function forwardpropagation(network::VanillaDNN, x::Vector{Float32})
     # Initialize storage for activations and z-values
-    activations = OffsetVector(Vector{Float64}[], 0:-1)
-    z_values = Vector{Vector{Float64}}()
+    activations = OffsetVector(Vector{Float32}[], 0:-1)
+    z_values = Vector{Vector{Float32}}()
     
     # Input layer: a^0 = x
     a = copy(x)
@@ -69,7 +69,7 @@ end
 
 For a given input/output pair  $(a,a^*)$, the sum of squared errors of a feedforward neural network is
 
-`$$\mathscr{L}_{(a,a^*)}(W^1,b^1,\ldots,W^{L},b^{L}) = \sum_{i=1}^{n^L}(\hat{a}_i - a^*_i)^2.$$`
+`$$\mathscr{L}_{(a,a^*)}(W^1,b^1,\ldots,W^{L},b^{L}) = \sum_{i=1}^{n^L}(a^L_i - a^*_i)^2.$$`
 
 where $n^L$ denotes the number of neurons in the output layer $L$.
 
@@ -512,11 +512,11 @@ For layer $l$, we have
 ### Backpropagation in Julia
 
 ```julia[1-31|4-13|15-28|30|1-31]
-function backpropagation(network::DNN, activations::OffsetVector{Vector{Float64}}, 
-                        z_values::Vector{Vector{Float64}}, y::Vector{Float64})
+function backpropagation(network::VanillaDNN, activations::OffsetVector{Vector{Float32}}, 
+                        z_values::Vector{Vector{Float32}}, y::Vector{Float32})
 
-    ∇W = Matrix{Float64}[]
-    ∇b = Vector{Float64}[]
+    ∇W = Matrix{Float32}[]
+    ∇b = Vector{Float32}[]
 
     # Output error
     â = activations[end]

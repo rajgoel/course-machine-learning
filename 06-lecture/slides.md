@@ -448,26 +448,64 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 
 ---
 
-## GNN with $k$ layers 
+## GNN with $L$ layers 
 
 ![Image](06-lecture/GNN.svg)
 
 > [!NOTE]
-> In a GNN with $k$ layers, information can flow between nodes that are $k$ connections apart in the original graph.
+> In a GNN with $L$ layers, information can flow between nodes that are $L$ connections apart in the original graph.
 
+---
+
+## Embeddings
+
+In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) is a mapping of a complex structure into a vector. 
+
+- For each layer $l$ let $k^l$ denote the number of features in the embedding 
+- For each node $i$ in layer $l$, let $h_i^l = ( a_{i,j}^l )_{1\leq j \leq k^l}$ denote an embedding with values  $a_{i,1}^l, \ldots, a_{i,k^l}^l$.
+- For each layer $l$, let $H^l = (h_i^l)_i$ denote an embedding matrix.
+
+
+> [!NOTE]
+> In GNNs, node features are represented as vectors of real numbers. All nodes use vectors of the same dimensionality within a given layer, but the dimensionality can differ across layers.
+
+---
+
+## Notation
+
+`$$
+\begin{pmatrix}
+  \blacksquare\!\square\!\blacksquare\!\square\!\square\!\square\!\blacksquare \\
+  \blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare\!\square \\
+\vdots\\
+  \square\!\blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+  a^l_{1,1} & a^l_{1,2} & \ldots & a^l_{1,k^l}\\
+  a^l_{2,1} & a^l_{2,2} & \ldots & a^l_{2,k^l}\\
+\vdots & \vdots & \ddots & \vdots\\
+  a^l_{n,1} & a^l_{n,2} & \ldots & a^l_{n,k^l}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+  h^l_1\\
+  h^l_2\\
+\vdots\\
+h^l_n
+\end{pmatrix}
+=
+H^l
+$$`
 ---
 
 ## Forward propagation
 
 The activations of node $j$ in GNN layer $l$ is computed by
 
-`$$a_j^l = f_{\theta^l}( a^{l-1}, j )$$`
+`$$h_j^l = f_{\theta^l}( H^{l-1}, j )$$`
 
-where 
-
-- $a_i^l$ denotes a vector of activation values for any node $i$ in layer $l$, 
-- $a^l$ contains the matrix of all activation values of all nodes in layer $l$, and 
-- $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
+where $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
 > [!IMPORTANT]
 > $f_{\theta^l}$ only uses the activation values of node $j$ and its neighbours. 
@@ -519,22 +557,24 @@ User-item relationships can be represented by a [bipartite graph](https://en.wik
 
 ---
 
-## Main idea
+## Collaborative filtering
 
-The main idea of using GNN for recommender systems is to learn similarities between
+[Collaborative filtering](https://en.wikipedia.org/wiki/Collaborative_filtering) uses user-item interactions collected from many users to learn similarities between
 
 - users and users,
 - items and items, and
-- users and items.
+- users and items
+
+to make recommendations.
 
 > [!NOTE]
-> Depending on use-case the recommendation will be the user or item with the largest similarity.
+> Depending on use-case the user or item with the largest similarity is recommended.
 
 ---
 
-## Embeddings
+## Embedding space
 
-An [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) maps entities to multi-dimensional vectors with the goal of positioning similar objects near each other.
+In recommender systems we want to obtain embeddings of objects (i.e. users and items) such that similar objects are *close* each other in the embedding space.
 
 ![Image](06-lecture/2D-movies.svg)
 
@@ -557,9 +597,9 @@ The **scalar product** (or **dot product**) between two vectors measures their s
 
 ## Learning embeddings
 
-Graph convolutional networks with $k$ layers can be used to learn embeddings of nodes, such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer activations, i.e., the scalar product
+Graph convolutional networks with $L$ layers can be used to learn embeddings of nodes, such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer activations, i.e., the scalar product
 
-$$(a_i^k)^T \cdot a_j^k$$
+$$(a_i^L)^T \cdot a_j^L$$
 
 approximates $v_{i,j}$
 
@@ -570,9 +610,9 @@ approximates $v_{i,j}$
 
 ## Loss
 
-For a GCN with $k$ layers, the mean squared error is
+For a GCN with $L$ layers, the mean squared error is
 
-`$$\mathscr{L}(W,a^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^k)^T \cdot a_j^k \right)^2$$`
+`$$\mathscr{L}(W,a^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^L)^T \cdot a_j^L \right)^2$$`
 
 where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
 

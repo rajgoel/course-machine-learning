@@ -49,20 +49,20 @@ Due to its computational efficiency and the capability to produce good solutions
 ### Stochastic gradient descent with [Flux.jl](https://fluxml.ai/Flux.jl/stable/)
 
 ```julia[1-2|4-11|13-35|16-25|27-34|37]
-function train!(network::FluxDNN, X_train::Matrix{Float32}, Y_train, learning_rate, epochs; 
+function train!(network::DNN, X_train::Matrix{Float32}, Y_train, η, epochs; 
                batch_size=128, verbose=true)
     
     # Define loss function and optimizer
     loss(m, x, y) = Flux.Losses.logitcrossentropy(m(x), y)
-    optimizer = Flux.setup(Flux.Adam(learning_rate), network.model)
+    optimizer = Flux.setup(Flux.Adam(η), network.model)
     
     # Create data loader for mini-batch training
     minibatches = Flux.DataLoader((X_train, Y_train), batchsize=batch_size, shuffle=true)
     
-    losses = Float64[]
+    losses = Float32[]
     
     for epoch in 1:epochs
-        epoch_losses = Float64[]
+        epoch_losses = Float32[]
         
         # Train on mini-batches (which are implicitly re-shuffled)
         for (x_batch, y_batch) in minibatches
@@ -92,8 +92,13 @@ end
 
 ---
 
+You find a full implementation for recognising handwritten digits with stochastic gradient descent in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
 > [!TIP]
-> You find a full implementation in `Lecture04` of the [Julia repository](https://rajgoel.github.io/course-machine-learning/julia).
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture04.demo()
 
 ===
 
@@ -178,9 +183,9 @@ Whenever a neuron receives a negative input, it's gradient becomes zero. This ma
 
 To overcome the problem of dead neurons, the **Leaky ReLU** 
 
-`$$\phi(z) = \begin{cases}z & \text{if } z > 0 \\ \eta z& \text{if } z \leq 0\end{cases}$$`
+`$$\phi(z) = \begin{cases}z & \text{if } z > 0 \\ \alpha z& \text{if } z \leq 0\end{cases}$$`
 
-can be used with $\eta$ being a small positive constant (typically 0.01).
+can be used with $\alpha$ being a small positive constant (typically 0.01).
 
 ![Figure](04-lecture/leakyReLU.svg)
 
@@ -189,11 +194,11 @@ can be used with $\eta$ being a small positive constant (typically 0.01).
 ### Derivative of leaky ReLU
 
 For
-`$$\phi(z) = \begin{cases}z & \text{if } z > 0 \\ \eta z& \text{if } z \leq 0\end{cases}$$`
+`$$\phi(z) = \begin{cases}z & \text{if } z > 0 \\ \alpha z& \text{if } z \leq 0\end{cases}$$`
 
 we have 
 
-`$$\phi'(z) = \begin{cases}1 & \text{if } z > 0 \\ \eta & \text{if } z \leq 0\end{cases}$$`
+`$$\phi'(z) = \begin{cases}1 & \text{if } z > 0 \\ \alpha & \text{if } z \leq 0\end{cases}$$`
 
 ---
 

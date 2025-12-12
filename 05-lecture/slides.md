@@ -274,7 +274,7 @@ Filtering with a stride of 3.
 
 ![Image](05-lecture/striding_4.svg)
 
----
+===
 
 ## Pooling
 
@@ -308,4 +308,14 @@ The LeNet-5 architecture, introduced by [LeCun, Bottou, Bengio, and Haffner (199
 <!-- .element: style="margin-top:-100px;margin-bottom:-100px;" -->
 
 <small >Source: [Zhang, Lipton, Li, and Smola. Dive into Deep Learning](https://github.com/d2l-ai/d2l-en)</small>
+
+---
+
+You find a full implementation for recognising handwritten digits with the LeNet-5 architecture in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
+> [!TIP]
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture05.demo()
 
