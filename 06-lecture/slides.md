@@ -511,11 +511,11 @@ where $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
 In **graph convolutional networks (GCN)** we use
 
-`$$a_j^l = \phi^l\left( W^l \cdot g( a^{l-1}, j ) \right)$$`
+`$$h_j^l = \phi^l\left( W^l \cdot g( H^{l-1}, j ) \right)$$`
 
 and
 
-`$$g( a^{l-1}, j ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} a_i^{l-1}$$`
+`$$g( h^{l-1}, j ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} H_i^{l-1}$$`
 
 where 
 
