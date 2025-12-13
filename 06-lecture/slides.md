@@ -502,7 +502,7 @@ $=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix}$`<!-- .eleme
 `$= H^l$`
 
 > [!IMPORTANT]
-> All embeddings in a layer $l$ must have exactle $k^l$ features.
+> All embeddings in a layer $l$ must have exactly $k^l$ features.
 
 ---
 
@@ -510,9 +510,9 @@ $=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix}$`<!-- .eleme
 
 The embedding of node $i$ in GNN layer $l$ is computed by
 
-`$$h_i^l = f_{i,\theta^l}\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big)$$`
+`$$h_i^l = f_{i,\theta^l}\left(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \right)$$`
 
-where $f_{i,\theta^l}$ is a parameterised function with parameters $\theta^l$ and $N_i$ is the set of neighbours of any node $i$.
+where $f_{i,\theta^l}$ is a parameterised function with parameters $\theta^l$ and $N_i$ is the set of neighbours of a node $i$.
 
 > [!IMPORTANT]
 > $f_{i,\theta^l}$ only uses the embeddings of node $i$ and its neighbours. 
@@ -523,15 +523,14 @@ where $f_{i,\theta^l}$ is a parameterised function with parameters $\theta^l$ an
 
 In **graph convolutional networks (GCN)** we use
 
-`$$h_i^l = \phi^l\left( W^l \cdot g_i\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big) \right)$$`
+`$$h_i^l = \phi^l\left( W^l \cdot g_i\left(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \right) \right)$$`
 
 and
 
-`$$g_i\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big) = \sum_{j \in N_i\cup\{i\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} h_j^{l-1}$$`
+`$$g_i\left(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \right) = \sum_{j \in N_i\cup\{i\}} \frac{v_{i,j}}{\sqrt{(|N_i|+1) \cdot (| N_j|+1)}} h_j^{l-1}$$`
 
 where 
 
-- $N_i$ is the set of neighbours of any node $i$,
 - $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{j,j}=1$,
 - $W^l$ is a learnable weight matrix shared across all nodes in layer $l$, and 
 - $\phi^l$ is an element-wise activation function, e.g., ReLU.
