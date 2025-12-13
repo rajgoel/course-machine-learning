@@ -460,37 +460,46 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 
 ## Embeddings
 
-In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) is a mapping of a complex structure into a vector. 
+In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) is a mapping of a complex structure into a vector of features. 
 
-- For each layer $l$ let $k^l$ denote the number of features in the embedding 
-- For each node $i$ in layer $l$, let `$h_i^l = ( a_{i,j}^l )_{1\leq j \leq k^l}$` denote an embedding with values  `$a_{i,1}^l, \ldots, a_{i,k^l}^l$`.
-- For each layer $l$, let `$H^l = (h_i^l)_i$` denote an embedding matrix.
-
-
-> [!NOTE]
-> In GNNs, node features are represented as vectors of real numbers. All nodes use vectors of the same dimensionality within a given layer, but the dimensionality can differ across layers.
+![Image](06-lecture/Embeddings.svg)
 
 ---
 
-## Notation
+## Embeddings
 
-`$$\begin{pmatrix}
+<!-- .slide: data-auto-animate="true" -->
+
+An embedding node $i$ in layer $l$ with $k^l$ features is a vector of activation values $(a^l_{i,j})_{1\leq j \leq k^l}$ denoted by $h_i^l$.
+
+`$\blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare$`<!-- .element: data-id="embedding" -->
+ $=$ `$( a^l_{i,1}, a^l_{i,2}, \ldots, a^l_{i,k^l} )$`<!-- .element: data-id="activations" --> $=$ `$h^l_i$`<!-- .element: data-id="h" -->
+
+---
+
+## Embeddings
+
+<!-- .slide: data-auto-animate="true" -->
+
+The matrix of all embeddings in layer $l$ is denoted by $H^l$.
+
+`$\begin{pmatrix}
   \blacksquare\!\square\!\blacksquare\!\square\!\square\!\square \\
   \blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare \\
-\vdots\\
+  \vdots\\
   \square\!\blacksquare\!\square\!\square\!\blacksquare\!\square \\
-\end{pmatrix} = \begin{pmatrix}
+\end{pmatrix}$`<!-- .element: data-id="embedding" -->
+$=$ `$\begin{pmatrix}
   a^l_{1,1} & a^l_{1,2} & \ldots & a^l_{1,k^l}\\
   a^l_{2,1} & a^l_{2,2} & \ldots & a^l_{2,k^l}\\
-\vdots & \vdots & \ddots & \vdots\\
+  \vdots & \vdots & \ddots & \vdots\\
   a^l_{n,1} & a^l_{n,2} & \ldots & a^l_{n,k^l}\\
-\end{pmatrix} = \begin{pmatrix}
-  h^l_1\\
-  h^l_2\\
-\vdots\\
-h^l_n
-\end{pmatrix} = H^l$$`
+\end{pmatrix}$`<!-- .element: data-id="activations" --> 
+$=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix} = H^l$`<!-- .element: data-id="h" -->
+`$= H^l$`
 
+> [!IMPORTANT]
+> All embeddings in any layer $l$ must have the same dimensionality.
 
 ---
 
@@ -498,7 +507,7 @@ h^l_n
 
 The activations of node $j$ in GNN layer $l$ is computed by
 
-`$$h_j^l = f_{\theta^l}( H^{l-1}, j )$$`
+`$$h_j^l = f_{j,\theta^l}( H^{l-1})$$`
 
 where $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
@@ -511,11 +520,11 @@ where $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
 In **graph convolutional networks (GCN)** we use
 
-`$$h_j^l = \phi^l\left( W^l \cdot g( H^{l-1}, j ) \right)$$`
+`$$h_j^l = \phi^l\left( W^l \cdot g_j( H^{l-1} ) \right)$$`
 
 and
 
-`$$g( h^{l-1}, j ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} H_i^{l-1}$$`
+`$$g_j( h^{l-1} ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} H_i^{l-1}$$`
 
 where 
 
