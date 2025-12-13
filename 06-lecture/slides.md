@@ -1,3 +1,4 @@
+
 # Graph neural networks 
 
 ---
@@ -474,10 +475,10 @@ In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(mac
 ## Notation
 
 `$$\begin{pmatrix}
-  \blacksquare\!\square\!\blacksquare\!\square\!\square\!\square\!\blacksquare \\
-  \blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare\!\square \\
+  \blacksquare\!\square\!\blacksquare\!\square\!\square\!\square \\
+  \blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare \\
 \vdots\\
-  \square\!\blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare \\
+  \square\!\blacksquare\!\square\!\square\!\blacksquare\!\square \\
 \end{pmatrix} = \begin{pmatrix}
   a^l_{1,1} & a^l_{1,2} & \ldots & a^l_{1,k^l}\\
   a^l_{2,1} & a^l_{2,2} & \ldots & a^l_{2,k^l}\\
