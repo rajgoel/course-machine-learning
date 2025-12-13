@@ -4,14 +4,14 @@
 Read 5x5 digit training data from a text file.
 
 File format: Each digit consists of 6 lines:
-- 5 lines of 5 space-separated Float64 values (5x5 pixel grid)
+- 5 lines of 5 space-separated Float32 values (5x5 pixel grid)
 - 1 line with the digit label (0-9)
 
 # Arguments
 - `file_path::String`: Path to the data file
 
 # Returns
-- `Tuple{Vector{Vector{Float64}}, Vector{Vector{Float64}}}`: (X, Y)
+- `Tuple{Vector{Vector{Float32}}, Vector{Vector{Float32}}}`: (X, Y)
   - `X`: Input vectors (each vector has 25 elements from 5x5 grid)
   - `Y`: One-hot encoded target vectors (10 classes, 1-indexed)
 
@@ -23,17 +23,17 @@ X, Y = read_data("5x5digits.txt")
 ```
 """
 function read_data(file_path)
-    X = Vector{Vector{Float64}}()
-    Y = Vector{Vector{Float64}}()  # Changed from OffsetArray to regular Vector
+    X = Vector{Vector{Float32}}()
+    Y = Vector{Vector{Float32}}()  # Changed from OffsetArray to regular Vector
     size = 0
     open(file_path, "r") do f
         while !eof(f)
             # Read 5 rows of 5 values for the digit grid
-            input = Vector{Float64}()
+            input = Vector{Float32}()
             for _ in 1:5  # Read 5 lines for a 5x5 grid
                 line = readline(f)
-                # Parse the line into Float64 and append to input
-                append!(input, parse.(Float64, split(line)))
+                # Parse the line into Float32 and append to input
+                append!(input, parse.(Float32, split(line)))
             end
 
             # Create one-hot encoded output
@@ -59,15 +59,15 @@ For each sample, performs forward pass and computes loss:
 - Total loss: Σ ℒ(y_i, â_i) over all samples
 
 # Arguments
-- `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs)
-- `b::Vector{Float64}`: Bias vector (n_outputs,)
-- `X::Vector{Vector{Float64}}`: Training input data
-- `Y::Vector{Vector{Float64}}`: Training target data (one-hot encoded)
+- `W::Matrix{Float32}`: Weight matrix (n_outputs × n_inputs)
+- `b::Vector{Float32}`: Bias vector (n_outputs,)
+- `X::Vector{Vector{Float32}}`: Training input data
+- `Y::Vector{Vector{Float32}}`: Training target data (one-hot encoded)
 
 # Returns
-- `Float64`: Total loss across all training samples
+- `Float32`: Total loss across all training samples
 """
-function total_loss(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
+function total_loss(W::Matrix{Float32}, b::Vector{Float32}, X::Vector{Vector{Float32}}, Y::Vector{Vector{Float32}})
     sum_ℒ = 0.0
     for j in 1:length(Y)
         # Compute predictions
@@ -95,8 +95,8 @@ function demo(sample_file=joinpath(@__DIR__, "5x5digits.txt"))
   X, Y = read_data(sample_file)
 
   # Define initial W and b
-  W = rand(Float64, 10, 25)  # Regular arrays, 1-indexed
-  b = rand(Float64, 10)
+  W = rand(Float32, 10, 25)  # Regular arrays, 1-indexed
+  b = rand(Float32, 10)
 
   initial_loss = total_loss(W, b, X, Y)
 

@@ -6,13 +6,13 @@ using LinearAlgebra
 Mean Squared Error loss function: ℒ = ‖â - y‖².
 
 # Arguments
-- `y::Vector{Float64}`: True target values
-- `â::Vector{Float64}`: Computed values
+- `y::Vector{Float32}`: True target values
+- `â::Vector{Float32}`: Computed values
 
 # Returns
-- `Float64`: MSE loss value
+- `Float32`: MSE loss value
 """
-function ℒ(y::Vector{Float64}, â::Vector{Float64})
+function ℒ(y::Vector{Float32}, â::Vector{Float32})
     diff = â - y
     return dot(diff, diff)
 end
@@ -23,13 +23,13 @@ end
 Gradient of MSE loss with respect to computed activations: ∂ℒ/∂â = 2(â - y).
 
 # Arguments
-- `y::Vector{Float64}`: True target values
-- `â::Vector{Float64}`: Computed values
+- `y::Vector{Float32}`: True target values
+- `â::Vector{Float32}`: Computed values
 
 # Returns
-- `Vector{Float64}`: Gradient vector ∂ℒ/∂â
+- `Vector{Float32}`: Gradient vector ∂ℒ/∂â
 """
-function ∂ℒ_∂â(y::Vector{Float64}, â::Vector{Float64})
+function ∂ℒ_∂â(y::Vector{Float32}, â::Vector{Float32})
     return 2.0 * (â - y)
 end
 
@@ -43,20 +43,20 @@ Calculates gradients using the chain rule:
 - ∂ℒ/∂b = δ
 
 # Arguments
-- `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs)
-- `b::Vector{Float64}`: Bias vector (n_outputs,)
-- `x::Vector{Float64}`: Input vector for sample
-- `y::Vector{Float64}`: Target output vector for sample
+- `W::Matrix{Float32}`: Weight matrix (n_outputs × n_inputs)
+- `b::Vector{Float32}`: Bias vector (n_outputs,)
+- `x::Vector{Float32}`: Input vector for sample
+- `y::Vector{Float32}`: Target output vector for sample
 
 # Returns
-- `Tuple{Matrix{Float64}, Vector{Float64}}`: (∇W, ∇b)
+- `Tuple{Matrix{Float32}, Vector{Float32}}`: (∇W, ∇b)
   - `∇W`: Weight gradients (same size as W)
   - `∇b`: Bias gradients (same size as b)
 """
-function compute_gradients(W::Matrix{Float64}, b::Vector{Float64}, x::Vector{Float64}, y::Vector{Float64})
+function compute_gradients(W::Matrix{Float32}, b::Vector{Float32}, x::Vector{Float32}, y::Vector{Float32})
     # Initialize
-        ∇W = zeros(Float64, size(W))
-        ∇b = zeros(Float64, size(b))
+        ∇W = zeros(Float32, size(W))
+        ∇b = zeros(Float32, size(b))
   
     # Input activation 
     a = x
@@ -86,20 +86,20 @@ Performs gradient computation for each sample and averages the results:
 - Return average: (1/N) * Σ(∇W_i), (1/N) * Σ(∇b_i)
 
 # Arguments
-- `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs)
-- `b::Vector{Float64}`: Bias vector (n_outputs,)
-- `X::Vector{Vector{Float64}}`: Training input data (N samples)
-- `Y::Vector{Vector{Float64}}`: Training target data (N samples)
+- `W::Matrix{Float32}`: Weight matrix (n_outputs × n_inputs)
+- `b::Vector{Float32}`: Bias vector (n_outputs,)
+- `X::Vector{Vector{Float32}}`: Training input data (N samples)
+- `Y::Vector{Vector{Float32}}`: Training target data (N samples)
 
 # Returns
-- `Tuple{Matrix{Float64}, Vector{Float64}}`: (avg_∇W, avg_∇b)
+- `Tuple{Matrix{Float32}, Vector{Float32}}`: (avg_∇W, avg_∇b)
   - `avg_∇W`: Average weight gradients
   - `avg_∇b`: Average bias gradients
 """
-function compute_average_gradients(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
+function compute_average_gradients(W::Matrix{Float32}, b::Vector{Float32}, X::Vector{Vector{Float32}}, Y::Vector{Vector{Float32}})
     # Initialize average gradients
-    sum_∇W = zeros(Float64, size(W))
-    sum_∇b = zeros(Float64, size(b))
+    sum_∇W = zeros(Float32, size(W))
+    sum_∇b = zeros(Float32, size(b))
 
     for j in 1:length(X)
                 ∇W, ∇b = compute_gradients(W, b, X[j], Y[j])
@@ -119,11 +119,11 @@ Flattens and concatenates weight and bias gradients into a single vector,
 then computes ‖∇‖ = √(‖∇W‖² + ‖∇b‖²) for convergence monitoring.
 
 # Arguments
-- `∇W::Matrix{Float64}`: Weight gradients
-- `∇b::Vector{Float64}`: Bias gradients
+- `∇W::Matrix{Float32}`: Weight gradients
+- `∇b::Vector{Float32}`: Bias gradients
 
 # Returns
-- `Float64`: Euclidean norm of the combined gradient vector
+- `Float32`: Euclidean norm of the combined gradient vector
 """
 function gradient_norm(∇W, ∇b)
     # Flatten and concatenate the gradients
@@ -154,16 +154,16 @@ For each iteration:
 5. Update parameters using gradient descent rule
 
 # Arguments
-- `W::Matrix{Float64}`: Weight matrix (n_outputs × n_inputs), modified in-place
-- `b::Vector{Float64}`: Bias vector (n_outputs,), modified in-place
-- `X::Vector{Vector{Float64}}`: Training input data
-- `Y::Vector{Vector{Float64}}`: Training target data (one-hot encoded)
+- `W::Matrix{Float32}`: Weight matrix (n_outputs × n_inputs), modified in-place
+- `b::Vector{Float32}`: Bias vector (n_outputs,), modified in-place
+- `X::Vector{Vector{Float32}}`: Training input data
+- `Y::Vector{Vector{Float32}}`: Training target data (one-hot encoded)
 
 """
-function gradient_descent!(W::Matrix{Float64}, b::Vector{Float64}, X::Vector{Vector{Float64}}, Y::Vector{Vector{Float64}})
-    tolerance::Float64 = 1.0e-3
+function gradient_descent!(W::Matrix{Float32}, b::Vector{Float32}, X::Vector{Vector{Float32}}, Y::Vector{Vector{Float32}})
+    tolerance::Float32 = 1.0e-3
     max_iterations::Int = 10000
-    η::Float64 = 0.1  # learning rate  
+    η::Float32 = 0.1  # learning rate  
     for iter in 1:max_iterations
         # Compute the average gradients ∇W and ∇b
                 ∇W, ∇b = compute_average_gradients(W, b, X, Y)
