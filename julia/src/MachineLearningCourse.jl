@@ -23,8 +23,8 @@ Lecture03.demo()
 
 - **Lecture01**: A simple linear classifier
 - **Lecture02**: Vanilla implementation of gradient descent
-- **Lecture03**: Vanilla deep neural network implementation
-- **Lecture04**: MNIST handwritten digit classifier with Flux.jl
+- **Lecture03**: Vanilla and Flux.jl deep neural network implementation
+- **Lecture04**: Stochastic gradient descent
 - **Lecture05**: Convolutional neural networks
 - **Lecture06**: Graph neural networks
 - **Lecture07**: Autoencoders
