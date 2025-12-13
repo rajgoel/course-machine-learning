@@ -472,7 +472,7 @@ In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(mac
 
 An embedding node $i$ in layer $l$ with $k^l$ features is a vector of activation values $(a^l_{i,j})_{1\leq j \leq k^l}$ denoted by $h_i^l$.
 
-`$\blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare$`<!-- .element: data-id="embedding" -->
+`$\square\!\blacksquare\!\square\!\blacksquare\!\square\!\blacksquare$`<!-- .element: data-id="embedding" -->
  $=$ `$( a^l_{i,1}, a^l_{i,2}, \ldots, a^l_{i,k^l} )$`<!-- .element: data-id="activations" --> $=$ `$h^l_i$`<!-- .element: data-id="h" -->
 
 ---
@@ -495,7 +495,7 @@ $=$ `$\begin{pmatrix}
   \vdots & \vdots & \ddots & \vdots\\
   a^l_{n,1} & a^l_{n,2} & \ldots & a^l_{n,k^l}\\
 \end{pmatrix}$`<!-- .element: data-id="activations" --> 
-$=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix} = H^l$`<!-- .element: data-id="h" -->
+$=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix}$`<!-- .element: data-id="h" -->
 `$= H^l$`
 
 > [!IMPORTANT]
