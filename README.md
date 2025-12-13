@@ -11,8 +11,8 @@ https://rajgoel.github.io/course-machine-learning
 | 01      | [Introduction](https://rajgoel.github.io/course-machine-learning/?topic=01-lecture)                   | [Requirements and prerequisites](https://rajgoel.github.io/course-machine-learning/?topic=01-lab)    |
 | 02      | [Neural networks and gradient descent](https://rajgoel.github.io/course-machine-learning/?topic=02-lecture)                | Project work    |
 | 03      | [Feed forward networks and backpropagation](https://rajgoel.github.io/course-machine-learning/?topic=03-lecture)          | Project work    |
-| 04      | [Architecture and pipeline](https://rajgoel.github.io/course-machine-learning/?topic=04-lecture) | Project work    |
-| 05      | [Filtering and convolution](https://rajgoel.github.io/course-machine-learning/?topic=05-lecture)  | Project work    |
+| 04      | [Stochastic gradient descent and implementation](https://rajgoel.github.io/course-machine-learning/?topic=04-lecture) | Project work    |
+| 05      | [Filtering, pooling, and convolution](https://rajgoel.github.io/course-machine-learning/?topic=05-lecture)  | Project work    |
 | 06      | [Graph neural networks and recommender systems](https://rajgoel.github.io/course-machine-learning/?topic=06-lecture)               | Project work    |
 | 07      | [Autoencoders and anomaly detection](https://rajgoel.github.io/course-machine-learning/?topic=07-lecture)               | Project work    |
 | 08      | [Reinforcement learning and value-based methods](https://rajgoel.github.io/course-machine-learning/?topic=08-lecture)         | Project work    |
