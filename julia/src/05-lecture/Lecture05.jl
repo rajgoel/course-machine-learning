@@ -37,7 +37,7 @@ include("StockDataMovingAverage.jl")
 
 export filter_image, stock_data_moving_average
 
-include("FluxLeNet5.jl")
+include("LeNet5.jl")
 include("Demo.jl")
 
 export demo

@@ -4,21 +4,21 @@ using Statistics
 using ..Lecture03: load_mnist_data
 
 """
-    demo(; seed=42, train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, batch_size=128, verbose=true)
+    demo(; seed=42, train_size=5000, test_size=1000, η=0.001, epochs=50, batch_size=128, verbose=true)
 
 Train and evaluate LeNet-5 CNN on MNIST dataset with grayscale images.
 
 # Arguments
-- `seed::Int`: Random seed for reproducibility (default: 42)
-- `train_size::Int`: Number of training samples (default: 5000)
-- `test_size::Int`: Number of test samples (default: 1000)
-- `learning_rate::Float64`: Learning rate for Adam optimizer (default: 0.001)
-- `epochs::Int`: Number of training epochs (default: 50)
-- `batch_size::Int`: Mini-batch size for SGD training (default: 128)
-- `verbose::Bool`: Print training progress (default: true)
+- `seed`: Random seed for reproducibility (default: 42)
+- `train_size`: Number of training samples (default: 5000)
+- `test_size`: Number of test samples (default: 1000)
+- `η`: Learning rate for Adam optimizer (default: 0.001)
+- `epochs`: Number of training epochs (default: 50)
+- `batch_size`: Mini-batch size for SGD training (default: 128)
+- `verbose`: Print training progress (default: true)
 
 # Returns
-- `Tuple{FluxLeNet5, Vector{Float64}}`: (model, losses)
+- `Tuple{LeNet5, Vector{Float32}}`: (model, losses)
   - `model`: Trained LeNet-5 CNN model for grayscale images
   - `losses`: Training loss values per epoch
 
@@ -39,11 +39,11 @@ model, losses = Lecture05.demo(epochs=100, batch_size=64)
 ```
 """
 function demo(; seed=42, train_size=5000, test_size=1000, 
-                          learning_rate=0.001, epochs=50, batch_size=128, verbose=true)
+                          η=0.001, epochs=50, batch_size=128, verbose=true)
     
-    println("="^80)
+    println("="^60)
     println("LENET-5 CNN TRAINING ON MNIST DATASET (GRAYSCALE IMAGES)")
-    println("="^80)
+    println("="^60)
     
     # Set random seed for reproducibility
     Random.seed!(seed)
@@ -53,10 +53,10 @@ function demo(; seed=42, train_size=5000, test_size=1000,
     X_train_raw, Y_train_raw, X_test_raw, Y_test_raw = load_mnist_data(train_size, test_size)
     
     # Flux CNN layers require 4D tensors: (height, width, channels, batch)
-    X_train = Float32.(reshape(X_train_raw, 28, 28, 1, train_size))
-    Y_train = Float32.(Y_train_raw)
-    X_test = Float32.(reshape(X_test_raw, 28, 28, 1, test_size))
-    Y_test = Float32.(Y_test_raw)
+    X_train = reshape(X_train_raw, 28, 28, 1, train_size)
+    Y_train = Y_train_raw
+    X_test = reshape(X_test_raw, 28, 28, 1, test_size)
+    Y_test = Y_test_raw
     
     println("MNIST data loaded:")
     println("  Training: $(size(X_train)) (height×width×channels×samples)")
@@ -65,7 +65,7 @@ function demo(; seed=42, train_size=5000, test_size=1000,
     
     # Create LeNet-5 architecture for grayscale images
     println("\n2. Creating LeNet-5 architecture for grayscale images...")
-    network = FluxLeNet5([28, 28, 1])  # 28×28×1 for MNIST
+    network = LeNet5([28, 28, 1])  # 28×28×1 for MNIST
     
     println("   LeNet-5 Architecture for Grayscale Images:")
     println("   - Input: $(network.layer_dimensions[1]) (grayscale channels)")
@@ -81,7 +81,7 @@ function demo(; seed=42, train_size=5000, test_size=1000,
     
     # Train the network
     println("\n3. Training LeNet-5 on MNIST...")
-    losses = train!(network, X_train, Y_train, learning_rate, epochs; 
+    losses = train!(network, X_train, Y_train, η, epochs; 
                     batch_size=batch_size, verbose=verbose)
     
     # Evaluate on test set
@@ -96,9 +96,9 @@ function demo(; seed=42, train_size=5000, test_size=1000,
     test_accuracy = results.accuracy
     
     # Summary
-    println("\n" * "="^80)
+    println("\n" * "="^60)
     println("LENET-5 MNIST TRAINING SUMMARY")
-    println("="^80)
+    println("="^60)
     println("Dataset: MNIST (handwritten digits)")
     println("Input format: 28×28×1 grayscale images")
     println("Final training loss: $(round(losses[end], digits=4))")
