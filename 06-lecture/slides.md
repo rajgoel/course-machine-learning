@@ -462,8 +462,8 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) is a mapping of a complex structure into a vector. 
 
 - For each layer $l$ let $k^l$ denote the number of features in the embedding 
-- For each node $i$ in layer $l$, let $h_i^l = ( a_{i,j}^l )_{1\leq j \leq k^l}$ denote an embedding with values  $a_{i,1}^l, \ldots, a_{i,k^l}^l$.
-- For each layer $l$, let $H^l = (h_i^l)_i$ denote an embedding matrix.
+- For each node $i$ in layer $l$, let `$h_i^l = ( a_{i,j}^l )_{1\leq j \leq k^l}$` denote an embedding with values  `$a_{i,1}^l, \ldots, a_{i,k^l}^l$`.
+- For each layer $l$, let `$H^l = (h_i^l)_i$` denote an embedding matrix.
 
 
 > [!NOTE]
@@ -473,8 +473,7 @@ In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(mac
 
 ## Notation
 
-`$$
-\begin{pmatrix}
+`$$\begin{pmatrix}
   \blacksquare\!\square\!\blacksquare\!\square\!\square\!\square\!\blacksquare \\
   \blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare\!\square \\
 \vdots\\
@@ -495,8 +494,9 @@ In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(mac
 h^l_n
 \end{pmatrix}
 =
-H^l
-$$`
+H^l$$`
+
+
 ---
 
 ## Forward propagation
