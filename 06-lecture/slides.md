@@ -472,8 +472,11 @@ In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(mac
 
 An embedding for node $i$ in layer $l$ with $k^l$ features is a vector of activation values $(a^l_{i,j})_{1\leq j \leq k^l}$ denoted by $h_i^l$.
 
-`$\square\!\blacksquare\!\square\!\blacksquare\!\square\!\blacksquare$`<!-- .element: data-id="embedding" -->
+`$\blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare$`<!-- .element: data-id="embedding" -->
  $=$ `$( a^l_{i,1}, a^l_{i,2}, \ldots, a^l_{i,k^l} )$`<!-- .element: data-id="activations" --> $=$ `$h^l_i$`<!-- .element: data-id="h" -->
+
+> [!NOTE]
+> Every node in a GNN has an embedding.
 
 ---
 
@@ -499,20 +502,20 @@ $=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix}$`<!-- .eleme
 `$= H^l$`
 
 > [!IMPORTANT]
-> All embeddings in any layer $l$ must have the same dimensionality.
+> All embeddings in a layer $l$ must have exactle $k^l$ features.
 
 ---
 
 ## Forward propagation
 
-The activations of node $j$ in GNN layer $l$ is computed by
+The embedding of node $i$ in GNN layer $l$ is computed by
 
-`$$h_j^l = f_{j,\theta^l}( H^{l-1})$$`
+`$$h_i^l = f_{i,\theta^l}\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big)$$`
 
-where $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
+where $f_{i,\theta^l}$ is a parameterised function with parameters $\theta^l$ and $N_i$ is the set of neighbours of any node $i$.
 
 > [!IMPORTANT]
-> $f_{\theta^l}$ only uses the activation values of node $j$ and its neighbours. 
+> $f_{i,\theta^l}$ only uses the embeddings of node $i$ and its neighbours. 
 
 ---
 
@@ -520,11 +523,11 @@ where $f_{\theta^l}$ is a parameterised function with parameters $\theta^l$.
 
 In **graph convolutional networks (GCN)** we use
 
-`$$h_j^l = \phi^l\left( W^l \cdot g_j( H^{l-1} ) \right)$$`
+`$$h_i^l = \phi^l\left( W^l \cdot g_i\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big) \right)$$`
 
 and
 
-`$$g_j( h^{l-1} ) = \sum_{i \in N_j\cup\{j\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} H_i^{l-1}$$`
+`$$g_i( h^{l-1} ) = \sum_{j \in N_i\cup\{i\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} h_j^{l-1}$$`
 
 where 
 
