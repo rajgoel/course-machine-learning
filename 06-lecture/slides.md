@@ -470,7 +470,7 @@ In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(mac
 
 <!-- .slide: data-auto-animate="true" -->
 
-An embedding node $i$ in layer $l$ with $k^l$ features is a vector of activation values $(a^l_{i,j})_{1\leq j \leq k^l}$ denoted by $h_i^l$.
+An embedding for node $i$ in layer $l$ with $k^l$ features is a vector of activation values $(a^l_{i,j})_{1\leq j \leq k^l}$ denoted by $h_i^l$.
 
 `$\square\!\blacksquare\!\square\!\blacksquare\!\square\!\blacksquare$`<!-- .element: data-id="embedding" -->
  $=$ `$( a^l_{i,1}, a^l_{i,2}, \ldots, a^l_{i,k^l} )$`<!-- .element: data-id="activations" --> $=$ `$h^l_i$`<!-- .element: data-id="h" -->
