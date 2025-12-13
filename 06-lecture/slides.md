@@ -527,7 +527,7 @@ In **graph convolutional networks (GCN)** we use
 
 and
 
-`$$g_i( h^{l-1} ) = \sum_{j \in N_i\cup\{i\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} h_j^{l-1}$$`
+`$$g_i\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big) = \sum_{j \in N_i\cup\{i\}} \frac{v_{i,j}}{\sqrt{|N_i| \cdot | N_j|}} h_j^{l-1}$$`
 
 where 
 
