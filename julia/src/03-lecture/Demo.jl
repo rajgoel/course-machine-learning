@@ -1,7 +1,7 @@
 using Random
 
 """
-    demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, learning_rate=0.001, epochs=50, verbose=true)
+    demo(seed=42, hidden_layers=[128, 64], train_size=5000, test_size=1000, η=0.001, epochs=50, verbose=true)
 
 Vanilla MNIST handwritten digit recognition demonstration.
 
@@ -10,14 +10,14 @@ Vanilla MNIST handwritten digit recognition demonstration.
 - `hidden_layers`: Dimensions of hidden layers (default: [128, 64])
 - `train_size`: Number of training samples to use (default: 5000)
 - `test_size`: Number of test samples to use (default: 1000)
-- `learning_rate`: Learning rate for training (default: 0.001)
+- `η`: Learning rate for training (default: 0.001)
 - `epochs`: Number of training epochs (default: 50)
 - `verbose`: Print training progress (default: true)
 """
-function demo(; learning_rate = 0.001, epochs = 100, seed = 42, train_size = 5000, test_size = 1000, verbose = true, hidden_layers = [128, 64])
-    println("="^80)
-    println("MNIST DIGIT RECOGNITION WITH DEEP NEURAL NETWORK")
-    println("="^80)
+function demo(; η = 0.001f0, epochs = 100, seed = 42, train_size = 5000, test_size = 1000, verbose = true, hidden_layers = [128, 64])
+    println("="^60)
+    println("MNIST DIGIT RECOGNITION WITH VANILLA DEEP NEURAL NETWORK")
+    println("="^60)
     
     # Set random seed for reproducibility
     Random.seed!(seed)
@@ -37,7 +37,7 @@ function demo(; learning_rate = 0.001, epochs = 100, seed = 42, train_size = 500
     println("\n2. Creating network architecture...")
     # Architecture: 784 → hidden_layers → 10
     layers = [784, hidden_layers..., 10]
-    dnn = DNN(layers)
+    dnn = VanillaDNN(layers)
     
     println("   Network architecture: $(layers)")
     total_params = sum(size(W, 1) * size(W, 2) + length(b) for (W, b) in zip(dnn.W, dnn.b))
@@ -49,9 +49,9 @@ function demo(; learning_rate = 0.001, epochs = 100, seed = 42, train_size = 500
     
     # Train the network
     println("\n3. Training network...")
-    println("   Learning rate: $(learning_rate), Epochs: $(epochs)")
+    println("   Learning rate: $(η), Epochs: $(epochs)")
     
-    losses = train!(dnn, X_train, Y_train, learning_rate, epochs, verbose)
+    losses = train!(dnn, X_train, Y_train, η, epochs, verbose)
     
     # Evaluate on test set
     println("\n4. Evaluating on test set...")
@@ -89,9 +89,9 @@ function demo(; learning_rate = 0.001, epochs = 100, seed = 42, train_size = 500
     test_accuracy = results.accuracy
     
     # Summary
-    println("\n" * "="^80)
+    println("\n" * "="^60)
     println("TRAINING SUMMARY")
-    println("="^80)
+    println("="^60)
     println("Final training loss: $(round(losses[end], digits=4))")
         
     println("\nNetwork learned to classify handwritten digits! ✓")

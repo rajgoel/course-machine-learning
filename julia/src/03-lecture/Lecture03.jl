@@ -24,7 +24,7 @@ module Lecture03
 
 # Include the implementation files
 include("MNIST_data.jl")
-include("DNN.jl")
+include("VanillaDNN.jl")
 include("Demo.jl")
 include("FluxDemo.jl")
 

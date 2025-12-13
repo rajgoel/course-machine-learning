@@ -15,10 +15,10 @@ Load MNIST handwritten digit dataset.
 
 # Returns
 - `Tuple`: (X_train, Y_train, X_test, Y_test)
-  - `X_train::Array{UInt8, 3}`: Training images (28 × 28 × samples), values 0-255
-  - `Y_train::Vector{Int}`: Training labels as integers 0-9
-  - `X_test::Array{UInt8, 3}`: Test images (28 × 28 × samples), values 0-255  
-  - `Y_test::Vector{Int}`: Test labels as integers 0-9
+  - `X_train::Array{Float32, 3}`: Training images (28 × 28 × samples), values 0-1
+  - `Y_train::Matrix{Float32}`: Training labels as one-hot encoded matrix (10 × samples)
+  - `X_test::Array{Float32, 3}`: Test images (28 × 28 × samples), values 0-1  
+  - `Y_test::Matrix{Float32}`: Test labels as one-hot encoded matrix (10 × samples)
 
 # Example Usage - Image Visualization
 ```julia
@@ -30,18 +30,18 @@ function load_mnist_data(train_size::Int=5000, test_size::Int=1000)
     println("Loading MNIST dataset...")
     
     # Load MNIST data
-    train_x, train_y = MNIST(split=:train)[:]  # 60,000 training samples
-    test_x, test_y = MNIST(split=:test)[:]     # 10,000 test samples
+    X_train_all, Y_train_all = MNIST(split=:train)[:]  # 60,000 training samples
+    X_test_all, Y_test_all = MNIST(split=:test)[:]     # 10,000 test samples
     
     # Take subset but keep original format
-    train_indices = randperm(size(train_x, 3))[1:train_size]
-    test_indices = randperm(size(test_x, 3))[1:test_size]
+    train_indices = randperm(size(X_train_all, 3))[1:train_size]
+    test_indices = randperm(size(X_test_all, 3))[1:test_size]
     
-    X_train = Float64.(train_x[:, :, train_indices]) ./ 255.0  # Normalize to [0,1]
-    Y_train = reduce(hcat, one_hot_encode.(Int.(train_y[train_indices]) .+ 1, 10))
+    X_train = X_train_all[:, :, train_indices]  # Already normalized to [0,1]
+    Y_train = Float32.(reduce(hcat, one_hot_encode.(Int.(Y_train_all[train_indices]) .+ 1, 10)))
 
-    X_test = Float64.(test_x[:, :, test_indices]) ./ 255.0  # Normalize to [0,1]
-    Y_test = reduce(hcat, one_hot_encode.(Int.(test_y[test_indices]) .+ 1, 10))
+    X_test = X_test_all[:, :, test_indices]  # Already normalized to [0,1]
+    Y_test = Float32.(reduce(hcat, one_hot_encode.(Int.(Y_test_all[test_indices]) .+ 1, 10)))
     
     return X_train, Y_train, X_test, Y_test
 end
