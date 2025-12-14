@@ -610,10 +610,9 @@ where $\measuredangle_{h_i,h_j}$ is the angle between the two embedding vectors.
 
 > [!TIP]
 > **Examples**:
-> - For $h_i= (0.3, 0.2)$ representing 
 > - The movie *Titanic* is represented by $h_i= (0.1, -0.8)$
 > - The movie *Terminator* is represented by $h_j= (0.4, 0.9)$
-> - The cosine similarity of the two movies is
+> - The cosine similarity of the two embeddings is
 > `$$\cos(\measuredangle_{h_i,h_j}) = \displaystyle \frac{0.1 \cdot 0.4 + (-0.8) \cdot 0.9}{ \sqrt{ 0.1^2 + (-0.8)^2 } \cdot \sqrt{ 0.4^2 + 0.9^2} } \approx -0.856$$`
 <!-- .element: style="font-size:26pt;" -->
 
@@ -621,14 +620,14 @@ where $\measuredangle_{h_i,h_j}$ is the angle between the two embedding vectors.
 
 ## Learning embeddings
 
-Graph convolutional networks with $L$ layers can be used to learn embeddings of nodes, such that for every edge $(i,j)$ with a weight $v_{i,j}$, the similarity of the final layer activations, i.e., the scalar product
+Graph convolutional networks with $L$ layers can be used to learn embeddings of nodes, such that for every edge $(i,j)$ with a weight $v_{i,j}$, the cosine similarity of the final layer embeddings
 
-$$(a_i^L)^T \cdot a_j^L$$
+$$\cos(\measuredangle_{h_i^L, h_j^L})$$
 
 approximates $v_{i,j}$
 
-> [!NOTE]
-> We can start with arbitrary first layer embeddings and do not need any genre information or similar.
+> [!IMPORTANT]
+> We assume that $v_{i,j} \in [-1,1]$ and may need to shift and normalise weights accordingly. 
 
 ---
 
@@ -636,7 +635,7 @@ approximates $v_{i,j}$
 
 For a GCN with $L$ layers, the mean squared error is
 
-`$$\mathscr{L}(W,a^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( v_{i,j} - (a_i^L)^T \cdot a_j^L \right)^2$$`
+`$$\mathscr{L}(W) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( \cos(\measuredangle_{h_i^L, h_j^L}) - v_{i,j} \right)^2$$`
 
 where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
 
