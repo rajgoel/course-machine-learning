@@ -26,7 +26,7 @@
 </g>
 
 <g data-id="layer1">
-  <text x="200" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer i </text>
+  <text x="200" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 𝑖 </text>
 
   <g>
     <circle cx="200" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -50,7 +50,7 @@
 </g>
 
 <g data-id="layer2">
-  <text x="500" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer j </text>
+  <text x="500" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 𝑗 </text>
 
   <g>
     <circle cx="500" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
