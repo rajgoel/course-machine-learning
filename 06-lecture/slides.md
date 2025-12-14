@@ -610,12 +610,12 @@ where $\measuredangle_{h_i,h_j}$ is the angle between the two embedding vectors.
 
 > [!TIP]
 > **Examples**:
-> - For $h_i= (0.3, 0.2)$ representing the movie *Pulp Fiction* and $h_j= (0.4, 0.9)$ representing the movie *Terminator* we have a similarity of
-> `$$\cos(\measuredangle_{h_i,h_j}) = \displaystyle \frac{0.3 \cdot 0.4 + 0.2 \cdot 0.9}{ \sqrt{ 0.3^2 + 0.2^2 } \cdot \sqrt{ 0.4^2 + 0.9^2} } \approx 0.845$$`
-<!-- .element: style="font-size:28pt;" -->
-> - For $h_i= (0.1, -0.8)$ representing the movie *Titanic* and $h_j= (0.4, 0.9)$ representing the movie *Terminator* we have a similarity of
-> `$$\cos(\measuredangle_{h_i,h_j}) = \displaystyle \frac{0.1 \cdot 0.4 + (-0.8) \cdot 0.9}{ \sqrt{ 0.1^2 + (-0.8)^2 } \cdot \sqrt{ 0.4^2 + 0.9^2} } \approx −0.856$$`
-<!-- .element: style="font-size:28pt;" -->
+> - For $h_i= (0.3, 0.2)$ representing 
+> - The movie *Titanic* is represented by $h_i= (0.1, -0.8)$
+> - The movie *Terminator* is represented by $h_j= (0.4, 0.9)$
+> - The cosine similarity of the two movies is
+> `$$\cos(\measuredangle_{h_i,h_j}) = \displaystyle \frac{0.1 \cdot 0.4 + (-0.8) \cdot 0.9}{ \sqrt{ 0.1^2 + (-0.8)^2 } \cdot \sqrt{ 0.4^2 + 0.9^2} } \approx -0.856$$`
+<!-- .element: style="font-size:26pt;" -->
 
 ---
 
