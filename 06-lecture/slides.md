@@ -464,6 +464,9 @@ In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(mac
 
 ![Image](06-lecture/Embeddings.svg)
 
+> [!NOTE]
+> Every node in a GNN has an embedding.
+
 ---
 
 ## Embeddings
@@ -474,9 +477,6 @@ An embedding for node $i$ in layer $l$ with $k^l$ features is a vector of activa
 
 `$\blacksquare\!\square\!\square\!\blacksquare\!\square\!\blacksquare$`<!-- .element: data-id="embedding" -->
  $=$ `$( a^l_{i,1}, a^l_{i,2}, \ldots, a^l_{i,k^l} )$`<!-- .element: data-id="activations" --> $=$ `$h^l_i$`<!-- .element: data-id="h" -->
-
-> [!NOTE]
-> Every node in a GNN has an embedding.
 
 ---
 
@@ -502,7 +502,7 @@ $=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix}$`<!-- .eleme
 `$= H^l$`
 
 > [!IMPORTANT]
-> All embeddings in a layer $l$ must have exactly $k^l$ features.
+> All embeddings in layer $l$ must have exactly $k^l$ features.
 
 ---
 
@@ -510,7 +510,7 @@ $=$ `$\begin{pmatrix} h^l_1\\ h^l_2\\ \vdots\\  h^l_n \end{pmatrix}$`<!-- .eleme
 
 The embedding of node $i$ in GNN layer $l$ is computed by
 
-`$$h_i^l = f_{i,\theta^l}\left(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \right)$$`
+`$$h_i^l = f_{i,\theta^l}\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big)$$`
 
 where $f_{i,\theta^l}$ is a parameterised function with parameters $\theta^l$ and $N_i$ is the set of neighbours of a node $i$.
 
@@ -523,17 +523,31 @@ where $f_{i,\theta^l}$ is a parameterised function with parameters $\theta^l$ an
 
 In **graph convolutional networks (GCN)** we use
 
-`$$h_i^l = \phi^l\left( W^l \cdot g_i\left(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \right) \right)$$`
+`$$h_i^l = \phi^l\Big(  g_i\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big) \cdot W^l  \Big)$$`
 
 and
 
-`$$g_i\left(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \right) = \sum_{j \in N_i\cup\{i\}} \frac{v_{i,j}}{\sqrt{(|N_i|+1) \cdot (| N_j|+1)}} h_j^{l-1}$$`
+`$$g_i\big(\ (h_j^{l-1})_{j\in N_i \cup \{i\}}\ \big) = \sum_{j \in N_i\cup\{i\}} \frac{v_{i,j}}{\sqrt{(|N_i|+1) \cdot (| N_j|+1)}} h_j^{l-1}$$`
 
 where 
 
-- $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{j,j}=1$,
-- $W^l$ is a learnable weight matrix shared across all nodes in layer $l$, and 
+- $v_{i,j}$ is the edge weight for each node $i \in N_j$ and $v_{i,i}=1$,
+- $W^l \in \mathbb{R}^{k^{l-1} \times k^l}$ is a learnable weight matrix for layer $l$, and 
 - $\phi^l$ is an element-wise activation function, e.g., ReLU.
+
+---
+
+## GCN matrix operations
+
+To compute all embeddings of a layer simultaneously, we can use the equivalent matrix operation
+
+`$$H^l = \phi\left( \hat{A} H^{l-1} W^l \right)$$`
+
+where 
+- `$\hat{A} = D^{-\tfrac{1}{2}} (A + I) D^{-\tfrac{1}{2}}$`,
+- $A$ is the weighted [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix), i.e. using edge weights $v_{i,j}$ instead of 1s,
+- $D$ is a [diagonal matrix](https://en.wikipedia.org/wiki/Diagonal_matrix) with $D_{ii} = |N_i| + 1$, and
+- $I$ is the [identity matrix](https://en.wikipedia.org/wiki/Identity_matrix).
 
 ===
 

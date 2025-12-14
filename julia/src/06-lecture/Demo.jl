@@ -23,10 +23,13 @@ function movie_explorer(embeddings, data)
     println("Movie explorer")
     println("="^60)
     
-    # Get all movie names for the menu
+    # Get all movie names for the menu, sorted alphabetically
     movie_start = data.n_users + 1
     movie_indices = collect(movie_start:length(data.train_graph.nodes))
-    movie_names = [data.train_graph.nodes[i].name for i in movie_indices]
+    movie_data = [(i, data.train_graph.nodes[i].name) for i in movie_indices]
+    sort!(movie_data, by=x -> x[2])  # Sort by movie name
+    movie_indices = [x[1] for x in movie_data]
+    movie_names = [x[2] for x in movie_data]
     
     while true
         println("\nSelect a movie to find similar ones:")

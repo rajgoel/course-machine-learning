@@ -139,8 +139,9 @@ function GCN(graph::Graph; epochs=50, embedding_sizes=[128, 64], η=0.001, batch
     I = spdiagm(ones(Float32, size(A, 1)))
     
     # Apply GCN normalization: D⁻¹ᐟ² (A + I) D⁻¹ᐟ²
-    degrees = Float32.(vec(sum(abs.(A), dims=2))) .+ 1.0f0 # Sum absolute weights
-    D⁻¹ᐟ² = spdiagm(degrees.^(-0.5f0))
+    degrees = Float32.([length(nzrange(A, i)) for i in 1:size(A,1)])
+
+    D⁻¹ᐟ² = spdiagm((degrees .+ 1.0f0).^(-0.5f0))
     Â = D⁻¹ᐟ² * (A + I) * D⁻¹ᐟ²
     
     println("Graph statistics:")
