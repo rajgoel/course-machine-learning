@@ -642,13 +642,15 @@ where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
 > [!IMPORTANT]
 > We learn the initial layer embeddings $H^0$ and the weights $W^1,W^2,\ldots,W^L$ simultaneously.
 
-===
-
-# Example: MovieLens
-
-The [MovieLens](https://juliaml.github.io/MLDatasets.jl/dev/datasets/graphs/#MLDatasets.MovieLens) dataset contains ratings of users for a variety of movies.
-
 ---
 
-> [!WARNING]
-> Not yet complete
+## Example: MovieLens
+
+You find a full implementation for movie recommendations based on the [MovieLens](https://juliaml.github.io/MLDatasets.jl/dev/datasets/graphs/#MLDatasets.MovieLens) dataset in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
+> [!TIP]
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture06.demo()
+
