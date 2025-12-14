@@ -541,10 +541,10 @@ where
 
 To compute all embeddings of a layer simultaneously, we can use the equivalent matrix operation
 
-`$$H^l = \phi\left( \hat{A} H^{l-1} W^l \right)$$`
+`$$H^l = \phi\left( \hat{A} \cdot H^{l-1} \cdot  W^l \right)$$`
 
 where 
-- `$\hat{A} = D^{-\tfrac{1}{2}} (A + I) D^{-\tfrac{1}{2}}$`,
+- `$\hat{A} = D^{-\tfrac{1}{2}} \cdot (A + I) \cdot D^{-\tfrac{1}{2}}$`,
 - $A$ is the weighted [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix), i.e. using edge weights $v_{i,j}$ instead of 1s,
 - $D$ is a [diagonal matrix](https://en.wikipedia.org/wiki/Diagonal_matrix) with $D_{ii} = |N_i| + 1$, and
 - $I$ is the [identity matrix](https://en.wikipedia.org/wiki/Identity_matrix).
@@ -610,9 +610,9 @@ where $\measuredangle_{h_i,h_j}$ is the angle between the two embedding vectors.
 
 > [!TIP]
 > **Examples**:
-> - The movie *Titanic* is represented by $h_i= (0.1, -0.8)$
-> - The movie *Terminator* is represented by $h_j= (0.4, 0.9)$
-> - The cosine similarity of the two embeddings is
+> - Assume the movie *Titanic* is represented by $h_i= (0.1, -0.8)$
+> - Assume the movie *Terminator* is represented by $h_j= (0.4, 0.9)$
+> - Then, the cosine similarity of the two movie embeddings is
 > `$$\cos(\measuredangle_{h_i,h_j}) = \displaystyle \frac{0.1 \cdot 0.4 + (-0.8) \cdot 0.9}{ \sqrt{ 0.1^2 + (-0.8)^2 } \cdot \sqrt{ 0.4^2 + 0.9^2} } \approx -0.856$$`
 <!-- .element: style="font-size:26pt;" -->
 
@@ -627,7 +627,7 @@ $$\cos(\measuredangle_{h_i^L, h_j^L})$$
 approximates $v_{i,j}$
 
 > [!IMPORTANT]
-> We assume that $v_{i,j} \in [-1,1]$ and may need to shift and normalise weights accordingly. 
+> We assume that $v_{i,j} \in [-1,1]$ for every edge $(i,j)$ and may need to shift and normalise weights accordingly. 
 
 ---
 
@@ -635,7 +635,7 @@ approximates $v_{i,j}$
 
 For a GCN with $L$ layers, the mean squared error is
 
-`$$\mathscr{L}(W) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( \cos(\measuredangle_{h_i^L, h_j^L}) - v_{i,j} \right)^2$$`
+`$$\mathscr{L}(W,H^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( \cos(\measuredangle_{h_i^L, h_j^L}) - v_{i,j} \right)^2$$`
 
 where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
 
