@@ -460,9 +460,9 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 
 ## Embeddings
 
-In machine learning, an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) is a mapping of a complex structure into a vector of features. 
+An [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) is a mapping of a complex structure into a vector of features. 
 
-![Image](06-lecture/Embeddings.svg)
+![Image](06-lecture/embeddings.svg)
 
 > [!NOTE]
 > Every node in a GNN has an embedding.
@@ -594,23 +594,27 @@ to make recommendations.
 
 ## Embedding space
 
-In recommender systems we want to obtain embeddings of objects (i.e. users and items) such that similar objects are *close* each other in the embedding space.
+In recommender systems, we want to obtain embeddings of objects (i.e. users and items) such that similar objects are *close* each other in the embedding space.
 
 ![Image](06-lecture/2D-movies.svg)
 
 ---
 
-## Measuring similarity
+## Cosine similarity
 
-The **scalar product** (or **dot product**) between two vectors measures their similarity:
+The [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) of two embeddings $h_i$ and $h_j$ is
 
-`$$(a_1, \ldots, a_n) \begin{pmatrix} b_1 \\ \vdots \\ b_n \end{pmatrix} = \sum_{i=1}^n a_{i} \cdot b_{i}$$`
+`$$\cos(\measuredangle_{h_i,h_j}) = \frac{ h_{i} \cdot h_{j} }{\|h_{i}\| \cdot \|h_{j}\|}$$`
+
+where $\measuredangle_{h_i,h_j}$ is the angle between the two embedding vectors. A value close to 1 indicates a large similarity, a value close to -1 a small similarity.
 
 > [!TIP]
-> **Examples**: 
-> - Pulp Fiction (0.3, 0.2) ↔ Terminator (0.4, 0.9): 0.12 + 0.18 = 0.30
-> - Titanic (0.1, -0.8) ↔ Terminator (0.4, 0.9): 0.04 - 0.72 = -0.68
-> - Titanic (0.1, -0.8) ↔ Warm Bodies (-0.5, -0.3): -0.05 + 0.24 = 0.19
+> **Examples**:
+> - For $h_i= (0.3, 0.2)$ representing the movie *Pulp Fiction* and $h_j= (0.4, 0.9)$ representing the movie *Terminator* we have a similarity of
+> `$$\cos(\measuredangle_{h_i,h_j}) = \displaystyle \frac{0.3 \cdot 0.4 + 0.2 \cdot 0.9}{ \sqrt{ 0.3^2 + 0.2^2 } \cdot \sqrt{ 0.4^2 + 0.9^2} } \approx 0.845$$`
+<!-- .element: style="font-size:28pt;" -->
+> - For $h_i= (0.1, -0.8)$ representing the movie *Titanic* and $h_j= (0.4, 0.9)$ representing the movie *Terminator* we have a similarity of
+> `$$\cos(\measuredangle_{h_i,h_j}) = \displaystyle \frac{0.1 \cdot 0.4 + (-0.8) \cdot 0.9}{ \sqrt{ 0.1^2 + (-0.8)^2 } \cdot \sqrt{ 0.4^2 + 0.9^2} } \approx −0.856$$`
 <!-- .element: style="font-size:28pt;" -->
 
 ---
