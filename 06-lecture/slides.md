@@ -107,7 +107,7 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 </g>
 
 <g data-id="layer1">
-  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 0 </text>
 
   <g data-id="A">
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -175,7 +175,7 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 </g>
 
 <g data-id="layer1">
-  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 0 </text>
 
   <g>
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -198,7 +198,7 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
   </g>
 </g>
 <g data-id="layer2">
-  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
+  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
 
   <g data-id="A">
     <circle cx="900" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -284,7 +284,7 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 </g>
 
 <g data-id="layer1">
-  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 0 </text>
 
   <g>
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -307,7 +307,7 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
   </g>
 </g>
 <g data-id="layer2">
-  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
+  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
 
   <g>
     <circle cx="900" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -400,7 +400,7 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
 </g>
 
 <g data-id="layer1">
-  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+  <text x="600" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 0 </text>
 
   <g>
     <circle cx="600" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -423,7 +423,7 @@ Graph neural networks (GNN) can be used to learn by aggregating information from
   </g>
 </g>
 <g data-id="layer2">
-  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
+  <text x="900" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
 
   <g>
     <circle cx="900" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -635,12 +635,12 @@ approximates $v_{i,j}$
 
 For a GCN with $L$ layers, the mean squared error is
 
-`$$\mathscr{L}(W,H^1) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( \cos(\measuredangle_{h_i^L, h_j^L}) - v_{i,j} \right)^2$$`
+`$$\mathscr{L}(H^0,W^1,W^2,\ldots,W^L) = \frac{1}{|E|} \sum_{(i,j) \in E} \left( \cos(\measuredangle_{h_i^L, h_j^L}) - v_{i,j} \right)^2$$`
 
 where $E$ is the set of edges $(i,j)$ with a weight $v_{i,j}$.
 
 > [!IMPORTANT]
-> We learn the weights **and** the first layer embeddings simultaneously.
+> We learn the initial layer embeddings $H^0$ and the weights $W^1,W^2,\ldots,W^L$ simultaneously.
 
 ===
 

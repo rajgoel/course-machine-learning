@@ -48,7 +48,7 @@
 </g>
 
 <g data-id="layer1">
-  <text x="150" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
+  <text x="150" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 0 </text>
 
   <g>
     <circle cx="150" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -72,7 +72,7 @@
 </g>
 
 <g data-id="layer2">
-  <text x="450" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
+  <text x="450" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 1 </text>
 
   <g>
     <circle cx="450" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
@@ -96,7 +96,7 @@
 </g>
 
 <g data-id="layer3">
-  <text x="750" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 3 </text>
+  <text x="750" y="50" font-size="30" fill="black" text-anchor="middle"> GNN layer 2 </text>
 
   <g>
     <circle cx="750" cy="100" r="25" stroke="firebrick" stroke-width="4" fill="lightgray" />
