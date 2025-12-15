@@ -164,7 +164,7 @@
           let errorElement = section.querySelector('.reconstructionError');
           if (errorElement) {
             if (reconstructionError) {
-              errorElement.innerHTML = `Reconstruction error: ${reconstructionError.raw.toFixed(6)}`;
+              errorElement.innerHTML = `Reconstruction error: ${reconstructionError.toFixed(6)}`;
             } else {
               errorElement.innerHTML = `Reconstruction error: N/A`;
             }

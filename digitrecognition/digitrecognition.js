@@ -55,7 +55,7 @@ function calculateReconstructionError(tensor) {
 		diff.dispose();
 		squaredDiff.dispose();
 		
-		return { raw: reconstructionError, normalized: normalizedError };
+		return reconstructionError;
 	} catch (e) {
 		console.warn("Error calculating reconstruction error:", e);
 		return null;
