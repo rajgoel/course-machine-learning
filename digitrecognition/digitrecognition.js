@@ -314,7 +314,7 @@ async function initialisePredictionButton(container,options) {
     container.addEventListener("click", async function () {
         var value = (getSection(container).querySelector('.predictedDigit') || {}).innerHTML;
         var section = getSection(container) 
-        if ( isNaN(value) && value !== '🛇' ) {
+        if ( isNaN(value) && value !== '☹' ) {
             // predict
             var canvas = section.querySelector('.drawDigit');
             // get image data from canvas
@@ -329,7 +329,7 @@ async function initialisePredictionButton(container,options) {
                   console.log("Reconstruction error:",reconstructionError);
                 if ( reconstructionError > 0.08 ) {
                     var element = getSection(container).querySelector('.predictedDigit');
-                    if (element) element.innerHTML = '🛇';
+                    if (element) element.innerHTML = '☹';
                     return;
                 }
             }
