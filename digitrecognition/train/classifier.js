@@ -30,17 +30,23 @@ async function showExamples(data) {
 }
 
 async function run() {  
+  // Check URL query parameter for simple mode
+  const urlParams = new URLSearchParams(window.location.search);
+  const useSimple = urlParams.has('simple');
+  
+  console.log(`Training ${useSimple ? 'Simple Dense' : 'CNN'} model...`);
+  
   const data = new MnistData();
   await data.load();
   await showExamples(data);
 
-  const model = getSimpleModel();
-//  const model = getModel();
-  tfvis.show.modelSummary({name: 'Model Architecture', tab: 'Model'}, model);
+  const model = useSimple ? getSimpleModel() : getModel();
+  const modelName = useSimple ? 'Simple Dense Model' : 'CNN Model';
+  tfvis.show.modelSummary({name: modelName, tab: 'Model'}, model);
   
   await train(model, data);
-  await model.save('downloads://simple-model');
-//  await model.save('downloads://mnist-model');
+  const saveAs = useSimple ? 'downloads://simple-model' : 'downloads://mnist-model';
+  await model.save(saveAs);
 
 
 //  const model = await tf.loadLayersModel('./mnist-model.json');

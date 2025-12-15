@@ -1,6 +1,16 @@
 //-------------------------------------
 // loader for cnn model
 //-------------------------------------
+
+// Capture script path at load time
+const SCRIPT_PATH = document.currentScript ? document.currentScript.src : 
+  (document.querySelector('script[src*="digitrecognition.js"]') || {}).src;
+const SCRIPT_DIR = SCRIPT_PATH ? SCRIPT_PATH.substring(0, SCRIPT_PATH.lastIndexOf('/')) : '';
+const MODELS_PATH = SCRIPT_DIR + '/models/';
+
+// Global variables
+let autoencoderModel;
+
 async function loadDigitRecognitionModels() {
   console.log("Loading models trained for digit recognition ...");
 
@@ -8,11 +18,48 @@ async function loadDigitRecognitionModels() {
   models = [ undefined, undefined ];
   
   // load the model using a HTTPS request (where you have stored your model files)
-  models[0] = await tf.loadLayersModel("digitrecognition/models/model.json");
-//  models[1] = await tf.loadLayersModel("digitrecognition/models/mnist-model.json");
-  models[1] = await tf.loadLayersModel("digitrecognition/models/simple-model.json");
+  models[0] = await tf.loadLayersModel(MODELS_PATH + "model.json");
+//  models[1] = await tf.loadLayersModel(MODELS_PATH + "mnist-model.json");
+  models[1] = await tf.loadLayersModel(MODELS_PATH + "simple-model.json");
+  
+  // Load autoencoder for reconstruction error
+  try {
+    autoencoderModel = await tf.loadLayersModel(MODELS_PATH + "autoencoder-model.json");
+    console.log("Autoencoder model loaded for reconstruction error");
+  } catch (error) {
+    console.warn("Could not load autoencoder model:", error);
+    autoencoderModel = null;
+  }
   
   console.log("Models trained for digit recognition loaded");
+}
+
+//-----------------------------------------------
+// Calculate reconstruction error using autoencoder
+//-----------------------------------------------
+function calculateReconstructionError(tensor) {
+	if (!autoencoderModel) return null;
+	
+	try {
+		const flattened = tensor.reshape([1, 784]);
+		const reconstruction = autoencoderModel.predict(flattened);
+		const diff = flattened.sub(reconstruction);
+		const squaredDiff = diff.square();
+		const reconstructionError = squaredDiff.mean().dataSync()[0];
+		
+		// Normalize: 0.05 error -> 0.5, using formula error/(error+0.05)
+		const normalizedError = reconstructionError / (reconstructionError + 0.05);
+		
+		flattened.dispose();
+		reconstruction.dispose();
+		diff.dispose();
+		squaredDiff.dispose();
+		
+		return { raw: reconstructionError, normalized: normalizedError };
+	} catch (e) {
+		console.warn("Error calculating reconstruction error:", e);
+		return null;
+	}
 }
 
 //-----------------------------------------------
@@ -32,7 +79,7 @@ function preprocessCanvas(image) {
 
 
 function getSection(element) {
-	while ( element.tagName.toLowerCase() != "section" ) {
+	while (element && element.tagName.toLowerCase() != "section" && !element.classList.contains("demo-section")) {
 		element = element.parentElement;
 	}
 	return element;
@@ -278,6 +325,18 @@ function initialisePredictionButton(container,options) {
 
 			// preprocess canvas
 			let tensor = preprocessCanvas(canvas);
+
+            if ( getSection(container).querySelector('.anomaly') ) {
+    			// Calculate reconstruction error
+	    		const reconstructionError = calculateReconstructionError(tensor);
+                if ( reconstructionError > 0.08 ) {
+    		    	console.log("Reconstruction error:",reconstructionError);
+    			    var element = getSection(container).querySelector('.predictedDigit');
+	    		    if (element) element.innerHTML = "&olcross;";
+                    return;
+                }
+            }
+
 
 			// make predictions on the preprocessed image tensor
 			let predictions = await models[container.getAttribute("data-model")].predict(tensor).data();
