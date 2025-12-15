@@ -336,6 +336,10 @@ async function initialisePredictionButton(container,options) {
 
 
             // make predictions on the preprocessed image tensor
+            if (!models[container.getAttribute("data-model")]) {
+                alert("Model is still loading, please wait...");
+                return;
+            }
             let predictions = await models[container.getAttribute("data-model")].predict(tensor).data();
 
             // get the model's prediction results
