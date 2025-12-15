@@ -329,7 +329,7 @@ async function initialisePredictionButton(container,options) {
                   console.log("Reconstruction error:",reconstructionError);
                 if ( reconstructionError > 0.08 ) {
                     var element = getSection(container).querySelector('.predictedDigit');
-                    if (element) element.innerHTML = '<i class="fas fa-ban"></i>';
+                    if (element) element.innerHTML = '🛇';
                     return;
                 }
             }
