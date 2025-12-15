@@ -312,8 +312,8 @@ function clearCanvas(canvas) {
 
  
 
-function initialisePredictionButton(container,options) {
-    loadDigitRecognitionModels();
+async function initialisePredictionButton(container,options) {
+    await loadDigitRecognitionModels();
 	container.addEventListener("click", async function () {
 		var value = (getSection(container).querySelector('.predictedDigit') || {}).innerHTML;
 		var section = getSection(container) 
