@@ -38,60 +38,57 @@ async function loadDigitRecognitionModels() {
 // Calculate reconstruction error using autoencoder
 //-----------------------------------------------
 function calculateReconstructionError(tensor) {
-	if (!autoencoderModel) return null;
-	
-	try {
-		const flattened = tensor.reshape([1, 784]);
-		const reconstruction = autoencoderModel.predict(flattened);
-		const diff = flattened.sub(reconstruction);
-		const squaredDiff = diff.square();
-		const reconstructionError = squaredDiff.mean().dataSync()[0];
-		
-		// Normalize: 0.05 error -> 0.5, using formula error/(error+0.05)
-		const normalizedError = reconstructionError / (reconstructionError + 0.05);
-		
-		flattened.dispose();
-		reconstruction.dispose();
-		diff.dispose();
-		squaredDiff.dispose();
-		
-		return reconstructionError;
-	} catch (e) {
-		console.warn("Error calculating reconstruction error:", e);
-		return null;
-	}
+    if (!autoencoderModel) return null;
+    
+    try {
+        const flattened = tensor.reshape([1, 784]);
+        const reconstruction = autoencoderModel.predict(flattened);
+        const diff = flattened.sub(reconstruction);
+        const squaredDiff = diff.square();
+        const reconstructionError = squaredDiff.mean().dataSync()[0];
+        
+        flattened.dispose();
+        reconstruction.dispose();
+        diff.dispose();
+        squaredDiff.dispose();
+        
+        return reconstructionError;
+    } catch (e) {
+        console.warn("Error calculating reconstruction error:", e);
+        return null;
+    }
 }
 
 //-----------------------------------------------
 // preprocess the canvas
 //-----------------------------------------------
 function preprocessCanvas(image) {
-	// resize the input image to target size of (1, 28, 28)
-	let tensor = tf.browser.fromPixels(image)
-		.resizeNearestNeighbor([28, 28])
-		.mean(2)
-		.expandDims(2)
-		.expandDims()
-		.toFloat();
-//	console.log(tensor.shape);
-	return tensor.div(255.0);
+    // resize the input image to target size of (1, 28, 28)
+    let tensor = tf.browser.fromPixels(image)
+        .resizeNearestNeighbor([28, 28])
+        .mean(2)
+        .expandDims(2)
+        .expandDims()
+        .toFloat();
+//    console.log(tensor.shape);
+    return tensor.div(255.0);
 }
 
 
 function getSection(element) {
-	while (element && element.tagName.toLowerCase() != "section" && !element.classList.contains("demo-section")) {
-		element = element.parentElement;
-	}
-	return element;
+    while (element && element.tagName.toLowerCase() != "section" && !element.classList.contains("demo-section")) {
+        element = element.parentElement;
+    }
+    return element;
 }
 
 function clearPrediction(section) {
-	var element = section.querySelector('.predictedDigit');
-	if (element) element.innerHTML = "?"
-	var element = section.querySelector('.predictions');
-	if (element) {
-		element.updatePredictions([0,0,0,0,0,0,0,0,0,0]);
-	}
+    var element = section.querySelector('.predictedDigit');
+    if (element) element.innerHTML = "?"
+    var element = section.querySelector('.predictions');
+    if (element) {
+        element.updatePredictions([0,0,0,0,0,0,0,0,0,0]);
+    }
 ;
 }
 
@@ -99,64 +96,64 @@ function initialiseCanvas(container,options) {
 //---------------
 // Create canvas
 //---------------
-	let canvas = container;
-	canvas.preview = getSection(container).querySelector('.preview5x5');
+    let canvas = container;
+    canvas.preview = getSection(container).querySelector('.preview5x5');
 
-	canvas.style.backgroundColor = "black";
-	if(typeof G_vmlCanvasManager != 'undefined') {
-		canvas = G_vmlCanvasManager.initElement(canvas);
-	}
-	var ctx = canvas.getContext("2d");
+    canvas.style.backgroundColor = "black";
+    if(typeof G_vmlCanvasManager != 'undefined') {
+        canvas = G_vmlCanvasManager.initElement(canvas);
+    }
+    var ctx = canvas.getContext("2d");
 
-	canvas.clickX = new Array();
-	canvas.clickY = new Array();
-	canvas.clickD = new Array();
-	canvas.drawing;
+    canvas.clickX = new Array();
+    canvas.clickY = new Array();
+    canvas.clickD = new Array();
+    canvas.drawing;
 
-	function startDrawing(canvas) {
-		canvas.drawing = true;
-		// clear prediction
-		clearPrediction( getSection(canvas) );
-	}
+    function startDrawing(canvas) {
+        canvas.drawing = true;
+        // clear prediction
+        clearPrediction( getSection(canvas) );
+    }
 
 
 //---------------------
 // MOUSE DOWN function
 //---------------------
 canvas.addEventListener("mousedown", function (e) {
-	var rect = canvas.getBoundingClientRect();
-	var mouseX = e.clientX- rect.left;
-	var mouseY = e.clientY- rect.top;
-	if ( !canvas.drawing) startDrawing(canvas);
-	addUserGesture(canvas,mouseX, mouseY);
-	drawOnCanvas(canvas);
+    var rect = canvas.getBoundingClientRect();
+    var mouseX = e.clientX- rect.left;
+    var mouseY = e.clientY- rect.top;
+    if ( !canvas.drawing) startDrawing(canvas);
+    addUserGesture(canvas,mouseX, mouseY);
+    drawOnCanvas(canvas);
 });
 
 //---------------------
 // MOUSE MOVE function
 //---------------------
 canvas.addEventListener("mousemove", function (e) {
-	if(canvas.drawing) {
-		var rect = canvas.getBoundingClientRect();
-		var mouseX = e.clientX- rect.left;
-		var mouseY = e.clientY- rect.top;
-		addUserGesture(canvas,mouseX, mouseY, true);
-		drawOnCanvas(canvas);
-	}
+    if(canvas.drawing) {
+        var rect = canvas.getBoundingClientRect();
+        var mouseX = e.clientX- rect.left;
+        var mouseY = e.clientY- rect.top;
+        addUserGesture(canvas,mouseX, mouseY, true);
+        drawOnCanvas(canvas);
+    }
 });
 
 //-------------------
 // MOUSE UP function
 //-------------------
 canvas.addEventListener("mouseup", function (e) {
-	canvas.drawing = false;
+    canvas.drawing = false;
 });
 
 //----------------------
 // MOUSE LEAVE function
 //----------------------
 canvas.addEventListener("mouseleave", function (e) {
-	canvas.drawing = false;
+    canvas.drawing = false;
 });
 
 
@@ -164,18 +161,18 @@ canvas.addEventListener("mouseleave", function (e) {
 // TOUCH START function
 //-----------------------
 canvas.addEventListener("touchstart", function (e) {
-	if (e.target == canvas) {
-    	e.preventDefault();
-  	}
-	var rect = canvas.getBoundingClientRect();
-	var touch = e.touches[0];
+    if (e.target == canvas) {
+        e.preventDefault();
+      }
+    var rect = canvas.getBoundingClientRect();
+    var touch = e.touches[0];
 
-	var mouseX = touch.clientX - rect.left;
-	var mouseY = touch.clientY - rect.top;
+    var mouseX = touch.clientX - rect.left;
+    var mouseY = touch.clientY - rect.top;
 
-	if ( !canvas.drawing) startDrawing(canvas);
-	addUserGesture(canvas,mouseX, mouseY);
-	drawOnCanvas(canvas);
+    if ( !canvas.drawing) startDrawing(canvas);
+    addUserGesture(canvas,mouseX, mouseY);
+    drawOnCanvas(canvas);
 
 }, false);
 
@@ -184,19 +181,19 @@ canvas.addEventListener("touchstart", function (e) {
 // TOUCH MOVE function
 //---------------------
 canvas.addEventListener("touchmove", function (e) {
-	if (e.target == canvas) {
-    	e.preventDefault();
-  	}
-	if(canvas.drawing) {
-		var rect = canvas.getBoundingClientRect();
-		var touch = e.touches[0];
+    if (e.target == canvas) {
+        e.preventDefault();
+      }
+    if(canvas.drawing) {
+        var rect = canvas.getBoundingClientRect();
+        var touch = e.touches[0];
 
-		var mouseX = touch.clientX - rect.left;
-		var mouseY = touch.clientY - rect.top;
+        var mouseX = touch.clientX - rect.left;
+        var mouseY = touch.clientY - rect.top;
 
-		addUserGesture(canvas,mouseX, mouseY, true);
-		drawOnCanvas(canvas);
-	}
+        addUserGesture(canvas,mouseX, mouseY, true);
+        drawOnCanvas(canvas);
+    }
 }, false);
 
 
@@ -204,10 +201,10 @@ canvas.addEventListener("touchmove", function (e) {
 // TOUCH END function
 //---------------------
 canvas.addEventListener("touchend", function (e) {
-	if (e.target == canvas) {
-    	e.preventDefault();
-  	}
-	canvas.drawing = false;
+    if (e.target == canvas) {
+        e.preventDefault();
+      }
+    canvas.drawing = false;
 }, false);
 
 
@@ -216,19 +213,19 @@ canvas.addEventListener("touchend", function (e) {
 //-----------------------
 canvas.addEventListener("touchleave", function (e) {
     e.stopPropagation();
-	if (e.target == canvas) {
-    	e.preventDefault();
-  	}
-	canvas.drawing = false;
+    if (e.target == canvas) {
+        e.preventDefault();
+      }
+    canvas.drawing = false;
 }, false);
 
 //--------------------
 // ADD CLICK function
 //--------------------
 function addUserGesture(canvas,x, y, dragging) {
-	canvas.clickX.push(x);
-	canvas.clickY.push(y);
-	canvas.clickD.push(dragging);
+    canvas.clickX.push(x);
+    canvas.clickY.push(y);
+    canvas.clickD.push(dragging);
 }
 
   // Function to calculate the average grayscale value in a rectangle
@@ -254,31 +251,31 @@ function addUserGesture(canvas,x, y, dragging) {
 // RE DRAW function
 //-------------------
   function drawOnCanvas(canvas) {
-	var ctx = canvas.getContext("2d");
+    var ctx = canvas.getContext("2d");
     var rect = canvas.getBoundingClientRect();
     var scale =canvas.width / rect.width;
 
-	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-	ctx.strokeStyle = "white";
-	ctx.lineJoin    = "round";
-	ctx.lineWidth   = canvas.width/10;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.strokeStyle = "white";
+    ctx.lineJoin    = "round";
+    ctx.lineWidth   = canvas.width/10;
 
-	for (var i = 0; i < canvas.clickX.length; i++) {
-		ctx.beginPath();
-		if(canvas.clickD[i] && i) {
-			ctx.moveTo(canvas.clickX[i-1]*scale, canvas.clickY[i-1]*scale);
-		} else {
-			ctx.moveTo(canvas.clickX[i]*scale-1, canvas.clickY[i]*scale);
-		}
-		ctx.lineTo(canvas.clickX[i]*scale, canvas.clickY[i]*scale);
-		ctx.closePath();
-		ctx.stroke();
+    for (var i = 0; i < canvas.clickX.length; i++) {
+        ctx.beginPath();
+        if(canvas.clickD[i] && i) {
+            ctx.moveTo(canvas.clickX[i-1]*scale, canvas.clickY[i-1]*scale);
+        } else {
+            ctx.moveTo(canvas.clickX[i]*scale-1, canvas.clickY[i]*scale);
+        }
+        ctx.lineTo(canvas.clickX[i]*scale, canvas.clickY[i]*scale);
+        ctx.closePath();
+        ctx.stroke();
 
-    	if ( canvas.preview ) {
-     	  for (var x=0; x<5; x++) {
+        if ( canvas.preview ) {
+           for (var x=0; x<5; x++) {
             for (var y=0; y<5; y++) {
               let grayValue =  getAverageGrayValue( canvas, x*canvas.width/5, y*canvas.height/5, canvas.width/5, canvas.height/5);
-     	      let rgbValue = Math.round(grayValue * 255);
+               let rgbValue = Math.round(grayValue * 255);
               // Create the color string in the form 'rgb(r, g, b)'
               let color = `rgb(${rgbValue}, ${rgbValue}, ${rgbValue})`;
               canvas.preview.children[5*y+x].value = grayValue;
@@ -286,7 +283,7 @@ function addUserGesture(canvas,x, y, dragging) {
             }
           }
 
-	    }
+        }
     }
   }
 
@@ -298,12 +295,12 @@ function addUserGesture(canvas,x, y, dragging) {
 function clearCanvas(canvas) {
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-	canvas.clickX = new Array();
-	canvas.clickY = new Array();
-	canvas.clickD = new Array();
-	
-	if ( canvas.preview ) {
-	  for (var i=0; i<25; i++) {
+    canvas.clickX = new Array();
+    canvas.clickY = new Array();
+    canvas.clickD = new Array();
+    
+    if ( canvas.preview ) {
+      for (var i=0; i<25; i++) {
         canvas.preview.children[i].value = 0;
         canvas.preview.children[i].setAttribute("fill","black");
       }
@@ -314,70 +311,70 @@ function clearCanvas(canvas) {
 
 async function initialisePredictionButton(container,options) {
     await loadDigitRecognitionModels();
-	container.addEventListener("click", async function () {
-		var value = (getSection(container).querySelector('.predictedDigit') || {}).innerHTML;
-		var section = getSection(container) 
-		if ( isNaN(value) ) {
-			// predict
-			var canvas = section.querySelector('.drawDigit');
-			// get image data from canvas
-			var imageData = canvas.toDataURL();
+    container.addEventListener("click", async function () {
+        var value = (getSection(container).querySelector('.predictedDigit') || {}).innerHTML;
+        var section = getSection(container) 
+        if ( isNaN(value) ) {
+            // predict
+            var canvas = section.querySelector('.drawDigit');
+            // get image data from canvas
+            var imageData = canvas.toDataURL();
 
-			// preprocess canvas
-			let tensor = preprocessCanvas(canvas);
+            // preprocess canvas
+            let tensor = preprocessCanvas(canvas);
 
             if ( getSection(container).querySelector('.detectAnomaly') ) {
-    			// Calculate reconstruction error
-	    		const reconstructionError = calculateReconstructionError(tensor);
-  		    	console.log("Reconstruction error:",reconstructionError);
+                // Calculate reconstruction error
+                const reconstructionError = calculateReconstructionError(tensor);
+                  console.log("Reconstruction error:",reconstructionError);
                 if ( reconstructionError > 0.08 ) {
-    			    var element = getSection(container).querySelector('.predictedDigit');
-	    		    if (element) element.innerHTML = "&olcross;";
+                    var element = getSection(container).querySelector('.predictedDigit');
+                    if (element) element.innerHTML = "&olcross;";
                     return;
                 }
             }
 
 
-			// make predictions on the preprocessed image tensor
-			let predictions = await models[container.getAttribute("data-model")].predict(tensor).data();
+            // make predictions on the preprocessed image tensor
+            let predictions = await models[container.getAttribute("data-model")].predict(tensor).data();
 
-			// get the model's prediction results
-			let results = Array.from(predictions);
-			let value = results.indexOf(Math.max(...results));
+            // get the model's prediction results
+            let results = Array.from(predictions);
+            let value = results.indexOf(Math.max(...results));
 
-			// display the predictions
-			var element = getSection(container).querySelector('.predictions');
-			if (element) {
-				element.updatePredictions(results);
-			}
-			var element = getSection(container).querySelector('.predictedDigit');
-			if (element) element.innerHTML = value;
+            // display the predictions
+            var element = getSection(container).querySelector('.predictions');
+            if (element) {
+                element.updatePredictions(results);
+            }
+            var element = getSection(container).querySelector('.predictedDigit');
+            if (element) element.innerHTML = value;
 
-			console.log( results.indexOf(Math.max(...results)) );
-//			console.log(results);
-		}
-		else {
-			// clear drawing canvas 
-			var canvas = section.querySelector('.drawDigit');
-			var ctx = canvas.getContext("2d");
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			canvas.clickX = new Array();
-			canvas.clickY = new Array();
-			canvas.clickD = new Array();
+            console.log( results.indexOf(Math.max(...results)) );
+//            console.log(results);
+        }
+        else {
+            // clear drawing canvas 
+            var canvas = section.querySelector('.drawDigit');
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.clickX = new Array();
+            canvas.clickY = new Array();
+            canvas.clickD = new Array();
 
-			// clear prediction
-			clearPrediction( section );
-		}
-	});
+            // clear prediction
+            clearPrediction( section );
+        }
+    });
 }
 
 function initialise5x5PreviewButton(container,options) {
-	container.addEventListener("click", async function () {
+    container.addEventListener("click", async function () {
       var section = getSection(container) 
       var canvas = section.querySelector('.drawDigit');
       clearCanvas( canvas );
       // clear prediction
-	  clearPrediction( section );
+      clearPrediction( section );
     });
 }
 
@@ -407,51 +404,51 @@ function initialise5x5PredictionButton(container,options) {
   container.addEventListener("click", async function () {
 
   var value = (getSection(container).querySelector('.predictedDigit') || {}).innerHTML;
-		var section = getSection(container) 
-		if ( isNaN(value) ) {
+        var section = getSection(container) 
+        if ( isNaN(value) ) {
             if ( !parameters5x5 ) return;
             // predict
-			var preview = section.querySelector('.preview5x5');
-			var input = [];
-        	for (var j=0; j<25; j++) {
-        	  input.push( preview.children[j].value || 0);
+            var preview = section.querySelector('.preview5x5');
+            var input = [];
+            for (var j=0; j<25; j++) {
+              input.push( preview.children[j].value || 0);
             }
 //            console.log("Input:",input);
             var results = [];
             var value = 0;
             var best = -1e6;
-        	for (var i=0; i<10; i++) {
-        	  // determine result
-        	  var result = parameters5x5[i].bias;
+            for (var i=0; i<10; i++) {
+              // determine result
+              var result = parameters5x5[i].bias;
               for (var j=0; j<25; j++) {
                 result += parameters5x5[i].weights[j] * input[j];
-        	  }
-        	  results.push(result);
-        	  if ( results[i] > best ) {
-        	    best = results[i];
-        	    value = i;
-        	  }
+              }
+              results.push(result);
+              if ( results[i] > best ) {
+                best = results[i];
+                value = i;
+              }
             }
 
-			// display the predictions
-			var element = getSection(container).querySelector('.predictions');
-			if (element) {
-				element.updatePredictions(results);
-			}
+            // display the predictions
+            var element = getSection(container).querySelector('.predictions');
+            if (element) {
+                element.updatePredictions(results);
+            }
 
             var element = getSection(container).querySelector('.predictedDigit');
-			if (element) element.innerHTML = value;
-		}
-		else {
-			// clear drawing canvas 
-			var canvas = section.querySelector('.drawDigit');
-			canvas.clickX = new Array();
-			canvas.clickY = new Array();
-			canvas.clickD = new Array();
-			clearCanvas( canvas );
+            if (element) element.innerHTML = value;
+        }
+        else {
+            // clear drawing canvas 
+            var canvas = section.querySelector('.drawDigit');
+            canvas.clickX = new Array();
+            canvas.clickY = new Array();
+            canvas.clickD = new Array();
+            clearCanvas( canvas );
 
-			// clear prediction
-			clearPrediction( section );
-		}
-	});
+            // clear prediction
+            clearPrediction( section );
+        }
+    });
 }
