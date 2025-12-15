@@ -108,7 +108,7 @@ The 2D latent space reveals clustering of similar digits.
 <td style="vertical-align: middle;padding:0;padding:0;width:400px!important;">
 <svg class="togglePrediction" data-model="0" width="400" height="400">
   <rect width="400" height="400" style="fill:black;" />
-  <text class="predictedDigit anomalies" x="200" y="350" font-size="400" text-anchor="middle"  style="fill:white;stroke:white;">?</text>
+  <text class="predictedDigit detectAnomaly" x="200" y="350" font-size="400" text-anchor="middle"  style="fill:white;stroke:white;">?</text>
 </svg>
 </td>
 </tr>

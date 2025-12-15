@@ -326,7 +326,7 @@ async function initialisePredictionButton(container,options) {
 			// preprocess canvas
 			let tensor = preprocessCanvas(canvas);
 
-            if ( getSection(container).querySelector('.anomaly') ) {
+            if ( getSection(container).querySelector('.detectAnomaly') ) {
     			// Calculate reconstruction error
 	    		const reconstructionError = calculateReconstructionError(tensor);
                 if ( reconstructionError > 0.08 ) {
