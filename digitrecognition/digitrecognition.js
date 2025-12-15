@@ -329,8 +329,8 @@ async function initialisePredictionButton(container,options) {
             if ( getSection(container).querySelector('.detectAnomaly') ) {
     			// Calculate reconstruction error
 	    		const reconstructionError = calculateReconstructionError(tensor);
+  		    	console.log("Reconstruction error:",reconstructionError);
                 if ( reconstructionError > 0.08 ) {
-    		    	console.log("Reconstruction error:",reconstructionError);
     			    var element = getSection(container).querySelector('.predictedDigit');
 	    		    if (element) element.innerHTML = "&olcross;";
                     return;
