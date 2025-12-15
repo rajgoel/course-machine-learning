@@ -314,7 +314,7 @@ async function initialisePredictionButton(container,options) {
     container.addEventListener("click", async function () {
         var value = (getSection(container).querySelector('.predictedDigit') || {}).innerHTML;
         var section = getSection(container) 
-        if ( isNaN(value) ) {
+        if ( isNaN(value) && value !== '🛇' ) {
             // predict
             var canvas = section.querySelector('.drawDigit');
             // get image data from canvas
