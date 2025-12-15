@@ -75,6 +75,11 @@ The 2D latent space reveals clustering of similar digits.
 > [!NOTE]
 > Similar digits (6, 8, 9) cluster together in the learned 2D space, demonstrating that the autoencoder captures semantic relationships.
 
+
+---
+
+![Image](07-lecture/2D-MNIST.png)
+
 ---
 
 ## Properties
@@ -115,5 +120,5 @@ The 2D latent space reveals clustering of similar digits.
 </table>
 
 > [!IMPORTANT]
-> The model only predicts a digit if the reconstruction error is below a given threshold!
+> If the reconstruction error is above a given threshold, no digit predicted!
 
