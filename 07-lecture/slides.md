@@ -93,3 +93,27 @@ The 2D latent space reveals clustering of similar digits.
 ===
 
 #  Anomaly detection
+
+---
+
+<table style="table-layout: fixed!important;width:900px;">
+<tr>
+<td style="vertical-align: middle;padding:0;width:400px!important;">
+<canvas class="drawDigit" width="400" height="400" data-prevent-swipe>
+</canvas>
+</td>
+<td style="vertical-align: middle;padding:0;width:300px!important;">
+<i class="fas fa-arrow-right" style="font-size:100px;padding:100px;"></i>
+</td>
+<td style="vertical-align: middle;padding:0;padding:0;width:400px!important;">
+<svg class="togglePrediction" data-model="0" width="400" height="400">
+  <rect width="400" height="400" style="fill:black;" />
+  <text class="predictedDigit anomalies" x="200" y="350" font-size="400" text-anchor="middle"  style="fill:white;stroke:white;">?</text>
+</svg>
+</td>
+</tr>
+</table>
+
+> [!IMPORTANT]
+> The model only predicts a digit if the reconstruction error is below a given threshold!
+

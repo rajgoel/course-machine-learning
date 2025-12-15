@@ -657,7 +657,7 @@ using Pkg
 Pkg.add("FLux")
 ```
 
-> ![NOTE]
+> [!NOTE]
 > For Python, there is [PyTorch](https://docs.pytorch.org/docs/stable/) which is based on C++ implementation of [LibTorch](https://docs.pytorch.org/cppdocs/).
 
 ---
