@@ -22,20 +22,20 @@ using MachineLearningCourse
     @testset "Lecture03" begin
         println("Testing Lecture03...")
         @test_nowarn redirect_stdout(devnull) do
-            Lecture03.demo(epochs=1)
+            Lecture03.demo(epochs=1, train_size = 100, test_size = 10)
         end
         @test_nowarn redirect_stdout(devnull) do
-            Lecture03.flux_demo(epochs=1)
+            Lecture03.flux_demo(epochs=1, train_size = 100, test_size = 10)
         end
     end
 
     @testset "Lecture04" begin
         println("Testing Lecture04...")
         @test_nowarn redirect_stdout(devnull) do
-            Lecture04.demo(epochs=1)
+            Lecture04.demo(epochs=1, train_size = 100, test_size = 10, batch_size=16)
         end
         @test_nowarn redirect_stdout(devnull) do
-            _, losses = Lecture04.demo(validation_size=1000,epochs=1)
+            _, losses = Lecture04.demo(epochs=1, train_size = 100, test_size = 10, validation_size=10, batch_size=16)
             Lecture04.plot_losses(losses)
         end
     end
@@ -50,7 +50,7 @@ using MachineLearningCourse
         #    Lecture05.plot_stock_with_moving_average("MSFT", 5, "1mo")
         # end
         @test_nowarn redirect_stdout(devnull) do
-            Lecture05.demo(epochs=1)
+            Lecture05.demo(epochs=1, train_size = 100, test_size = 10, batch_size=16)
         end
     end
 
@@ -58,6 +58,13 @@ using MachineLearningCourse
         println("Testing Lecture06...")
         @test_nowarn redirect_stdout(devnull) do
             Lecture06.demo(epochs=1,interactive=false)
+        end
+    end
+
+    @testset "Lecture07" begin
+        println("Testing Lecture07...")
+        @test_nowarn redirect_stdout(devnull) do
+            Lecture07.demo(epochs=1, display=false)
         end
     end
 end
