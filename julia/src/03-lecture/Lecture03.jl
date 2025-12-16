@@ -28,6 +28,6 @@ include("VanillaDNN.jl")
 include("Demo.jl")
 include("FluxDemo.jl")
 
-export demo, flux_demo
+export load_mnist_data, display_digit, demo, flux_demo
 
 end # module Lecture03

@@ -55,6 +55,8 @@ using .Lecture08
 using .Lecture09
 
 export Lecture01, Lecture02, Lecture03, Lecture04, Lecture05, Lecture06, Lecture07, Lecture08, Lecture09
+export load_mnist_data, display_digit
+export load_movielens_data
 
 end
 
