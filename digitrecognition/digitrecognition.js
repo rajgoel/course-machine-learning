@@ -1,7 +1,3 @@
-//-------------------------------------
-// loader for cnn model
-//-------------------------------------
-
 // Capture script path at load time
 const SCRIPT_PATH = document.currentScript ? document.currentScript.src : 
   (document.querySelector('script[src*="digitrecognition.js"]') || {}).src;
@@ -9,29 +5,30 @@ const SCRIPT_DIR = SCRIPT_PATH ? SCRIPT_PATH.substring(0, SCRIPT_PATH.lastIndexO
 const MODELS_PATH = SCRIPT_DIR + '/models/';
 
 // Global variables
-let autoencoderModel;
+let models, autoencoderModel;
+let modelsLoaded = false;
 
-async function loadDigitRecognitionModels() {
+async function loadDigitRecognitionModels(container) {
   console.log("Loading models trained for digit recognition ...");
 
   // clear the model variable
   models = [ undefined, undefined ];
-  
-  // load the model using a HTTPS request (where you have stored your model files)
-  models[0] = await tf.loadLayersModel(MODELS_PATH + "model.json");
-//  models[1] = await tf.loadLayersModel(MODELS_PATH + "mnist-model.json");
-  models[1] = await tf.loadLayersModel(MODELS_PATH + "simple-model.json");
-  
+  autoencoderModel = null;
+ 
   // Load autoencoder for reconstruction error
   try {
+    // load the model using a HTTPS request (where you have stored your model files)
+    models[0] = await tf.loadLayersModel(MODELS_PATH + "model.json");
+//    models[1] = await tf.loadLayersModel(MODELS_PATH + "mnist-model.json");
+    models[1] = await tf.loadLayersModel(MODELS_PATH + "simple-model.json");
     autoencoderModel = await tf.loadLayersModel(MODELS_PATH + "autoencoder-model.json");
     console.log("Autoencoder model loaded for reconstruction error");
   } catch (error) {
-    console.warn("Could not load autoencoder model:", error);
-    autoencoderModel = null;
+    console.warn("Could not load all models:", error);
   }
   
-  console.log("Models trained for digit recognition loaded");
+  modelsLoaded = true;
+  console.log("Models loaded");
 }
 
 //-----------------------------------------------
@@ -307,11 +304,13 @@ function clearCanvas(canvas) {
     }
 }
 
- 
-
 async function initialisePredictionButton(container,options) {
-    await loadDigitRecognitionModels();
+    await loadDigitRecognitionModels(container);
     container.addEventListener("click", async function () {
+        if ( !modelsLoaded) {
+          alert("Models not yet loaded. Please retry later.");
+          return;
+        }
         var value = (getSection(container).querySelector('.predictedDigit') || {}).innerHTML;
         var section = getSection(container) 
         if ( isNaN(value) && value !== '☹' ) {
@@ -334,12 +333,6 @@ async function initialisePredictionButton(container,options) {
                 }
             }
 
-
-            // make predictions on the preprocessed image tensor
-            if (!models[container.getAttribute("data-model")]) {
-                alert("Model is still loading, please wait...");
-                return;
-            }
             let predictions = await models[container.getAttribute("data-model")].predict(tensor).data();
 
             // get the model's prediction results
@@ -354,8 +347,7 @@ async function initialisePredictionButton(container,options) {
             var element = getSection(container).querySelector('.predictedDigit');
             if (element) element.innerHTML = value;
 
-            console.log( results.indexOf(Math.max(...results)) );
-//            console.log(results);
+            console.log(results);
         }
         else {
             // clear drawing canvas 
