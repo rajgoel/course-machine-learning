@@ -22,7 +22,6 @@ async function loadDigitRecognitionModels(container) {
 //    models[1] = await tf.loadLayersModel(MODELS_PATH + "mnist-model.json");
     models[1] = await tf.loadLayersModel(MODELS_PATH + "simple-model.json");
     autoencoderModel = await tf.loadLayersModel(MODELS_PATH + "autoencoder-model.json");
-    console.log("Autoencoder model loaded for reconstruction error");
   } catch (error) {
     console.warn("Could not load all models:", error);
   }
