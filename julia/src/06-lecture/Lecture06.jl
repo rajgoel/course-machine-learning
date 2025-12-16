@@ -6,12 +6,18 @@ Implementation of graph convolutional networks (GCNs) for collaborative filterin
 # Available Functions
 
 - `demo()`: Graph convolutional network demo for collaborative filtering using MovieLens data
+- `movie_explorer(embeddings, data)`: Interactive menu for exploring movie similarities using trained embeddings.
 
 # Usage
 
 ```julia
 using MachineLearningCourse
 Lecture06.demo()
+```
+or
+```julia
+_, embeddings, data = Lecture06.demo(interactive=false)
+Lecture06.movie_explorer(embeddings, data)
 ```
 """
 module Lecture06
@@ -22,6 +28,6 @@ include("MovieLens_data.jl")
 include("GCN.jl")
 include("Demo.jl")
 
-export demo, movie_explorer
+export load_movielens_data, demo, movie_explorer
 
 end
