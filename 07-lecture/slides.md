@@ -100,6 +100,18 @@ Autoencoders minimise the **reconstruction error**, i.e., the mean squared error
 ![Image](07-lecture/2D-MNIST.png)
 
 
+---
+
+## Example: MNIST digits
+
+You find a full implementation for latent space visualisation of MNIST image distributions in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
+> [!TIP]
+> Run:
+> ```julia
+> using MachineLearningCourse
+> Lecture07.demo()
+
 ===
 
 ##  Anomaly detection
