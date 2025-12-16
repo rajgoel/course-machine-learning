@@ -50,6 +50,26 @@ Autoencoders minimise the **reconstruction error**, i.e., the mean squared error
 
 ---
 
+## Example: MNIST reconstructions
+
+<table style="border: none;">
+<tr>
+<td style="border: none;"><img src="07-lecture/reconstruction1.png"></td>
+<td style="border: none;"><img src="07-lecture/reconstruction2.png"></td>
+<td style="border: none;"><img src="07-lecture/reconstruction3.png"></td>
+<td style="border: none;"><img src="07-lecture/reconstruction4.png"></td>
+</tr>
+<tr>
+<td style="border: none;"><img src="07-lecture/reconstruction5.png"></td>
+<td style="border: none;"><img src="07-lecture/reconstruction6.png"></td>
+<td style="border: none;"><img src="07-lecture/reconstruction7.png"></td>
+<td style="border: none;"><img src="07-lecture/reconstruction8.png"></td>
+</tr>
+</table>
+
+
+---
+
 ## Use cases
 
 - **Dimensionality reduction**: Reduce dimensionality, e.g., for visualisation or data compression
@@ -87,7 +107,7 @@ Autoencoders minimise the **reconstruction error**, i.e., the mean squared error
 [Anomaly detection](https://en.wikipedia.org/wiki/Anomaly_detection) or [outlier](https://en.wikipedia.org/wiki/Outlier) detection is the identification of observations which deviate significantly from other observations.
 
 > [!NOTE]
-> Anomaly detection is used for cybersecurity, fraud detection, medicine, computer vision, and other applications. 
+> Anomaly detection is used for cybersecurity, fraud detection, supply chain disruptions, medicine, and other applications. 
 
 ---
 
