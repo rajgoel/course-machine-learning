@@ -67,6 +67,13 @@ using MachineLearningCourse
             Lecture07.demo(epochs=1, display=false)
         end
     end
+
+    @testset "Lecture08" begin
+        println("Testing Lecture08...")
+        @test_nowarn redirect_stdout(devnull) do
+            Lecture08.demo(max_episodes=1, plot=false)
+        end
+    end
 end
 
 
