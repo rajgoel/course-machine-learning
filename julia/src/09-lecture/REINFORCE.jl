@@ -53,6 +53,7 @@ Train an agent using the REINFORCE policy gradient algorithm.
 - `hidden_layers=[128, 64]`: Architecture of hidden layers
 - `η=1e-3`: Learning rate (typically higher than DQN)
 - `γ=0.99`: Discount factor for returns
+- `T=20_000`: Maximum steps per episode
 - `max_episodes=1000`: Maximum number of episodes to train
 - `callback=EpisodeLogger()`: Function called after each episode
 
@@ -66,7 +67,10 @@ policy = REINFORCE(env, max_episodes=1000)
 ```
 """
 function REINFORCE(env; 
-    hidden_layers=[64, 32], η=1e-3, γ=0.99, max_episodes=1000, callback=EpisodeLogger() )
+    hidden_layers=[64, 32], η=1e-3, 
+    γ=0.99, T=20_000, max_episodes=1000, 
+    callback=EpisodeLogger()
+)
     
     # Initialize environment and get dimensions
     RL.reset!(env)
