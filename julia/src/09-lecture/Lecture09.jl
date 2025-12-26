@@ -24,7 +24,6 @@ using ..Lecture08: EpisodeLogger, create_plot!  # Import from Lecture08
 include("PolicyNetwork.jl")
 include("REINFORCE.jl")
 include("ActorCritic.jl")
-include("A2C.jl")
 include("PolicyAgent.jl")
 include("Demo.jl")
 
