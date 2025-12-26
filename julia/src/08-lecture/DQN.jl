@@ -142,14 +142,13 @@ function DQN(env;
 )
     RL.reset!(env)
 
-        
     # Initialize experience replay buffer
     replay_buffer = ReplayBuffer(replay_memory_size)
     
     # Create the neural network architecture with flattened game state as input and action Q-values as output
     layers = [length(RL.observe(env)), hidden_layers..., length(RL.actions(env))]
-    q_network = QNetwork(layers)        # Main Q-network
-    target_network = QNetwork(layers)   # Target network for stable learning
+    q_network = ValueNetwork(layers)        # Main Q-network
+    target_network = ValueNetwork(layers)   # Target network for stable learning
     
     # Initialize target network with same weights as main network
     update_target_network!(target_network, q_network)

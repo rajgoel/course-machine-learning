@@ -28,7 +28,7 @@ module Lecture08
 # Include components
 using Breakout
 include("Logger.jl")
-include("QNetwork.jl")
+include("ValueNetwork.jl")
 include("ReplayBuffer.jl")
 include("DQN.jl")
 include("DQNAgent.jl")
