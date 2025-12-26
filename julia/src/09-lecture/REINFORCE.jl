@@ -50,17 +50,8 @@ function REINFORCE(env;
         Sₜ₋₁ = RL.observe(env)
         ∑rₜ = 0.0
         
-
         trajectory = Tuple{Vector{Float32}, Int32, Float32}[] # (state,action,reward)
 
-        # Episode storage
-        states = []
-        actions = []
-        rewards = []
-        log_probs = []
-        
-        steps = 0
-        
         t = 0
         # Loop over at most T steps within episode
         while t < T
