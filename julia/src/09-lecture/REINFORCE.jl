@@ -54,7 +54,6 @@ Train an agent using the REINFORCE policy gradient algorithm.
 - `η=1e-3`: Learning rate (typically higher than DQN)
 - `γ=0.99`: Discount factor for returns
 - `max_episodes=1000`: Maximum number of episodes to train
-- `baseline=false`: Whether to use baseline (reduces variance)
 - `callback=EpisodeLogger()`: Function called after each episode
 
 # Returns
@@ -67,9 +66,7 @@ policy = REINFORCE(env, max_episodes=1000)
 ```
 """
 function REINFORCE(env; 
-    hidden_layers=[64, 32], η=1e-3, γ=0.99, max_episodes=1000,
-    baseline=false, callback=EpisodeLogger()
-)
+    hidden_layers=[64, 32], η=1e-3, γ=0.99, max_episodes=1000, callback=EpisodeLogger() )
     
     # Initialize environment and get dimensions
     RL.reset!(env)
@@ -82,17 +79,6 @@ function REINFORCE(env;
     
     # Set up optimizer (Adam works well for policy gradients)
     optimizer = Flux.setup(Adam(η), policy)
-    
-    # Optional baseline for variance reduction
-    if baseline
-        baseline_layers = [feature_dim, hidden_layers..., 1]
-        value_network = Flux.Chain(
-            [Flux.Dense(baseline_layers[i], baseline_layers[i+1], 
-             i < length(baseline_layers)-1 ? Flux.relu : identity) 
-             for i in 1:length(baseline_layers)-1]...
-        )
-        value_optimizer = Flux.setup(Adam(η), value_network)
-    end
     
     # Training loop
     for episode in 1:max_episodes
@@ -132,25 +118,9 @@ function REINFORCE(env;
             steps += 1
         end
         
-        # Compute returns
-        returns = compute_returns(rewards, γ)
-        
-        # Compute baselines if using baseline
-        if baseline
-            # Train value network to predict returns
-            value_loss, value_grads = Flux.withgradient(value_network) do model
-                values = [model(reshape(s, :, 1))[1] for s in states]
-                Flux.Losses.mse(returns, values)
-            end
-            Flux.update!(value_optimizer, value_network, value_grads[1])
-            
-            # Compute advantages
-            values = [value_network(reshape(s, :, 1))[1] for s in states]
-            advantages = returns - values
-        else
-            advantages = returns
-        end
-        
+        # Compute advantages
+        advantages = compute_returns(rewards, γ)
+                
         # Policy gradient update
         policy_loss, policy_grads = Flux.withgradient(policy) do model
             # Compute policy loss: -∇_θ Σ log π(a|s) * G
