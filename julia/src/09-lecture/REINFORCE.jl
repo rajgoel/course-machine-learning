@@ -29,7 +29,7 @@ policy = REINFORCE(env, max_episodes=1000)
 """
 function REINFORCE(env; 
     hidden_layers=[64, 32], η=1e-3, 
-    γ=0.99, T=20_000, max_episodes=1000, 
+    γ=0.99, T=20_000, max_episodes=100_000, 
     callback=EpisodeLogger()
 )
     

@@ -24,7 +24,7 @@ result = demo(algorithm=REINFORCE, max_episodes=500)
 ```
 """
 function demo(algorithm=ActorCritic; max_episodes=100_000, plot=true)
-    env = BreakoutEnv(:minimal)
+    env = BreakoutEnv(:brickless)
     logger = EpisodeLogger(plot=plot)
 
     println("Policy Gradient Training initialized:")
