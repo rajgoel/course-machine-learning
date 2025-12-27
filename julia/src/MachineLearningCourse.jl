@@ -17,6 +17,7 @@ using MachineLearningCourse
 Lecture01.demo()
 Lecture02.demo()
 Lecture03.demo()
+# etc.
 ```
 
 ## Course Structure
@@ -24,12 +25,12 @@ Lecture03.demo()
 - **Lecture01**: A simple linear classifier
 - **Lecture02**: Vanilla implementation of gradient descent
 - **Lecture03**: Vanilla and Flux.jl deep neural network implementation
-- **Lecture04**: Stochastic gradient descent
-- **Lecture05**: Convolutional neural networks
-- **Lecture06**: Graph neural networks
-- **Lecture07**: Autoencoders
-- **Lecture08**: Deep Q networks
-- **Lecture09**: Proximal policy optimisation
+- **Lecture04**: Deep neural network implementation using Flux.jl
+- **Lecture05**: Implementation of filtering, pooling, and convolution
+- **Lecture06**: Implementation of graph convolutional networks (GCNs) for collaborative filtering
+- **Lecture07**: Implementation of autoencoders
+- **Lecture08**: Implementation of Deep Q-Learning for the Breakout game
+- **Lecture09**: Implementation of policy gradient methods for the Breakout game
 """
 module MachineLearningCourse
 

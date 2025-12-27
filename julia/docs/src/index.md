@@ -33,6 +33,10 @@ Lecture02.demo()
 
 ## Course material
 
+```@docs
+MachineLearningCourse.MachineLearningCourse
+```
+
 ### Lecture 01 - A simple linear classifier
 
 ```@autodocs
