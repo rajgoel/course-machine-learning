@@ -1,7 +1,7 @@
 """
     Lecture08
 
-Deep Q-learning on the Breakout game
+Implementation of Deep Q-Learning for the Breakout game
 
 # Available Functions
 
@@ -34,6 +34,6 @@ include("DQN.jl")
 include("DQNAgent.jl")
 include("Demo.jl")
 
-export demo, breakout, create_plot!, dqn_target_evaluation, ddqn_target_evaluation, dqn_agent, save, load
+export demo, breakout, create_plot!, DQN, dqn_target_evaluation, ddqn_target_evaluation, dqn_agent, save, load
 
 end # module Lecture08

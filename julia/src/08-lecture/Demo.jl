@@ -26,7 +26,7 @@ display(logger.plot)  # Show the plot
 ```
 """
 function demo(; max_episodes=100_000, target_evaluation=ddqn_target_evaluation, plot=true)
-    env = BreakoutEnv()
+    env = BreakoutEnv(:brickless)
     logger = EpisodeLogger(plot=plot)
 
     # Print training configuration for educational purposes

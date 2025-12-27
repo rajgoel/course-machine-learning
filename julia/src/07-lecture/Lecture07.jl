@@ -1,7 +1,7 @@
 """
     Lecture07
 
-Autoencoders
+Implementation of autoencoders
 
 # Available Functions
 

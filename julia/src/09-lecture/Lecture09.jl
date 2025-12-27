@@ -1,7 +1,7 @@
 """
     Lecture09
 
-Policy Gradient Methods: REINFORCE and Actor-Critic
+Implementation of policy gradient methods for the Breakout game.
 
 # Available Functions
 
@@ -27,6 +27,6 @@ include("ActorCritic.jl")
 include("PolicyAgent.jl")
 include("Demo.jl")
 
-export demo, policy_agent, save, load, EpisodeLogger, create_plot!
+export demo, policy_agent, save, load, EpisodeLogger, create_plot!, REINFORCE, ActorCritic
 
 end # module Lecture09

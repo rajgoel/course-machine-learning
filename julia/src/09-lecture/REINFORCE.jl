@@ -76,6 +76,11 @@ function REINFORCE(env;
             end
         end
         
+        # Callback for logging
+        if callback !== nothing
+            callback(i, t, ∑rₜ)
+        end
+
                ∇J̃ = Flux.gradient(policy) do model
             J̃ = 0.0f0 # Trajectory-based estimate of objective J(θ)
             R = 0.0f0
@@ -90,12 +95,7 @@ function REINFORCE(env;
             return J̃ / length(trajectory)  # Average objective per step
         end
               
-        Flux.update!(optimizer, policy, ∇J̃[1]) 
-        
-        # Callback for logging
-        if callback !== nothing
-            callback(i, t, ∑rₜ)
-        end
+        Flux.update!(optimizer, policy, ∇J̃[1])         
     end
     
     return policy

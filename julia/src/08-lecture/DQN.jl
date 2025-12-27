@@ -100,7 +100,7 @@ Train an agent using the (Double) DQN algorithm.
 # Arguments
 - `env`: Environment implementing CommonRLInterface
 - `hidden_layers=[128, 64]`: Architecture of hidden layers
-- `η=5e-5`: Learning rate for Adam optimizer
+- `η=1e-4`: Learning rate for Adam optimizer
 - `γ=0.99`: Discount factor for Bellman equation
 - `T=20_000`: Maximum steps per episode
 - `ϵ=(0.5, 0.01)`: Epsilon tuple (initial, final) for exploration
@@ -132,7 +132,7 @@ q_network = DQN(env, target_evaluation=dqn_target_evaluation)
 ```
 """
 function DQN(env; 
-    hidden_layers=[128, 64], η=5e-5, 
+    hidden_layers=[128, 64], η=1e-4, 
     γ=0.99, T=20_000,  
         ϵ=(0.5, 0.01), Δϵ = 1e-4, 
     replay_memory_size=1_000_000, replay_start_size=100_000, batch_size=32, update_frequency=4,
