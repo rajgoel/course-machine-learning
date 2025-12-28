@@ -17,8 +17,9 @@ Policy-based methods learn a **parameterised policy function** $\pi_\theta(S,X)$
 We can use a neural network with parameters $\theta$ to learn $\pi_\theta(S,X)$ for 
 creating trajectories 
 `$$\tau = (S_0, X_1, r_1, S_1, \ldots, S_T)$$` 
- and maximising the expected total rewards 
-`$$J(\theta) = \mathbb{E}\left[f(\tau)]$$`
+ and maximising 
+`$$J(\theta) = \mathbb{E}_\tau \left[R(\tau)\right]$$`
+where $R(\tau)$ represents the total rewards of trajectory $\tau$.
 
 ---
 
