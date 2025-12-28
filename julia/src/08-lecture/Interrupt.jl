@@ -4,12 +4,12 @@ Global reference to track interrupt status.
 QUIT = Ref(false)
 
 """
-    watch_keypress()
+    enable_interrupt()
 
 Start monitoring for ENTER key press to interrupt training.
 Press ENTER to interrupt training gracefully.
 """
-function watch_keypress()
+function enable_interrupt()
     QUIT[] = false
     println("Press ENTER to interrupt training...")
     

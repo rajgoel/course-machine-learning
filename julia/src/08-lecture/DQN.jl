@@ -161,7 +161,7 @@ function DQN(env;
 
     εᵢ = first(ε)  # Will be reduced by Δε after every episode
 
-    watch_keypress() # allow to interrupt training by pressing ENTER key
+    enable_interrupt() # allow to interrupt training by pressing ENTER key
     # Loop over episodes
     for i in 1:max_episodes
         # Reset environment for episode i

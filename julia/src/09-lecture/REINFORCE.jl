@@ -1,7 +1,7 @@
 using Flux
 using Statistics
 import CommonRLInterface as RL
-using ..Lecture08: EpisodeLogger
+using ..Lecture08: EpisodeLogger, QUIT, enable_interrupt
 
 
 """
@@ -43,6 +43,7 @@ function REINFORCE(env;
     # Set up optimizer (Adam works well for policy gradients)
     optimizer = Flux.setup(Adam(η), policy)
     
+    enable_interrupt() # allow to interrupt training by pressing ENTER key
     # Training loop
     for i in 1:max_episodes
         # Reset environment for episode i
@@ -96,6 +97,10 @@ function REINFORCE(env;
         end
               
         Flux.update!(optimizer, policy, ∇J̃[1])         
+
+        if QUIT[]
+            break
+        end
     end
     
     return policy

@@ -1,7 +1,7 @@
 using Flux
 using Statistics
 import CommonRLInterface as RL
-using ..Lecture08: EpisodeLogger, ValueNetwork
+using ..Lecture08: EpisodeLogger, ValueNetwork, QUIT, enable_interrupt
 
 
 """
@@ -54,6 +54,7 @@ function ActorCritic(env;
     actor_optimizer = Flux.setup(Adam(η), actor)
     critic_optimizer = Flux.setup(Adam(η_critic), critic)
     
+    enable_interrupt() # allow to interrupt training by pressing ENTER key
     # Training loop
     for i in 1:max_episodes
         # Reset environment for episode i
@@ -142,6 +143,10 @@ function ActorCritic(env;
         # Callback for logging
         if callback !== nothing
             callback(i, t, ∑rₜ)
+        end
+
+        if QUIT[]
+            break
         end
     end
     
