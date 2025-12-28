@@ -127,7 +127,7 @@ using the observed rewards and by replacing probabilities by 1 or 0 based on the
 
 We can apply gradient ascent using 
 
-`$$\tilde J(\theta) = \nabla_{\!\theta} \sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\nabla_{\!\theta}\ \tilde J(\theta) = \nabla_{\!\theta} \sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 as a proportional estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`.
 
