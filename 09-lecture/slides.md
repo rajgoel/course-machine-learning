@@ -361,7 +361,19 @@ Moreover, we have
 `$= \class{highlight}{\displaystyle\sum_X B(S)  \cdot \pi_\theta(S,X)  \cdot \nabla_{\!\theta} \ln \ \pi_\theta(S,X)}$`<!-- .element: data-id="zero-6" -->
 
 and `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
-`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \class{highlight}{\big( Q_{\pi_\theta}(S,X) - B(S) \big)} \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \class{highlight}{\big( Q_{\pi_\theta}(S,X) - B(S) \big)} \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="pgt-baseline" -->
+
+for any given baseline $B(S)$.
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+## Policy gradient theorem with baseline
+
+According to the policy gradient theorem, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \class{highlight}{\big( Q_{\pi_\theta}(S,X) - B(S) \big)} \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="pgt-baseline" -->
 
 for any given baseline $B(S)$.
 
