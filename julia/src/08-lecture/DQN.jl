@@ -141,7 +141,6 @@ function DQN(env;
     callback=EpisodeLogger()
 )
     RL.reset!(env)
-
     # Initialize experience replay buffer
     replay_buffer = ReplayBuffer(replay_memory_size)
     
@@ -162,6 +161,7 @@ function DQN(env;
 
          ϵᵢ = first(ϵ)  # Will be reduced by Δϵ after every episode
 
+    watch_keypress() # allow to interrupt training by pressing ENTER key
     # Loop over episodes
     for i in 1:max_episodes
         # Reset environment for episode i
@@ -220,6 +220,10 @@ function DQN(env;
 
         # Reduce ϵᵢ for reduced exploration and increased exploitation
                 ϵᵢ = max(last(ϵ), ϵᵢ - Δϵ)
+
+        if QUIT[]
+            break
+        end
     end
     
     return q_network

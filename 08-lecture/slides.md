@@ -230,7 +230,6 @@ function DQN(env;
     callback=EpisodeLogger()
 )
     RL.reset!(env)
-
     # Initialize experience replay buffer
     replay_buffer = ReplayBuffer(replay_memory_size)
     
@@ -251,6 +250,7 @@ function DQN(env;
 
          ϵᵢ = first(ϵ)  # Will be reduced by Δϵ after every episode
 
+    watch_keypress() # allow to interrupt training by pressing ENTER key
     # Loop over episodes
     for i in 1:max_episodes
         # Reset environment for episode i
@@ -309,6 +309,10 @@ function DQN(env;
 
         # Reduce ϵᵢ for reduced exploration and increased exploitation
                 ϵᵢ = max(last(ϵ), ϵᵢ - Δϵ)
+
+        if QUIT[]
+            break
+        end
     end
     
     return q_network
@@ -337,12 +341,23 @@ You find a full implementation of DQN and DDQN in the [course repository](https:
 > DQN:
 > ```julia
 > using MachineLearningCourse
-> Lecture09.demo(:DQN)
+> Lecture08.demo(:DQN)
 > ```
 >
 > DDQN:
 > ```julia
 > using MachineLearningCourse
-> Lecture09.demo(:DDQN)
+> Lecture08.demo(:DDQN)
 > ```
+
+---
+
+## (D)DQN for the Breakout game
+
+A visualisation of the trained agent playing the Breakout game can be launched by:
+
+```julia
+using MachineLearningCourse
+Lecture08.breakout()
+```
 

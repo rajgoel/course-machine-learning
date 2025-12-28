@@ -2,13 +2,13 @@ using Breakout
 import CommonRLInterface as RL
 
 """
-    demo(; max_episodes=100_000, target_evaluation=ddqn_target_evaluation, plot=true)
+    demo(algorithm=:DDQN; max_episodes=100_000, plot=true)
 
 Run a DQN training demo on Breakout environment.
 
 # Arguments
+- `algorithm=:DDQN`: Selected algorithm (use `:DQN` for standard DQN)
 - `max_episodes=100_000`: Maximum number of training episodes
-- `target_evaluation=ddqn_target_evaluation`: Target evaluation function (use `dqn_target_evaluation` for standard DQN)
 - `plot=true`: Whether to display live plots during training
 
 # Returns
@@ -17,17 +17,25 @@ Run a DQN training demo on Breakout environment.
 # Usage
 ```julia
 # With live plotting
-q_network, logger = demo(max_episodes=1000, plot=true)
+q_network, logger = Lecture08.demo(max_episodes=1000, plot=true)
 
-# Without live plotting (faster training)
-q_network, logger = demo(max_episodes=1000, plot=false)
-create_plot!(logger)  # Generate final plot
+# DQN without live plotting (faster training)
+q_network, logger = Lecture08.demo(:DQN, max_episodes=1000, plot=false)
+Lecture08.create_plot!(logger)  # Generate final plot
 display(logger.plot)  # Show the plot
 ```
 """
-function demo(; max_episodes=100_000, target_evaluation=ddqn_target_evaluation, plot=true)
+function demo(algorithm=:DDQN; max_episodes=100_000, plot=true)
     env = BreakoutEnv(:brickless)
     logger = EpisodeLogger(plot=plot)
+
+    if algorithm == :DDQN
+        target_evaluation=ddqn_target_evaluation
+    elseif algorithm == :DQN
+        target_evaluation=dqn_target_evaluation
+    else 
+        error("Unknown algorithm: $algorithm. Supported algorithms are :DQN and :DDQN")
+    end
 
     # Print training configuration for educational purposes
     println("Environment initialized:")

@@ -27,6 +27,7 @@ module Lecture08
 
 # Include components
 using Breakout
+include("Interrupt.jl")
 include("Logger.jl")
 include("ValueNetwork.jl")
 include("ReplayBuffer.jl")
