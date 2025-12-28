@@ -147,7 +147,7 @@ as a proportional estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`
 <!-- .slide: data-fullscreen="yes"  -->
 
 
-```julia [1-3|5-13|16-23|25-47|54-68]
+```julia [1-5|7-15|18-25|27-30|32-48|56-68]
 function REINFORCE(env; 
     hidden_layers=[64, 32], η=1e-3, 
     γ=0.99, T=20_000, max_episodes=100_000, 
@@ -203,7 +203,7 @@ function REINFORCE(env;
             callback(i, t, ∑rₜ)
         end
 
-               ∇J̃ = Flux.gradient(policy) do model
+        ∇J̃ = Flux.gradient(policy) do model
             J̃ = 0.0f0 # Trajectory-based estimate of objective J(θ)
             R = 0.0f0
             while t > 0
