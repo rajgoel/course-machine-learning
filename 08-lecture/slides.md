@@ -127,7 +127,7 @@ In Q-learning, we learn a **parameterised action-value function** $Q_\theta(S,X)
 
 The $\varepsilon$-greedy algorithm is a simple approach to balance **exploration** and **exploitation** when selecting actions by
 
-`$$X_t = \left\{  \begin{array}{l} \textsf{ any action with probability } \varepsilon \\ \displaystyle \arg\!\max_X Q_\theta(𝑆_{t-1},𝑋) \textsf{ with probability } 1-\varepsilon \end{array}\\   \right.$$`
+`$$X_t = \left\{  \begin{array}{l} \textsf{ any action with probability } \varepsilon \\ \displaystyle \,\arg\!\max_X Q_\theta(𝑆_{t-1},𝑋) \textsf{ with probability } 1-\varepsilon \end{array}\\   \right.$$`
 
 > [!NOTE]
 > We can gradually reduce $\varepsilon$ during training.
