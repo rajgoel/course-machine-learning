@@ -444,7 +444,7 @@ For training the critic we use the squared error loss
 
 ## Actor-critic algorithm
 
-```julia [1-5|7-21|24-31|33-36|38-53|55-74|76-82]
+```julia [1-5|7-21|24-31|33-36|38-53|58-66|68-77|79-80|85-91]
 function ActorCritic(env; 
     hidden_layers=[64, 32], η=1e-4, η_critic=1e-3,
     γ=0.99, T=20_000, max_episodes=100_000, 
