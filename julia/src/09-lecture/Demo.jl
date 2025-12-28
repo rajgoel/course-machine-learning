@@ -2,13 +2,13 @@ using Breakout
 import CommonRLInterface as RL
 
 """
-    demo(; algorithm=ActorCritic, max_episodes=1000, plot=true)
+    demo(algorithm=:REINFORCE; max_episodes=100_000, plot=true)
 
 Run policy gradient training demo on Breakout environment.
 
 # Arguments
-- `algorithm=ActorCritic`: Algorithm function to use (ActorCritic or REINFORCE)
-- `max_episodes=500_000`: Maximum number of training episodes
+- `algorithm=:REINFORCE`: Algorithm function to use (:REINFORCE or :ActorCritic)
+- `max_episodes=100_000`: Maximum number of training episodes
 - `plot=true`: Whether to display live plots during training
 
 # Returns
@@ -16,14 +16,14 @@ Run policy gradient training demo on Breakout environment.
 
 # Usage
 ```julia
-# Actor-Critic (default)
-result = demo(max_episodes=500)
+# REINFORCE (default)
+result = Lecture09.demo(max_episodes=500)
 
-# REINFORCE
-result = demo(algorithm=REINFORCE, max_episodes=500)
+# Actor-critic
+result = Lecture09.demo(algorithm=ActorCritic, max_episodes=500)
 ```
 """
-function demo(algorithm=ActorCritic; max_episodes=100_000, plot=true)
+function demo(algorithm=:REINFORCE; max_episodes=100_000, plot=true)
     env = BreakoutEnv(:brickless)
     logger = EpisodeLogger(plot=plot)
 
@@ -33,7 +33,14 @@ function demo(algorithm=ActorCritic; max_episodes=100_000, plot=true)
     println("  Max episodes: ", max_episodes)
     println("  Live plotting: ", plot)
 
-    result = algorithm(env, max_episodes=max_episodes, callback=logger)
+    if algorithm == :REINFORCE
+        result = REINFORCE(env, max_episodes=max_episodes, callback=logger)
+    elseif algorithm == :ActorCritic
+        result = ActorCritic(env, max_episodes=max_episodes, callback=logger)
+    else 
+        error("Unknown algorithm: $algorithm. Supported algorithms are :REINFORCE and :ActorCritic")
+    end
+
     return result, logger
 end
 

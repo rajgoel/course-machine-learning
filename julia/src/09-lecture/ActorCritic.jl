@@ -60,17 +60,11 @@ function ActorCritic(env;
         # Reset environment for episode i
         RL.reset!(env)
         Sₜ₋₁ = RL.observe(env)
-        ∑rₜ = 0.0
+        ∑rₜ = 0.0        
+        # Batch storage (state,action,reward,value of state, value of next state)
+        batch = Tuple{Vector{Float32}, Int32, Float32, Float32, Float32}[]
         
-        # Batch storage
-        states = Vector{Vector{Float32}}()
-        actions = Vector{Int}()
-        advantages = Vector{Float32}()
-        targets = Vector{Float32}()
-        
-        t = 0
-        batch_count = 0
-        
+        t = 0    
         # Loop over at most T steps within episode
         while t < T
             t += 1
@@ -85,50 +79,41 @@ function ActorCritic(env;
             Sₜ = RL.observe(env)
             terminal = RL.terminated(env)
             
-            # Compute TD error and targets
-            V_curr = critic(reshape(Sₜ₋₁, :, 1))[1]
-            V_next = terminal ? 0.0f0 : critic(reshape(Sₜ, :, 1))[1]
-            target = rₜ + γ * V_next
-            advantage = target - V_curr
+            # Compute values for state and next state
+            Vₜ₋₁ = critic(reshape(Sₜ₋₁, :, 1))[1]
+            Vₜ = terminal ? 0.0f0 : critic(reshape(Sₜ, :, 1))[1]
             
             # Store in batch
-            push!(states, copy(Sₜ₋₁))
-            push!(actions, action_idx)
-            push!(advantages, advantage)
-            push!(targets, target)
-            batch_count += 1
+            push!(batch, (Sₜ₋₁, Xₜ, rₜ, Vₜ₋₁, Vₜ))
             
             # Update networks when batch is full or episode ends
-            if batch_count >= batch_size || terminal
+            if length(batch) >= batch_size || terminal
                 # Batch update actor
                 ∇_actor = Flux.gradient(actor) do model
                     loss = 0.0f0
-                    for j in 1:batch_count
-                        log_π = Flux.logsoftmax(model(reshape(states[j], :, 1))[:, 1])
-                        loss += -advantages[j] * log_π[actions[j]]
+                    for (Sₜ₋₁, Xₜ, rₜ, Vₜ₋₁, Vₜ) in batch
+                        log_π = Flux.logsoftmax(model(reshape(Sₜ₋₁, :, 1))[:, 1])
+                        action_idx = findfirst(==(Xₜ), RL.actions(env))
+                        loss -= (rₜ + γ * Vₜ - Vₜ₋₁) * log_π[action_idx]
                     end
-                    loss / batch_count
+                    loss / length(batch)
                 end
                 
                 # Batch update critic
                 ∇_critic = Flux.gradient(critic) do model
                     loss = 0.0f0
-                    for j in 1:batch_count
-                        V_pred = model(reshape(states[j], :, 1))[1]
-                        loss += (targets[j] - V_pred)^2
+                    for (Sₜ₋₁, _, rₜ, _, Vₜ) in batch
+                        target = rₜ + γ * Vₜ 
+                        prediction = model(reshape(Sₜ₋₁, :, 1))[1]
+                        loss += (target - prediction)^2
                     end
-                    loss / batch_count
+                    loss / length(batch)
                 end
                 
                 Flux.update!(actor_optimizer, actor, ∇_actor[1])
                 Flux.update!(critic_optimizer, critic, ∇_critic[1])
                 
-                # Clear batch
-                empty!(states)
-                empty!(actions) 
-                empty!(advantages)
-                empty!(targets)
-                batch_count = 0
+                empty!(batch)
             end
             
             ∑rₜ += rₜ
