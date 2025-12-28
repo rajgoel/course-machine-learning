@@ -6,10 +6,9 @@ In reinforcement learning, an **agent learns** to make **sequential decisions** 
 
 ---
 
-## Sequential decision processes
+## Sequential decision problems
 
-Sequential decision processes provide a [unified modelling framework](https://link.springer.com/chapter/10.1007/978-3-030-60990-0_3) for reinforcement learning that naturally handles both deterministic and stochastic environments.
-They consist of
+[Sequential decision problems](https://castle.princeton.edu/wp-content/uploads/2021/09/RLSO-Cover-Chapter1-Sept32021.pdf) provide a unified modelling framework for reinforcement learning that naturally handles both deterministic and stochastic environments. They consist of
 
 - **State variables**
 - **Decision variables**
@@ -18,7 +17,7 @@ They consist of
 - **Objective function**
 
 > [!NOTE]
-> Reinforcement learning is often based on [Markov decision processes (MDPs)](https://en.wikipedia.org/wiki/Markov_decision_process), a framework for sequential decision processes in stochastic environments. 
+> An alternative framework for sequential decision problems are [Markov decision processes (MDPs)](https://en.wikipedia.org/wiki/Markov_decision_process). 
 
 ---
 
@@ -63,7 +62,7 @@ The objective function $f$ evaluates the quality of a state $S_t$.
 The goal is to **maximize** $f(S_T)$, where $T$ is the final time step.
 
 > [!IMPORTANT]
-> We assume that the sequential decision process is finite, i.e., there is a final time step $T$. Moreover, we assume that the objective function $f$ is evaluable for all states $S_t$, including intermediate and terminal states.
+> We assume that the sequential decision process is finite, i.e., there is a final time step $T$. Moreover, we assume that $f(S_t)$ can be evaluated for all $0 \leq t \leq T$.
 
 ---
 
@@ -111,7 +110,7 @@ deactivate Environment
 
 ## Value functions
 
-Value-based methods learn value functions to estimate expected cumulative rewards:
+Value-based methods learn to estimate:
 
 - **State-value function** $V(S)$: expected cumulative reward from state $S$
 - **Action-value function** $Q(S,X)$: expected cumulative reward from taking action (or decision) $X$ in state $S$
@@ -122,15 +121,22 @@ Value-based methods learn value functions to estimate expected cumulative reward
 
 In Q-learning, we learn a **parameterised action-value function** $Q_\theta(S,X)$ with parameters $\theta$ that estimates the expected cumulative reward from taking action $X$ in state $S$.
 
+---
+
+## $\epsilon$-greedy algorithm
+
+The $\epsilon$-greedy algorithm is a simple approach to balance **exploration** and **exploitation** when selecting actions by
+
+`$$X_t = \left\{  \begin{array}{l} \textsf{ any action with probability } \epsilon \\ \displaystyle \,\,\arg\!\max_X Q_\theta(𝑆,𝑋) \textsf{ with probability } 1-\epsilon \end{array}\\   \right.$$`
+
 > [!NOTE]
-> - After training, the action $X$ with the highest value of $Q_\theta(𝑆,𝑋)$ is taken.
-> - During training, exploration strategies are used that occasionally select other actions. 
+> We can gradually reduce $\epsilon$ during training.
 
 ---
 
 ## Deep Q-Networks (DQN)
 
-In DQN, $Q_\theta(S,X)$ is represented by a neural network and $\theta$ represents the weights and biases of the neural network. 
+In DQN we represent $Q_\theta(S,X)$ by a neural network with parameters $\theta$ representing the weights and biases. 
 
 > [!NOTE]
 > - The state $S$ defines the activations of the **input layer**.
@@ -152,19 +158,17 @@ If we had a perfectly learned action-value function $Q_\theta(S,X)$, and always 
 
 To learn the action-value function $Q_\theta(S,X)$, we use a sample-based form of the Bellman equation:
 
-`$$Q_\theta(S_{t-1}, X_t) = r_t + \gamma \cdot \max_{X} Q_\theta(S_t, X)$$`
+`$$Q_\theta(S_{t-1}, X_t) = r_t + \class{highlight}{\gamma} \cdot \max_{X} Q_\theta(S_t, X)$$`
 
-where
-- $\gamma \in [0,1]$ is a so-called **discount factor** for future rewards.
+where $\gamma \in [0,1]$ is a so-called **discount factor**.
 
 
 > [!NOTE]
-> - Observed transitions `$\big(S_{t-1},X_t,r_t,S_t\big)$` allow us to omit computing expected values.
-> - With $\gamma < 1$, future errors due to imperfect $Q$-values are discounted.
+> $\gamma < 1$ is used to reduce the impact of imperfect $Q$-values for future actions.
 
 ---
 
-## Loss function and challenges in training
+## Loss function
 
 We can train our neural network by minimizing the squared error between the target obtained by the Bellman equation and the prediction
 
@@ -174,21 +178,29 @@ We can train our neural network by minimizing the squared error between the targ
 > Consecutive observations are highly correlated. This can cause **overfitting** to recent training data.
 <!-- .element: class="fragment" -->
 
-> [!WARNING]
-> Both prediction and target depend on $\theta$ which is updated during training. This can create **instability** and can prevent convergence.
-<!-- .element: class="fragment" -->
-
 ---
 
 ## Experience replay
 
-To reduce correlation of observations used for training, we can create a **replay buffer** in which we store observations.
+To reduce correlation of observations used for training, we can create a **replay buffer** in which we store observed **state transitions** $(S_{t-1},X_t,r_t,S_t)$.
 
-During training we randomly pick observations from the replay buffer, and run stochastic gradient descent on those mini-batches. 
+We create mini-batches by **randomly** picking state transitions to run stochastic gradient descent.
 
 > [!NOTE]
 > With a sufficiently large replay buffer, observations selected for a mini-batch are likely to come from different episodes.
 
+---
+
+## Instability
+
+Both the Bellman target and the prediction
+
+`$$\mathscr{L}(\theta) = \Big( \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_\theta(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} \Big)^2$$`
+
+depend on $\theta$ which is updated during training.
+
+> [!IMPORTANT]
+> Even small changes in $\theta$ can cause large changes in the loss. This can create **instability** and can prevent convergence.
 
 ---
 
@@ -203,60 +215,113 @@ To address the **instability** problem, we can use a **target network** with par
 
 ---
 
-## TD-error and gradient of the loss
+## DQN-Algorithm
 
-The gradient of the loss
+```julia [1-9|10-24|26-28|30|32-33|34-37|39-44|46-51|53-56|58-59|61-65|67-71|73-80|88-89]
+function DQN(env; 
+    hidden_layers=[128, 64], η=1e-4, 
+    γ=0.99, T=20_000,  
+        ϵ=(0.5, 0.01), Δϵ = 1e-4, 
+    replay_memory_size=1_000_000, replay_start_size=100_000, batch_size=32, update_frequency=4,
+    target_evaluation=ddqn_target_evaluation,  target_update_frequency=25_000,
+    max_episodes=100_000,  
+    callback=EpisodeLogger()
+)
+    RL.reset!(env)
 
-`$$\mathscr{L}(\theta) = \Big(  \underbrace{\big( r_t + \gamma \cdot \max_{X} Q_{\theta_{\text{target}}}(S_t, X) \big)}_{\textrm{Bellman target}} - \underbrace{Q_\theta(S_{t-1}, X_t)}_{\textrm{Prediction}} \Big)^2$$`
+    # Initialize experience replay buffer
+    replay_buffer = ReplayBuffer(replay_memory_size)
+    
+    # Create the neural network architecture with flattened game state as input and action Q-values as output
+    layers = [length(RL.observe(env)), hidden_layers..., length(RL.actions(env))]
+    q_network = ValueNetwork(layers)        # Main Q-network
+    target_network = ValueNetwork(layers)   # Target network for stable learning
+    
+    # Initialize target network with same weights as main network
+    update_target_network!(target_network, q_network)
+    
+    # Set up Adam optimizer for gradient-based learning
+    optimizer = Flux.setup(Adam(η), q_network)
 
-with respect to $\theta$ is 
+    # Initialize update counters
+    next_update = replay_start_size
+    next_target_update = replay_start_size + target_update_frequency
 
-`$$\nabla_{\!\theta}\ \mathscr{L} = 2\delta_t \cdot (-1) \cdot \nabla_\theta Q_\theta(S_{t-1}, X_t)$$`
+         ϵᵢ = first(ϵ)  # Will be reduced by Δϵ after every episode
 
-where $\delta_t$ is the **temporal difference (TD) error**, i.e., the difference between Bellman target and prediction.
+    # Loop over episodes
+    for i in 1:max_episodes
+        # Reset environment for episode i
+        RL.reset!(env)
+        Sₜ₋₁ = RL.observe(env)
+        ∑rₜ = 0.0
+        
+        t = 0
+        # Loop over at most T steps within episode
+        while t < T
+            t += 1
+            next_update -= 1
+            next_target_update -= 1
+            
+            # ϵᵢ-greedy action selection
+            if rand() < ϵᵢ
+                Xₜ = rand(RL.actions(env)) # Random action
+            else               
+                Xₜ = RL.actions(env)[argmax(q_network(reshape(Sₜ₋₁, :, 1)))]  # Greedy action 
+            end
+            
+            # Execute the chosen action in the environment
+            rₜ = RL.act!(env, Xₜ)
+            Sₜ = RL.observe(env)
+            terminal = RL.terminated(env)
+            
+            # Store experience in replay buffer for later learning
+            push!(replay_buffer, StateTransition(Sₜ₋₁, Xₜ, rₜ, Sₜ, terminal))
+            
+            # Perform training step when counter reaches zero
+            if next_update <= 0
+                loss = train_step!(q_network, target_network, optimizer, replay_buffer, batch_size, γ, RL.actions(env), target_evaluation)
+                next_update = update_frequency  # Reset counter
+            end
+            
+            # Update target network when counter reaches zero
+            if next_target_update <= 0
+                update_target_network!(target_network, q_network)
+                next_target_update = target_update_frequency  # Reset counter
+            end
+            
+            # Update episode reward
+            ∑rₜ += rₜ
+            Sₜ₋₁ = Sₜ
+            
+            # End episode if terminal state reached
+            if terminal
+                break
+            end
+        end
+        
+        # Callback for monitoring progress
+        if callback !== nothing
+            callback(i, t, ∑rₜ)
+        end
 
-> [!NOTE]
-> With the target network, the Bellman target does not depend on $\theta$.
+        # Reduce ϵᵢ for reduced exploration and increased exploitation
+                ϵᵢ = max(last(ϵ), ϵᵢ - Δϵ)
+    end
+    
+    return q_network
+end
+```
 
 
 ---
 
-## DQN Algorithm
+## DQN vs. Double DQN (DDQN)
 
-```
-Initialize:
-  - Q-network with random weights θ
-  - Target network Q_target with weights θ_target = θ 
-  - Replay buffer D
-  - Target network update frequency C
-  - Environment
+In DQN the target network is target network is used for both action selection and evaluation. As Q-values may be wrong, especially early in training, any overestimation may amplify if used for selection and evaluation.
 
-For each episode:
-  1. Initialize state S₀
-  
-  For each time step t:
-    1a. With probability ε: select random action Xₜ
-        Otherwise: select Xₜ = argmax Q(Sₜ₋₁, X)
-    
-    1b. Execute action Xₜ, observe reward rₜ and state Sₜ
-    
-    1c. Store transition (Sₜ₋₁, Xₜ, rₜ, Sₜ) in replay buffer D
-    
-    1d. Sample random mini-batch from D
-    
-    1e. For each transition in the mini-batch:
-        Compute target: yⱼ = rⱼ + γ · max Q_target(Sⱼ, X)
-        Compute TD-error: δⱼ = yⱼ - Q(Sⱼ₋₁, Xⱼ)
-    
-    1f. Update θ: θ ← θ + α × avg( 2δⱼ × ∇_θ Q(Sⱼ₋₁, Xⱼ) ) 
-    
-    1h. if t mod C == 0: update target network θ_target ← θ
-
-  2. Update ε
-```
+To reduce such an **overestimation bias** DDQN uses the target network for evaluation, and the main network for action selection. 
 
 > [!NOTE]
-> - ε-greedy exploration balances exploitation vs exploration
-> - Mini-batch sampling breaks correlation between consecutive updates
-> - Target network updates every C steps maintain training stability
+> Decoupling selection from evaluation prevents the same network's overestimation errors from compounding. If the main network overestimates an action, the target network provides an independent evaluation that is less likely to have the same overestimation bias.
 
