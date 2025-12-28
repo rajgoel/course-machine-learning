@@ -92,7 +92,7 @@ Given a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$, we can e
 using the observed rewards and by replacing probabilities by 1 or 0 based on the actual observation:
 <!-- .element: data-id="trajectories" -->
 
-`$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> $1 \cdot$ `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot  1 \cdot$ `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
+`$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> $1 \cdot$ `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot  1 \cdot$ `$\nabla_{\!\theta}$`<!-- .element: data-id="nabla" --> `$\ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
 
 ---
 
@@ -105,7 +105,20 @@ Given a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$, we can e
 using the observed rewards and by replacing probabilities by 1 or 0 based on the actual observation:
 <!-- .element: data-id="trajectories" -->
 
-`$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot$ `$\nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
+`$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot$ `$\nabla_{\!\theta}$`<!-- .element: data-id="nabla" --> `$\ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+Given a trajectory of observations $(S_0, X_1, r_1, S_1, \ldots, S_T)$, we can estimate
+
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="del-J-final" -->
+
+using the observed rewards and by replacing probabilities by 1 or 0 based on the actual observation:
+<!-- .element: data-id="trajectories" -->
+
+`$\nabla_{\!\theta}$`<!-- .element: data-id="nabla" --> `$\displaystyle\sum_{t=1}^{T}  \Big($`<!-- .element: data-id="del-J-estimate-a" --> `$\displaystyle\sum_{k=t}^T r_k$`<!-- .element: data-id="del-J-estimate-b" --> $\cdot$ `$\ln \pi_\theta(S_{t-1},X_t) \Big)$`<!-- .element: data-id="del-J-estimate-c" -->
 
 ---
 
@@ -113,7 +126,7 @@ using the observed rewards and by replacing probabilities by 1 or 0 based on the
 
 We can apply gradient ascent using 
 
-`$$\sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\tilde J(\theta) = \nabla_{\!\theta} \sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 as a proportional estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`
 
