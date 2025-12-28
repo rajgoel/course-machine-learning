@@ -103,8 +103,8 @@ Train an agent using the (Double) DQN algorithm.
 - `η=1e-4`: Learning rate for Adam optimizer
 - `γ=0.99`: Discount factor for Bellman equation
 - `T=20_000`: Maximum steps per episode
-- `ϵ=(0.5, 0.01)`: Epsilon tuple (initial, final) for exploration
-- `Δϵ=1e-4`: Epsilon decay per episode
+- `ε=(0.5, 0.01)`: Epsilon tuple (initial, final) for exploration
+- `Δε=1e-4`: Epsilon decay per episode
 - `replay_memory_size=1_000_000`: Size of experience replay buffer
 - `replay_start_size=100_000`: Start training after this many experiences
 - `batch_size=32`: Batch size for training
@@ -134,7 +134,7 @@ q_network = DQN(env, target_evaluation=dqn_target_evaluation)
 function DQN(env; 
     hidden_layers=[128, 64], η=1e-4, 
     γ=0.99, T=20_000,  
-        ϵ=(0.5, 0.01), Δϵ = 1e-4, 
+    ε=(0.5, 0.01), Δε = 1e-4, 
     replay_memory_size=1_000_000, replay_start_size=100_000, batch_size=32, update_frequency=4,
     target_evaluation=ddqn_target_evaluation,  target_update_frequency=25_000,
     max_episodes=100_000,  
@@ -159,7 +159,7 @@ function DQN(env;
     next_update = replay_start_size
     next_target_update = replay_start_size + target_update_frequency
 
-         ϵᵢ = first(ϵ)  # Will be reduced by Δϵ after every episode
+    εᵢ = first(ε)  # Will be reduced by Δε after every episode
 
     watch_keypress() # allow to interrupt training by pressing ENTER key
     # Loop over episodes
@@ -176,8 +176,8 @@ function DQN(env;
             next_update -= 1
             next_target_update -= 1
             
-            # ϵᵢ-greedy action selection
-            if rand() < ϵᵢ
+            # εᵢ-greedy action selection
+            if rand() < εᵢ
                 Xₜ = rand(RL.actions(env)) # Random action
             else               
                 Xₜ = RL.actions(env)[argmax(q_network(reshape(Sₜ₋₁, :, 1)))]  # Greedy action 
@@ -218,8 +218,8 @@ function DQN(env;
             callback(i, t, ∑rₜ)
         end
 
-        # Reduce ϵᵢ for reduced exploration and increased exploitation
-                ϵᵢ = max(last(ϵ), ϵᵢ - Δϵ)
+        # Reduce εᵢ for reduced exploration and increased exploitation
+        εᵢ = max(last(ε), εᵢ - Δε)
 
         if QUIT[]
             break

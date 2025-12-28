@@ -57,6 +57,6 @@ function load(filepath::String)
     network = ValueNetwork(data["architecture"])
     Flux.loadmodel!(network, data["weights"])
     println("Network loaded from: $filepath")
-    return q_network
+    return network
 end
 
