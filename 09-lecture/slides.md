@@ -440,6 +440,8 @@ For training the critic we use the squared error loss
 
 ---
 
+<!-- .slide: data-fullscreen="yes"  -->
+
 ## Actor-critic algorithm
 
 ```julia [1-5|7-21|24-31|33-36|38-53|55-74|76-82]
@@ -549,4 +551,34 @@ function ActorCritic(env;
     return actor
 end
 ```
+<!-- .element: class="fullscreen stretch" -->
+
+---
+
+You find a full implementation of REINFORCE and Actor-critic in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
+> [!TIP]
+> - **REINFORCE:**
+> ```julia
+> using MachineLearningCourse
+> Lecture09.demo(:REINFORCE)
+> ```
+>
+> - **Actor-critic:**:
+> ```julia
+> using MachineLearningCourse
+> Lecture09.demo(:ActorCritic)
+> ```
+
+---
+
+## REINFORCE for the Breakout game
+
+> [!TIP]
+> A visualisation of the trained agent playing the Breakout game can be launched by:
+> 
+> ```julia
+> using MachineLearningCourse
+> Lecture09.breakout()
+> ```
 
