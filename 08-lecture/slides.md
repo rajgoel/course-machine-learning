@@ -215,6 +215,8 @@ To address the **instability** problem, we can use a **target network** with par
 
 ---
 
+<!-- .slide: data-fullscreen="yes"  -->
+
 ## DQN-Algorithm
 
 ```julia [1-9|10-24|26-28|30|32-33|34-37|39-44|46-51|53-56|58-59|61-65|67-71|73-80|88-89]
@@ -312,6 +314,7 @@ function DQN(env;
     return q_network
 end
 ```
+<!-- .element: class="fullscreen stretch" -->
 
 
 ---
