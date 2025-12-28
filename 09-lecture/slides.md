@@ -16,9 +16,9 @@ Policy-based methods learn a **parameterised policy function** $\pi_\theta(S,X)$
 
 We can use a neural network with parameters $\theta$ to learn $\pi_\theta(S,X)$ for 
 creating trajectories 
-`$$(S_0, X_1, r_1, S_1, \ldots, S_T)$$` 
- and maximising the expected returns 
-`$$J(\theta) = \mathbb{E}\left[\sum_{t=1}^T r_t\right]$$`
+`$$\tau = (S_0, X_1, r_1, S_1, \ldots, S_T)$$` 
+ and maximising the expected total rewards 
+`$$J(\theta) = \mathbb{E}\left[f(\tau)]$$`
 
 ---
 
@@ -128,7 +128,7 @@ We can apply gradient ascent using
 
 `$$\tilde J(\theta) = \nabla_{\!\theta} \sum_{t=1}^{T}  \Big( \sum_{k=t}^T r_k \cdot  \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
-as a proportional estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`
+as a proportional estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`.
 
 > [!NOTE]
 > The hope is that gradient estimates over many trajectories will lead to policy improvement similar to using true gradients.
