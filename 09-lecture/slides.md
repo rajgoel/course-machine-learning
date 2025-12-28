@@ -143,25 +143,91 @@ as a proportional estimate of the true gradient `$\nabla_{\!\theta}\ J(\theta)$`
 
 ## REINFORCE algorithm
 
-```
-Initialize:
-  - Policy network π_θ with random weights θ
-  - Environment
+<!-- .slide: data-fullscreen="yes"  -->
 
-For each episode:
-  1. Collect trajectory: (S₀, X₁, r₁, S₁, ..., S_T)
-  
-  2. For each time step t = T down to 1:
-     - Compute cumulative reward: Rₜ = rₜ + R_{t+1} (with R_{T+1} = 0)
-     - Compute gradient: ∇ₜ = ∇_θ log π_θ(Sₜ₋₁,Xₜ) × Rₜ
-  
-  3. Update policy: θ ← θ + α × Σ(t=1 to T) ∇ₜ
-```
 
-> [!NOTE]
-> - REINFORCE learns from complete episodes (Monte Carlo approach)
-> - Higher rewards increase probability of actions that led to them
-> - Can have high variance due to using full trajectory returns
+```julia [1-3|5-13|16-23|25-47|54-68]
+function REINFORCE(env; 
+    hidden_layers=[64, 32], η=1e-3, 
+    γ=0.99, T=20_000, max_episodes=100_000, 
+    callback=EpisodeLogger()
+)
+    
+    # Initialize environment and get dimensions
+    RL.reset!(env)
+    
+    # Create policy network for discrete actions
+    layers = [length(RL.observe(env)), hidden_layers..., length(RL.actions(env))]
+    policy = PolicyNetwork(layers)
+    
+    # Set up optimizer (Adam works well for policy gradients)
+    optimizer = Flux.setup(Adam(η), policy)
+    
+    enable_interrupt() # allow to interrupt training by pressing ENTER key
+    # Training loop
+    for i in 1:max_episodes
+        # Reset environment for episode i
+        RL.reset!(env)
+        Sₜ₋₁ = RL.observe(env)
+        ∑rₜ = 0.0
+        
+        trajectory = Tuple{Vector{Float32}, Int32, Float32}[] # (state,action,reward)
+
+        t = 0
+        # Loop over at most T steps within episode
+        while t < T
+            t += 1
+            
+            # Sample action from policy
+            π = Flux.softmax(policy(reshape(Sₜ₋₁, :, 1))[:, 1])            
+            action_idx = sample_action(π)
+
+            Xₜ = RL.actions(env)[action_idx]
+            rₜ = RL.act!(env, Xₜ)
+            Sₜ = RL.observe(env)
+            terminal = RL.terminated(env)          
+            
+            push!(trajectory, (Sₜ₋₁, Xₜ, rₜ))
+            ∑rₜ += rₜ
+            Sₜ₋₁ = Sₜ
+
+            # End episode if terminal state reached
+            if terminal
+                break
+            end
+        end
+        
+        # Callback for logging
+        if callback !== nothing
+            callback(i, t, ∑rₜ)
+        end
+
+               ∇J̃ = Flux.gradient(policy) do model
+            J̃ = 0.0f0 # Trajectory-based estimate of objective J(θ)
+            R = 0.0f0
+            while t > 0
+                Sₜ₋₁, Xₜ, rₜ = trajectory[t] 
+                R = rₜ + γ * R
+                log_π = Flux.logsoftmax(model(reshape(Sₜ₋₁, :, 1))[:, 1])
+                action_idx = findfirst(==(Xₜ), RL.actions(env))
+                J̃ -= R * log_π[action_idx] # negative objective for gradient descent
+                t -= 1
+            end
+            return J̃ / length(trajectory)  # Average objective per step
+        end
+              
+        Flux.update!(optimizer, policy, ∇J̃[1])         
+
+        if QUIT[]
+            break
+        end
+    end
+    
+    return policy
+end
+```
+<!-- .element: class="fullscreen stretch" -->
+
 
 ===
 
