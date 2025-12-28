@@ -219,7 +219,7 @@ To address the **instability** problem, we can use a **target network** with par
 
 ## DQN-Algorithm
 
-```julia [1-9|10-24|26-28|30|32-33|34-37|39-44|46-51|53-56|58-59|61-65|67-71|73-80|88-89]
+```julia [1-9|10-23|25-27|29|32-33|34-37|39-44|46-51|53-56|58-59|61-65|67-71|73-80|88-89]
 function DQN(env; 
     hidden_layers=[128, 64], η=1e-4, 
     γ=0.99, T=20_000,  
@@ -334,7 +334,7 @@ In DQN the target network is used for **both** action selection and evaluation.
 
 ## Double DQN (DDQN)
 
-To reduce the overestimation bias DDQN uses the target network for evaluation, and the main network for action selection. 
+To reduce the overestimation bias, DDQN uses the target network for evaluation, and the main network for action selection. 
 
 > [!NOTE]
 > If the main network overestimates an action, the target network provides an independent evaluation that is less likely to have the same overestimation bias.
@@ -361,10 +361,11 @@ You find a full implementation of DQN and DDQN in the [course repository](https:
 
 ## (D)DQN for the Breakout game
 
-A visualisation of the trained agent playing the Breakout game can be launched by:
-
-```julia
-using MachineLearningCourse
-Lecture08.breakout()
-```
+> [!TIP]
+> A visualisation of the trained agent playing the Breakout game can be launched by:
+> 
+> ```julia
+> using MachineLearningCourse
+> Lecture08.breakout()
+> ```
 
