@@ -111,6 +111,7 @@ You find a full implementation for latent space visualisation of MNIST image dis
 > ```julia
 > using MachineLearningCourse
 > Lecture07.demo()
+> ```
 
 ===
 

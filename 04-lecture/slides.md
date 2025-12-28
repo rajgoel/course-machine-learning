@@ -99,6 +99,7 @@ You find a full implementation for recognising handwritten digits with stochasti
 > ```julia
 > using MachineLearningCourse
 > Lecture04.demo()
+> ```
 
 ===
 

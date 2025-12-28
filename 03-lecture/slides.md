@@ -738,4 +738,5 @@ You can find the implementation in the [course repository](https://rajgoel.githu
 > ```julia
 > using MachineLearningCourse
 > Lecture03.flux_demo()
+> ```
 

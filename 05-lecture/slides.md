@@ -318,4 +318,5 @@ You find a full implementation for recognising handwritten digits with the LeNet
 > ```julia
 > using MachineLearningCourse
 > Lecture05.demo()
+> ```
 

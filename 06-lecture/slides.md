@@ -653,4 +653,5 @@ You find a full implementation for movie recommendations based on the [MovieLens
 > ```julia
 > using MachineLearningCourse
 > Lecture06.demo()
+> ```
 

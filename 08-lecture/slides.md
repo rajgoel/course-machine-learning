@@ -328,3 +328,21 @@ To reduce such an **overestimation bias** DDQN uses the target network for evalu
 > [!NOTE]
 > Decoupling selection from evaluation prevents the same network's overestimation errors from compounding. If the main network overestimates an action, the target network provides an independent evaluation that is less likely to have the same overestimation bias.
 
+
+---
+
+You find a full implementation of DQN and DDQN in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
+
+> [!TIP]
+> DQN:
+> ```julia
+> using MachineLearningCourse
+> Lecture09.demo(:DQN)
+> ```
+>
+> DDQN:
+> ```julia
+> using MachineLearningCourse
+> Lecture09.demo(:DDQN)
+> ```
+
