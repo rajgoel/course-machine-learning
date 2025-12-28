@@ -396,10 +396,9 @@ We know that `$\nabla_{\!\theta}\ J(\theta)$` is proportional to
 We know that `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 `$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) \class{highlight}{- V_{\theta_\text{critic}}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="critic" -->
 
-which can be estimated by 
+which can be estimated by  
 
-`$$\nabla_{\!\theta}  \sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k \class{highlight}{- V_{\theta_\text{critic}}(S_{t-1})} \big) \cdot   \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
-<!-- .element: data-id="critic-2" -->
+`$$\nabla_{\!\theta}  \sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k \class{highlight}{- V_{\theta_\text{critic}}(S_{t-1})} \big) \cdot   \ln \pi_\theta(S_{t-1},X_t) \Big)$$`<!-- .element: data-id="critic-2" -->
 
 ---
 
@@ -422,7 +421,7 @@ As we do not need to wait for termination of an episode, we can estimate the pol
 
 `$$\nabla_{\!\theta}  \big( r_t + V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \ln \pi_\theta(S_{t-1},X_t)$$`
 
---
+---
 
 ## Training the actor 
 
@@ -436,8 +435,8 @@ as a proportional approximate of $\nabla_\theta J(\theta)$ for training the acto
 
 ## Training the critic 
 
-For training the critic we use the loss function
-`$$\mathscr(\theta_\text{critic}}) = \big( \underbrace{r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} \big)^2$$`
+For training the critic we use the squared error loss
+`$$\mathscr{L}(\theta_{\text{critic}}) = \big( \underbrace{r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} \big)^2$$`
 
 ---
 
