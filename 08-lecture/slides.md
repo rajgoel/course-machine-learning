@@ -123,14 +123,14 @@ In Q-learning, we learn a **parameterised action-value function** $Q_\theta(S,X)
 
 ---
 
-## $\epsilon$-greedy algorithm
+## $\varepsilon$-greedy algorithm
 
-The $\epsilon$-greedy algorithm is a simple approach to balance **exploration** and **exploitation** when selecting actions by
+The $\varepsilon$-greedy algorithm is a simple approach to balance **exploration** and **exploitation** when selecting actions by
 
-`$$X_t = \left\{  \begin{array}{l} \textsf{ any action with probability } \epsilon \\ \displaystyle \,\,\arg\!\max_X Q_\theta(𝑆,𝑋) \textsf{ with probability } 1-\epsilon \end{array}\\   \right.$$`
+`$$X_t = \left\{  \begin{array}{l} \textsf{ any action with probability } \varepsilon \\ \displaystyle \arg\!\max_X Q_\theta(𝑆_{t-1},𝑋) \textsf{ with probability } 1-\varepsilon \end{array}\\   \right.$$`
 
 > [!NOTE]
-> We can gradually reduce $\epsilon$ during training.
+> We can gradually reduce $\varepsilon$ during training.
 
 ---
 
@@ -223,7 +223,7 @@ To address the **instability** problem, we can use a **target network** with par
 function DQN(env; 
     hidden_layers=[128, 64], η=1e-4, 
     γ=0.99, T=20_000,  
-        ϵ=(0.5, 0.01), Δϵ = 1e-4, 
+    ε=(0.5, 0.01), Δε = 1e-4, 
     replay_memory_size=1_000_000, replay_start_size=100_000, batch_size=32, update_frequency=4,
     target_evaluation=ddqn_target_evaluation,  target_update_frequency=25_000,
     max_episodes=100_000,  
@@ -248,7 +248,7 @@ function DQN(env;
     next_update = replay_start_size
     next_target_update = replay_start_size + target_update_frequency
 
-         ϵᵢ = first(ϵ)  # Will be reduced by Δϵ after every episode
+    εᵢ = first(ε)  # Will be reduced by Δε after every episode
 
     watch_keypress() # allow to interrupt training by pressing ENTER key
     # Loop over episodes
@@ -265,8 +265,8 @@ function DQN(env;
             next_update -= 1
             next_target_update -= 1
             
-            # ϵᵢ-greedy action selection
-            if rand() < ϵᵢ
+            # εᵢ-greedy action selection
+            if rand() < εᵢ
                 Xₜ = rand(RL.actions(env)) # Random action
             else               
                 Xₜ = RL.actions(env)[argmax(q_network(reshape(Sₜ₋₁, :, 1)))]  # Greedy action 
@@ -307,8 +307,8 @@ function DQN(env;
             callback(i, t, ∑rₜ)
         end
 
-        # Reduce ϵᵢ for reduced exploration and increased exploitation
-                ϵᵢ = max(last(ϵ), ϵᵢ - Δϵ)
+        # Reduce εᵢ for reduced exploration and increased exploitation
+        εᵢ = max(last(ε), εᵢ - Δε)
 
         if QUIT[]
             break
@@ -323,14 +323,21 @@ end
 
 ---
 
-## DQN vs. Double DQN (DDQN)
+## Overestimation bias
 
-In DQN the target network is target network is used for both action selection and evaluation. As Q-values may be wrong, especially early in training, any overestimation may amplify if used for selection and evaluation.
+In DQN the target network is used for **both** action selection and evaluation.
 
-To reduce such an **overestimation bias** DDQN uses the target network for evaluation, and the main network for action selection. 
+> [!WARNING]
+> If an action is overestimated, it will be both selected (due to high value) and evaluated highly (same high value), creating an **overestimation bias** causing a wrong learning signal.
+
+---
+
+## Double DQN (DDQN)
+
+To reduce the overestimation bias DDQN uses the target network for evaluation, and the main network for action selection. 
 
 > [!NOTE]
-> Decoupling selection from evaluation prevents the same network's overestimation errors from compounding. If the main network overestimates an action, the target network provides an independent evaluation that is less likely to have the same overestimation bias.
+> If the main network overestimates an action, the target network provides an independent evaluation that is less likely to have the same overestimation bias.
 
 
 ---
@@ -338,13 +345,13 @@ To reduce such an **overestimation bias** DDQN uses the target network for evalu
 You find a full implementation of DQN and DDQN in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
 
 > [!TIP]
-> DQN:
+> - **DQN:**
 > ```julia
 > using MachineLearningCourse
 > Lecture08.demo(:DQN)
 > ```
 >
-> DDQN:
+> - **DDQN:**:
 > ```julia
 > using MachineLearningCourse
 > Lecture08.demo(:DDQN)
