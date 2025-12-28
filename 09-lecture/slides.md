@@ -76,7 +76,7 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \underbrace{\class{highlight}{\nabla_{\!\theta} \ln \ \pi_\theta(S,X)}}_{= \frac{\nabla_{\tiny\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \underbrace{\class{highlight}{\nabla_{\!\theta} \ln \ \pi_\theta(S,X)}}_{= \frac{\nabla_{\!\tiny\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
 
 > [!TIP]
 > Computing gradients of log-probabilities  `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$` can easily be done using **auto-differentiation** of modern deep learning frameworks.
@@ -379,27 +379,38 @@ for any given baseline $B(S)$.
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ## Value-function baseline
 
 The main idea of actor-critic methods is to use a baseline obtained from a learnable **state-value function** `$V_{\theta_\text{critic}}(S)$` with parameters `$\theta_\text{critic}$`.
 
-Then, `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
-`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) \class{highlight}{- V_{\theta_\text{critic}}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`
-
-<span class="fragment">
-which can be estimated by 
-
-`$$\sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k \class{highlight}{- V_{\theta_\text{critic}}(S_{t-1})} \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
-
-</span>
+We know that `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) \class{highlight}{- V_{\theta_\text{critic}}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="critic" -->
 
 ---
 
-`$$\sum_{t=1}^{T}  \Big( \big( \class{highlight}{\sum_{k=t}^T r_k} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+
+<!-- .slide: data-auto-animate="true" -->
+
+We know that `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
+`$$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X \big( Q_{\pi_\theta}(S,X) \class{highlight}{- V_{\theta_\text{critic}}(S)} \big) \cdot \pi_\theta(S,X) \cdot  \nabla_{\!\theta} \ln \ \pi_\theta(S,X) \Big)$$`<!-- .element: data-id="critic" -->
+
+which can be estimated by 
+
+`$$\nabla_{\!\theta}  \sum_{t=1}^{T}  \Big( \big( \sum_{k=t}^T r_k \class{highlight}{- V_{\theta_\text{critic}}(S_{t-1})} \big) \cdot   \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+<!-- .element: data-id="critic-2" -->
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+`$$\nabla_{\!\theta} \sum_{t=1}^{T}  \Big( \big( \class{highlight}{\sum_{k=t}^T r_k} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \ln \pi_\theta(S_{t-1},X_t) \Big)$$`<!-- .element: data-id="critic-2" -->
+
 
 can be estimated by
 
-`$$\sum_{t=1}^{T}  \Big( \big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
+`$$\nabla_{\!\theta} \sum_{t=1}^{T}  \Big( \big( \class{highlight}{r_t + V_{\theta_\text{critic}}(S_t)} - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \ln \pi_\theta(S_{t-1},X_t) \Big)$$`
 
 > [!IMPORTANT]
 > For each step $t$ we can now compute all terms without waiting for the episode to be completed. 
@@ -409,60 +420,134 @@ can be estimated by
 
 As we do not need to wait for termination of an episode, we can estimate the policy gradient **for step** $t$ by 
 
-`$$\big( r_t + V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
+`$$\nabla_{\!\theta}  \big( r_t + V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1}) \big) \cdot  \ln \pi_\theta(S_{t-1},X_t)$$`
+
+--
+
+## Training the actor 
+
+As before, we can add a **discount factor** $\gamma\in [0,1]$ to obtain
+
+`$$\nabla_{\!\theta}  \big( \underbrace{r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} \big) \cdot  \ln \pi_\theta(S_{t-1},X_t)$$`
+
+as a proportional approximate of $\nabla_\theta J(\theta)$ for training the actor.
 
 ---
 
-## TD-error and policy gradient
+## Training the critic 
 
-Inspired by the Bellmann equation, we can use a **discount factor** $\gamma \in [0,1]$ to define the **temporal difference (TD) error**
-
-`$$\delta_t = r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t) - V_{\theta_\text{critic}}(S_{t-1})$$`
-
-and
-
-`$$\delta_t \cdot  \nabla_{\!\theta} \ln \pi_\theta(S_{t-1},X_t)$$`
-
-as an estimation of the policy gradient **for step** $t$ of the episode. 
-
----
-
-## TD-error and loss of the critic
-
-To learn the **state-value function** `$V_{\theta_\text{critic}}(S)$` we minimise the loss 
-
-`$$\mathscr{L}(\theta_\text{critic}) = \Big( \underbrace{\big( r_t + \gamma \cdot V_{\theta_\text{critic}}(S_t) \big)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} \Big)^2$$`
-
-The [(semi-)gradient](http://incompleteideas.net/book/RLbook2020.pdf#page=222) which treats the Bellman target as a constant is
-
-`$$\nabla_{\!\theta_\text{critic}}\ \mathscr{L} = 2 \delta_t \cdot (-1) \cdot \nabla_{\!\theta_\text{critic}} V_{\theta_\text{critic}}(S_{t-1})$$`
-
-where $\delta_t$ is the **temporal difference (TD) error**, i.e., the difference between Bellman target and prediction.
-
-> [!NOTE]
-> We could add a target network (like in DQN) to improve stability.
-
+For training the critic we use the loss function
+`$$\mathscr(\theta_\text{critic}}) = \big( \underbrace{r_t + \class{highlight}{\gamma} \cdot V_{\theta_\text{critic}}(S_t)}_{\textrm{Bellman target}} - \underbrace{V_{\theta_\text{critic}}(S_{t-1})}_{\textrm{Prediction}} \big)^2$$`
 
 ---
 
 ## Actor-critic algorithm
 
-```
-Initialize:
-  - Policy network π_θ with random weights θ
-  - Critic network V_θ_critic with random weights θ_critic
-  - Environment
+```julia [1-5|7-21|24-31|33-36|38-53|55-74|76-82]
+function ActorCritic(env; 
+    hidden_layers=[64, 32], η=1e-4, η_critic=1e-3,
+    γ=0.99, T=20_000, max_episodes=100_000, 
+    batch_size=32, callback=EpisodeLogger()
+)
+    
+    # Initialize environment and get dimensions
+    RL.reset!(env)
+    feature_dim = length(RL.observe(env))
+    n_actions = length(RL.actions(env))
+    
+    # Create actor (policy) and critic (value) networks
+    actor_layers = [feature_dim, hidden_layers..., n_actions]
+    critic_layers = [feature_dim, hidden_layers..., 1]
+    
+    actor = PolicyNetwork(actor_layers)    # π_θ(s,a)
+    critic = ValueNetwork(critic_layers)   # V_θ_critic(s)
+    
+    # Set up optimizers
+    actor_optimizer = Flux.setup(Adam(η), actor)
+    critic_optimizer = Flux.setup(Adam(η_critic), critic)
+    
+    enable_interrupt() # allow to interrupt training by pressing ENTER key
+    # Training loop
+    for i in 1:max_episodes
+        # Reset environment for episode i
+        RL.reset!(env)
+        Sₜ₋₁ = RL.observe(env)
+        ∑rₜ = 0.0
+        # Batch storage (state,action,reward,value of state, value of next state)
+        batch = Tuple{Vector{Float32}, Int32, Float32, Float32, Float32}[]
+        
+        t = 0
+        # Loop over at most T steps within episode
+        while t < T
+            t += 1
+            
+            # Sample action from policy (actor)
+            π = Flux.softmax(actor(reshape(Sₜ₋₁, :, 1))[:, 1])            
+            action_idx = sample_action(π)
+            Xₜ = RL.actions(env)[action_idx]
+            
+            # Execute action and observe next state
+            rₜ = RL.act!(env, Xₜ)
+            Sₜ = RL.observe(env)
+            terminal = RL.terminated(env)
+            
+            # Compute value functions for batch storage
+            Vₜ₋₁ = critic(reshape(Sₜ₋₁, :, 1))[1]
+            Vₜ = terminal ? 0.0f0 : critic(reshape(Sₜ, :, 1))[1]
+            
+            # Store in batch
+            push!(batch, (Sₜ₋₁, Xₜ, rₜ, Vₜ₋₁, Vₜ))
+            
+            # Update networks when batch is full or episode ends
+            if length(batch) >= batch_size || terminal
+                # Batch update actor
+                ∇_actor = Flux.gradient(actor) do model
+                    loss = 0.0f0
+                    for (Sₜ₋₁, Xₜ, rₜ, Vₜ₋₁, Vₜ) in batch
+                        log_π = Flux.logsoftmax(model(reshape(Sₜ₋₁, :, 1))[:, 1])
+                        action_idx = findfirst(==(Xₜ), RL.actions(env))
+                        loss -= (rₜ + γ * Vₜ - Vₜ₋₁) * log_π[action_idx]
+                    end
+                    loss / length(batch)
+                end
+                
+                # Batch update critic
+                ∇_critic = Flux.gradient(critic) do model
+                    loss = 0.0f0
+                    for (Sₜ₋₁, _, rₜ, _, Vₜ) in batch
+                        target = rₜ + γ * Vₜ 
+                        prediction = model(reshape(Sₜ₋₁, :, 1))[1]
+                        loss += (target - prediction)^2
+                    end
+                    loss / length(batch)
+                end
+                
+                Flux.update!(actor_optimizer, actor, ∇_actor[1])
+                Flux.update!(critic_optimizer, critic, ∇_critic[1])
+                
+                empty!(batch)
+            end
+            
+            ∑rₜ += rₜ
+            Sₜ₋₁ = Sₜ
 
-For each episode:
-  1. Initialize state S₀
-  
-  2. For each time step t = 1 to T:
-     a. Sample action Xₜ ~ π_θ(Sₜ₋₁, ·)
-     b. Execute action Xₜ, observe reward rₜ and next state Sₜ
-     c. Compute TD error: δₜ = rₜ + γ V_θ_critic(Sₜ) - V_θ_critic(Sₜ₋₁)
-     d. Compute policy gradient: ∇_θ ← ∇_θ log π_θ(Sₜ₋₁,Xₜ) via automatic differentiation
-     e. Update policy: θ ← θ + α × δₜ × ∇_θ
-     f. Compute critic gradient: ∇_θ_critic ← ∇_θ_critic V_θ_critic(Sₜ₋₁) via automatic differentiation
-     g. Update critic: θ_critic ← θ_critic + α_critic × 2δₜ × ∇_θ_critic
+            # End episode if terminal state reached
+            if terminal
+                break
+            end
+        end
+        
+        # Callback for logging
+        if callback !== nothing
+            callback(i, t, ∑rₜ)
+        end
+
+        if QUIT[]
+            break
+        end
+    end
+    
+    return actor
+end
 ```
 
