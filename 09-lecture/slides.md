@@ -7,17 +7,18 @@
 Policy-based methods learn a **parameterised policy function** $\pi_\theta(S,X)$ with parameters $\theta$ to determine probabilities of taking a decision $X$ when in state $S$.
 
 > [!NOTE]
-> - After training, the decision with the highest probability $\pi_\theta(S,X)$ is taken.
 > - During training, the decision is chosen by sampling using probabilities $\pi_\theta(S,X)$.
+> - After training, the decision with the highest probability $\pi_\theta(S,X)$ is taken.
 
 ---
 
 ## Policy learning with neural networks
 
-We can use a neural network with parameters $\theta$ to learn $\pi_\theta(S,X)$ to be used to 
-
-- create a trajectory `$(S_0, X_1, r_1, S_1, \ldots, S_T)$`  and
-- maximise `$J(\theta) = \displaystyle\sum_{t=1}^T r_t$`
+We can use a neural network with parameters $\theta$ to learn $\pi_\theta(S,X)$ for 
+creating trajectories 
+`$$(S_0, X_1, r_1, S_1, \ldots, S_T)$$` 
+ and maximising the expected returns 
+`$$J(\theta) = \mathbb{E}\left[\sum_{t=1}^T r_t\right]$$`
 
 ---
 
@@ -29,7 +30,7 @@ In order to
 
 we can use gradient ascent to update our parameters by
 
-`$$\theta \leftarrow \theta + \alpha \cdot \nabla_{\!\theta}\ J(\theta)$$`
+`$$\theta \leftarrow \theta + \eta \cdot \nabla_{\!\theta}\ J(\theta)$$`
 
 
 ---
@@ -74,10 +75,7 @@ where
 
 `$\nabla_{\!\theta}\ J(\theta)$` is proportional to 
 
-`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \class{highlight}{\nabla_{\!\theta} \ln \ \pi_\theta(S,X)}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
-
-> [!NOTE]
-> We have `$\nabla_{\!\theta} \ln \ \pi_\theta(S,X) = \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}$`. 
+`$\displaystyle\sum_S \Big( \mu_{\pi_\theta}(S) \cdot \displaystyle\sum_X Q_{\pi_\theta}(S,X)$`<!-- .element: data-id="del-J-a" --> `$\cdot$`<!-- .element: data-id="del-J-dot1" --> `$\pi_\theta(S,X)$`<!-- .element: data-id="del-J-pi" --> `$\cdot$`<!-- .element: data-id="del-J-dot2" --> `$ \underbrace{\class{highlight}{\nabla_{\!\theta} \ln \ \pi_\theta(S,X)}}_{= \frac{\nabla_{\!\theta} \pi_\theta(S,X)}{\pi_\theta(S,X)}}$`<!-- .element: data-id="del-J-b" --> `$\Big)$`<!-- .element: data-id="del-J-)" -->
 
 > [!TIP]
 > Computing gradients of log-probabilities  `$ \nabla_{\!\theta} \ln \ \pi_\theta(S,X)$` can easily be done using **auto-differentiation** of modern deep learning frameworks.
