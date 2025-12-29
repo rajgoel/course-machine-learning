@@ -20,8 +20,8 @@ module Lecture09
 
 # Include components
 using Breakout
-using ..Lecture08: EpisodeLogger, create_plot!  # Import from Lecture08
-include("PolicyNetwork.jl")
+using ..Lecture08: EpisodeLogger, create_plot!, Network  # Import from Lecture08
+include("Sample.jl")
 include("REINFORCE.jl")
 include("ActorCritic.jl")
 include("PolicyAgent.jl")

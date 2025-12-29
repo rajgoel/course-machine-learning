@@ -71,14 +71,20 @@ using MachineLearningCourse
     @testset "Lecture08" begin
         println("Testing Lecture08...")
         @test_nowarn redirect_stdout(devnull) do
-            Lecture08.demo(max_episodes=1, plot=false)
+            Lecture08.demo(:DQN,max_episodes=1, plot=false)
+        end
+        @test_nowarn redirect_stdout(devnull) do
+            Lecture08.demo(:DDQN,max_episodes=1, plot=false)
         end
     end
 
     @testset "Lecture09" begin
-        println("Testing Lecture08...")
+        println("Testing Lecture09...")
         @test_nowarn redirect_stdout(devnull) do
-            Lecture09.demo(max_episodes=1, plot=false)
+            Lecture09.demo(:REINFORCE,max_episodes=1, plot=false)
+        end
+        @test_nowarn redirect_stdout(devnull) do
+            Lecture09.demo(:ActorCritic,max_episodes=1, plot=false)
         end
     end
 end

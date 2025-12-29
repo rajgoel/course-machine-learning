@@ -1,6 +1,18 @@
 using JLD2
 
-function ValueNetwork(layers::Vector{Int})
+"""
+    Network(layers::Vector{Int})
+
+Create a neural network with specified architecture.
+
+# Arguments
+- `layers`: Network architecture (e.g., [input_dim, 64, 32, output_dim])
+
+# Returns
+- Neural network (Flux.Chain) with ReLU hidden layers and linear output
+```
+"""
+function Network(layers::Vector{Int})
     # Build the model using Flux.Chain
     model_layers = []
     for i in 1:length(layers)-2
@@ -9,6 +21,7 @@ function ValueNetwork(layers::Vector{Int})
     push!(model_layers, Flux.Dense(layers[end-1], layers[end]))
     return Flux.Chain(model_layers...)
 end
+
 
 """
     save(network, filepath::String)
@@ -54,7 +67,7 @@ network = load("model.jld2")
 """
 function load(filepath::String)
     data = JLD2.load(filepath)
-    network = ValueNetwork(data["architecture"])
+    network = Network(data["architecture"])
     Flux.loadmodel!(network, data["weights"])
     println("Network loaded from: $filepath")
     return network

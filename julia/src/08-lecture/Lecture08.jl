@@ -29,12 +29,12 @@ module Lecture08
 using Breakout
 include("Interrupt.jl")
 include("Logger.jl")
-include("ValueNetwork.jl")
+include("Network.jl")
 include("ReplayBuffer.jl")
 include("DQN.jl")
-include("DQNAgent.jl")
+include("Agent.jl")
 include("Demo.jl")
 
-export demo, breakout, create_plot!, DQN, dqn_target_evaluation, ddqn_target_evaluation, dqn_agent, save, load
+export demo, breakout, create_plot!, DQN, dqn_target_evaluation, ddqn_target_evaluation, agent, save, load, Network
 
 end # module Lecture08

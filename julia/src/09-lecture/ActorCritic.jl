@@ -1,7 +1,7 @@
 using Flux
 using Statistics
 import CommonRLInterface as RL
-using ..Lecture08: EpisodeLogger, ValueNetwork, QUIT, enable_interrupt
+using ..Lecture08: EpisodeLogger, Network, QUIT, enable_interrupt
 
 
 """
@@ -47,8 +47,8 @@ function ActorCritic(env;
     actor_layers = [feature_dim, hidden_layers..., n_actions]
     critic_layers = [feature_dim, hidden_layers..., 1]
     
-    actor = PolicyNetwork(actor_layers)    # π_θ(s,a)
-    critic = ValueNetwork(critic_layers)   # V_θ_critic(s)
+    actor = Network(actor_layers)    # π_θ(s,a)
+    critic = Network(critic_layers)   # V_θ_critic(s)
     
     # Set up optimizers
     actor_optimizer = Flux.setup(Adam(η), actor)

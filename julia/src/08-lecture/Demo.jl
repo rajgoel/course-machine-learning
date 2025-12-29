@@ -12,7 +12,7 @@ Run a DQN training demo on Breakout environment.
 - `plot=true`: Whether to display live plots during training
 
 # Returns
-- `(q_network, logger)`: Trained network and logger with training data
+- `(q_network, logger)`: Trained network and logger
 
 # Usage
 ```julia
@@ -22,12 +22,17 @@ q_network, logger = Lecture08.demo(max_episodes=1000, plot=true)
 # DQN without live plotting (faster training)
 q_network, logger = Lecture08.demo(:DQN, max_episodes=1000, plot=false)
 Lecture08.create_plot!(logger)  # Generate final plot
-display(logger.plot)  # Show the plot
+using Plots
+plot!(logger.plot,size=(800,600)) # Resize plot
+savefig(logger.plot,"training.png")
 ```
 """
 function demo(algorithm=:DDQN; max_episodes=100_000, plot=true)
     env = BreakoutEnv(:brickless)
     logger = EpisodeLogger(plot=plot)
+
+    println("  Algorithm: ", algorithm)
+    println("  Max episodes: ", max_episodes)
 
     if algorithm == :DDQN
         target_evaluation=ddqn_target_evaluation
@@ -36,12 +41,6 @@ function demo(algorithm=:DDQN; max_episodes=100_000, plot=true)
     else 
         error("Unknown algorithm: $algorithm. Supported algorithms are :DQN and :DDQN")
     end
-
-    # Print training configuration for educational purposes
-    println("Environment initialized:")
-    println("  Actions: ", RL.actions(env))
-    println("  Max episodes: ", max_episodes)
-    println("  Live plotting: ", plot)
 
     q_network = DQN(env, target_evaluation=target_evaluation, max_episodes=max_episodes, callback=logger)
     return q_network, logger
@@ -59,13 +58,13 @@ Run Breakout game with a trained DQN model.
 # Example
 ```julia
 # Run game with trained model
-breakout("trained_breakout_dqn.jld2")
+breakout("agent.jld2")
 ```
 """
-function breakout(model_path::String=joinpath(@__DIR__, "models", "ddqn_agent.jld2"); speed=nothing)
+function breakout(model_path::String=joinpath(@__DIR__, "agent.jld2"); speed=nothing)
     # Load the trained model
-    q_network = load(model_path)
+    model = load(model_path)
     
     # Run Breakout with the DQN agent
-    Breakout.breakout(game_state -> dqn_agent(game_state, q_network), speed=speed)
+    Breakout.breakout(game_state -> agent(game_state, model), speed=speed)
 end

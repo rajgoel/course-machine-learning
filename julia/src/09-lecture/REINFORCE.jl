@@ -38,7 +38,7 @@ function REINFORCE(env;
     
     # Create policy network for discrete actions
     layers = [length(RL.observe(env)), hidden_layers..., length(RL.actions(env))]
-    policy = PolicyNetwork(layers)
+    policy = Network(layers)
     
     # Set up optimizer (Adam works well for policy gradients)
     optimizer = Flux.setup(Adam(η), policy)

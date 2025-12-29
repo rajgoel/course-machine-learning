@@ -67,7 +67,7 @@ Modules = [MachineLearningCourse.Lecture04]
 Modules = [MachineLearningCourse.Lecture05]
 ```
 
-### Lecture 06 - Implementation of graph convolutional networks (GCNs) for collaborative filtering.
+### Lecture 06 - Implementation of graph convolutional networks (GCNs) for collaborative filtering
 
 ```@autodocs
 Modules = [MachineLearningCourse.Lecture06]
