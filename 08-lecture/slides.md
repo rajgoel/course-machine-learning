@@ -102,6 +102,15 @@ deactivate Environment
 
 ![Image](08-lecture/Reinforcement_learning.svg)
 
+---
+
+## Example
+
+<video autoplay loop muted playsinline style="width:100%; height:auto;">
+  <source src="08-lecture/Breakout.webm" type="video/webm">
+</video>
+
+
 ===
 
 # Value-based methods
