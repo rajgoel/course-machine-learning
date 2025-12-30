@@ -104,9 +104,9 @@ deactivate Environment
 
 ---
 
-## Example
+## Example: [Breakout.jl](https://github.com/rajgoel/Breakout.jl)
 
-<video autoplay loop muted playsinline style="width:100%; height:auto;">
+<video data-autoplay loop muted playsinline style="height:100%; width:auto;">
   <source src="08-lecture/Breakout.webm" type="video/webm">
 </video>
 
