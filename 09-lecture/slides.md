@@ -229,6 +229,16 @@ end
 ```
 <!-- .element: class="fullscreen stretch" -->
 
+---
+
+## REINFORCE training progress
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+    <img src="09-lecture/REINFORCE-run1.png" alt="Run 1" style="width: 100%;">
+    <img src="09-lecture/REINFORCE-run2.png" alt="Run 2" style="width: 100%;">
+    <img src="09-lecture/REINFORCE-run3.png" alt="Run 3" style="width: 100%;">
+    <img src="09-lecture/REINFORCE-run4.png" alt="Run 4" style="width: 100%;">
+</div>
 
 ===
 
@@ -555,6 +565,17 @@ end
 
 ---
 
+## Actor-critic training progress
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+    <img src="09-lecture/ActorCritic-run1.png" alt="Run 1" style="width: 100%;">
+    <img src="09-lecture/ActorCritic-run2.png" alt="Run 2" style="width: 100%;">
+    <img src="09-lecture/ActorCritic-run3.png" alt="Run 3" style="width: 100%;">
+    <img src="09-lecture/ActorCritic-run4.png" alt="Run 4" style="width: 100%;">
+</div>
+
+---
+
 You find a full implementation of REINFORCE and Actor-critic in the [course repository](https://rajgoel.github.io/course-machine-learning/julia).
 
 > [!TIP]
@@ -568,17 +589,5 @@ You find a full implementation of REINFORCE and Actor-critic in the [course repo
 > ```julia
 > using MachineLearningCourse
 > Lecture09.demo(:ActorCritic)
-> ```
-
----
-
-## REINFORCE for the Breakout game
-
-> [!TIP]
-> A visualisation of the trained agent playing the Breakout game can be launched by:
-> 
-> ```julia
-> using MachineLearningCourse
-> Lecture09.breakout()
 > ```
 

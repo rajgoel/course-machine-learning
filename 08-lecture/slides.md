@@ -320,6 +320,16 @@ end
 ```
 <!-- .element: class="fullscreen stretch" -->
 
+---
+
+## DQN training progress
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+    <img src="08-lecture/DQN-run1.png" alt="Run 1" style="width: 100%;">
+    <img src="08-lecture/DQN-run2.png" alt="Run 2" style="width: 100%;">
+    <img src="08-lecture/DQN-run3.png" alt="Run 3" style="width: 100%;">
+    <img src="08-lecture/DQN-run4.png" alt="Run 4" style="width: 100%;">
+</div>
 
 ---
 
@@ -339,6 +349,16 @@ To reduce the overestimation bias, DDQN uses the target network for evaluation, 
 > [!NOTE]
 > If the main network overestimates an action, the target network provides an independent evaluation that is less likely to have the same overestimation bias.
 
+---
+
+## DDQN training progress
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+    <img src="08-lecture/DDQN-run1.png" alt="Run 1" style="width: 100%;">
+    <img src="08-lecture/DDQN-run2.png" alt="Run 2" style="width: 100%;">
+    <img src="08-lecture/DDQN-run3.png" alt="Run 3" style="width: 100%;">
+    <img src="08-lecture/DDQN-run4.png" alt="Run 4" style="width: 100%;">
+</div>
 
 ---
 
@@ -358,8 +378,6 @@ You find a full implementation of DQN and DDQN in the [course repository](https:
 > ```
 
 ---
-
-## (D)DQN for the Breakout game
 
 > [!TIP]
 > A visualisation of the trained agent playing the Breakout game can be launched by:
