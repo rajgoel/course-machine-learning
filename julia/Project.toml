@@ -31,7 +31,7 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 Breakout = {rev = "main", url = "https://github.com/rajgoel/Breakout.jl"}
 
 [compat]
-Breakout = "0.1.0"
+Breakout = "1.0.0"
 CommonRLInterface = "0.3.3"
 DataStructures = "0.18.22"
 Distributions = "0.25.122"
