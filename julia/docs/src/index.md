@@ -31,6 +31,18 @@ Lecture02.demo()
 # etc.
 ```
 
+## Lectures
+
+- [Lecture 01](lecture01.md) - A simple linear classifier
+- [Lecture 02](lecture02.md) - Vanilla implementation of gradient descent
+- [Lecture 03](lecture03.md) - Vanilla and Flux.jl deep neural network implementation
+- [Lecture 04](lecture04.md) - Stochastic gradient descent using Flux.jl
+- [Lecture 05](lecture05.md) - Filtering, pooling, and convolution
+- [Lecture 06](lecture06.md) - Graph convolutional networks (GCNs) for collaborative filtering
+- [Lecture 07](lecture07.md) - Autoencoders
+- [Lecture 08](lecture08.md) - Deep Q-Learning for the Breakout game
+- [Lecture 09](lecture09.md) - Policy gradient methods for the Breakout game
+
 ## Course material
 
 ```@docs
