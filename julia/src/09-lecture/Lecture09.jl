@@ -15,7 +15,6 @@ using MachineLearningCourse
 policy, logger = Lecture09.demo_reinforce(max_episodes=500)
 ```
 """
-
 module Lecture09
 
 # Include components

@@ -22,7 +22,6 @@ using MachineLearningCourse
 Lecture08.breakout()
 ```
 """
-
 module Lecture08
 
 # Include components
