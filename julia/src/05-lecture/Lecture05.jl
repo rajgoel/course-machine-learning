@@ -1,7 +1,7 @@
 """
     Lecture05
 
-Implementation of filtering, pooling, and convolution.
+Filtering, pooling, and convolution.
 
 # Available Functions
 

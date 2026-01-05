@@ -1,7 +1,7 @@
 """
     Lecture06
 
-Implementation of graph convolutional networks (GCNs) for collaborative filtering.
+Graph convolutional networks (GCNs) for collaborative filtering.
 
 # Available Functions
 

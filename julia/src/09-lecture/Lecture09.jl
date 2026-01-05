@@ -1,7 +1,7 @@
 """
     Lecture09
 
-Implementation of policy gradient methods for the Breakout game.
+Policy gradient methods for the Breakout game.
 
 # Available Functions
 

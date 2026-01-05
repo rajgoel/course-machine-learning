@@ -1,7 +1,7 @@
 """
     Lecture08
 
-Implementation of Deep Q-Learning for the Breakout game
+Deep Q-Learning for the Breakout game
 
 # Available Functions
 

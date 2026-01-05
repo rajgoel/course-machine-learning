@@ -1,11 +1,11 @@
 """
     Lecture04
 
-Deep neural network implementation using Flux.jl.
+Stochastic gradient descent using Flux.jl.
 
 # Available Functions
 
-- `demo()`: Deep learning demo for MNIST handwritten digit recognition
+- `demo()`: Stochastic gradient descent demo for MNIST handwritten digit recognition
 
 # Usage
 
