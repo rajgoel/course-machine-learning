@@ -5,10 +5,11 @@ ENV["JULIA_SDL2_DISABLE_AUDIO"] = "1"     # SDL2_jll respects this
 ENV["SDL_VIDEODRIVER"] = "dummy"          # optional, prevents video init if needed
 ENV["DOCUMENTER"] = "true"                # Documenter-specific flag
 
-# --- activate docs environment and dev-add main package ---
+# --- activate docs environment and ensure Julia finds the package ---
+push!(LOAD_PATH, joinpath(@__DIR__, ".."))
+
 using Pkg
 Pkg.activate(@__DIR__)
-Pkg.develop(path=joinpath(@__DIR__, ".."))
 
 using Documenter
 using MachineLearningCourse
