@@ -5,14 +5,14 @@ ENV["JULIA_SDL2_DISABLE_AUDIO"] = "1"     # SDL2_jll respects this
 ENV["SDL_VIDEODRIVER"] = "dummy"          # optional, prevents video init if needed
 ENV["DOCUMENTER"] = "true"                # Documenter-specific flag
 
-# --- activate docs environment and ensure Julia finds the package ---
+using Documenter
+using Pkg
+
+# Add the parent project to the load path for docstring extraction
 push!(LOAD_PATH, joinpath(@__DIR__, ".."))
 
-using Pkg
-Pkg.activate(@__DIR__)
-
-using Documenter
-using MachineLearningCourse
+# Import the module without precompiling heavy dependencies
+import MachineLearningCourse
 
 makedocs(
     sitename = "MachineLearningCourse.jl",
@@ -43,4 +43,3 @@ makedocs(
 )
 
 # Docs are built to julia/docs/build/ and will be published by GitHub's automatic workflow.
-
