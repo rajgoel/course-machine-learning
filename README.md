@@ -43,6 +43,10 @@ architectures
 - use deep learning for a wide range of tasks, including prediction and
 classification
 
+### Demo implementations
+
+Demo implementations for core concepts can be found in the `julia` folder. The respective code documentation can be found here: https://rajgoel.github.io/course-machine-learning/julia
+
 ### Literature
 
 I. Goodfellow, Y. Bengio, and A. Courville: [Deep Learning](https://www.deeplearningbook.org/), An MIT Press book, 2016
