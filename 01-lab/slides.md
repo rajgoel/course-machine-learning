@@ -125,7 +125,7 @@ The project will be assessed based on the following criteria:
 - **Trustworthiness**  
   Trustworthiness of results, in particular, w.r.t. to diverse biases that may influence results.
 - **Written report (3000 - 5000 words)**
-  A written report must be added to the GitHub repository **by the end of the session preceding the presentation session**. 
+  A written report must be added to the GitHub repository **by the end of the session preceding the presentation session**. The report must be provided in a single-file (.md or .pdf).
 - **Final presentation (15 minutes)**  
   A final project presentation will be held in the last session of the course. 
 
