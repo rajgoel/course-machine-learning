@@ -24,7 +24,7 @@ In the lab you will be given the opportunity to acquire hands-on experience in a
 
 You may use **any** programming language and deep learning framework, but be aware that help in program language and framework specific issues is subject to knowledge and experience of the lecturer.
 
-> [!NOTE]
+> [!TIP]
 > As lecture and example implementations are designed using **Julia** and the **Flux.jl** deep learning framework, the best support can be given to students using these. 
 
 ---
