@@ -142,7 +142,7 @@ Project report and presentation should:
 - An assessment of the suitability of the approach
 
 > [!IMPORTANT]
-> Final report and presentation will are equal important for the final project grade.
+> Final report and presentation are equal important for the final project grade.
 
 ---
 
