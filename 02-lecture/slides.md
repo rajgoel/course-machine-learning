@@ -288,7 +288,7 @@ is
 `$\displaystyle\frac{1}{|S|} \cdot \displaystyle\sum_{(a,a^*) \in S}$`<!-- .element: data-id="average" -->
 `$\mathscr{L}_{(a,a^*)}$`
 
-<p></p>
+<p> </p>
 
 ---
 
@@ -307,7 +307,7 @@ is
 `$\nabla_{W,b}$`<!-- .element: data-id="nabla" -->
 `$\mathscr{L}_{(a,a^*)}$`
 
-i.e. the average of the gradients over all samples.
+i.e. the average of the gradients of the sample losses.
 
 ---
 
