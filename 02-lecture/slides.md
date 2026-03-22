@@ -273,18 +273,36 @@ The [gradient](https://en.wikipedia.org/wiki/Gradient) $\nabla f$ of a function 
 
 ---
 
+<!-- .slide: data-auto-animate="true" -->
+
 ### Gradient of the average loss
 
 The gradient of the average loss
 `$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
 \displaystyle\sum_{(a,a^*) \in S} \mathscr{L}_{(a,a^*)}(W,b).
 $$`
-is the average of the gradients over all samples 
-`$$
-\nabla_{W,b} \mathscr{L} =
-\displaystyle\frac{1}{|S|} \cdot
-\displaystyle\sum_{(a,a^*) \in S} \nabla_{W,b} \mathscr{L}_{(a,a^*)}
+is
+`$\nabla_{W,b} \mathscr{L} =$` 
+`$\nabla_{W,b}$`<!-- .element: data-id="nabla" -->
+`$\displaystyle\frac{1}{|S|} \cdot \displaystyle\sum_{(a,a^*) \in S} \nabla_{W,b}$`<!-- .element: data-id="average" -->
+`$\mathscr{L}_{(a,a^*)}$`
+
+---
+
+<!-- .slide: data-auto-animate="true" -->
+
+### Gradient of the average loss
+
+The gradient of the average loss
+`$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
+\displaystyle\sum_{(a,a^*) \in S} \mathscr{L}_{(a,a^*)}(W,b).
 $$`
+is 
+`$\nabla_{W,b} \mathscr{L} =$` 
+`$\displaystyle\frac{1}{|S|} \cdot \displaystyle\sum_{(a,a^*) \in S} \nabla_{W,b}$`<!-- .element: data-id="average" -->
+`$\nabla_{W,b}$`<!-- .element: data-id="nabla" -->
+`$\mathscr{L}_{(a,a^*)}$`
+i.e. the average of the gradients over all samples.
 
 ---
 
