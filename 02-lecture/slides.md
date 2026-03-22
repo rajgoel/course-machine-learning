@@ -288,7 +288,7 @@ is
 `$\displaystyle\frac{1}{|S|} \cdot \displaystyle\sum_{(a,a^*) \in S}$`<!-- .element: data-id="average" -->
 `$\mathscr{L}_{(a,a^*)}$`
 
-<p> </p>
+<br>
 
 ---
 
