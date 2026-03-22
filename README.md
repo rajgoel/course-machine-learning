@@ -53,8 +53,16 @@ I. Goodfellow, Y. Bengio, and A. Courville: [Deep Learning](https://www.deeplear
 
 R.S. Sutton and A.G. Barto: [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/RLbook2020.pdf), second edition, 2020.
 
+### Additional resources
+
+- 3Blue1Brown. [Neural Networks](https://youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&si=sEEGX-lNt4YMZO43)
+- Welch Labs. [Neural Networks Demystified](https://youtube.com/playlist?list=PLiaHhY2iBX9hdHaRr6b7XevZtgZRa1PoU&si=DNiHrQYzmDgfGZik)
+- Walch Labs. How Models Learn [Part 1](https://www.youtube.com/watch?v=NrO20Jb-hy0) [Part 2](https://www.youtube.com/watch?v=VkHfRKewkWw)
+- Walch Labs. [The moment we stopped understanding AI](https://www.youtube.com/watch?v=UZDiGooFs54)
+- Papers in 100 Lines of Code. [Reinforcement Learning](https://youtube.com/playlist?list=PLgMYKvjKE10UZNku-Qx7-z2PEC-7KLiUn&si=bBtiB6tRghFLaOcy) [Code on GitHub](https://github.com/MaximeVandegar/Papers-in-100-Lines-of-Code)
+
 ## License
 
 MIT licensed
 
-Copyright (C) 2025 Asvin Goel
+Copyright (C) 2025- Asvin Goel
