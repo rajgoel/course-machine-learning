@@ -180,6 +180,32 @@ blockquote.admonition ul {
 }
 
 /*********************************************
+ * GitHub corner
+ *********************************************/
+
+.github-corner {
+  position: fixed;
+  top: 35px;
+  right: -55px;
+  padding-bottom: 6px;
+  font-size: 24px;
+
+  width: 120px;
+  height: 60px;
+  background: var(--r-link-color-dark);
+  z-index: 20;
+
+  display: flex;
+  align-items: flex-end;      /* bottom alignment */
+  justify-content: center;    /* horizontal centering */
+
+  transform: rotate(45deg);
+  transform-origin: top right;
+
+  color: var(--r-background-color);
+}
+
+/*********************************************
  * Print
  *********************************************/
 
