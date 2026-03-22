@@ -277,7 +277,7 @@ The [gradient](https://en.wikipedia.org/wiki/Gradient) $\nabla f$ of a function 
 
 ### Gradient of the average loss
 
-The gradient of the average loss
+The gradient of the average loss over all samples
 `$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
 \displaystyle\sum_{(a,a^*) \in S} \mathscr{L}_{(a,a^*)}(W,b).
 $$`
@@ -296,7 +296,7 @@ is
 
 ### Gradient of the average loss
 
-The gradient of the average loss
+The gradient of the average loss over all samples
 `$$\mathscr{L}(W,b) = \displaystyle\frac{1}{|S|} \cdot
 \displaystyle\sum_{(a,a^*) \in S} \mathscr{L}_{(a,a^*)}(W,b).
 $$`
@@ -307,7 +307,7 @@ is
 `$\nabla_{W,b}$`<!-- .element: data-id="nabla" -->
 `$\mathscr{L}_{(a,a^*)}$`
 
-i.e. the average of the gradients of the sample losses.
+i.e. the average of the gradients of all sample losses.
 
 ---
 
