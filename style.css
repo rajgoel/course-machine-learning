@@ -180,30 +180,10 @@ blockquote.admonition ul {
 }
 
 /*********************************************
- * GitHub corner
+ * GitHub corner (https://tholman.com/github-corners/)
  *********************************************/
 
-.github-corner {
-  position: fixed;
-  top: 35px;
-  right: -55px;
-  padding-bottom: 6px;
-  font-size: 24px;
-
-  width: 120px;
-  height: 60px;
-  background: var(--r-link-color-dark);
-  z-index: 20;
-
-  display: flex;
-  align-items: flex-end;      /* bottom alignment */
-  justify-content: center;    /* horizontal centering */
-
-  transform: rotate(45deg);
-  transform-origin: top right;
-
-  color: var(--r-background-color);
-}
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
 
 /*********************************************
  * Print
