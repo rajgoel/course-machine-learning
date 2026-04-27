@@ -26,7 +26,7 @@ In reinforcement learning, an **agent learns** to make **sequential decisions** 
 The set of state variables $S_t$ comprises all variables required to describe the state of a system at (the end of) time $t$.
 
 > [!NOTE]
-> The term **time** does not necessarily represent clock time and can also be understood as a metaphor for step.
+> With **system** we refer to the model, not reality. The term **time** does not necessarily represent clock time and can also be understood as a metaphor for step.
 
 ---
 
