@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240">
+
+  <!-- Main data rectangle -->
+  <rect x="50" y="10" width="700" height="100" fill="#e6f2ff" stroke="#333" stroke-width="2"/>
+  <text x="400" y="60" font-family="Arial" font-size="20" text-anchor="middle">Complete Dataset</text>
+  
+  <!-- Segmented data sections -->
+  <!-- Training set -->
+  <rect x="60" y="150" width="420" height="80" fill="#b3d9ff" stroke="#333" stroke-width="2"/>
+  <text x="270" y="185" font-family="Arial" font-size="18" text-anchor="middle">Training Set</text>
+  <text x="270" y="210" font-family="Arial" font-size="18" text-anchor="middle">(60-80%)</text>
+  
+  <!-- Dev/Validation set -->
+  <rect x="490" y="150" width="120" height="80" fill="#80bfff" stroke="#333" stroke-width="2"/>
+  <text x="550" y="185" font-family="Arial" font-size="18" text-anchor="middle">Validation Set</text>
+  <text x="550" y="210" font-family="Arial" font-size="18" text-anchor="middle">(10-20%)</text>
+  
+  <!-- Test set -->
+  <rect x="620" y="150" width="120" height="80" fill="#4da6ff" stroke="#333" stroke-width="2"/>
+  <text x="680" y="185" font-family="Arial" font-size="18" text-anchor="middle">Test Set</text>
+  <text x="680" y="210" font-family="Arial" font-size="18" text-anchor="middle">(10-20%)</text>
+  
+  <!-- Arrows connecting segments -->
+  <path d="M 270 110 L 270 150" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 550 110 L 550 150" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 680 110 L 680 150" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrowhead definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+  
+
+</svg>

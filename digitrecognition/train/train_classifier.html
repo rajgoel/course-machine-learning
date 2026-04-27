@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Train MNIST Digit Classifier</title>
+  
+  <!-- Import TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0"></script>
+  <!-- Import tfjs-vis for visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis/dist/tfjs-vis.umd.min.js"></script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .info {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 5px 5px 0;
+    }
+    .warning {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 5px 5px 0;
+    }
+    .success {
+      background: #e8f5e8;
+      border-left: 4px solid #4caf50;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 5px 5px 0;
+    }
+    .model-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 15px 0;
+      background: #fafafa;
+    }
+    .model-card h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    .architecture {
+      font-family: monospace;
+      background: #f8f8f8;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+    .status {
+      font-size: 18px;
+      text-align: center;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    ul li {
+      margin: 8px 0;
+    }
+  </style>
+  
+  <!-- Import the data file -->
+  <script src="mnist_data.js" type="module"></script>
+  <!-- Import the main script file -->
+  <script src="classifier.js" type="module"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🧠 Train MNIST Digit Classifier</h1>
+    
+    <div class="info">
+      <h3>📋 What This Does:</h3>
+      <p>This page trains neural networks to classify handwritten digits (0-9) using the MNIST dataset. You can train either a simple dense network or a more complex CNN.</p>
+    </div>
+
+    <div class="warning">
+      <h3>⚠️ Before You Start:</h3>
+      <ul>
+        <li><strong>Time:</strong> Training takes 5-15 minutes depending on the model</li>
+        <li><strong>Internet:</strong> Will download ~11MB of MNIST data on first run</li>
+        <li><strong>Browser:</strong> Keep this tab open during training</li>
+        <li><strong>Monitoring:</strong> Open dev tools (F12) to see detailed progress</li>
+      </ul>
+    </div>
+
+    <h2>🏗️ Available Models</h2>
+    
+    <div class="model-card">
+      <h3>🔹 Simple Dense Network (Default)</h3>
+      <div class="architecture">
+        Input: 28×28×1 → Dense(16) → Dense(16) → Dense(10)
+        Activation: ReLU → ReLU → Linear
+        Loss: Mean Squared Error
+        Training Time: ~5 minutes
+      </div>
+      <p><strong>Use for:</strong> Quick training, educational purposes, simple digit recognition</p>
+    </div>
+
+    <div class="model-card">
+      <h3>🔹 Convolutional Neural Network (Optional)</h3>
+      <div class="architecture">
+        Input: 28×28×1 → Conv2D(8,5×5) → MaxPool → Conv2D(16,5×5) → MaxPool → Flatten → Dense(10)
+        Activation: ReLU → ReLU → Softmax
+        Loss: Categorical Crossentropy
+        Training Time: ~15 minutes
+      </div>
+      <p><strong>Use for:</strong> Better accuracy, learning about CNNs, production use</p>
+    </div>
+
+    <div class="info">
+      <h3>📊 What You'll See:</h3>
+      <ul>
+        <li><strong>Input Data Examples:</strong> Sample MNIST digits</li>
+        <li><strong>Model Architecture:</strong> Visual representation of the network</li>
+        <li><strong>Training Progress:</strong> Loss and accuracy curves in real-time</li>
+        <li><strong>Model Evaluation:</strong> Accuracy per digit and confusion matrix</li>
+      </ul>
+    </div>
+
+    <div class="success">
+      <h3>💾 After Training:</h3>
+      <ol>
+        <li>The model will automatically download to your <code>Downloads</code> folder</li>
+        <li>Copy the <code>.json</code> and <code>.bin</code> files to <code>../models/</code></li>
+        <li>Update <code>../digitrecognition.js</code> to load your trained model</li>
+        <li>Use in your slides for real-time digit recognition!</li>
+      </ol>
+    </div>
+
+    <h2>🔧 Customization</h2>
+    <p>To modify the training:</p>
+    <ul>
+      <li>Edit <code>classifier.js</code> to change model architecture</li>
+      <li>Uncomment/comment model lines to switch between simple and CNN models</li>
+      <li>Adjust epochs, batch size, and learning rate in the training function</li>
+    </ul>
+
+    <div class="status">
+      <strong>🚀 Training will start automatically when the page loads</strong><br>
+      Check the TensorFlow.js Visor panel for live training progress
+    </div>
+  </div>
+</body>
+</html>
+

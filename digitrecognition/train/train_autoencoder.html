@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Train Autoencoder for Out-of-Sample Detection</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@latest/dist/tfjs-vis.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .info {
+      background: #f0f8ff;
+      border: 1px solid #0066cc;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .warning {
+      background: #fff8e1;
+      border: 1px solid #ff9800;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .status {
+      background: #e8f5e8;
+      border: 1px solid #4caf50;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🤖 Autoencoder Training for Out-of-Sample Detection</h1>
+  
+  <div class="info">
+    <h3>📋 What This Does:</h3>
+    <ol>
+      <li>Trains an autoencoder on 10,000 MNIST digits (50 epochs)</li>
+      <li>Tests with 90° rotated images to establish outlier thresholds</li>
+      <li>Creates dynamic quality thresholds based on actual performance</li>
+      <li>Shows detailed visualizations in 3 tabs: Training, Evaluation, Out-of-sample</li>
+      <li>Generates model files and statistics for production use</li>
+    </ol>
+  </div>
+
+  <div class="warning">
+    <h3>⚠️ Requirements:</h3>
+    <ul>
+      <li>Good internet connection (downloads ~11MB MNIST data on first run)</li>
+      <li>Keep this tab open during training (~10-15 minutes)</li>
+      <li>Open dev tools (F12) to see detailed console logs</li>
+      <li>Training uses 10,000 samples + 2,000 validation samples</li>
+    </ul>
+  </div>
+
+  <div class="status">
+    <h3>📊 What You'll See:</h3>
+    <ul>
+      <li><strong>Training Tab:</strong> Real-time loss curves and epoch progress</li>
+      <li><strong>Evaluation Tab:</strong> Normal MNIST reconstruction quality</li>
+      <li><strong>Out-of-sample Tab:</strong> Rotated images as outlier test</li>
+      <li><strong>Console:</strong> Dynamic thresholds and detailed statistics</li>
+      <li><strong>Downloads:</strong> Model files (.json + .weights.bin)</li>
+    </ul>
+  </div>
+
+  <h2>🧠 Model Architecture</h2>
+  <p>The autoencoder uses the following architecture:</p>
+  <ul>
+    <li><strong>Input:</strong> 784 pixels (28×28 flattened)</li>
+    <li><strong>Encoder:</strong> 784 → 128 → 64 → 32 (bottleneck)</li>
+    <li><strong>Decoder:</strong> 32 → 64 → 128 → 784</li>
+    <li><strong>Loss:</strong> Mean Squared Error (reconstruction error)</li>
+  </ul>
+
+  <h2>🎯 Out-of-Sample Detection Method</h2>
+  <p>The system creates dynamic quality thresholds by:</p>
+  <ol>
+    <li><strong>Training Phase:</strong> Learn to reconstruct normal MNIST digits</li>
+    <li><strong>Threshold Phase:</strong> Test with 90° rotated digits to find outlier range</li>
+    <li><strong>Dynamic Thresholds:</strong>
+      <ul>
+        <li>🟢 <strong>Digit:</strong> Error < best rotated image (definitely digit-like)</li>
+        <li>🟡 <strong>Unknown:</strong> Error between best rotated and worst normal</li>
+        <li>🔴 <strong>No digit:</strong> Error > worst normal digit (definitely not digit)</li>
+      </ul>
+    </li>
+    <li><strong>Production:</strong> Apply same thresholds to classify new inputs</li>
+  </ol>
+
+  <div class="info">
+    <h3>💡 Why This Works:</h3>
+    <p>Autoencoders reconstruct familiar patterns (digits) with low error, but struggle with unfamiliar patterns (non-digits), creating high reconstruction errors that can be used for out-of-sample detection.</p>
+  </div>
+
+  <script type="module" src="autoencoder.js"></script>
+</body>
+</html>

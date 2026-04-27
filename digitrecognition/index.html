@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hand-written Digit Recognition</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .demo-section {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .drawDigit {
+      border: 2px solid #333;
+      cursor: crosshair;
+      margin: 10px;
+    }
+    .button-group {
+      margin: 15px 0;
+    }
+    .button-group button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .predict-btn {
+      background: #2196f3;
+      color: white;
+    }
+    .clear-btn {
+      background: #f44336;
+      color: white;
+    }
+    .outofsample-btn {
+      background: #ff9800;
+      color: white;
+    }
+    .predictedDigit {
+      font-size: 48px;
+      font-weight: bold;
+      color: #2196f3;
+      margin: 10px;
+    }
+    .info {
+      background: #f0f8ff;
+      border: 1px solid #0066cc;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    .warning {
+      background: #fff8e1;
+      border: 1px solid #ff9800;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <section class="demo-section">
+    <h1>Hand-written Digit Recognition</h1>
+    <p>Draw in the canvas below:</p>
+    
+    <canvas class="drawDigit" width="200" height="200"></canvas>
+    
+    <div class="button-group">
+      <button class="predict-and-check-btn" data-model="0">Predict</button>
+      <button class="clear-btn">Clear</button>
+    </div>
+    
+    <div>
+      <strong>Predicted Digit:</strong> <span class="predictedDigit">?</span>
+    </div>
+    
+    <div>
+      <span class="reconstructionError" style="font-size: 12px; color: #666;"></span>
+    </div>
+    
+    <!-- Predictions element expected by digitrecognition.js -->
+    <div class="predictions" style="display: none;"></div>
+    
+    <script>
+      // Add updatePredictions method to predictions element
+      document.addEventListener('DOMContentLoaded', function() {
+        const predictionsEl = document.querySelector('.predictions');
+        if (predictionsEl) {
+          predictionsEl.updatePredictions = function(predictions) {
+            // Optional: could display prediction probabilities here
+            console.log('Predictions:', predictions);
+          };
+        }
+      });
+    </script>
+    
+    <!-- Out-of-sample result will be inserted here automatically -->
+  </section>
+  </div>
+
+  <!-- Include required scripts -->
+  <script src="digitrecognition.js"></script>
+  
+  <script>
+    // Initialize the canvas and buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.querySelector('.drawDigit');
+      const predictAndCheckButton = document.querySelector('.predict-and-check-btn');
+      const clearButton = document.querySelector('.clear-btn');
+      
+      // Initialize canvas for drawing
+      initialiseCanvas(canvas);
+      
+      // Initialize combined prediction and out-of-sample button
+      initialiseCombinedButton(predictAndCheckButton);
+      
+      // Initialize clear button
+      clearButton.addEventListener('click', function() {
+        clearCanvas(canvas);
+        clearPrediction(getSection(canvas));
+      });
+    });
+    
+    // Combined function for both prediction and out-of-sample detection
+    function initialiseCombinedButton(container) {
+      loadDigitRecognitionModels();
+      
+      container.addEventListener("click", async function () {
+        var section = getSection(container);
+        var canvas = section.querySelector('.drawDigit');
+        
+        try {
+          // 1. Digit prediction
+          let tensor = preprocessCanvas(canvas);
+          let predictions = await models[container.getAttribute("data-model")].predict(tensor).data();
+          let results = Array.from(predictions);
+          let predictedDigit = results.indexOf(Math.max(...results));
+          
+          // Display prediction
+          var element = section.querySelector('.predictedDigit');
+          if (element) element.innerHTML = predictedDigit;
+          
+          // Update predictions element
+          var predElement = section.querySelector('.predictions');
+          if (predElement && predElement.updatePredictions) {
+            predElement.updatePredictions(results);
+          }
+          
+          // 2. Out-of-sample detection
+          const reconstructionError = calculateReconstructionError(tensor);
+          
+          // Display reconstruction error below the predicted digit
+          let errorElement = section.querySelector('.reconstructionError');
+          if (errorElement) {
+            if (reconstructionError) {
+              errorElement.innerHTML = `Reconstruction error: ${reconstructionError.toFixed(6)}`;
+            } else {
+              errorElement.innerHTML = `Reconstruction error: N/A`;
+            }
+          }
+          
+          tensor.dispose();
+        } catch (error) {
+          console.error("Error in prediction:", error);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
